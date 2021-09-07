@@ -1,0 +1,23 @@
+// 全局变量定义
+$menuText: #bfcbd9;
+$menuActiveText: #409eff;
+$subMenuActiveText: #f4f4f5;
+
+$menuBg: #304156;
+$menuHover: #263445;
+
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+$sideBarWidth: 210px;
+
+//导出scss定义的样式变量
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}
