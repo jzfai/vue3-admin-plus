@@ -5,5 +5,4 @@ node_modules
 dist
 *.d.ts
 *.svg
-*.png
-*.jpg
+
