@@ -65,6 +65,20 @@ export const constantRoutes = [
         meta: { title: '父子通信', icon: 'dashboard' }
       }
     ]
+  },
+  {
+    path: '/table',
+    component: Layout,
+    meta: { title: 'Table', icon: 'table' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'dynamictable',
+        component: () => import('@/views/table/DynamicTable.vue'),
+        name: 'DynamicTable',
+        meta: { title: '动态 Table' }
+      }
+    ]
   }
 ]
 
