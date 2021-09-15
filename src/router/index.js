@@ -44,7 +44,15 @@ export const constantRoutes = [
         path: 'hook',
         component: () => import('@/views/example/hook/Hook.vue'),
         name: 'Hook',
-        meta: { title: 'Hook示例', icon: 'dashboard' }
+        meta: { title: 'Hook示例', icon: 'dashboard' },
+        children: [
+          {
+            path: 'hook-children',
+            component: () => import('@/views/example/hook/HookChildren.vue'),
+            name: 'HookChildren',
+            meta: { title: 'HookChildren', icon: 'dashboard' }
+          }
+        ]
       },
       {
         path: 'vuex-use',

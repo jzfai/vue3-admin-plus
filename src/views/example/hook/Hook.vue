@@ -1,6 +1,9 @@
 <template>
   <div>ref1:{{ ref1 }},ref2:{{ ref2 }}</div>
   <el-button @click="hookExample">执行hook方法</el-button>
+
+  <div class="mt-2" style="color: red">第三层routerView</div>
+  <router-view></router-view>
 </template>
 
 <script setup>
