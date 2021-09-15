@@ -13,7 +13,6 @@ export default {
       setHearTime: 10000,
       heartTimeOut: 20000,
       timeoutObj: null
-      // serverTimeoutObj: null
     }
   },
   methods: {

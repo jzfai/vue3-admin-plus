@@ -25,7 +25,7 @@ const props = defineProps({
   }
 })
 const state = reactive({
-  title: 'Vue3  Admin  Plus',
+  title: 'vue3  admin  plus',
   logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
 })
 

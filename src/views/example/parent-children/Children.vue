@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, defineEmits } from 'vue'
+import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
 let { proxy } = getCurrentInstance()
 const props = defineProps({
   fatherName: {

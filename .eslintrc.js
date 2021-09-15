@@ -15,7 +15,8 @@ module.exports = {
     defineProps: true,
     defineExpose: true,
     Obj_type: true,
-    axios_c_ty: true
+    axios_c_ty: true,
+    defineEmits: true
   },
   extends: [
     'plugin:vue/vue3-essential',

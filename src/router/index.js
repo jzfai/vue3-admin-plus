@@ -15,6 +15,12 @@ export const constantRoutes = [
     alwaysShow: true,
     children: [
       {
+        path: 'brand',
+        component: () => import('@/views/use-example/brand/Brand.vue'),
+        name: 'Brand',
+        meta: { title: '增删改查例子', icon: 'dashboard' }
+      },
+      {
         path: 'echarts',
         component: () => import('@/views/use-example/echarts/Echarts.vue'),
         name: 'Echarts',

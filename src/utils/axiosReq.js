@@ -1,7 +1,7 @@
 import store from '@/store'
 import axios from 'axios'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
-import { getToken, setToken } from '@/utils/auth'
+import { getToken, setToken, removeToken } from '@/utils/auth'
 let requestData
 let loadingE
 
@@ -47,7 +47,6 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (res) => {
-    console.log('res', res)
     if (requestData.afHLoading && loadingE) {
       loadingE.close()
     }
@@ -63,45 +62,35 @@ service.interceptors.response.use(
     if (flag || code === 0) {
       return res.data
     } else {
+      //token失效或者有问题
+      if (code === 403) {
+        ElMessageBox.confirm(`${msg}`, {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          removeToken()
+          location.reload()
+        })
+        return Promise.reject(msg)
+      }
       if (requestData.isAlertErrorMsg) {
         ElMessage({
           message: msg,
           type: 'error',
           duration: 2 * 1000
         })
-        return Promise.reject(msg)
-      } else {
-        return res.data
       }
+      return Promise.reject(msg)
     }
   },
   (err) => {
     if (loadingE) loadingE.close()
-    if (err && err.response && err.response.code) {
-      if (err.response.code === 403) {
-        ElMessageBox.confirm('请重新登录', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      } else {
-        ElMessage({
-          message: err,
-          type: 'error',
-          duration: 2 * 1000
-        })
-      }
-    } else {
-      ElMessage({
-        message: err,
-        type: 'error',
-        duration: 2 * 1000
-      })
-    }
+    ElMessage({
+      message: err,
+      type: 'error',
+      duration: 2 * 1000
+    })
     return Promise.reject(err)
   }
 )
