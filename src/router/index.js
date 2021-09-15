@@ -10,7 +10,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/echarts',
+    redirect: '/brand',
     meta: { title: '使用示例', icon: 'dashboard' },
     alwaysShow: true,
     children: [
