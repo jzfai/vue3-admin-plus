@@ -8,7 +8,6 @@ export default function () {
     return rect.width - 1 < WIDTH
   }
   const $_resizeHandler = () => {
-    console.log('处理了')
     if (!document.hidden) {
       const isMobile = $_isMobile()
       // console.log('toggleDevice')

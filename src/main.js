@@ -16,8 +16,10 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 app.use(ElementPlus, { size: 'mini', locale: zhCn })
 
 //global mixin
-import globalMixin from '@/mixins/globalMixin'
-app.mixin(globalMixin)
+import elementMixin from '@/mixins/elementMixin'
+app.mixin(elementMixin)
+import commonMixin from '@/mixins/commonMixin'
+app.mixin(commonMixin)
 
 //import axios req
 import axiosReq from '@/utils/axiosReq'

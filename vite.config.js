@@ -58,13 +58,13 @@ export default ({ command }) => {
     build: {
       brotliSize: false,
       // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000,
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      }
+      chunkSizeWarningLimit: 2000
+      // terserOptions: {
+      //   compress: {
+      //     drop_console: true,
+      //     drop_debugger: true
+      //   }
+      // }
     },
     resolve: {
       alias: {
