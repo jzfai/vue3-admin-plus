@@ -77,7 +77,7 @@ const insertReq = () => {
       method: 'post', //--c
       bfLoading: true
     })
-    .then((res) => {
+    .then(() => {
       proxy.elMessageMixin('保存成功')
       emit('selectPageReq')
       emit('hideComp')
@@ -127,7 +127,6 @@ let closeFormModal = () => {
 
 /*4.上传文件相关*/
 const fileUploadSave = () => {
-  //--c
   const formData = new FormData()
   formData.append('file', proxy.$refs.refSettingFile.files[0])
   proxy
