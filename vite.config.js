@@ -5,7 +5,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteSvgIcons from 'vite-plugin-svg-icons'
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
-const prodMock = true
+const prodMock = true // build prod mock or not
 export default ({ command }) => {
   return {
     base: './',
