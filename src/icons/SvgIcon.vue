@@ -40,13 +40,15 @@ export default defineComponent({
 .nav-icon {
   display: inline-block;
   font-size: 15px;
-  margin-right: 12px;
+  margin-right: 14px;
   position: relative;
 }
 
 .svg-icon {
   width: 1em;
   height: 1em;
+  position: relative;
+  top: -0.07em;
   fill: currentColor;
   vertical-align: middle;
 }

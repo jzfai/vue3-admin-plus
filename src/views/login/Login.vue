@@ -111,8 +111,8 @@ let loginReq = () => {
   store
     .dispatch('user/login', formInline)
     .then(() => {
-      ElMessage({ message: '登录成功', type: 'success' })
       proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
+      ElMessage({ message: '登录成功', type: 'success' })
     })
     .catch((res) => {
       tipMessage.value = res.msg
