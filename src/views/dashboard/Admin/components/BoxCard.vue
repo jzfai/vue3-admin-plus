@@ -118,7 +118,7 @@ const roles = computed(() => {
     background-color: #fff;
     margin: auto;
     box-shadow: none !important;
-    ::v-deep .pan-info {
+    .pan-info {
       box-shadow: none !important;
     }
   }

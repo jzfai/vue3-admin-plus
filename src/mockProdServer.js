@@ -4,7 +4,8 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 // 可以使用 import.meta.glob功能来进行全部导入
 import table from '../mock/table'
 import test from '../mock/test'
+import remoteSearch from '../mock/remote-search.js'
 
 export function setupProdMockServer() {
-  createProdMockServer([...table, ...test])
+  createProdMockServer([...table, ...test, ...remoteSearch])
 }
