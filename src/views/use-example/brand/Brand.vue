@@ -208,6 +208,9 @@ let addBtnClick = () => {
     refBrandForm.value.showModal()
   })
 }
+onMounted(() => {
+  console.log('import', import.meta.env.VITE_APP_IMAGE_URL)
+})
 const hideComp = () => {
   showFrom.value = false
 }
