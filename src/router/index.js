@@ -1,6 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout'
 
+/* Router Modules */
+import chartsRouter from './modules/charts'
+
 export const constantRoutes = [
   {
     path: '/login',
@@ -26,10 +29,11 @@ export const constantRoutes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
-        meta: { title: 'Dashboard', icon: 'table' }
+        meta: { title: 'Dashboard', icon: 'dashboard' }
       }
     ]
   },
+  chartsRouter,
   {
     path: '/example',
     component: Layout,

@@ -5,6 +5,8 @@ add multi function   can  view  http://8.135.1.141/vue3-admin-plus
 add prod mock
 // 2021-09-28
 add keep-alive transition and fix some issue
+// 2021-09-29
+add echarts example
 ```
 
 ### 前言
