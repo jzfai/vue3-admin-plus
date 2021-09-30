@@ -26,10 +26,10 @@ import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 //导入配置文件
 import settings from '@/settings'
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
-const router = useRouter()
+const route = useRoute()
 let routes = computed(() => {
   return store.state.permission.routes
 })
@@ -51,7 +51,14 @@ const variables = computed(() => {
     sideBarWidth: '210px'
   }
 })
-const activeMenu = computed(() => router.currentRoute.value.fullPath)
+const activeMenu = computed(() => {
+  const { meta, fullPath } = route
+  // if set path, the sidebar will highlight the path you set
+  if (meta.activeMenu) {
+    return meta.activeMenu
+  }
+  return fullPath
+})
 </script>
 
 <style lang="scss">

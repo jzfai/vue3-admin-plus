@@ -10,6 +10,11 @@ $subMenuBg: #1f2d3d;
 $subMenuHover: #001528;
 $sideBarWidth: 210px;
 
+//navbar
+$navBarHeight:50px;
+//tagsView
+$tagViewHeight:32px;
+
 //导出scss定义的样式变量
 /*vite无法获取scss变量https://github.com/vitejs/vite/issues/1279*/
 //:export {

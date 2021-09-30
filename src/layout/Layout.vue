@@ -1,13 +1,16 @@
-<!--suppress ALL -->
 <template>
   <div :class="classObj" class="layout-wrapper">
-    <!--左侧-->
+    <!--left side-->
     <Sidebar class="sidebar-container" v-if="settings.showLeftMenu" />
-    <!--右侧-->
+    <!--right side-->
     <div class="main-container">
-      <Navbar />
+      <div>
+        <Navbar />
+        <TagsView v-if="settings.needTagsView" />
+      </div>
       <AppMain />
     </div>
+    <!--<Settings />-->
   </div>
 </template>
 <!--原理vue2.0-->
@@ -19,7 +22,7 @@ export default {
 </script>
 
 <script setup>
-import { Sidebar, Navbar, AppMain } from './components'
+import { Sidebar, Navbar, AppMain, TagsView } from './components'
 import { getCurrentInstance, computed } from 'vue'
 import settings from '@/settings'
 let { proxy } = getCurrentInstance()
@@ -33,8 +36,8 @@ let classObj = computed(() => {
   }
 })
 //import ResizeHook to   listen  page size that   open or close
-import H_ResizeHook from './hook/ResizeHandler'
-H_ResizeHook()
+import ResizeHook from './hook/ResizeHandler'
+ResizeHook()
 </script>
 
 <style lang="scss" scoped>

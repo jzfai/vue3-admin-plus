@@ -1,7 +1,7 @@
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade-transform" mode="out-in">
-      <div class="app-main" :key="key">
+      <div class="app-main" :class="{ 'show-tag-view': setting.needTagsView }" :key="key">
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
@@ -11,6 +11,8 @@
 </template>
 
 <script setup>
+import setting from '@/settings'
+
 import { getCurrentInstance, computed } from 'vue'
 let { proxy } = getCurrentInstance()
 
@@ -24,12 +26,15 @@ const cachedViews = computed(() => {
 
 <style scoped lang="scss">
 .app-main {
-  //padding: 10px;
+  padding: 10px;
   /*50 = navbar  */
-  height: calc(100vh - 50px);
+  height: calc(100vh - #{$navBarHeight});
   width: 100%;
   position: relative;
   overflow: auto;
+}
+.show-tag-view {
+  height: calc(100vh - #{$navBarHeight} - #{$tagViewHeight}) !important;
 }
 .fixed-header + .app-main {
   padding-top: 50px;
