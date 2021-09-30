@@ -6,4 +6,3 @@ dist
 dist-ssr
 *.local
 yarn.lock
-*.svg
