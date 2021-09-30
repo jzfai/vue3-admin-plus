@@ -39,8 +39,8 @@ const state = reactive({
   levelList: null
 })
 onMounted(() => {
-  // console.log(state.levelList)
-  // console.log(props.to)
+  console.log(state.levelList)
+  console.log(props.to)
 })
 </script>
 

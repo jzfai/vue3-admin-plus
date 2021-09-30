@@ -36,7 +36,23 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether need nprogress
    */
-  isNeedNprogress: true
+  isNeedNprogress: true,
+
+  /**
+   * @type {boolean} true | false
+   * @description Whether show TagsView
+   */
+  needTagsView: true,
+  /**
+   * @description TagsView show number
+   */
+  tagsViewNum: 6,
+  //showSettings: true
+  /**
+   * @type {boolean} true | false
+   * @description Whether  open prod mock
+   */
+  openProdMock: true
 }
 
 export default setting

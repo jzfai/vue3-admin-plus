@@ -7,6 +7,8 @@ add prod mock
 add keep-alive transition and fix some issue
 // 2021-09-29
 add echarts example
+// 2021-09-30
+add tags view
 ```
 
 ### 前言
@@ -97,6 +99,6 @@ location /vue3-admin-plus{
 ```
 
 #### 如果需要实时交流的可以加入wx群(有vue3+ts视频教程)
-![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud1.png)
+![http://8.135.1.141/file/images/wx-groud.png](http://8.135.1.141/file/images/wx-groud.png)
 
 大家的支持是我前进的动力    欢迎加入一起开发
