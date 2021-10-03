@@ -29,59 +29,29 @@
 <script setup>
 import PanThumb from '@/views/dashboard/PanThumb'
 import Mallki from '@/views/dashboard/TextHoverEffect/Mallki'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-
+import { getCurrentInstance, reactive, computed } from 'vue'
 let { proxy } = getCurrentInstance()
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
-const state = reactive({
+reactive({
   statisticsData: {
     article_count: 1024,
     pageviews_count: 1024
   }
 })
-
-// import {useStore} from 'vuex'
-const name = computed(() => {
+computed(() => {
   return proxy.$store.state.user.name
 })
 const avatar = computed(() => {
   return proxy.$store.state.user.avatar
 })
-const roles = computed(() => {
+computed(() => {
   return proxy.$store.state.user.roles
 })
-// watch(() => props.name, (oldValue,newValue) => {
-//
-//   },
-//   { immediate: true }
-// );
-
-// const store = useStore()
-// const router = useRouter()
-// onMounted(()=>{
-//   console.log("页面挂载了")
-// })
-// let helloFunc = () => {
-//   console.log("helloFunc");
-// };
-//导出给refs使用
-// defineExpose({ helloFunc });
-//导出属性到页面中使用
-// let {levelList} = toRefs(state);
 </script>
 
 <style lang="scss">
 .box-card-component {
   .el-card__header {
-    padding: 0px !important;
+    padding: 0 !important;
   }
 }
 </style>
@@ -102,8 +72,8 @@ const roles = computed(() => {
   }
   .mallki-text {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     font-size: 20px;
     font-weight: bold;
   }

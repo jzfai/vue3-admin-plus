@@ -19,8 +19,7 @@
 <script setup>
 //echarts 例子地址 https://echarts.apache.org/examples/zh/index.html#chart-type-line
 import * as echarts from 'echarts'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
-let { proxy } = getCurrentInstance()
+import { onMounted, ref } from 'vue'
 /*折线图*/
 let echartsInstanceF = ref(null)
 const initEchartsF = () => {

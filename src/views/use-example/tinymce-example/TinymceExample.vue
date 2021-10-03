@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
+import { getCurrentInstance, ref } from 'vue'
 import Tinymce from '@/components/Tinymce/Tinymce.vue'
 //获取store和router
 // import {useRouter} from 'vue-router'

@@ -260,7 +260,7 @@ let { visible, top, left, selectedTag } = toRefs(state)
       margin-left: 5px;
       margin-top: 3px;
       &:first-of-type {
-        margin-left: 15px;
+        margin-left: 10px;
       }
       &:last-of-type {
         margin-right: 15px;

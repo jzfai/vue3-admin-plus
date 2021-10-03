@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, toRefs, reactive, onBeforeUnmount } from 'vue'
+import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 
 let { proxy } = getCurrentInstance()

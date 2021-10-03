@@ -1,14 +1,9 @@
 <template>
   <li :class="{ completed: todo.done, editing: editing }" class="todo">
     <div class="view">
-      <input
-        :checked="todo.done"
-        class="toggle"
-        type="checkbox"
-        @change="toggleTodo( todo)"
-      >
+      <input :checked="todo.done" class="toggle" type="checkbox" @change="toggleTodo(todo)" />
       <label @dblclick="editing = true" v-text="todo.text" />
-      <button class="destroy" @click="deleteTodo( todo )" />
+      <button class="destroy" @click="deleteTodo(todo)" />
     </div>
     <input
       v-show="editing"
@@ -18,7 +13,7 @@
       @keyup.enter="doneEdit"
       @keyup.esc="cancelEdit"
       @blur="doneEdit"
-    >
+    />
   </li>
 </template>
 
@@ -37,7 +32,7 @@ export default {
   props: {
     todo: {
       type: Object,
-      default: function() {
+      default: function () {
         return {}
       }
     }

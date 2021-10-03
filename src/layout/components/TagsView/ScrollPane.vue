@@ -6,19 +6,9 @@
 
 <script setup>
 const tagAndTagSpacing = 4 // tagAndTagSpacing
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, onBeforeUnmount } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
+import { onMounted, getCurrentInstance, ref, reactive, computed, onBeforeUnmount } from 'vue'
 let { proxy } = getCurrentInstance()
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
-const state = reactive({
+reactive({
   left: 0
 })
 
@@ -26,14 +16,6 @@ const refScrollContainer = ref(null)
 const scrollWrapper = computed(() => {
   return refScrollContainer.value.wrap
 })
-// watch(() => props.name, (oldValue,newValue) => {
-//
-//   },
-//   { immediate: true }
-// );
-
-// const store = useStore()
-// const router = useRouter()
 onMounted(() => {
   scrollWrapper.value.addEventListener('scroll', emitScroll, true)
 })

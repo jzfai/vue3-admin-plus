@@ -7,7 +7,22 @@
   <div class="mt-2">action</div>
   <el-button @click="openSideBar">openSideBar</el-button>
   <el-button @click="closeSideBar">closeSideBar</el-button>
+  <div>是否开启：{{ opened }}</div>
 </template>
+
+<script>
+/*可以设置默认的名字*/
+import { mapState } from 'vuex'
+export default {
+  name: 'Login',
+  computed: {
+    ...mapState({
+      opened: (state) => state.app,
+      opened2: (state) => state.app
+    })
+  }
+}
+</script>
 
 <script setup>
 import { ref } from 'vue'

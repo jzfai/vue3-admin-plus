@@ -20,18 +20,8 @@
 
 <script setup>
 import { transactionList } from '@/api/remote-search'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, onBeforeMount } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
-let { proxy } = getCurrentInstance()
-// const props = defineProps({
-//   name: {
-//     require: true,
-//     default: "fai",
-//     type:String,
-//   },
-// });
+import { toRefs, reactive, onBeforeMount } from 'vue'
+
 const state = reactive({
   list: null
 })
