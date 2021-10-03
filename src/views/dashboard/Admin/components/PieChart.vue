@@ -3,13 +3,13 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, onBeforeUnmount } from 'vue'
+import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
 let { proxy } = getCurrentInstance()
-const props = defineProps({
+defineProps({
   className: {
     type: String,
     default: 'chart'

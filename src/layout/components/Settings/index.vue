@@ -7,7 +7,6 @@
           <span>Theme Color</span>
           <!--          <theme-picker style="float: right; height: 26px; margin: -3px 8px 0 0" @change="themeChange" />-->
         </div>
-
         <div class="drawer-item">
           <span>Open Tags-View</span>
           <el-switch v-model="tagsView" class="drawer-switch" />
@@ -28,9 +27,7 @@
 </template>
 
 <script>
-import settings from '@/settings'
 import RightPanel from './RightPanel'
-// import ThemePicker from '@/components/ThemePicker'
 export default {
   components: { RightPanel },
   data() {

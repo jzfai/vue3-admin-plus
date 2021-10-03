@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, onBeforeUnmount } from 'vue'
+import { onMounted, getCurrentInstance, watch, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 //获取store和router
 // import {useRouter} from 'vue-router'

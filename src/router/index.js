@@ -6,6 +6,17 @@ import chartsRouter from './modules/charts'
 
 export const constantRoutes = [
   {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index')
+      }
+    ]
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/Login.vue'),
     hidden: true
@@ -34,39 +45,6 @@ export const constantRoutes = [
     ]
   },
   chartsRouter,
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'table' }
-      }
-    ]
-  },
   {
     path: '/nested',
     component: Layout,
@@ -138,9 +116,23 @@ export const constantRoutes = [
 ]
 export const asyncRoutes = [
   {
-    path: '/using-demo',
+    path: '/brand',
     component: Layout,
-    meta: { title: 'Use demo', icon: 'eye-open' },
+    meta: { title: '增删改查', icon: 'guide' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'brand',
+        component: () => import('@/views/use-example/brand/Brand.vue'),
+        name: 'Brand',
+        meta: { title: '增删改查例子', icon: 'guide' }
+      }
+    ]
+  },
+  {
+    path: '/writing-demo',
+    component: Layout,
+    meta: { title: 'Writing Demo', icon: 'eye-open' },
     alwaysShow: true,
     children: [
       {
@@ -153,7 +145,7 @@ export const asyncRoutes = [
         path: 'vuex-use',
         component: () => import('@/views/example/vuex-use/VuexUse.vue'),
         name: 'VuexUse',
-        meta: { title: 'vuex-Demo' }
+        meta: { title: 'Vuex-Demo' }
       },
       {
         path: 'mock-test',
@@ -171,21 +163,7 @@ export const asyncRoutes = [
         path: 'parent-children',
         component: () => import('@/views/example/parent-children/Parent.vue'),
         name: 'Parent',
-        meta: { title: '' }
-      }
-    ]
-  },
-  {
-    path: '/brand',
-    component: Layout,
-    meta: { title: '增删改查', icon: 'guide' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'brand',
-        component: () => import('@/views/use-example/brand/Brand.vue'),
-        name: 'Brand',
-        meta: { title: '增删改查例子', icon: 'guide' }
+        meta: { title: 'Parent-Children' }
       }
     ]
   },

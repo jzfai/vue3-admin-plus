@@ -139,7 +139,7 @@ const containerWidth = computed(() => {
 })
 watch(
   () => props.value,
-  (oldValue, newValue) => {
+  () => {
     if (!state.hasChange && state.hasInit) {
       proxy.$nextTick(() => window.tinymce.get(state.tinymceId).setContent(props.val || ''))
     }

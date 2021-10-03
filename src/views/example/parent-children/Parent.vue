@@ -29,6 +29,10 @@ const childMethod = () => {
 const emitParent = (data) => {
   console.log('得到子组件的信息111', data)
 }
+const fartherMethod = () => {
+  console.log('fartherMethod')
+}
+defineExpose({ fartherMethod })
 </script>
 
 <style scoped lang="scss"></style>

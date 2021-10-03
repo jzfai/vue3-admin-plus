@@ -1,10 +1,11 @@
 <template>
   <div>{{ name }}</div>
   <el-button @click="emitFather">emitFather</el-button>
+  <el-button @click="getFatherMethod">getFatherMethod</el-button>
 </template>
 
 <script setup>
-import { onMounted, ref, toRefs } from 'vue'
+import { getCurrentInstance, onMounted, reactive, ref, toRefs } from 'vue'
 const props = defineProps({
   fatherName: {
     require: true,
@@ -12,13 +13,18 @@ const props = defineProps({
     type: String
   }
 })
-let state = ref({
+let state = reactive({
   name: 'Children'
 })
 //导出给refs使用
 let childRef = ref('childRef')
 let childMethod = () => {
   return 'childMethod'
+}
+
+const { proxy } = getCurrentInstance()
+let getFatherMethod = () => {
+  proxy.$parent.fartherMethod()
 }
 //emit
 // 定义emit事件
