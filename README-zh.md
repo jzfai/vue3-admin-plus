@@ -164,6 +164,9 @@ Modern browsers and Internet Explorer 11+.
 | --------- | --------- | --------- | --------- |
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
+## 讨论和交流
+[WeChat group](http://8.135.1.141/file/images/wx-groud.png)
+
 ## 版本
 
 [MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
