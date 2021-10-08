@@ -80,14 +80,13 @@ yarn run lint
 
 Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information
 
+## 相关项目
 
-## Related items
-
-- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
-- ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
-- js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
-- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
-- Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
+- js版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- ts版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
+- js实例参考版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- react版本： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
+- 微服务后台数据：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 ## Extra
 
