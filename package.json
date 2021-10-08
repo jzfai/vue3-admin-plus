@@ -8,7 +8,6 @@
         "build": "vite build --mode build",
         "serve": "vite preview --mode build",
         "preview:build": "yarn run build && vite preview ",
-        "preview:build-serve": "vite build --mode build-serve && vite preview",
         "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
         "prepare": "husky install"
     },
