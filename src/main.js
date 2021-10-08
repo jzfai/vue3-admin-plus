@@ -35,4 +35,8 @@ app.config.globalProperties.$momentMini = $momentMini
 
 //import router  intercept
 import './permission'
+
+//error log  collection
+import errorLog from '@/hooks/errorLogHook'
+errorLog(app)
 app.use(router).mount('#app')
