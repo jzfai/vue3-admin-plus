@@ -12,8 +12,8 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 ## Update log
 
 ```javascript
-//10-03
-change vue3-admin-template to  ts version
+//10-08
+add error log collection func
 ```
 ## Demo
 
@@ -40,10 +40,10 @@ You can refer to first：[documentation of vue-admin-template ](https://juejin.i
 
 ```bash
 # clone the project
-git clone https://github.com/jzfai/vue3-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-plus.git
 
 # enter the project directory
-cd vue3-admin-template
+cd vue3-admin-plus
 
 # install dependency(Recommend use yarn)
 yarn
@@ -110,7 +110,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## License
 
-[MIT](https://github.com/jzfai/vue3-admin-templateLICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 
