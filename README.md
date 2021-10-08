@@ -81,16 +81,13 @@ yarn run lint
 Refer to [Documentation](https://panjiachen.github.io/vue-element-admin-site/guide/essentials/deploy.html) for more information
 
 
+## Related items
 
-## Related Project
-
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-
-- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
-
-- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
-
-- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
+- js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
+- Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 ## Extra
 
