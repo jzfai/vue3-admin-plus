@@ -5,7 +5,7 @@
 
 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，框架使用类似 vue-admin-admin
 
-使用 eslint+prettier 格式和校验代码,提高代码规范性和开发效率
+使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
 
 [Access address](http://8.135.1.141/vue3-admin-plus)
 

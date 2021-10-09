@@ -126,7 +126,7 @@ let loginReq = () => {
  *  password show or hidden
  * */
 let passwordType = ref('password')
-const refPassword=ref(null)
+const refPassword = ref(null)
 let showPwd = () => {
   if (passwordType.value === 'password') {
     passwordType.value = ''
