@@ -23,7 +23,7 @@
           </span>
           <el-input
             :key="passwordType"
-            ref="password"
+            ref="refPassword"
             v-model="formInline.password"
             :type="passwordType"
             name="password"
@@ -126,6 +126,7 @@ let loginReq = () => {
  *  password show or hidden
  * */
 let passwordType = ref('password')
+const refPassword=ref(null)
 let showPwd = () => {
   if (passwordType.value === 'password') {
     passwordType.value = ''
@@ -133,8 +134,7 @@ let showPwd = () => {
     passwordType.value = 'password'
   }
   proxy.$nextTick(() => {
-    let refPassword = null
-    proxy.$refs['password'].focus()
+    refPassword.value.focus()
   })
 }
 </script>
