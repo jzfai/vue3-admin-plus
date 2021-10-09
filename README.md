@@ -6,7 +6,7 @@ English | [简体中文](./README-zh.md)
 
 A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus and similar design  for   vue-element-admin
 
-Use eslint+prettier format and verification code to improve code standardization and development efficiency
+Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
 [Access address](http://8.135.1.141/vue3-admin-plus)
 
