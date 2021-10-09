@@ -4,7 +4,9 @@ English | [简体中文](./README-zh.md)
 
 > Vue3-admin-plus provides enterprise-level development demo.
 
-A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus and similar design  for   vue-admin-template
+A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus and similar design  for   vue-element-admin
+
+Use eslint+prettier format and verification code to improve code standardization and development efficiency
 
 [Access address](http://8.135.1.141/vue3-admin-plus)
 
@@ -24,13 +26,13 @@ add error log collection func
 
 ![template-demo](http://8.135.1.141/file/images/plus-demo.png)
 
-## 相关项目
+## Related items
 
-- js版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
-- ts版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
-- js实例参考版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
-- react版本： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
-- 微服务后台数据：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
+- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
+- js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
+- Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 ## Documents
 
@@ -96,7 +98,7 @@ Modern browsers and Internet Explorer 11+.
 | --------- | --------- | --------- | --------- |
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
-## Discussion and Cmmunication
+## Discussion and Communication(There are vue3+ts and react17 video tutorials in the group)
 [WeChat group](http://8.135.1.141/file/images/wx-groud.png)
 
 ## License
