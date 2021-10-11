@@ -69,7 +69,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 
 
-#### vue3和vue2在性能上的对比
+#### vue3和vue2在性能上的对比 
 
 - 打包大小减少41%
 
@@ -80,6 +80,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 - **使用Proxy代替defineProperty实现数据响应式**
 
 - **重写虚拟DOM的实现和Tree-Shaking**
+
 
 [vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
