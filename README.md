@@ -2,7 +2,7 @@
 
 **English** | [中文](./README-zh_CN.md)
 
-> A basic vue3 admin template with  vite2 & Element-Plus UI & axios & svg-icon& permission control & lint
+> vue3 admin plus provides enterprise-level development demo
 
 A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus ，It's fast!
 
@@ -32,7 +32,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/template-demo.png)
+![template-demo](http://8.135.1.141/file/images/plus-demo.png)
 
 
 ## Related items
