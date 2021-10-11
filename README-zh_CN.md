@@ -81,7 +81,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 - **重写虚拟DOM的实现和Tree-Shaking**
 
-
 [vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
 ## 构建步骤
