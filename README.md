@@ -60,7 +60,7 @@ You can refer to first：[documentation of vue-admin-template ](https://juejin.i
 3.Simplified some complex logic and optimized the design method of the architecture part
 
 
-Comparison of performance between vue3 and vue2
+#### Comparison of performance between vue3 and vue2
 
 - 41% reduction in package size
 
@@ -119,11 +119,13 @@ yarn run lint
 
 ## Extra
 
-This framework is still in the process of improvement. .....
+Architecture development is not easy. If you feel good, please give me a compliment. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+
 
 ## Browsers support
 
 Note: Vue3 is not supported the Internet Explorer
+
 Modern browsers and Internet Explorer 11+.
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |

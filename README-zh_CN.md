@@ -4,7 +4,7 @@
 
 
 
-> vue3—admin-plus 提供企业级开发demo
+> vue3 admin plus 提供企业级开发demo
 
 
 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，It's fast!
@@ -69,7 +69,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 
 
-vue3和vue2在性能上的对比
+#### vue3和vue2在性能上的对比
 
 - 打包大小减少41%
 
