@@ -14,6 +14,8 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 ```javascript
 //10-08
 add error log collection func
+//10-14
+add permission of role and code
 ```
 
 ## Online experience

@@ -1,20 +1,27 @@
 import { loginReq, logoutReq, getInfoReq } from '@/api/user'
 import { setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
 
-const state = {
-  name: '',
-  avatar: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
-  roles: ['admin']
+const getDefaultState = () => {
+  return {
+    //token: getToken(),
+    username: '',
+    avatar: '',
+    roles: []
+  }
 }
 
+const state = getDefaultState()
+
 const mutations = {
-  SET_NAME: (state, username) => {
-    state.name = username
+  M_username: (state, username) => {
+    state.username = username
   },
-  SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
+  M_roles: (state, roles) => {
+    state.roles = roles
   }
+  // SET_AVATAR: (state, avatar) => {
+  //   state.avatar = avatar
+  // }
 }
 
 const actions = {
@@ -46,8 +53,17 @@ const actions = {
           if (!data) {
             return reject('Verification failed, please Login again.')
           }
-          const { username } = data
-          commit('SET_NAME', username)
+          //此处模拟数据
+          const rolesArr = localStorage.getItem('roles')
+          if (rolesArr) {
+            data.roles = JSON.parse(rolesArr)
+          } else {
+            data.roles = ['admin']
+            localStorage.setItem('roles', JSON.stringify(data.roles))
+          }
+          const { roles, username } = data
+          commit('M_username', username)
+          commit('M_roles', roles)
           // commit('SET_AVATAR', avatar)
           resolve(data)
         })
@@ -62,7 +78,6 @@ const actions = {
       logoutReq()
         .then(() => {
           removeToken() // must remove  token  first
-          resetRouter()
           resolve()
         })
         .catch((error) => {

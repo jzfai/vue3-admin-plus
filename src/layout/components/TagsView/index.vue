@@ -250,7 +250,7 @@ let { visible, top, left, selectedTag } = toRefs(state)
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 26px;
+      height: 27px;
       line-height: 26px;
       border: 1px solid #d8dce5;
       color: #495060;
@@ -310,6 +310,7 @@ let { visible, top, left, selectedTag } = toRefs(state)
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {
+    border-radius: 3px;
     .el-icon-close {
       width: 16px;
       height: 16px;
