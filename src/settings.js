@@ -25,24 +25,26 @@ const setting = {
    * @description Whether show the drop-down
    */
   ShowDropDown: true,
+  /**
+   * @type {boolean} true | false
+   * @description Whether show Hamburger
+   */
   showHamburger: true,
   /**
    * @type {boolean} true | false
    * @description Whether need login
    */
   isNeedLogin: true,
-
   /**
    * @type {boolean} true | false
    * @description Whether need nprogress
    */
   isNeedNprogress: true,
-
   /**
    * @type {boolean} true | false
    * @description Whether show TagsView
    */
-  needTagsView: true,
+  showTagsView: true,
   /**
    * @description TagsView show number
    */
@@ -53,14 +55,17 @@ const setting = {
    * @description Whether  open prod mock
    */
   openProdMock: true,
-
   /**
    * @type {string | array} 'serve' | ['build', 'serve']
    * @description Need show err logs component.
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['build', 'serve']
    */
-  errorLog: ['serve', 'build']
+  errorLog: ['build'],
+  /**
+   * @type {string} 'roles' | 'code'
+   */
+  permissionMode: 'roles'
 }
 
 export default setting

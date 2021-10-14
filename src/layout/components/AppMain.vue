@@ -1,7 +1,7 @@
 <template>
   <router-view v-slot="{ Component }">
     <transition name="fade-transform" mode="out-in">
-      <div class="app-main" :class="{ 'show-tag-view': setting.needTagsView }" :key="key">
+      <div class="app-main" :class="{ 'show-tag-view': setting.showTagsView }" :key="key">
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
@@ -12,15 +12,21 @@
 
 <script setup>
 import setting from '@/settings'
-
-import { getCurrentInstance, computed } from 'vue'
-let { proxy } = getCurrentInstance()
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
 const key = computed(() => {
-  return proxy.$route.path
+  return useRoute().path
 })
+let store = useStore()
 const cachedViews = computed(() => {
-  return proxy.$store.state.app.cachedViews
+  //TagsView is open: open using cachedViews of TagsView, otherwise using app
+  if (setting.showTagsView) {
+    return store.state.app.cachedViews
+  } else {
+    return store.state.app.cachedViews
+  }
 })
 </script>
 

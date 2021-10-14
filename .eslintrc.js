@@ -14,9 +14,7 @@ module.exports = {
     localStorage: true,
     window: true,
     defineProps: true,
-    defineExpose: true,
-    Obj_type: true,
-    axios_c_ty: true
+    defineExpose: true
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -33,6 +31,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',
+    'no-async-promise-executor': 'off',
     'import/no-extraneous-dependencies': 'off',
     'vue/no-multiple-template-root': 'off',
     'vue/html-self-closing': 'off',

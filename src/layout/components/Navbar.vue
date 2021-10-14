@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
   <div class="navbar rowBC">
     <div class="rowSC">
@@ -26,10 +25,10 @@
             <router-link to="/">
               <el-dropdown-item>Home</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-plus">
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-template">
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-plus">
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-template">
               <el-dropdown-item>Docs</el-dropdown-item>
             </a>
             <!--<el-dropdown-item>修改密码</el-dropdown-item>-->

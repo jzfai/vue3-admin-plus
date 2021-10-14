@@ -1,9 +1,9 @@
 <template>
-  <div id="Sidebar">
+  <div id="Sidebar" class="reset-menu-style">
     <!--logo-->
     <Logo :collapse="!isCollapse" v-if="settings.sidebarLogo" />
     <!--router nav-->
-    <el-scrollbar wrap-class="scrollbar-wrapper reset-menu-style">
+    <el-scrollbar>
       <el-menu
         :default-active="activeMenu"
         :collapse="!isCollapse"
@@ -65,6 +65,9 @@ const activeMenu = computed(() => {
 .reset-menu-style {
   .el-menu {
     border-right: none;
+  }
+  .el-scrollbar__wrap {
+    padding-bottom: 8vh;
   }
 }
 </style>

@@ -2,15 +2,12 @@
   <div :class="classObj" class="layout-wrapper">
     <!--left side-->
     <Sidebar class="sidebar-container" v-if="settings.showLeftMenu" />
-    <!--right side-->
+    <!--right container-->
     <div class="main-container">
-      <div>
-        <Navbar />
-        <TagsView v-if="settings.needTagsView" />
-      </div>
+      <Navbar />
+      <TagsView v-if="settings.showTagsView" />
       <AppMain />
     </div>
-    <!--<Settings />-->
   </div>
 </template>
 <!--原理vue2.0-->
@@ -35,7 +32,7 @@ let classObj = computed(() => {
     hideSidebar: !settings.showLeftMenu
   }
 })
-//import ResizeHook to   listen  page size that   open or close
+//import ResizeHook to  listen  page size that  open or close
 import ResizeHook from './hook/ResizeHandler'
 ResizeHook()
 </script>
@@ -43,9 +40,6 @@ ResizeHook()
 <style lang="scss" scoped>
 .layout-wrapper {
   overflow: hidden;
-  //display: flex;
-  //align-content: start;
-  //justify-content: start;
 }
 .main-container {
   min-height: 100%;
