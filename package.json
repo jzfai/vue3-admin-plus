@@ -23,6 +23,7 @@
         "nprogress": "^0.2.0",
         "path": "^0.12.7",
         "path-to-regexp": "^6.2.0",
+        "screenfull": "4.2.0",
         "tinymce": "^4.9.11",
         "vue": "3.2.20",
         "vue-count-to": "^1.0.13",

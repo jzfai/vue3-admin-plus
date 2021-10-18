@@ -1,8 +1,8 @@
 <template>
   <el-table :data="list" style="width: 100%; padding-top: 15px">
     <el-table-column label="Order_No" min-width="200">
-      <template #default="scope">
-        {{ orderNoFilter(scope.row.order_no) }}
+      <template #default="{ row }">
+        {{ row.order_no?.substring(0, 30) }}
       </template>
     </el-table-column>
     <el-table-column label="Price" width="195" align="center">
@@ -23,7 +23,7 @@ import { transactionList } from '@/api/remote-search'
 import { toRefs, reactive, onBeforeMount } from 'vue'
 
 const state = reactive({
-  list: null
+  list: []
 })
 onBeforeMount(() => {
   fetchData()
@@ -39,7 +39,7 @@ const toThousandFilter = (num) => {
   return (+num || 0).toString().replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }
 const orderNoFilter = (str) => {
-  return str.substring(0, 30)
+  return
 }
 const fetchData = () => {
   transactionList().then((response) => {

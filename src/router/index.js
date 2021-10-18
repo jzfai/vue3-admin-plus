@@ -126,16 +126,16 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/brand',
+    path: '/crud',
     component: Layout,
-    meta: { title: '增删改查', icon: 'guide' },
+    meta: { title: 'CRUD', icon: 'guide' },
     alwaysShow: true,
     children: [
       {
-        path: 'brand',
-        component: () => import('@/views/use-example/brand/Brand.vue'),
-        name: 'Brand',
-        meta: { title: '增删改查例子', icon: 'guide' }
+        path: 'crud',
+        component: () => import('@/views/crud'),
+        name: 'crud',
+        meta: { title: 'CRUD-Demo', icon: 'guide' }
       }
     ]
   },
@@ -178,30 +178,16 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/tinymce',
+    path: '/Use Example',
     component: Layout,
-    meta: { title: '富文本', icon: 'documentation' },
+    meta: { title: 'Use Example', icon: 'documentation' },
     alwaysShow: true,
     children: [
       {
         path: 'tinymce',
         component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
         name: 'Tinymce',
-        meta: { title: 'tinymce富文本', icon: 'documentation' }
-      }
-    ]
-  },
-  {
-    path: '/echarts',
-    component: Layout,
-    meta: { title: '图表', icon: 'chart' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'echarts',
-        component: () => import('@/views/use-example/echarts/Echarts.vue'),
-        name: 'Echarts',
-        meta: { title: 'Echarts图表', icon: 'chart' }
+        meta: { title: 'Tinymce', icon: 'documentation' }
       }
     ]
   },
@@ -212,10 +198,10 @@ export const constantRoutes = [
     alwaysShow: true,
     children: [
       {
-        path: 'dynamictable',
+        path: 'dynamic-table',
         component: () => import('@/views/table/DynamicTable.vue'),
         name: 'DynamicTable',
-        meta: { title: '动态 Table' }
+        meta: { title: 'Dynamic Table' }
       }
     ]
   }

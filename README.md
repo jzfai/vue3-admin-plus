@@ -16,6 +16,8 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 add error log collection func
 //10-14
 add permission of role and code
+//10-18
+add Screenfull LangSelect SizeSelect of nav-bar
 ```
 
 ## Online experience

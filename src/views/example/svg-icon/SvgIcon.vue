@@ -6,7 +6,7 @@
 <script setup></script>
 
 <style scoped lang="scss">
-.svg-icon {
+.dashboard {
   font-size: 100px;
   color: red;
 }

@@ -11,7 +11,10 @@
     </div>
     <!--nav title-->
     <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
-    <div class="right-menu" v-if="settings.ShowDropDown">
+    <div class="right-menu rowSC" v-if="settings.ShowDropDown">
+      <Screenfull />
+      <SizeSelect />
+      <LangSelect />
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
           <img
@@ -43,6 +46,9 @@
 <script setup>
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
+import Screenfull from '@/components/Screenfull'
+import SizeSelect from '@/components/SizeSelect'
+import LangSelect from '@/components/LangSelect'
 import { computed, getCurrentInstance } from 'vue'
 import settings from '@/settings'
 import { useStore } from 'vuex'
