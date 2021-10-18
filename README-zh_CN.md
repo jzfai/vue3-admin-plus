@@ -18,9 +18,9 @@
 add error log collection func
 //10-14
 add permission of role and code
+//10-18
+add Screenfull LangSelect SizeSelect of nav-bar
 ```
-
-
 
 ## 线上体验
 
@@ -145,14 +145,14 @@ yarn run lint
   - lint
 
 - 全局功能
-  #- 国际化多语言
+  - 国际化多语言
   #- 多种动态换肤
   - 动态侧边栏（支持多级路由嵌套）
   - 动态面包屑
   - 快捷导航(标签页)
   - Svg Sprite 图标
   - 本地/后端 mock 数据
-  #- Screenfull全屏
+  - Screenfull全屏
   - 自适应收缩侧边栏
 
 - 编辑器

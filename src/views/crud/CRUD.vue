@@ -27,37 +27,39 @@
     </el-form>
   </div>
   <!--表格和分页-->
-  <el-table
-    height="calc(100vh - 230px)"
-    id="resetElementDialog"
-    ref="refuserTable"
-    @selection-change="handleSelectionChange"
-    size="mini"
-    border
-    :data="usertableData"
-  >
-    <el-table-column type="selection" align="center" width="50" />
-    <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
-    <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
-      <template #default="{ row }">
-        <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
-      </template>
-    </el-table-column>
-    <el-table-column align="center" prop="letter" label="首字母" width="80" />
-    <el-table-column align="center" prop="seq" label="排序" width="80" />
-    <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
-    <el-table-column align="center" prop="updateTime" label="更新时间" width="140" />
-    <!--点击操作-->
-    <el-table-column fixed="right" align="center" label="操作" width="180">
-      <template #default="{ row }">
-        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
-        <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div class="auto-general-table-height">
+    <el-table
+      id="resetElementDialog"
+      ref="refuserTable"
+      @selection-change="handleSelectionChange"
+      size="mini"
+      border
+      :data="usertableData"
+    >
+      <el-table-column type="selection" align="center" width="50" />
+      <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
+      <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
+        <template #default="{ row }">
+          <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="letter" label="首字母" width="80" />
+      <el-table-column align="center" prop="seq" label="排序" width="80" />
+      <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
+      <el-table-column align="center" prop="updateTime" label="更新时间" width="140" />
+      <!--点击操作-->
+      <el-table-column fixed="right" align="center" label="操作" width="180">
+        <template #default="{ row }">
+          <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
+          <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
+          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
+
   <!--分页-->
-  <div class="block columnCC mt-2 mb-5">
+  <div class="block columnCC mt-2">
     <el-pagination
       :current-page="pageNum"
       :page-sizes="[10, 20, 50, 100]"
@@ -85,7 +87,7 @@
       </span>
     </template>
   </el-dialog>
-  <BrandForm v-if="showFrom" ref="refBrandForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
+  <CRUDForm v-if="showFrom" ref="refCRUDForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
 </template>
 <script>
 export default {
@@ -96,8 +98,8 @@ export default {
 /*1.初始化引入和实例化*/
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 let { proxy } = getCurrentInstance()
-import BrandForm from './BrandForm.vue'
-const refBrandForm = ref(null)
+import CRUDForm from './CRUDForm.vue'
+const refCRUDForm = ref(null)
 onActivated(() => {
   console.log('onActivated')
 })
@@ -205,7 +207,7 @@ let showFrom = ref(false)
 let addBtnClick = () => {
   showFrom.value = true
   proxy.$nextTick(() => {
-    refBrandForm.value.showModal()
+    refCRUDForm.value.showModal()
   })
 }
 onMounted(() => {
@@ -218,7 +220,7 @@ let tableEditClick = (row) => {
   getDetailByIdReq(row.id).then((resData) => {
     showFrom.value = true
     proxy.$nextTick(() => {
-      refBrandForm.value.showModal(true, resData.data)
+      refCRUDForm.value.showModal(true, resData.data)
     })
   })
 }
