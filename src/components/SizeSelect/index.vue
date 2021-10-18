@@ -11,7 +11,7 @@
           :command="item.value"
           :disabled="size === item.value"
         >
-          <h3 class="pt-1 pb-1">{{ item.label }}</h3>
+          <h3 class="pt-1 pb-1 font-sizePx14">{{ item.label }}</h3>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
