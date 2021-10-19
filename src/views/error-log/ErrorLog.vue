@@ -29,30 +29,29 @@
     </el-form>
   </div>
   <!--表格和分页-->
-  <div class="auto-general-table-height">
-    <el-table
-      id="resetElementDialog"
-      ref="refuserTable"
-      size="mini"
-      border
-      @selection-change="handleSelectionChange"
-      :data="usertableData"
-    >
-      <el-table-column type="selection" align="center" width="50" />
-      <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
-      <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
-      <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
-      <!--    <el-table-column align="center" prop="id" label="id主键" min-width="100" />-->
-      <!--点击操作-->
-      <el-table-column fixed="right" align="center" label="操作" width="80">
-        <template #default="{ row }">
-          <!--        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>-->
-          <!--        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>-->
-          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-  </div>
+  <el-table
+    id="resetElementDialog"
+    ref="refuserTable"
+    :height="`calc(100vh - ${settings.delWindowHeight})`"
+    size="mini"
+    border
+    @selection-change="handleSelectionChange"
+    :data="usertableData"
+  >
+    <el-table-column type="selection" align="center" width="50" />
+    <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
+    <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
+    <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
+    <!--    <el-table-column align="center" prop="id" label="id主键" min-width="100" />-->
+    <!--点击操作-->
+    <el-table-column fixed="right" align="center" label="操作" width="80">
+      <template #default="{ row }">
+        <!--        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>-->
+        <!--        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>-->
+        <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
 
   <!--分页-->
   <div class="block columnCC mt-2">
@@ -94,7 +93,7 @@
 
 <script setup>
 import { onMounted, getCurrentInstance, ref, reactive } from 'vue'
-
+import settings from '@/settings'
 let { proxy } = getCurrentInstance()
 import bus from '@/utils/bus'
 /*

@@ -29,7 +29,7 @@ const state = reactive({
 })
 
 const size = computed(() => {
-  return Cookies.get('language')
+  return Cookies.get('language') || 'en'
 })
 
 const handleSetSize = (size) => {

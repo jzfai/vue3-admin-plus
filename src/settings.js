@@ -65,7 +65,10 @@ const setting = {
   /**
    * @type {string} 'roles' | 'code'
    */
-  permissionMode: 'roles'
+  permissionMode: 'roles',
+
+  //table height(100vh-delWindowHeight)
+  delWindowHeight: '210px'
 }
 
 export default setting
