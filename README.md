@@ -123,7 +123,7 @@ yarn run lint
 
 ## Extra
 
-Architecture development is not easy. If you feel good, please give me a compliment. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+Architecture development is not easy. If you feel good, please give me a **compliment**. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
 
 
 ## Browsers support
