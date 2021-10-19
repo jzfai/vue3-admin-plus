@@ -12,9 +12,11 @@ import Cookies from 'js-cookie'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
+
+//Set default size small and  language  en
 app.use(ElementPlus, {
-  size: Cookies.get('size') || 'small',
-  locale: Cookies.get('language') === 'zhCn' && zhCn
+  size: Cookies.get('size') || ('small' && Cookies.set('size', 'small')),
+  locale: Cookies.get('language') || (zhCn && Cookies.set('language', 'en'))
 })
 //global mixin
 import elementMixin from '@/mixins/elementMixin'
