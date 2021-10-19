@@ -87,12 +87,12 @@
 
 
 /*table relative */
-.auto-general-table-height{
-  .el-table{
-    height:calc(100vh - #{$delWindowHeight}) !important;
-    overflow: auto!important;
-  }
-}
+//.auto-general-table-height{
+//  .el-table__body{
+//    height:calc(100vh - #{$delWindowHeight}) !important;
+//    overflow-y: auto!important;
+//  }
+//}
 
 
 

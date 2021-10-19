@@ -31,7 +31,7 @@ const state = reactive({
 })
 
 const size = computed(() => {
-  return Cookies.get('size')
+  return Cookies.get('size') || 'mini'
 })
 
 const handleSetSize = (size) => {
