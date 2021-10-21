@@ -22,7 +22,11 @@ export default function (app) {
     app.config.errorHandler = (err) => {
       request({
         url: '/ty-user/errorCollection/insert',
-        data: { pageUrl: window.location.href, errorLog: `${err.message}---${err.stack}` },
+        data: {
+          pageUrl: window.location.href,
+          errorLog: `${err.message}---${err.stack.substr(0, 300)}`,
+          browserType: navigator.userAgent
+        },
         method: 'post',
         bfLoading: false,
         isAlertErrorMsg: true

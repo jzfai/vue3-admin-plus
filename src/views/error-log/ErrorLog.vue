@@ -41,13 +41,11 @@
     <el-table-column type="selection" align="center" width="50" />
     <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
     <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
+    <el-table-column align="center" prop="browserType" label="浏览器类型" width="180" />
     <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
-    <!--    <el-table-column align="center" prop="id" label="id主键" min-width="100" />-->
     <!--点击操作-->
     <el-table-column fixed="right" align="center" label="操作" width="80">
       <template #default="{ row }">
-        <!--        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>-->
-        <!--        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>-->
         <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
       </template>
     </el-table-column>
