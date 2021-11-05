@@ -21,6 +21,7 @@ const switchRoles = computed({
   },
   set(val) {
     localStorage.setItem('codeArr', JSON.stringify(val))
+    //此处reload清空路由和重置部分状态
     location.reload()
   }
 })
