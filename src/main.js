@@ -40,6 +40,10 @@ app.config.globalProperties.$momentMini = $momentMini
 import directive from '@/directive'
 directive(app)
 
+//import global directive
+import components from '@/components'
+components(app)
+
 //import router  intercept
 import './permission'
 

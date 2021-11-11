@@ -1,8 +1,18 @@
 <template>
   <!--操作-->
   <div class="mr-3 rowSS">
-    <el-button type="primary" icon="el-icon-plus" @click="addBtnClick">新增</el-button>
-    <el-button type="primary" icon="el-icon-delete" @click="multiDelBtnClick">删除</el-button>
+    <el-button type="primary" @click="addBtnClick">
+      <el-icon style="vertical-align: middle">
+        <FolderAdd />
+      </el-icon>
+      <span style="vertical-align: middle">增加</span>
+    </el-button>
+    <el-button type="primary" @click="multiDelBtnClick">
+      <el-icon style="vertical-align: middle">
+        <Delete />
+      </el-icon>
+      <span style="vertical-align: middle">删除</span>
+    </el-button>
     <!--条件搜索-->
     <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
       <el-form-item label-width="0px" label="" prop="username" label-position="left">
@@ -22,9 +32,9 @@
           end-placeholder="结束日期"
         />
       </el-form-item>
-      <!--查询按钮-->
-      <el-button @click="searchBtnClick" type="primary">查询</el-button>
     </el-form>
+    <!--查询按钮-->
+    <el-button @click="searchBtnClick" type="primary">查询</el-button>
   </div>
   <!--表格和分页-->
   <el-table
@@ -94,6 +104,7 @@ export default {
 }
 </script>
 <script setup>
+import { Delete, FolderAdd } from '@element-plus/icons'
 /*1.初始化引入和实例化*/
 import settings from '@/settings'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'

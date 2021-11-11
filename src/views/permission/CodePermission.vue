@@ -2,10 +2,12 @@
   <div>测试前请确定设置了setting.js文件里permissionMode为code模式</div>
   <div style="margin-bottom: 15px">Your codeArr: {{ codeArr }}</div>
   Switch roles:
-  <el-radio-group v-model="switchRoles">
-    <el-radio-button :label="[1]">show CodePage</el-radio-button>
-    <el-radio-button :label="[]">hide CodePage</el-radio-button>
-  </el-radio-group>
+  <div>
+    <el-radio-group v-model="switchRoles">
+      <el-radio-button :label="[1]">show CodePage</el-radio-button>
+      <el-radio-button :label="[]">hide CodePage</el-radio-button>
+    </el-radio-group>
+  </div>
 </template>
 
 <script setup>
@@ -21,7 +23,6 @@ const switchRoles = computed({
   },
   set(val) {
     localStorage.setItem('codeArr', JSON.stringify(val))
-    //此处reload清空路由和重置部分状态
     location.reload()
   }
 })

@@ -40,7 +40,9 @@ export const constantRoutes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
-        meta: { title: 'Dashboard', icon: 'dashboard' }
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        //https://element-plus.gitee.io/zh-CN/component/icon.html#svg
+        meta: { title: 'Dashboard', elSvgIcon: 'Fold' }
       }
     ]
   },
@@ -136,6 +138,12 @@ export const constantRoutes = [
         component: () => import('@/views/crud'),
         name: 'crud',
         meta: { title: 'CRUD-Demo', icon: 'guide' }
+      },
+      {
+        path: 'import-export',
+        component: () => import('@/views/crud/Vci.vue'),
+        name: 'ImportExport',
+        meta: { title: 'Import Export', icon: 'guide' }
       }
     ]
   },

@@ -13,7 +13,8 @@
         @contextmenu.prevent="openMenu(tag, $event)"
       >
         {{ tag.title }}
-        <span v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)" />
+
+        <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
       </router-link>
     </div>
     <!--    <scroll-pane ref="refScrollPane" class="tags-view-wrapper" @scroll="handleScroll">-->
@@ -44,7 +45,7 @@
 <script setup>
 // import ScrollPane from './ScrollPane'
 import path from 'path'
-
+import { Close } from '@element-plus/icons'
 import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
 //获取store和router
 import { useRouter } from 'vue-router'
@@ -312,18 +313,12 @@ let { visible, top, left, selectedTag } = toRefs(state)
   .tags-view-item {
     border-radius: 3px;
     .el-icon-close {
-      width: 16px;
-      height: 16px;
-      vertical-align: 2px;
-      border-radius: 50%;
-      text-align: center;
+      border-radius: 6px;
+      width: 12px;
+      height: 12px;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       transform-origin: 100% 50%;
-      &:before {
-        transform: scale(0.6);
-        display: inline-block;
-        vertical-align: -3px;
-      }
+      vertical-align: -2px;
       &:hover {
         background-color: #b4bccc;
         color: #fff;
