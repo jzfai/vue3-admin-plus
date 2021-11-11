@@ -2,7 +2,13 @@
   <!--操作-->
   <div class="mr-3 rowSS">
     <el-button type="primary" @click="errorLogProd">错误日志测试</el-button>
-    <el-button type="primary" icon="el-icon-delete" @click="multiDelBtnClick">删除</el-button>
+    <el-button type="primary" @click="multiDelBtnClick">
+      <!-- 感觉写法复杂了-->
+      <el-icon style="vertical-align: middle">
+        <Delete />
+      </el-icon>
+      <span style="vertical-align: middle">删除</span>
+    </el-button>
     <!--条件搜索-->
     <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
       <el-form-item label-width="0px" label="" prop="errorLog" label-position="left">
@@ -24,9 +30,9 @@
           end-placeholder="结束日期"
         />
       </el-form-item>
-      <!--查询按钮-->
-      <el-button @click="searchBtnClick">查询</el-button>
     </el-form>
+    <!--查询按钮-->
+    <el-button @click="searchBtnClick">查询</el-button>
   </div>
   <!--表格和分页-->
   <el-table
@@ -50,7 +56,6 @@
       </template>
     </el-table-column>
   </el-table>
-
   <!--分页-->
   <div class="block columnCC mt-2">
     <el-pagination
@@ -90,6 +95,7 @@
 </template>
 
 <script setup>
+import { Delete } from '@element-plus/icons'
 import { onMounted, getCurrentInstance, ref, reactive } from 'vue'
 import settings from '@/settings'
 let { proxy } = getCurrentInstance()
@@ -148,14 +154,13 @@ onMounted(() => {
   })
 })
 const searchBtnClick = () => {
-  pageNum = 1
+  pageNum.value = 1
   selectPageReq()
 }
 
 /*添加和修改*/
 /*详情*/
 let detailData = ref({})
-
 /*删除*/
 let deleteByIdReq = (id) => {
   return proxy.$axiosReq({

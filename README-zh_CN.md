@@ -14,12 +14,11 @@
 ## 更新日志
 
 ```javascript
-//10-08
-add error log collection func
 //10-14
 add permission of role and code
-//10-18
-add Screenfull LangSelect SizeSelect of nav-bar
+//11-11
+update element-plus vite2 vue3 version ,add func of element-svg icon for side menu
+add domo of 'import export download template' in CRUD
 ```
 
 ## 线上体验
@@ -200,7 +199,7 @@ yarn run lint
 
 ## 额外
 
-架构开发不易，如果感觉好，请给我点个**赞**憋，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
+架构开发不易，如果感觉好，请给我点个**start**，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
 
 ## 浏览器支持
 

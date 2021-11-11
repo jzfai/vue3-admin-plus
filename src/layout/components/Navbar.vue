@@ -11,17 +11,16 @@
     </div>
     <!--nav title-->
     <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
-    <div class="right-menu rowSC" v-if="settings.ShowDropDown">
-      <Screenfull />
-      <SizeSelect />
-      <LangSelect />
+    <div class="right-menu" v-if="settings.ShowDropDown">
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
           <img
             src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
             class="user-avatar"
           />
-          <i class="el-icon-caret-bottom" />
+          <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
+          <!--el-icon-x  is  destructed-->
+          <!--<i class="el-icon-caret-bottom" />-->
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -44,11 +43,9 @@
 </template>
 
 <script setup>
+import { CaretBottom } from '@element-plus/icons'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
-import LangSelect from '@/components/LangSelect'
 import { computed, getCurrentInstance } from 'vue'
 import settings from '@/settings'
 import { useStore } from 'vuex'

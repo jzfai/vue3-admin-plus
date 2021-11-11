@@ -12,12 +12,11 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 ## Update log
 
 ```javascript
-//10-08
-add error log collection func
 //10-14
 add permission of role and code
-//10-18
-add Screenfull LangSelect SizeSelect of nav-bar
+//11-11
+update element-plus vite2 vue3 version ,add func of element-svg icon for side menu
+add domo of 'import export download template' in CRUD
 ```
 
 ## Online experience
@@ -123,7 +122,7 @@ yarn run lint
 
 ## Extra
 
-Architecture development is not easy. If you feel good, please give me a **compliment**. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+Architecture development is not easy. If you feel good, please give me a **start**. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
 
 
 ## Browsers support
