@@ -17,7 +17,6 @@
         "core-js": "^3.6.5",
         "echarts": "4.2.1",
         "element-plus": "^1.2.0-beta.3",
-        "js-cookie": "2.2.0",
         "mitt": "^3.0.0",
         "moment-mini": "^2.22.1",
         "nprogress": "^0.2.0",
