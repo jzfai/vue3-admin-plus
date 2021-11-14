@@ -8,13 +8,12 @@ import store from './store'
 app.use(store)
 
 //import element-plus
-import Cookies from 'js-cookie'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 app.use(ElementPlus, {
-  size: Cookies.get('size') || 'mini',
-  locale: Cookies.get('language') === 'zhCn' && zhCn
+  size: localStorage.getItem('size') || 'mini',
+  locale: localStorage.getItem('language') === 'zhCn' && zhCn
 })
 //global mixin
 import elementMixin from '@/mixins/elementMixin'
