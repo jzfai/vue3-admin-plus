@@ -19,7 +19,6 @@
 </template>
 
 <script setup>
-import Cookies from 'js-cookie'
 import { computed, reactive, toRefs } from 'vue'
 const state = reactive({
   sizeOptions: [
@@ -31,11 +30,11 @@ const state = reactive({
 })
 
 const size = computed(() => {
-  return Cookies.get('size') || 'mini'
+  return localStorage.getItem('size') || 'mini'
 })
 
 const handleSetSize = (size) => {
-  Cookies.set('size', size)
+  localStorage.setItem('size', size)
   location.reload()
 }
 //导出属性到页面中使用
