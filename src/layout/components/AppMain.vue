@@ -23,7 +23,7 @@ let store = useStore()
 const cachedViews = computed(() => {
   //TagsView is open: open using cachedViews of TagsView, otherwise using app
   if (setting.showTagsView) {
-    return store.state.app.cachedViews
+    return store.state.tagsView.cachedViews
   } else {
     return store.state.app.cachedViews
   }
