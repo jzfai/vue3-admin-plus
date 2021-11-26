@@ -47,13 +47,10 @@ const destroy = () => {
 let { isFullscreen } = toRefs(state)
 </script>
 
-<style scoped>
-.screenfull-svg {
-  display: inline-block;
-  cursor: pointer;
-  fill: #5a5e66;
-  width: 20px;
-  height: 20px;
-  vertical-align: 10px;
+<style lang="scss">
+.nav-svg-icon {
+  font-size: 18px;
+  color: #5a5e66;
+  margin-top: 4px;
 }
 </style>
