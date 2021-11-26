@@ -23,7 +23,6 @@ export default function () {
     }
   }
   onBeforeMount(() => {
-    console.log('添加了监听')
     window.addEventListener('resize', $_resizeHandler)
   })
   onMounted(() => {

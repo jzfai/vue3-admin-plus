@@ -1,7 +1,9 @@
 <template>
-  <div>{{ name }}</div>
-  <el-button @click="emitFather">emitFather</el-button>
-  <el-button @click="getFatherMethod">getFatherMethod</el-button>
+  <div>
+    <div>{{ name }}</div>
+    <el-button @click="emitFather">emitFather</el-button>
+    <el-button @click="getFatherMethod">getFatherMethod</el-button>
+  </div>
 </template>
 
 <script setup>

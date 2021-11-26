@@ -26,7 +26,7 @@
 
 <script setup>
 /*初始化参数比如引入组件，proxy,state等*/
-import { getCurrentInstance, onMounted } from 'vue'
+import { getCurrentInstance } from 'vue'
 import Link from './Link'
 import Item from './Item.jsx'
 import { isExternal } from '@/utils/validate'
@@ -48,10 +48,6 @@ defineProps({
     type: String,
     default: ''
   }
-})
-onMounted(() => {
-  // console.log("我挂载了");
-  // console.log(proxy.item);
 })
 //显示sidebarItem 的情况
 proxy.onlyOneChild = null
@@ -84,17 +80,3 @@ let resolvePath = (routePath) => {
   return path.resolve(proxy.basePath, routePath)
 }
 </script>
-
-<style lang="scss">
-// menu hover
-/* .submenu-title-noDropdown,
-  .el-submenu__title {
-    &:hover {
-      background-color: $menuHover !important;
-    }
-  }
-
-  .is-active>.el-submenu__title {
-    color: $subMenuActiveText !important;
-  }*/
-</style>

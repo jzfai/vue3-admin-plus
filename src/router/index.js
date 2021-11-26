@@ -182,11 +182,33 @@ export const constantRoutes = [
         component: () => import('@/views/example/parent-children/Parent.vue'),
         name: 'Parent',
         meta: { title: 'Parent-Children' }
+      },
+      {
+        path: 'keep-alive',
+        component: () => import('@/views/example/keep-alive'),
+        name: 'KeepAlive',
+        //cachePage: cachePage when page enter, default false
+        //leaveRmCachePage: remove cachePage when page leave, default false
+        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
+      },
+      {
+        path: 'router-demo-f',
+        name: 'routerDemoF',
+        hidden: true,
+        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
+        meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
+      },
+      {
+        path: 'router-demo-s',
+        name: 'routerDemoS',
+        hidden: true,
+        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
+        meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
       }
     ]
   },
   {
-    path: '/Use Example',
+    path: '/use-example',
     component: Layout,
     meta: { title: 'Use Example', icon: 'documentation' },
     alwaysShow: true,

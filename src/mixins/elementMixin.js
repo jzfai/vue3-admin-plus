@@ -115,18 +115,6 @@ const mixin = {
     }
   },
   methods: {
-    // /* table和分页*/
-    // handleSizeChangeMixin(val) {
-    //   this.pageSizeMixin = val
-    //   this.selectPageReq()
-    // },
-    // handleCurrentChangeMixin(val) {
-    //   this.pageNumMixin = val
-    //   this.selectPageReq()
-    // },
-    // selectPageReq() {
-    //   console.log('我是mixin里的selectPageReq方法')
-    // },
     /* 级联*/
     casHandleChangeMixin() {
       // 解决目前级联选择器搜索输入报错问题
@@ -183,20 +171,12 @@ const mixin = {
     * return Promise
     * */
     elConfirmNoCancelBtnMixin(title, message) {
-      return new Promise((resolve, reject) => {
-        this.$confirm(message || '你确定要删除吗', title || '确认框', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          showCancelButton: false,
-          type: 'warning'
-        })
-          .then(() => {
-            resolve()
-          })
-          .catch(() => {
-            reject()
-          })
-      })
+      return this.$confirm(message || '你确定要删除吗', title || '确认框', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        showCancelButton: false,
+        type: 'warning'
+      }).catch(() => {})
     },
     /*
      * 确认弹框
@@ -205,18 +185,10 @@ const mixin = {
      * return Promise
      * */
     elConfirmMixin(title, message) {
-      return new Promise((resolve, reject) => {
-        this.$confirm(message || '你确定要删除吗', title || '确认框', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        })
-          .then(() => {
-            resolve()
-          })
-          .catch(() => {
-            reject()
-          })
+      return this.$confirm(message || '你确定要删除吗', title || '确认框', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
     }
   }

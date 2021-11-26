@@ -47,7 +47,6 @@ service.interceptors.request.use(
 // 响应拦截
 service.interceptors.response.use(
   (res) => {
-    console.log('res', res)
     if (requestData.afHLoading && loadingE) {
       loadingE.close()
     }
@@ -60,9 +59,20 @@ service.interceptors.response.use(
     if (isNeedUpdateToken) {
       setToken(updateToken)
     }
-    if (flag || code === 0) {
+    if (flag) {
       return res.data
     } else {
+      if (code === 403) {
+        ElMessageBox.confirm('请重新登录', {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch('user/resetToken').then(() => {
+            location.reload()
+          })
+        })
+      }
       if (requestData.isAlertErrorMsg) {
         ElMessage({
           message: msg,
@@ -77,31 +87,11 @@ service.interceptors.response.use(
   },
   (err) => {
     if (loadingE) loadingE.close()
-    if (err && err.response && err.response.code) {
-      if (err.response.code === 403) {
-        ElMessageBox.confirm('请重新登录', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-          })
-        })
-      } else {
-        ElMessage({
-          message: err,
-          type: 'error',
-          duration: 2 * 1000
-        })
-      }
-    } else {
-      ElMessage({
-        message: err,
-        type: 'error',
-        duration: 2 * 1000
-      })
-    }
+    ElMessage({
+      message: err,
+      type: 'error',
+      duration: 2 * 1000
+    })
     return Promise.reject(err)
   }
 )

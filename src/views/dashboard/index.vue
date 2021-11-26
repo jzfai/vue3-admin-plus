@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard-container">
+  <div class="dashboard-container scroll-y">
     <Admin v-if="roles.includes('admin')" />
     <Editor v-else />
   </div>

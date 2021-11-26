@@ -1,102 +1,104 @@
 <template>
-  <!--操作-->
-  <div class="mr-3 rowSS">
-    <el-button type="primary" @click="addBtnClick">
-      <el-icon style="vertical-align: middle">
-        <FolderAdd />
-      </el-icon>
-      <span style="vertical-align: middle">增加</span>
-    </el-button>
-    <el-button type="primary" @click="multiDelBtnClick">
-      <el-icon style="vertical-align: middle">
-        <Delete />
-      </el-icon>
-      <span style="vertical-align: middle">删除</span>
-    </el-button>
-    <!--条件搜索-->
-    <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
-      <el-form-item label-width="0px" label="" prop="username" label-position="left">
-        <!--  --c -->
-        <el-input v-model="searchFormMixin.name" class="widthPx-150" placeholder="品牌名字" />
-      </el-form-item>
-      <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
-        <el-date-picker
-          v-model="startEndArrMixin"
-          type="datetimerange"
-          format="YYYY-MM-DD"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          @change="dateTimePacking"
-          class="widthPx-250"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        />
-      </el-form-item>
-    </el-form>
-    <!--查询按钮-->
-    <el-button @click="searchBtnClick" type="primary">查询</el-button>
-  </div>
-  <!--表格和分页-->
-  <el-table
-    id="resetElementDialog"
-    ref="refuserTable"
-    :height="`calc(100vh - ${settings.delWindowHeight})`"
-    @selection-change="handleSelectionChange"
-    size="mini"
-    border
-    :data="usertableData"
-  >
-    <el-table-column type="selection" align="center" width="50" />
-    <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
-    <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
-      <template #default="{ row }">
-        <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
-      </template>
-    </el-table-column>
-    <el-table-column align="center" prop="letter" label="首字母" width="80" />
-    <el-table-column align="center" prop="seq" label="排序" width="80" />
-    <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
-    <el-table-column align="center" prop="updateTime" label="更新时间" width="140" />
-    <!--点击操作-->
-    <el-table-column fixed="right" align="center" label="操作" width="180">
-      <template #default="{ row }">
-        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-        <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
-        <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div class="scroll-y">
+    <!--操作-->
+    <div class="mr-3 rowSS">
+      <el-button type="primary" @click="addBtnClick">
+        <el-icon style="vertical-align: middle">
+          <FolderAdd />
+        </el-icon>
+        <span style="vertical-align: middle">增加</span>
+      </el-button>
+      <el-button type="primary" @click="multiDelBtnClick">
+        <el-icon style="vertical-align: middle">
+          <Delete />
+        </el-icon>
+        <span style="vertical-align: middle">删除</span>
+      </el-button>
+      <!--条件搜索-->
+      <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
+        <el-form-item label-width="0px" label="" prop="username" label-position="left">
+          <!--  --c -->
+          <el-input v-model="searchFormMixin.name" class="widthPx-150" placeholder="品牌名字" />
+        </el-form-item>
+        <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
+          <el-date-picker
+            v-model="startEndArrMixin"
+            type="datetimerange"
+            format="YYYY-MM-DD"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            @change="dateTimePacking"
+            class="widthPx-250"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          />
+        </el-form-item>
+      </el-form>
+      <!--查询按钮-->
+      <el-button @click="searchBtnClick" type="primary">查询</el-button>
+    </div>
+    <!--表格和分页-->
+    <el-table
+      id="resetElementDialog"
+      ref="refuserTable"
+      :height="`calc(100vh - ${settings.delWindowHeight})`"
+      @selection-change="handleSelectionChange"
+      size="mini"
+      border
+      :data="usertableData"
+    >
+      <el-table-column type="selection" align="center" width="50" />
+      <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
+      <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
+        <template #default="{ row }">
+          <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
+        </template>
+      </el-table-column>
+      <el-table-column align="center" prop="letter" label="首字母" width="80" />
+      <el-table-column align="center" prop="seq" label="排序" width="80" />
+      <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
+      <el-table-column align="center" prop="updateTime" label="更新时间" width="140" />
+      <!--点击操作-->
+      <el-table-column fixed="right" align="center" label="操作" width="180">
+        <template #default="{ row }">
+          <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
+          <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
+          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
 
-  <!--分页-->
-  <div class="block columnCC mt-2">
-    <el-pagination
-      :current-page="pageNum"
-      :page-sizes="[10, 20, 50, 100]"
-      :page-size="pageSize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="pageTotalMixin"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
+    <!--分页-->
+    <div class="block columnCC mt-2">
+      <el-pagination
+        :current-page="pageNum"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pageTotalMixin"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
+    <!--详情-->
+    <el-dialog :title="dialogTitleMixin" v-model="detailDialogMixin" width="500px" :close-on-click-modal="false">
+      <div class="detail-container rowBC">
+        <div class="detail-container-item">品牌名称：{{ detailData.name }}</div>
+      </div>
+      <div class="detail-container rowBC">
+        <div class="detail-container-item">品牌首字母：{{ detailData.letter }}</div>
+      </div>
+      <div class="detail-container rowBC">
+        <div class="detail-container-item">排序：{{ detailData.seq }}</div>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="detailDialogMixin = false">确 定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <CRUDForm v-if="showFrom" ref="refCRUDForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
   </div>
-  <!--详情-->
-  <el-dialog :title="dialogTitleMixin" v-model="detailDialogMixin" width="500px" :close-on-click-modal="false">
-    <div class="detail-container rowBC">
-      <div class="detail-container-item">品牌名称：{{ detailData.name }}</div>
-    </div>
-    <div class="detail-container rowBC">
-      <div class="detail-container-item">品牌首字母：{{ detailData.letter }}</div>
-    </div>
-    <div class="detail-container rowBC">
-      <div class="detail-container-item">排序：{{ detailData.seq }}</div>
-    </div>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button type="primary" @click="detailDialogMixin = false">确 定</el-button>
-      </span>
-    </template>
-  </el-dialog>
-  <CRUDForm v-if="showFrom" ref="refCRUDForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
 </template>
 <script>
 export default {

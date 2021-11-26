@@ -10,9 +10,9 @@
         :collapse="!isCollapse"
         :unique-opened="false"
         :collapse-transition="false"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
-        :active-text-color="variables.menuActiveText"
+        :background-color="scssJson.menuBg"
+        :text-color="scssJson.menuText"
+        :active-text-color="scssJson.menuActiveText"
         mode="vertical"
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -37,21 +37,42 @@ let routes = computed(() => {
 const isCollapse = computed(() => {
   return store.state.app.sidebar.opened
 })
-const variables = computed(() => {
-  // let data = JSON.parse(scssVariables.replace(/:export\s*/, ''))
-  // console.log('scssVariables')
-  // console.log(typeof data)
-  return {
-    menuText: '#bfcbd9',
-    menuActiveText: '#409EFF',
-    subMenuActiveText: '#f4f4f5',
-    menuBg: '#304156',
-    menuHover: '#263445',
-    subMenuBg: '#1f2d3d',
-    subMenuHover: '#001528',
-    sideBarWidth: '210px'
-  }
-})
+
+//change  scss variable to js
+const dillScssExportToJson = (scssExportJson) => {
+  let jsonString = scssExportJson.replace(/:export\s*/, '').replace(/[\s+\r\n]/g, '')
+  let scssJson = {}
+  jsonString
+    .slice(1, jsonString.length - 2)
+    .split(';')
+    .forEach((fItem) => {
+      let arr = fItem.split(':')
+      scssJson[arr[0]] = arr[1]
+    })
+  return scssJson
+}
+
+//get scss variable
+import scssExportJson from '@/styles/variables-to-js.scss'
+let scssJson = dillScssExportToJson(scssExportJson)
+// onMounted(() => {
+//   // console.log('scssExportJson', scssExportJson)
+// })
+// const variables = computed(() => {
+//   // let data = JSON.parse(scssExportJson.replace(/:export\s*/, ''))
+//   // console.log('scssExportJson')
+//   // console.log(typeof data)
+//   return {
+//     menuText: '#bfcbd9',
+//     menuActiveText: '#409EFF',
+//     subMenuActiveText: '#f4f4f5',
+//     menuBg: '#304156',
+//     menuHover: '#263445',
+//     subMenuBg: '#1f2d3d',
+//     subMenuHover: '#001528',
+//     sideBarWidth: '210px'
+//   }
+// })
 const activeMenu = computed(() => {
   const { meta, fullPath } = route
   // if set path, the sidebar will highlight the path you set

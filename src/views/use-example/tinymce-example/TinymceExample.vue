@@ -1,12 +1,14 @@
 <template>
-  <div class="mb-1">
-    <el-button @click="setTinyContent">设置文本消息</el-button>
-    <el-button @click="getTinyContent">获取文本消息</el-button>
-  </div>
+  <div class="scroll-y">
+    <div class="mb-1">
+      <el-button @click="setTinyContent">设置文本消息</el-button>
+      <el-button @click="getTinyContent">获取文本消息</el-button>
+    </div>
 
-  <Tinymce ref="refTinymce" />
-  <div class="mt-2">只读,readOnly为true</div>
-  <Tinymce :readOnly="true" />
+    <Tinymce ref="refTinymce" />
+    <div class="mt-2">只读,readOnly为true</div>
+    <Tinymce :readOnly="true" />
+  </div>
 </template>
 
 <script setup>

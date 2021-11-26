@@ -7,13 +7,13 @@ const mixin = {
   },
   created() {
     // 通用获取页面参数
-    if (this.$route && this.$route.query && this.$route.query.params) {
+    if (this.$route?.query?.params) {
       this.queryParamsMixin = JSON.parse(this.$route.query.params)
     }
   },
   methods: {
     // vue router跳转
-    routerPushMixin(path, params) {
+    routerPushMixin(name, params) {
       let data = {}
       if (params) {
         data = {
@@ -23,11 +23,11 @@ const mixin = {
         data = {}
       }
       this.$router.push({
-        name: path,
+        name: name,
         query: data
       })
     },
-    routerReplaceMixin(path, params) {
+    routerReplaceMixin(name, params) {
       let data = {}
       if (params) {
         data = {
@@ -37,7 +37,7 @@ const mixin = {
         data = {}
       }
       this.$router.replace({
-        name: path,
+        name: name,
         query: data
       })
     },

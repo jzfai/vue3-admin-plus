@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="app-container scroll-y">
     <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border highlight-current-row>
       <el-table-column align="center" label="ID" width="95">
         <template #default="scope">

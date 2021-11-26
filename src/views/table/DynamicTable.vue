@@ -1,16 +1,18 @@
 <template>
-  <el-checkbox-group v-model="checkedList" @change="handleChangeChecked">
-    <el-checkbox v-for="item in tableColums" :label="item.prop" :key="item.prop">{{ item.title }}</el-checkbox>
-  </el-checkbox-group>
-  <el-table :data="tableData">
-    <template v-for="item in tableColums" :key="item.prop">
-      <el-table-column :prop="item.prop" :label="item.title" v-if="item.show">
-        <template #default="scope">
-          {{ scope.row[item.prop] }}
-        </template>
-      </el-table-column>
-    </template>
-  </el-table>
+  <div class="scroll-y">
+    <el-checkbox-group v-model="checkedList" @change="handleChangeChecked">
+      <el-checkbox v-for="item in tableColums" :label="item.prop" :key="item.prop">{{ item.title }}</el-checkbox>
+    </el-checkbox-group>
+    <el-table :data="tableData">
+      <template v-for="item in tableColums" :key="item.prop">
+        <el-table-column :prop="item.prop" :label="item.title" v-if="item.show">
+          <template #default="scope">
+            {{ scope.row[item.prop] }}
+          </template>
+        </el-table-column>
+      </template>
+    </el-table>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue'

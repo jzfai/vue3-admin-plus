@@ -1,7 +1,6 @@
 const state = {
   sidebar: {
     opened: true,
-    //opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true,
     withoutAnimation: false
   },
   device: 'desktop',
@@ -19,11 +18,12 @@ const mutations = {
 
   /*keepAlive缓存*/
   M_ADD_CACHED_VIEW: (state, view) => {
+    console.log('M_ADD_CACHED_VIEW', view)
     if (state.cachedViews.includes(view)) return
     state.cachedViews.push(view)
   },
-
   M_DEL_CACHED_VIEW: (state, view) => {
+    console.log('M_DEL_CACHED_VIEW', view)
     const index = state.cachedViews.indexOf(view)
     index > -1 && state.cachedViews.splice(index, 1)
   },

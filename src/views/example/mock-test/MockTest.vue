@@ -1,6 +1,8 @@
 <template>
-  <div>mock 使用示例(dev环境时使用)</div>
-  <el-button @click="listReq" type="primary">点击发送mock请求</el-button>
+  <div class="mockTest">
+    <div>mock 使用示例(dev环境时使用)</div>
+    <el-button @click="listReq" type="primary">点击发送mock请求</el-button>
+  </div>
 </template>
 
 <script setup>
