@@ -12,11 +12,16 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 ## Update log
 
 ```javascript
-//10-14
-add permission of role and code
 //11-11
 update element-plus vite2 vue3 version ,add func of element-svg icon for side menu
 add domo of 'import export download template' in CRUD
+//11-26
+update vue3 version and so on;
+add keep-alive use demo and router using  demo ，look for "http://8.135.1.141/vue3-admin-template/#/writing-demo/keep-alive"
+add the param cachePage and leaveRmCachePage to route for keep-alive,look for https://github.com/jzfai/vue3-admin-template/blob/master/src/router/index.js
+add collection the error log of img loading fail,look for "http://8.135.1.141/vue3-admin-template/#/error-log/log"
+in router page you need add root element,such as div, but is not necessary for children component
+fix some issue
 ```
 
 ## Online experience
