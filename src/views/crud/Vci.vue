@@ -1,87 +1,89 @@
 <template>
-  <!--操作-->
-  <div class="mr-3 rowSS">
-    <el-button type="primary" @click="addBtnClick">新增</el-button>
-    <el-button type="primary" @click="multiDelBtnClick">删除</el-button>
-    <!--条件搜索-->
-    <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-3">
-      <el-form-item label-width="0px" label="" prop="sn" label-position="left">
-        <el-input v-model="searchForm.sn" class="widthPx-150" placeholder="设备号" />
-      </el-form-item>
-      <el-form-item label-width="0px" label="" prop="status" label-position="left">
-        <el-select v-model="searchForm.status" clearable placeholder="状态" class="widthPx-120">
-          <el-option label="未出库" :value="0" />
-          <el-option label="已出库" :value="1" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
-        <el-date-picker
-          v-model="startEndArrMixin"
-          type="datetimerange"
-          format="YYYY-MM-DD"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          @change="dateTimePacking"
-          class="widthPx-200"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
+  <div class="scroll-y">
+    <!--操作-->
+    <div class="mr-3 rowSS">
+      <el-button type="primary" @click="addBtnClick">新增</el-button>
+      <el-button type="primary" @click="multiDelBtnClick">删除</el-button>
+      <!--条件搜索-->
+      <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-3">
+        <el-form-item label-width="0px" label="" prop="sn" label-position="left">
+          <el-input v-model="searchForm.sn" class="widthPx-150" placeholder="设备号" />
+        </el-form-item>
+        <el-form-item label-width="0px" label="" prop="status" label-position="left">
+          <el-select v-model="searchForm.status" clearable placeholder="状态" class="widthPx-120">
+            <el-option label="未出库" :value="0" />
+            <el-option label="已出库" :value="1" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
+          <el-date-picker
+            v-model="startEndArrMixin"
+            type="datetimerange"
+            format="YYYY-MM-DD"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            @change="dateTimePacking"
+            class="widthPx-200"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          />
+        </el-form-item>
+      </el-form>
+      <!--查询按钮-->
+      <el-button type="primary" @click="searchBtnClick">搜索</el-button>
+      <div class="ml-4">
+        <ImportExportComp
+          @reloadList="selectPageReq"
+          importFileUrl="/ty-user/vci/importExcel"
+          importValidUrl="/ty-user/vci/validExcel"
+          exportFileUrl="/ty-user/vci/exportExcel"
+          :getSearchData="getSearchData"
         />
-      </el-form-item>
-    </el-form>
-    <!--查询按钮-->
-    <el-button type="primary" @click="searchBtnClick">搜索</el-button>
-    <div class="ml-4">
-      <ImportExportComp
-        @reloadList="selectPageReq"
-        importFileUrl="/ty-user/vci/importExcel"
-        importValidUrl="/ty-user/vci/validExcel"
-        exportFileUrl="/ty-user/vci/exportExcel"
-        :getSearchData="getSearchData"
-      />
-      <el-button type="primary" @click="downloadTemplate">down template to test</el-button>
+        <el-button type="primary" @click="downloadTemplate">down template to test</el-button>
+      </div>
     </div>
+    <!--表格和分页-->
+    <el-table
+      height="calc(100vh - 280px)"
+      @selection-change="handleSelectionChange"
+      id="resetElementDialog"
+      ref="refuserTable"
+      size="mini"
+      border
+      :data="VcitableData"
+    >
+      <el-table-column align="center" type="selection" width="50" />
+      <el-table-column align="center" prop="sn" label="设备号" min-width="100" />
+      <el-table-column align="center" prop="hardVersion" label="硬件版本" min-width="100" />
+      <el-table-column align="center" prop="createTime" label="入库时间" width="150" />
+      <el-table-column align="center" prop="status" label="状态" min-width="100">
+        <template #default="{ row }">
+          <span v-if="row.status === 0">未出库</span>
+          <h4 style="color: green" v-if="row.status === 1">已出库</h4>
+        </template>
+      </el-table-column>
+      <!--点击操作-->
+      <el-table-column align="center" label="操作" width="120px">
+        <template #default="{ row }">
+          <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
+          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!--分页-->
+    <div class="block columnCC mt-2 mb-5">
+      <el-pagination
+        :current-page="pageNum"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="pageTotalMixin"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
+    <VciForm v-if="showFrom" ref="refVciForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
   </div>
-  <!--表格和分页-->
-  <el-table
-    height="calc(100vh - 280px)"
-    @selection-change="handleSelectionChange"
-    id="resetElementDialog"
-    ref="refuserTable"
-    size="mini"
-    border
-    :data="VcitableData"
-  >
-    <el-table-column align="center" type="selection" width="50" />
-    <el-table-column align="center" prop="sn" label="设备号" min-width="100" />
-    <el-table-column align="center" prop="hardVersion" label="硬件版本" min-width="100" />
-    <el-table-column align="center" prop="createTime" label="入库时间" width="150" />
-    <el-table-column align="center" prop="status" label="状态" min-width="100">
-      <template #default="{ row }">
-        <span v-if="row.status === 0">未出库</span>
-        <h4 style="color: green" v-if="row.status === 1">已出库</h4>
-      </template>
-    </el-table-column>
-    <!--点击操作-->
-    <el-table-column align="center" label="操作" width="120px">
-      <template #default="{ row }">
-        <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-        <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-  <!--分页-->
-  <div class="block columnCC mt-2 mb-5">
-    <el-pagination
-      :current-page="pageNum"
-      :page-sizes="[10, 20, 50, 100]"
-      :page-size="pageSize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="pageTotalMixin"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    />
-  </div>
-  <VciForm v-if="showFrom" ref="refVciForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
 </template>
 
 <script setup>

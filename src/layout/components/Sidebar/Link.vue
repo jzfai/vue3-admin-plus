@@ -6,9 +6,9 @@
 
 <script setup>
 import { isExternal } from '@/utils/validate'
-import { onMounted, computed, getCurrentInstance, reactive } from 'vue'
+import { computed, getCurrentInstance } from 'vue'
 let { proxy } = getCurrentInstance()
-const props = defineProps({
+defineProps({
   to: {
     type: String,
     required: true
@@ -35,13 +35,6 @@ const linkProps = (to) => {
     to: to
   }
 }
-const state = reactive({
-  levelList: null
-})
-onMounted(() => {
-  console.log(state.levelList)
-  console.log(props.to)
-})
 </script>
 
 <style scoped lang="scss"></style>

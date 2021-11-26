@@ -1,13 +1,15 @@
 <template>
-  <div>getter</div>
-  <el-button @click="getterFunc">获取getter:{{ getterValue }}</el-button>
-  <div class="mt-2">commit</div>
-  <el-button @click="c_openSideBar">c_openSideBar</el-button>
-  <el-button @click="c_closeSideBar">c_closeSideBar</el-button>
-  <div class="mt-2">action</div>
-  <el-button @click="openSideBar">openSideBar</el-button>
-  <el-button @click="closeSideBar">closeSideBar</el-button>
-  <div>是否开启：{{ opened }}</div>
+  <div>
+    <div>getter</div>
+    <el-button @click="getterFunc">获取getter:{{ getterValue }}</el-button>
+    <div class="mt-2">commit</div>
+    <el-button @click="c_openSideBar">c_openSideBar</el-button>
+    <el-button @click="c_closeSideBar">c_closeSideBar</el-button>
+    <div class="mt-2">action</div>
+    <el-button @click="openSideBar">openSideBar</el-button>
+    <el-button @click="closeSideBar">closeSideBar</el-button>
+    <div>是否开启：{{ opened }}</div>
+  </div>
 </template>
 
 <script>

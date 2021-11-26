@@ -1,19 +1,21 @@
 <template>
-  <div className="mb-1">折线图</div>
-  <div className="rowSS">
-    <div id="echartsContainerLineF" style="width: 550px; height: 400px"></div>
-    <div id="echartsContainerLineS" style="width: 550px; height: 400px"></div>
-  </div>
-  <div className="mb-1">柱状图</div>
-  <div className="rowSS">
-    <div id="echartsContainerBarF" style="width: 550px; height: 400px"></div>
-    <div id="echartsContainerBarS" style="width: 550px; height: 400px"></div>
-  </div>
+  <div class="scroll-y">
+    <div className="mb-1">折线图</div>
+    <div className="rowSS">
+      <div id="echartsContainerLineF" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerLineS" style="width: 550px; height: 400px"></div>
+    </div>
+    <div className="mb-1">柱状图</div>
+    <div className="rowSS">
+      <div id="echartsContainerBarF" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerBarS" style="width: 550px; height: 400px"></div>
+    </div>
 
-  <div className="mb-1">饼图</div>
-  <div className="rowSS">
-    <div id="echartsContainerPieF" style="width: 550px; height: 400px"></div>
-    <div id="echartsContainerPieS" style="width: 550px; height: 400px"></div>
+    <div className="mb-1">饼图</div>
+    <div className="rowSS">
+      <div id="echartsContainerPieF" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerPieS" style="width: 550px; height: 400px"></div>
+    </div>
   </div>
 </template>
 <script setup>

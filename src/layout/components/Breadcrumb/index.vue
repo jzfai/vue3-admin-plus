@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeMount, getCurrentInstance, watch, ref } from 'vue'
+import { onBeforeMount, getCurrentInstance, watch, ref } from 'vue'
 import { compile } from 'path-to-regexp'
 let levelList = ref(null)
 let { proxy } = getCurrentInstance()
@@ -54,9 +54,6 @@ watch(
   },
   { immediate: true }
 )
-onMounted(() => {
-  console.log(proxy.$route)
-})
 onBeforeMount(() => {
   getBreadcrumb()
 })

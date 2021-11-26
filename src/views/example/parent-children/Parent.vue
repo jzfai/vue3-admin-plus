@@ -1,7 +1,9 @@
 <template>
-  <div>这是父组件</div>
-  <Children ref="refChildren" father-name="Vue3Template" @emitParent="emitParent" />
-  <el-button @click="childMethod">childMethod</el-button>
+  <div class="scroll-y">
+    <div>这是父组件</div>
+    <Children ref="refChildren" father-name="Vue3Template" @emitParent="emitParent" />
+    <el-button @click="childMethod">childMethod</el-button>
+  </div>
 </template>
 
 <script setup>

@@ -14,9 +14,11 @@ $sideBarWidth: 210px;
 $navBarHeight: 50px;
 //tagsView
 $tagViewHeight: 32px;
+//app-main padding
+$appMainPadding: 10px;
 
 //导出scss定义的样式变量
-/*vite无法获取scss变量https://github.com/vitejs/vite/issues/1279*/
+//vite无法获取scss变量https://github.com/vitejs/vite/issues/1279
 //:export {
 //  menuText: $menuText;
 //  menuActiveText: $menuActiveText;
@@ -27,5 +29,3 @@ $tagViewHeight: 32px;
 //  subMenuHover: $subMenuHover;
 //  sideBarWidth: $sideBarWidth;
 //}
-
-

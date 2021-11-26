@@ -80,13 +80,13 @@ export default {
     // 将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式
     startTime = startTime.replace(/\-/g, '/')
     endTime = endTime.replace(/\-/g, '/')
-    var sTime = new Date(startTime) // 开始时间
-    var eTime = new Date(endTime) // 结束时间
-    var timeOff = eTime - sTime // 相差时间戳（毫秒数）
-    var timeMinute = 1000 * 60
-    var timeHour = 1000 * 3600
-    var timeDay = 1000 * 3600 * 24
-    var timeYear = 1000 * 3600 * 24 * 365
+    let sTime = new Date(startTime) // 开始时间
+    let eTime = new Date(endTime) // 结束时间
+    let timeOff = eTime - sTime // 相差时间戳（毫秒数）
+    let timeMinute = 1000 * 60
+    let timeHour = 1000 * 3600
+    let timeDay = 1000 * 3600 * 24
+    let timeYear = 1000 * 3600 * 24 * 365
     if (timeOff / timeYear >= 1) {
       return parseInt(timeOff / timeYear) + '年' + parseInt((timeOff % timeYear) / timeDay) + '天'
     } else if (timeOff / timeDay >= 1) {
@@ -105,7 +105,7 @@ export default {
   /* 获取两个日期相差天数
    * */
   dateDiff(sDate1, sDate2) {
-    var arrDate, objDate1, objDate2, iDays
+    let arrDate, objDate1, objDate2, iDays
     arrDate = sDate1.split('-')
     objDate1 = new Date(arrDate[1] + '/' + arrDate[2] + '/' + arrDate[0])
     arrDate = sDate2.split('-')

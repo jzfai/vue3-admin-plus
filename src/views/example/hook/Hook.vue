@@ -1,12 +1,7 @@
 <template>
-  <div>ref1:{{ ref1 }},ref2:{{ ref2 }}</div>
-  <el-button @click="hookExample">执行hook方法</el-button>
-  <div>
-    <!--    <el-icon :size="size" :color="color">-->
-    <!--      <edit></edit>-->
-    <!--    </el-icon>-->
-    <!-- Or use it independently without derive attributes from parent -->
-    <edit></edit>
+  <div class="hookDemo">
+    <div>ref1:{{ ref1 }},ref2:{{ ref2 }}</div>
+    <el-button @click="hookExample">执行hook方法</el-button>
   </div>
 </template>
 

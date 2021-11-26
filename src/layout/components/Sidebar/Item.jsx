@@ -29,7 +29,6 @@ export default defineComponent({
         // view https://element-plus.org/zh-CN/component/icon.html
         return <ElSvgItem elSvgName={props.meta.elSvgIcon} />
       } else if (props.meta?.icon) {
-        console.log('我进入渲染了')
         return <svg-icon icon-class={props.meta?.icon} className="nav-icon" />
       }
     }

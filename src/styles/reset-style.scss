@@ -7,8 +7,7 @@ body {
 * {
   box-sizing: border-box;
 }
-*::before,
-*::after {
+*::before,*::after{
   box-sizing: border-box;
 }
 a:focus,
