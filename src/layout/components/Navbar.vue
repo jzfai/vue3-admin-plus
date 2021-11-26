@@ -12,7 +12,7 @@
     <!--nav title-->
     <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
     <div class="right-menu rowSC" v-if="settings.ShowDropDown">
-      <Screenfull />
+      <ScreenFull />
       <SizeSelect />
       <LangSelect />
       <el-dropdown trigger="click" size="medium">
@@ -46,15 +46,16 @@
 </template>
 
 <script setup>
+import SizeSelect from '@/components/SizeSelect'
+import LangSelect from '@/components/LangSelect'
+import ScreenFull from '@/components/ScreenFull'
+
 import { CaretBottom } from '@element-plus/icons'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'
 import settings from '@/settings'
 
-import Screenfull from '@/components/Screenfull'
-import SizeSelect from '@/components/SizeSelect'
-import LangSelect from '@/components/LangSelect'
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 let { proxy } = getCurrentInstance()
