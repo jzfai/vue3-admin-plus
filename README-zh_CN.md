@@ -74,7 +74,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 3.简化了部分复杂的逻辑，优化了架构部分设计方式
 
 
-
 #### vue3和vue2在性能上的对比
 
 - 打包大小减少41%
