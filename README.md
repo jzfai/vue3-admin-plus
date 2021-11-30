@@ -38,6 +38,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
  ---- Let's look at the loading speed and the size of the built package first.：
 
+http://8.135.1.141/file/vap-assets/
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
 ![template-demo](http://8.135.1.141/file/images/plus-demo.png)
@@ -54,11 +55,9 @@ The framework is available in js, ts and plus versions
 > development and  experience：two words  Really fragrant！！！！！
 
 ## Documents
-
--- Efforts are being made to develop documents ......
-
-You can refer to first：[documentation of vue-admin-template ](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
-
+- [目录结构，代码格式eslint+pretty，以及git hooks 使用（基础篇）](https://juejin.cn/post/7036301333304967181)
+- [前端proxy跨域，nginx，后端跨域配置介绍， 以及跨域原理简介（基础篇）](https://juejin.cn/post/7029560170451566606)
+- [Vue3 ref和reactive的使用和区别以及响应式原理](https://juejin.cn/post/7029559671648518151)
 #### The difference with vue-admin-template
 
 1.The layout method uses flex instead of the previous float, and the float layout method is completely removed, and some layout methods are optimized.
