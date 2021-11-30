@@ -38,7 +38,6 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
  ---- Let's look at the loading speed and the size of the built package first.：
 
-http://8.135.1.141/file/vap-assets/
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
 ![template-demo](http://8.135.1.141/file/images/plus-demo.png)
