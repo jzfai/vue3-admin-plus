@@ -96,8 +96,6 @@ const actions = {
         }
         accessedRoutes = await filterRouterByCodeArr(codeArr, asyncRoutes)
       }
-
-      commit('M_routes', accessedRoutes)
       resolve(accessedRoutes)
     })
   }
