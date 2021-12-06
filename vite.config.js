@@ -9,7 +9,7 @@ import setting from './src/settings'
 const prodMock = setting.openProdMock
 export default ({ command }) => {
   return {
-    base: './',
+    base: command === 'serve' ? './' : '/',
     define: {
       'process.platform': null,
       'process.version': null
