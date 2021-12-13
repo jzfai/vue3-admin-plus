@@ -106,7 +106,7 @@ export default {
 }
 </script>
 <script setup>
-import { Delete, FolderAdd } from '@element-plus/icons'
+import { Delete, FolderAdd } from '@element-plus/icons-vue'
 /*1.初始化引入和实例化*/
 import settings from '@/settings'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'

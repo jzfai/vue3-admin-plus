@@ -108,7 +108,7 @@ export default {
 </script>
 
 <script setup>
-import { Delete } from '@element-plus/icons'
+import { Delete } from '@element-plus/icons-vue'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 import settings from '@/settings'
 let { proxy } = getCurrentInstance()

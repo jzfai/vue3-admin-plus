@@ -12,7 +12,7 @@ export const constantRoutes = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
+        component: () => import('@/views/redirect')
       }
     ]
   },
@@ -23,12 +23,12 @@ export const constantRoutes = [
   },
   {
     path: '/404',
-    component: () => import('@/views/error-page/404'),
+    component: () => import('@/views/error-page/404.vue'),
     hidden: true
   },
   {
     path: '/401',
-    component: () => import('@/views/error-page/401'),
+    component: () => import('@/views/error-page/401.vue'),
     hidden: true
   },
   {
@@ -39,14 +39,12 @@ export const constantRoutes = [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/dashboard/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        //https://element-plus.gitee.io/zh-CN/component/icon.html#svg
         meta: { title: 'Dashboard', elSvgIcon: 'Fold' }
       }
     ]
   },
-  chartsRouter,
   {
     path: '/nested',
     component: Layout,
@@ -59,31 +57,31 @@ export const constantRoutes = [
     children: [
       {
         path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
+        component: () => import('@/views/nested/menu1/index.vue'), // Parent router-view
         name: 'Menu1',
         meta: { title: 'Menu1' },
         children: [
           {
             path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
+            component: () => import('@/views/nested/menu1/menu1-1/index.vue'),
             name: 'Menu1-1',
             meta: { title: 'Menu1-1' }
           },
           {
             path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
+            component: () => import('@/views/nested/menu1/menu1-2/index.vue'),
             name: 'Menu1-2',
             meta: { title: 'Menu1-2' },
             children: [
               {
                 path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1/index.vue'),
                 name: 'Menu1-2-1',
                 meta: { title: 'Menu1-2-1' }
               },
               {
                 path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2/index.vue'),
                 name: 'Menu1-2-2',
                 meta: { title: 'Menu1-2-2' }
               }
@@ -91,7 +89,7 @@ export const constantRoutes = [
           },
           {
             path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
+            component: () => import('@/views/nested/menu1/menu1-3/index.vue'),
             name: 'Menu1-3',
             meta: { title: 'Menu1-3' }
           }
@@ -99,7 +97,7 @@ export const constantRoutes = [
       },
       {
         path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
+        component: () => import('@/views/nested/menu2/index.vue'),
         name: 'Menu2',
         meta: { title: 'menu2' }
       }
@@ -110,7 +108,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/jzfai/vue3-admin-plus.git',
+        path: 'https://github.com/jzfai/vue3-admin-template.git',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
@@ -121,12 +119,13 @@ export const constantRoutes = [
     children: [
       {
         path: 'log',
-        component: () => import('@/views/error-log/index'),
+        component: () => import('@/views/error-log'),
         name: 'ErrorLog',
         meta: { title: 'Error Log', icon: 'bug' }
       }
     ]
   },
+  chartsRouter,
   {
     path: '/crud',
     component: Layout,
@@ -144,6 +143,12 @@ export const constantRoutes = [
         component: () => import('@/views/crud/Vci.vue'),
         name: 'ImportExport',
         meta: { title: 'Import Export', icon: 'guide' }
+      },
+      {
+        path: 'img-address-packing',
+        component: () => import('@/views/crud/ImgAddressPacking.vue'),
+        name: 'ImgAddressPacking',
+        meta: { title: 'ImgAdd Pack', icon: 'guide' }
       }
     ]
   },
@@ -220,20 +225,6 @@ export const constantRoutes = [
         meta: { title: 'Tinymce', icon: 'documentation' }
       }
     ]
-  },
-  {
-    path: '/table',
-    component: Layout,
-    meta: { title: 'Table', icon: 'table' },
-    alwaysShow: true,
-    children: [
-      {
-        path: 'dynamic-table',
-        component: () => import('@/views/table/DynamicTable.vue'),
-        name: 'DynamicTable',
-        meta: { title: 'Dynamic Table' }
-      }
-    ]
   }
 ]
 
@@ -256,7 +247,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'roleIndex',
-        component: () => import('@/views/permission/index'),
+        component: () => import('@/views/permission'),
         name: 'Permission',
         meta: {
           title: 'Role Index'
@@ -265,7 +256,7 @@ export const asyncRoutes = [
       },
       {
         path: 'page',
-        component: () => import('@/views/permission/page'),
+        component: () => import('@/views/permission/page.vue'),
         name: 'PagePermission',
         meta: {
           title: 'Page Permission',
@@ -274,7 +265,7 @@ export const asyncRoutes = [
       },
       {
         path: 'directive',
-        component: () => import('@/views/permission/directive'),
+        component: () => import('@/views/permission/directive.vue'),
         name: 'DirectivePermission',
         meta: {
           title: 'Directive Permission'
@@ -283,7 +274,7 @@ export const asyncRoutes = [
       },
       {
         path: 'code-index',
-        component: () => import('@/views/permission/CodePermission'),
+        component: () => import('@/views/permission/CodePermission.vue'),
         name: 'CodePermission',
         meta: {
           title: 'Code Index'
@@ -291,7 +282,7 @@ export const asyncRoutes = [
       },
       {
         path: 'code-page',
-        component: () => import('@/views/permission/CodePage'),
+        component: () => import('@/views/permission/CodePage.vue'),
         name: 'CodePage',
         meta: {
           title: 'Code Page',

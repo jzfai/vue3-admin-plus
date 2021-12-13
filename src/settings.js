@@ -68,7 +68,12 @@ const setting = {
   permissionMode: 'roles',
 
   //table height(100vh-delWindowHeight)
-  delWindowHeight: '210px'
+  delWindowHeight: '210px',
+
+  /*
+   * setting dev token when  isNeedLogin is setting false
+   * */
+  tmpToken: 'tmp_token'
 }
 
 export default setting

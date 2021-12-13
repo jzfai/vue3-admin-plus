@@ -27,7 +27,7 @@
 <script setup>
 /*初始化参数比如引入组件，proxy,state等*/
 import { getCurrentInstance } from 'vue'
-import Link from './Link'
+import Link from './Link.vue'
 import Item from './Item.jsx'
 import { isExternal } from '@/utils/validate'
 import path from 'path'

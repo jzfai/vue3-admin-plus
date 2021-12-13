@@ -258,7 +258,7 @@ export default {
    * return: arrObj查找 过后的数组
    * */
   findArrObjByKey(arrObj, objKey, value) {
-    return arrObj[arrObj.findIndex((item) => item[objKey] == value)]
+    return arrObj[arrObj.findIndex((item) => item[objKey] === value)]
   },
   /*
    * 根据arrObj 筛选arrObj2   根据arrObj objKey值查找

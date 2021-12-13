@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import Chart from './components/Keyboard'
+import Chart from './components/Keyboard.vue'
 </script>
 
 <style scoped>
