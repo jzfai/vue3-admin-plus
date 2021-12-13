@@ -89,6 +89,7 @@ export default ({ command, mode }) => {
         '~': resolve(__dirname, './'),
         '@': resolve(__dirname, 'src')
       }
+      //why remove it to look https://github.com/vitejs/vite/issues/6026
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
     css: {
@@ -96,6 +97,7 @@ export default ({ command, mode }) => {
         //define global scss variable
         scss: {
           additionalData: `@import "@/styles/variables.scss";`
+          //vite build element-plus  warning https://www.zhihu.com/question/498190531/answer/2219095376
         }
       }
     },

@@ -6,3 +6,5 @@ dist
 dist-ssr
 *.local
 yarn.lock
+yarn.error.log
+pnpm-lock.yaml
