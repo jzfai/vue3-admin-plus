@@ -154,7 +154,7 @@ let selectPageReq = () => {
     proxy.pageTotalMixin = resData.data?.total
   })
 }
-import tablePageHook from '@/hooks/tablePageHook'
+import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 const dateTimePacking = (timeArr) => {
   if (timeArr && timeArr.length === 2) {

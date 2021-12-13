@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import testHooks from '@/hooks/testHooks'
+import testHooks from '@/hooks/useTest'
 let { ref1, ref2, hooksFunc } = testHooks()
 const hookExample = () => {
   hooksFunc()
