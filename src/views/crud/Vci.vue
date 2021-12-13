@@ -137,7 +137,7 @@ let selectPageReq = () => {
   })
 }
 
-import tablePageHook from '@/hooks/tablePageHook'
+import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 //时间packing
 const dateTimePacking = (timeArr) => {
