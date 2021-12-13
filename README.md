@@ -1,4 +1,4 @@
-# vue3-admin-plus
+# vue3-admin-template
 
 **English** | [中文](./README-zh_CN.md)
 
@@ -8,6 +8,7 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 
 Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
+Vite need Node.js >= 12.0.0。
 
 ## Update log
 
@@ -21,13 +22,13 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 
 ## Online experience
 
-[github address](https://github.com/jzfai/vue3-admin-plus.git)
+[github address](https://github.com/jzfai/vue3-admin-template.git)
 
-[Access address](http://8.135.1.141/vue3-admin-plus)
+[Access address](http://8.135.1.141/vue3-admin-template)
 
-国内体验地址：http://8.135.1.141/vue3-admin-plus
+国内体验地址：http://8.135.1.141/vue3-admin-template
 
-github 地址：  https://github.com/jzfai/vue3-admin-plus.git
+github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
 ## Demo
 
@@ -37,16 +38,17 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ![template-demo](http://8.135.1.141/file/images/plus-demo.png)
 
-
 ## Related items
 
-The framework is available in js, ts and plus versions
+The framework is available in js, ts , plus and electron versions
 - js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- js version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
 - react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 > development and  experience：two words  Really fragrant！！！！！
+
 
 
 #### Comparison of performance between vue3 and vue2
@@ -62,16 +64,16 @@ The framework is available in js, ts and plus versions
 - **Rewrite the implementation of virtual DOM and Tree-Shaking**
 
 
-[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
+[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-template/issues/2)
 
 ## Build Setup
 
 ```bash
 # clone the project
-git clone https://github.com/jzfai/vue3-admin-plus.git
+git clone https://github.com/jzfai/vue3-admin-template.git
 
 # enter the project directory
-cd vue3-admin-plus
+cd vue3-admin-template
 
 # install dependency(Recommend use yarn)
 yarn
@@ -126,7 +128,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## License
 
-[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 

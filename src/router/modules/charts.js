@@ -14,25 +14,25 @@ const chartsRouter = {
   children: [
     {
       path: 'keyboard',
-      component: () => import('@/views/charts/keyboard'),
+      component: () => import('@/views/charts/keyboard.vue'),
       name: 'KeyboardChart',
       meta: { title: 'Keyboard Chart', noCache: true }
     },
     {
       path: 'line',
-      component: () => import('@/views/charts/line'),
+      component: () => import('@/views/charts/line.vue'),
       name: 'LineChart',
       meta: { title: 'Line Chart', noCache: true }
     },
     {
       path: 'mix-chart',
-      component: () => import('@/views/charts/mix-chart'),
+      component: () => import('@/views/charts/mix-chart.vue'),
       name: 'MixChart',
       meta: { title: 'Mix Chart', noCache: true }
     },
     {
       path: 'echarts-demo',
-      component: () => import('@/views/charts/echarts-demo'),
+      component: () => import('@/views/charts/echarts-demo.vue'),
       name: 'EchartsDemo',
       meta: { title: 'Echarts Demo', noCache: true }
     }

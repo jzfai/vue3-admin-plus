@@ -1,2 +1,2 @@
-import component from './CRUD'
+import component from './CRUD.vue'
 export default component

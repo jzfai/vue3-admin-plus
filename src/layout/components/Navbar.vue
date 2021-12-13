@@ -46,16 +46,15 @@
 </template>
 
 <script setup>
-import SizeSelect from '@/components/SizeSelect'
-import LangSelect from '@/components/LangSelect'
-import ScreenFull from '@/components/ScreenFull'
+import SizeSelect from '@/components/SizeSelect/index.vue'
+import LangSelect from '@/components/LangSelect/index.vue'
+import ScreenFull from '@/components/ScreenFull/index.vue'
 
-import { CaretBottom } from '@element-plus/icons'
+import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'
 import settings from '@/settings'
-
 import { useStore } from 'vuex'
 import { ElMessage } from 'element-plus'
 let { proxy } = getCurrentInstance()

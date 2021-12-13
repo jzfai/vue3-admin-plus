@@ -1,5 +1,4 @@
-//https://blog.csdn.net/Sheng_zhenzhen/article/details/108685176
-//
+// https://blog.csdn.net/Sheng_zhenzhen/article/details/108685176
 module.exports = {
   root: true,
   env: {
@@ -44,6 +43,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': ['off'],
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
+    'vue/script-setup-uses-vars': ['off'],
     //can config  to 2 if need more then required
     '@typescript-eslint/no-unused-vars': [1],
     'no-param-reassign': ['off']

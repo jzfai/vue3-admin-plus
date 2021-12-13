@@ -5,25 +5,21 @@ import { getToken, setToken } from '@/utils/auth'
 let requestData
 let loadingE
 
-const service = axios.create({
-  // baseURL: process.env.VUE_APP_BASE_URL,
-  // timeout: 30000 // 超时时间
-})
-// 请求拦截
+const service = axios.create()
+// request
 service.interceptors.request.use(
-  (request) => {
-    // console.log('request', request)
-    // token配置
-    request.headers['AUTHORIZE_TOKEN'] = getToken()
-    /* 下载文件*/
-    if (request.isDownLoadFile) {
-      request.responseType = 'blob'
+  (req) => {
+    // token setting
+    req.headers['AUTHORIZE_TOKEN'] = getToken()
+    /* download file*/
+    if (req.isDownLoadFile) {
+      req.responseType = 'blob'
     }
-    if (request.isUploadFile) {
-      request.headers['Content-Type'] = 'multipart/form-data'
+    /* upload file*/
+    if (req.isUploadFile) {
+      req.headers['Content-Type'] = 'multipart/form-data'
     }
-    requestData = request
-    if (request.bfLoading) {
+    if (req.bfLoading) {
       loadingE = ElLoading.service({
         lock: true,
         text: '数据载入中',
@@ -32,30 +28,32 @@ service.interceptors.request.use(
       })
     }
     /*
-     *params会拼接到url上
+     *params会拼接到url上,such as  "a=1&b=2"
      * */
-    if (request.isParams) {
-      request.params = request.data
-      request.data = {}
+    if (req.isParams) {
+      req.params = req.data
+      req.data = {}
     }
-    return request
+    //save req for res to using
+    requestData = req
+    return req
   },
   (err) => {
     Promise.reject(err)
   }
 )
-// 响应拦截
+//response
 service.interceptors.response.use(
   (res) => {
     if (requestData.afHLoading && loadingE) {
       loadingE.close()
     }
-    // 如果是下载文件直接返回
+    // direct return, when download file
     if (requestData.isDownLoadFile) {
       return res.data
     }
     const { flag, msg, code, isNeedUpdateToken, updateToken } = res.data
-    //更新token保持登录状态
+    //update token
     if (isNeedUpdateToken) {
       setToken(updateToken)
     }
@@ -96,7 +94,7 @@ service.interceptors.response.use(
   }
 )
 
-export default function khReqMethod({
+export default function axiosReq({
   url,
   data,
   method,

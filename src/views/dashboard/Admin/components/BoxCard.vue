@@ -28,7 +28,7 @@
 
 <script setup>
 import PanThumb from '@/views/dashboard/PanThumb'
-import Mallki from '@/views/dashboard/TextHoverEffect/Mallki'
+import Mallki from '@/views/dashboard/TextHoverEffect/Mallki.vue'
 import { getCurrentInstance, reactive, computed } from 'vue'
 let { proxy } = getCurrentInstance()
 reactive({

@@ -33,7 +33,7 @@ let classObj = computed(() => {
   }
 })
 //import ResizeHook to  listen  page size that  open or close
-import ResizeHook from './hook/ResizeHandler'
+import ResizeHook from './hook/useResizeHandler'
 ResizeHook()
 </script>
 

@@ -1,15 +1,17 @@
-# vue3-admin-plus
+# vue3-admin-template
 
 **中文** | [English](./README.md)
 
 
 
-> vue3 admin plus 提供企业级开发demo
+> 这是一个基础的 vue3 admin 管理后台。它只包含了 Element-Plus UI & axios & svg-icon& permission control & lint，这些搭建后台必要的东西。
 
 
 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，It's fast!
 
 使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
+
+Vite 需要 Node.js 版本 >= 12.0.0。
 
 ## 更新日志
 
@@ -17,19 +19,20 @@
 
 - [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
 
+
 ## 文档
 
 - [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
 
 ## 线上体验
 
-[github address](https://github.com/jzfai/vue3-admin-plus.git)
+[github address](https://github.com/jzfai/vue3-admin-template.git)
 
-[Access address](http://8.135.1.141/vue3-admin-plus)
+[Access address](http://8.135.1.141/vue3-admin-template)
 
-github 地址：  https://github.com/jzfai/vue3-admin-plus.git
+github 地址：  https://github.com/jzfai/vue3-admin-template.git
 
-国内体验地址：http://8.135.1.141/vue3-admin-plus
+国内体验地址：http://8.135.1.141/vue3-admin-template
 
 
 ## 例子
@@ -38,22 +41,24 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/plus-demo.png)
+![template-demo](http://8.135.1.141/file/images/template-demo.png)
 
 ## 相关项目
 
-框架有js，ts和plus版本
+框架有js，ts，plus和electron版本
 
 - js版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
 - ts版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - js实例参考plus版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- electron版本：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
 - react版本： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
 - java微服务后台数据：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 > 开发和使用感受：两个字 真香！！！！！
 
 
-#### vue3和vue2在性能上的对比
+
+vue3和vue2在性能上的对比
 
 - 打包大小减少41%
 
@@ -65,16 +70,16 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 - **重写虚拟DOM的实现和Tree-Shaking**
 
-[vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-plus/issues/2)
+[vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-template/issues/2)
 
 ## 构建步骤
 
 ```bash
 # 克隆项目
-git clone https://github.com/jzfai/vue3-admin-plus.git
+git clone https://github.com/jzfai/vue3-admin-template.git
 
 # 进入项目目录
-cd  vue3-admin-plus
+cd  vue3-admin-template
 
 # 安装依赖(建议用yarn)
 yarn
@@ -127,14 +132,14 @@ yarn run lint
   - lint
 
 - 全局功能
-  - 国际化多语言
+  #- 国际化多语言
   #- 多种动态换肤
   - 动态侧边栏（支持多级路由嵌套）
   - 动态面包屑
   - 快捷导航(标签页)
   - Svg Sprite 图标
   - 本地/后端 mock 数据
-  - Screenfull全屏
+  #- Screenfull全屏
   - 自适应收缩侧边栏
 
 - 编辑器
@@ -182,7 +187,7 @@ yarn run lint
 
 ## 额外
 
-架构开发不易，如果感觉好，请给我点个**start**，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
+架构开发不易，如果感觉好，请给我点个 start ，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
 
 ## 浏览器支持
 
@@ -198,7 +203,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## 版本
 
-[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 

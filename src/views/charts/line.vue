@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import Chart from './components/LineMarker'
+import Chart from './components/LineMarker.vue'
 </script>
 
 <style scoped>

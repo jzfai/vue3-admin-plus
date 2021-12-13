@@ -1,2 +1,2 @@
-import component from './Sidebar'
+import component from './Sidebar.vue'
 export default component

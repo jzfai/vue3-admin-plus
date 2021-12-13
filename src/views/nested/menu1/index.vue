@@ -1,7 +1,9 @@
 <template>
   <div>
-    <el-alert :closable="false" title="menu 1">
-      <router-view />
-    </el-alert>
+    <router-view v-slot="{ Component }">
+      <el-alert :closable="false" title="menu 1">
+        <component :is="Component" />
+      </el-alert>
+    </router-view>
   </div>
 </template>

@@ -1,2 +1,2 @@
-import component from './KeepAlive'
+import component from './KeepAlive.vue'
 export default component

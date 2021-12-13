@@ -3,7 +3,7 @@
     <GithubCorner class="github-corner" />
     <PanelGroup @handleSetLineChartData="handleSetLineChartData" />
     <el-row style="background: #fff; padding: 16px 16px 0; margin-bottom: 32px">
-      <LineChart :chart-data="lineChartData" />
+      <LineChart :chart-data="lineChartData ?? {}" />
     </el-row>
     <el-row :gutter="32">
       <el-col :xs="24" :sm="24" :lg="8">
@@ -61,14 +61,14 @@
 <script setup>
 import { toRefs, reactive } from 'vue'
 import GithubCorner from '@/views/dashboard/GithubCorner'
-import PanelGroup from './components/PanelGroup'
-import LineChart from './components/LineChart'
-import RaddarChart from './components/RaddarChart'
-import PieChart from './components/PieChart'
-import BarChart from './components/BarChart'
-import TransactionTable from './components/TransactionTable'
-import TodoList from './components/TodoList'
-import BoxCard from './components/BoxCard'
+import PanelGroup from './components/PanelGroup.vue'
+import LineChart from './components/LineChart.vue'
+import RaddarChart from './components/RaddarChart.vue'
+import PieChart from './components/PieChart.vue'
+import BarChart from './components/BarChart.vue'
+import TransactionTable from './components/TransactionTable.vue'
+import TodoList from './components/TodoList/index.vue'
+import BoxCard from './components/BoxCard.vue'
 const lineChart = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],

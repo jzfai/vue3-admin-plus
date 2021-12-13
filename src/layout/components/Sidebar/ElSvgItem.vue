@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import * as ElSvg from '@element-plus/icons'
+import * as ElSvg from '@element-plus/icons-vue'
 const props = defineProps({
   elSvgName: {
     require: true,
