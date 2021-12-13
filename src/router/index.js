@@ -108,7 +108,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://github.com/jzfai/vue3-admin-template.git',
+        path: 'https://github.com/jzfai/vue3-admin-plus.git',
         meta: { title: 'External Link', icon: 'link' }
       }
     ]

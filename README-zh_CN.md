@@ -1,4 +1,4 @@
-# vue3-admin-template
+# vue3-admin-plus
 
 **中文** | [English](./README.md)
 
@@ -26,13 +26,13 @@ Vite 需要 Node.js 版本 >= 12.0.0。
 
 ## 线上体验
 
-[github address](https://github.com/jzfai/vue3-admin-template.git)
+[github address](https://github.com/jzfai/vue3-admin-plus.git)
 
-[Access address](http://8.135.1.141/vue3-admin-template)
+[Access address](http://8.135.1.141/vue3-admin-plus)
 
-github 地址：  https://github.com/jzfai/vue3-admin-template.git
+github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
-国内体验地址：http://8.135.1.141/vue3-admin-template
+国内体验地址：http://8.135.1.141/vue3-admin-plus
 
 
 ## 例子
@@ -70,16 +70,16 @@ vue3和vue2在性能上的对比
 
 - **重写虚拟DOM的实现和Tree-Shaking**
 
-[vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-template/issues/2)
+[vite2和webpack打包速度上的对比](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
 ## 构建步骤
 
 ```bash
 # 克隆项目
-git clone https://github.com/jzfai/vue3-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-plus.git
 
 # 进入项目目录
-cd  vue3-admin-template
+cd  vue3-admin-plus
 
 # 安装依赖(建议用yarn)
 yarn
@@ -203,7 +203,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## 版本
 
-[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 

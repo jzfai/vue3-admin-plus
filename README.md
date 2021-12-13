@@ -22,13 +22,13 @@ Vite need Node.js >= 12.0.0。
 
 ## Online experience
 
-[github address](https://github.com/jzfai/vue3-admin-template.git)
+[github address](https://github.com/jzfai/vue3-admin-plus.git)
 
-[Access address](http://8.135.1.141/vue3-admin-template)
+[Access address](http://8.135.1.141/vue3-admin-plus)
 
-国内体验地址：http://8.135.1.141/vue3-admin-template
+国内体验地址：http://8.135.1.141/vue3-admin-plus
 
-github 地址：  https://github.com/jzfai/vue3-admin-template.git
+github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ## Demo
 
@@ -64,16 +64,16 @@ The framework is available in js, ts , plus and electron versions
 - **Rewrite the implementation of virtual DOM and Tree-Shaking**
 
 
-[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-template/issues/2)
+[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
 ## Build Setup
 
 ```bash
 # clone the project
-git clone https://github.com/jzfai/vue3-admin-template.git
+git clone https://github.com/jzfai/vue3-admin-plus.git
 
 # enter the project directory
-cd vue3-admin-template
+cd vue3-admin-plus
 
 # install dependency(Recommend use yarn)
 yarn
@@ -128,7 +128,7 @@ Modern browsers and Internet Explorer 11+.
 
 ## License
 
-[MIT](https://github.com/jzfai/vue3-admin-template/blob/master/LICENSE) license.
+[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
 
 Copyright (c) 2021-present  kuanghua
 
