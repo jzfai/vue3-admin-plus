@@ -10,7 +10,7 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showTitle">{{ settings.showTitle }}</div>
+    <div class="heardCenterTitle" v-if="settings.showNavbarTitle">{{ settings.title }}</div>
     <div class="right-menu rowSC" v-if="settings.ShowDropDown">
       <ScreenFull />
       <SizeSelect />
@@ -54,22 +54,26 @@ import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
 import { computed, getCurrentInstance } from 'vue'
-import settings from '@/settings'
-import { useStore } from 'vuex'
-import { ElMessage } from 'element-plus'
-let { proxy } = getCurrentInstance()
 
+import { ElMessage } from 'element-plus'
+import { useStore } from 'vuex'
+const store = useStore()
+
+let { proxy } = getCurrentInstance()
+let settings = computed(() => {
+  return store.state.app.settings
+})
 const opened = computed(() => {
-  return proxy.$store.state.app.sidebar.opened
+  return store.state.app.sidebar.opened
 })
 const toggleSideBar = () => {
-  proxy.$store.commit('app/M_toggleSideBar')
+  store.commit('app/M_toggleSideBar')
 }
 
 /*
  * 退出登录
  * */
-const store = useStore()
+
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
     ElMessage({ message: '退出登录成功', type: 'success' })

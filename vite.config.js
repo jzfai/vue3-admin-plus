@@ -8,14 +8,17 @@ import { viteMockServe } from 'vite-plugin-mock'
 import setting from './src/settings'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
-import packageJson from './package.json'
+// import packageJson from './package.json'
 export default ({ command, mode }) => {
   return {
     /*
      * "/vue3-admin-plus" nginx deploy folder
      * detail to look https://vitejs.cn/config/#base
+     * how to config, such as http://8.135.1.141/vue3-admin-plus/#/dashboard
+     * "/vue3-admin-plus/" --> config to base is you need
+     * http://8.135.1.141 --> if you config "/" , you can visit attached  to http://8.135.1.141
      * */
-    base: `/${packageJson.name}/`,
+    base: setting.viteBasePath,
     define: {
       'process.platform': null,
       'process.version': null

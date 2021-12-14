@@ -26,7 +26,6 @@ import { computed } from 'vue'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
 //导入配置文件
-import settings from '@/settings'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
@@ -36,6 +35,9 @@ let routes = computed(() => {
 })
 const isCollapse = computed(() => {
   return store.state.app.sidebar.opened
+})
+let settings = computed(() => {
+  return store.state.app.settings
 })
 
 //change  scss variable to js
@@ -55,24 +57,6 @@ const dillScssExportToJson = (scssExportJson) => {
 //get scss variable
 import scssExportJson from '@/styles/variables-to-js.scss'
 let scssJson = dillScssExportToJson(scssExportJson)
-// onMounted(() => {
-//   // console.log('scssExportJson', scssExportJson)
-// })
-// const variables = computed(() => {
-//   // let data = JSON.parse(scssExportJson.replace(/:export\s*/, ''))
-//   // console.log('scssExportJson')
-//   // console.log(typeof data)
-//   return {
-//     menuText: '#bfcbd9',
-//     menuActiveText: '#409EFF',
-//     subMenuActiveText: '#f4f4f5',
-//     menuBg: '#304156',
-//     menuHover: '#263445',
-//     subMenuBg: '#1f2d3d',
-//     subMenuHover: '#001528',
-//     sideBarWidth: '210px'
-//   }
-// })
 const activeMenu = computed(() => {
   const { meta, fullPath } = route
   // if set path, the sidebar will highlight the path you set

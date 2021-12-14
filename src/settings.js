@@ -1,10 +1,7 @@
 const setting = {
+  /*page layout related*/
+  //sideBar or navbar show title
   title: 'Vue3 Admin Plus',
-  /**
-   * @type {boolean} true | false
-   * @description Whether fix the header
-   */
-  fixedHeader: true,
   /**
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
@@ -14,12 +11,7 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether show the title in Navbar
    */
-  showTitle: false,
-  /**
-   * @type {boolean} true | false
-   * @description Whether show the settings right-panel
-   */
-  showLeftMenu: true,
+  showNavbarTitle: false,
   /**
    * @type {boolean} true | false
    * @description Whether show the drop-down
@@ -32,14 +24,9 @@ const setting = {
   showHamburger: true,
   /**
    * @type {boolean} true | false
-   * @description Whether need login
+   * @description Whether show the settings right-panel
    */
-  isNeedLogin: true,
-  /**
-   * @type {boolean} true | false
-   * @description Whether need nprogress
-   */
-  isNeedNprogress: true,
+  showLeftMenu: true,
   /**
    * @type {boolean} true | false
    * @description Whether show TagsView
@@ -49,7 +36,34 @@ const setting = {
    * @description TagsView show number
    */
   tagsViewNum: 6,
-  //showSettings: true
+  /**
+   * @type {boolean} true | false
+   * @description Whether show the top Navbar
+   */
+  showTopNavbar: true,
+
+  /* page  animation related*/
+  /**
+   * @type {boolean} true | false
+   * @description Whether need animation of main area
+   */
+  mainNeedAnimation: false,
+  /**
+   * @type {boolean} true | false
+   * @description Whether need nprogress
+   */
+  isNeedNprogress: false,
+
+  /*page login or other*/
+  /**
+   * @type {boolean} true | false
+   * @description Whether need login
+   */
+  isNeedLogin: true,
+  /**
+   * @type {string} 'roles' | 'code'
+   */
+  permissionMode: 'roles',
   /**
    * @type {boolean} true | false
    * @description Whether  open prod mock
@@ -62,18 +76,20 @@ const setting = {
    * If you want to also use it in dev, you can pass ['build', 'serve']
    */
   errorLog: ['build'],
-  /**
-   * @type {string} 'roles' | 'code'
-   */
-  permissionMode: 'roles',
-
-  //table height(100vh-delWindowHeight)
+  /*
+   * table height(100vh-delWindowHeight)
+   * */
   delWindowHeight: '210px',
-
   /*
    * setting dev token when  isNeedLogin is setting false
    * */
-  tmpToken: 'tmp_token'
+  tmpToken: 'tmp_token',
+
+  /*
+   * vite.config.js base config
+   * such as
+   * */
+  viteBasePath: '/vue3-admin-plus/'
 }
 
 export default setting

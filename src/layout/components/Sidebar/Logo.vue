@@ -14,16 +14,20 @@
 </template>
 
 <script setup>
-import { toRefs, reactive } from 'vue'
-import setting from '@/settings'
+import { toRefs, reactive, computed } from 'vue'
 defineProps({
   collapse: {
     type: Boolean,
     required: true
   }
 })
+import { useStore } from 'vuex'
+let store = useStore()
+let settings = computed(() => {
+  return store.state.app.settings
+})
 const state = reactive({
-  title: setting.title,
+  title: settings.value.title,
   logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
 })
 //export to page for
