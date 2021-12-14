@@ -18,15 +18,18 @@ import Tinymce from '@/components/Tinymce/Tinymce.vue'
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
 let { proxy } = getCurrentInstance()
-
 /*tinymce操作*/
 const refTinymce = ref(null)
 const setTinyContent = () => {
-  refTinymce.value.setContent('tinymce设置的内容')
+  if (refTinymce.value) {
+    refTinymce.value.setContent('tinymce设置的内容')
+  }
 }
 const getTinyContent = () => {
-  let content = refTinymce.value.getContent()
-  proxy.elMessageMixin(content)
+  if (refTinymce.value) {
+    let content = refTinymce.value.getContent()
+    proxy.elMessageMixin(content)
+  }
 }
 </script>
 
