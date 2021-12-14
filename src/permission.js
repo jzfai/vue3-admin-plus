@@ -1,4 +1,4 @@
-import router, { asyncRoutes } from '@/router'
+import router from '@/router'
 import store from './store'
 import settings from './settings'
 import { getToken, setToken } from '@/utils/auth'
@@ -23,29 +23,35 @@ router.beforeEach(async (to, from, next) => {
     } else {
       //judge isGetUserInfo
       let isGetUserInfo = store.state.permission.isGetUserInfo
-      if (isGetUserInfo) {
+      /**
+       * exist userInfo or not need login
+       * note: if not need login,the asyncRoutes is not necessary, recommended to use static routes
+       */
+      if (isGetUserInfo || !settings.isNeedLogin) {
         next()
       } else {
         try {
-          let accessRoutes = []
-          if (settings.isNeedLogin) {
-            // get user info
-            // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-            const { roles } = await store.dispatch('user/getInfo')
-            accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          } else {
-            accessRoutes = asyncRoutes
-          }
+          /**
+           * get user info
+           * note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+           */
+          const { roles } = await store.dispatch('user/getInfo')
+          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+
           // setting constRouters and accessRoutes to vuex , in order to sideBar for using
           store.commit('permission/M_routes', accessRoutes)
-          // dynamically add accessible routes
-          //router4 addRoutes destroyed
+
+          /**
+           * dynamically add accessible routes
+           * router4 addRoutes destroyed
+           */
           accessRoutes.forEach((route) => {
             router.addRoute(route)
           })
+
           //already get userInfo
           store.commit('permission/M_isGetUserInfo', true)
-          // hack method to ensure that addRoutes is complete
+
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
