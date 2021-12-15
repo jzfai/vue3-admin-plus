@@ -23,13 +23,13 @@ const mixin = {
   },
   created() {
     /* 获取url连接域名，用于多平台迁移*/
-    const localUrl = window.location.href.slice(0, window.location.href.indexOf('/', 9) + 1)
-    const socketUrl = localUrl.replace(/http|https/gi, 'ws')
+    // const localUrl = window.location.href.slice(0, window.location.href.indexOf('/', 9) + 1)
+    // const socketUrl = localUrl.replace(/http|https/gi, 'ws')
     // 读取.env 多坏境里的数据
     this.VITE_APP_IMAGE_URL_PRE = import.meta.env.VITE_APP_BASE_URL
     this.VITE_APP_BASE_URL = import.meta.env.VITE_APP_BASE_URL
-    this.VITE_APP_BASE_WS_URL =
-      import.meta.env.VITE_APP_ENV === 'serve' ? import.meta.env.VITE_APP_BASE_WS_URL : socketUrl
+    // this.VITE_APP_BASE_WS_URL =
+    //   import.meta.env.VITE_APP_ENV === 'serve' ? import.meta.env.VITE_APP_BASE_WS_URL : socketUrl
     // 获取token和个人基本信息
     this.accessTokenMixin = getToken()
     this.userBaseInfoMixin = JSON.parse(localStorage.getItem('L_userBaseInfo'))

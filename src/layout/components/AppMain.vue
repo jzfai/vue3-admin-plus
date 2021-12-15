@@ -1,11 +1,16 @@
 <template>
   <div class="app-main" :class="{ 'show-tag-view': settings.showTagsView }">
     <router-view v-slot="{ Component }">
-      <component :is="compType" :name="settings.mainNeedAnimation ?? 'fade-breadcrumb'">
+      <!--has transition  Judging by settings.mainNeedAnimation-->
+      <transition name="fade-transform" mode="out-in" v-if="settings.mainNeedAnimation">
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
-      </component>
+      </transition>
+      <!-- no transition -->
+      <keep-alive :include="cachedViews" v-else>
+        <component :is="Component" :key="key" />
+      </keep-alive>
     </router-view>
   </div>
 </template>
@@ -21,10 +26,7 @@ let settings = computed(() => {
 })
 //Whether close the animation fo breadcrumb
 const compType = computed(() => {
-  if (settings.value.mainNeedAnimation) {
-    return 'transition'
-  }
-  return 'div'
+  return 'transition'
 })
 
 // cachePage: is true, keep-alive this Page

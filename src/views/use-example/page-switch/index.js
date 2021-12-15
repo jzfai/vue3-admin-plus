@@ -1,2 +1,2 @@
-import component from './PageSwitch.vue'
+import component from './SettingSwitch.vue'
 export default component

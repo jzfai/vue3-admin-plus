@@ -1,13 +1,13 @@
 {
     "name": "vue3-admin-plus",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "license": "ISC",
     "author": "kuanghua(869653722@qq.com)",
     "scripts": {
         "dev": "vite --mode serve-dev --host",
+        "test": "vite --mode serve-test --host",
+        "build:test": "vite build --mode  build-test",
         "build": "vite build --mode build",
-        "build:serve": "vite build --mode  build-serve",
-        "serve": "vite preview --mode build",
         "preview": "yarn run build && vite preview ",
         "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
         "prepare": "husky install"
@@ -17,12 +17,13 @@
         "axios": "0.21.3",
         "echarts": "4.2.1",
         "element-plus": "1.2.0-beta.6",
-        "mitt": "^3.0.0",
+        "mitt": "3.0.0",
         "moment-mini": "^2.22.1",
-        "nprogress": "^0.2.0",
+        "nprogress": "0.2.0",
         "path": "0.12.7",
         "path-to-regexp": "^6.2.0",
         "tinymce": "4.9.11",
+        "screenfull": "4.2.0",
         "vue": "3.2.26",
         "vue-router": "4.0.12",
         "vuex": "4.0.2"

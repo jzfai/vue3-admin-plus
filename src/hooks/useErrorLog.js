@@ -20,11 +20,13 @@ let errorLogReq = (errLog) => {
   })
 }
 
-export default function (app) {
-  //type judge
-  // base type  using 'type of'
-  // Reference type using 'instance of'
-  // recommend to reading https://www.jianshu.com/p/ddc7f189d130
+export default function () {
+  /*
+   * type judge
+   * base type  using 'type of'
+   * Reference type using 'instance of'
+   * recommend to reading https://www.jianshu.com/p/ddc7f189d130
+   * */
   const checkNeed = () => {
     const env = import.meta.env.VITE_APP_ENV
     let { errorLog } = setting
@@ -37,21 +39,20 @@ export default function (app) {
     return false
   }
   if (checkNeed()) {
-    //error log white
-    let whiteList = ['cancel']
-    //add img load error log listen
-    document.addEventListener(
+    window.addEventListener(
       'error',
-      (err) => {
-        let errLog = `${JSON.stringify(err.target.outerHTML)}`
-        errorLogReq(errLog)
+      ({ error, target }) => {
+        if (target.outerHTML) {
+          //img error collection
+          let errLog = `${JSON.stringify(target.outerHTML)}`
+          errorLogReq(errLog)
+        } else {
+          let errLog = `${error.stack.substr(0, 300)}`
+          errorLogReq(errLog)
+        }
       },
+      //use Event capture  to collection  img error
       true
     )
-    app.config.errorHandler = (err) => {
-      if (whiteList.includes(err)) return
-      let errLog = `${err.message}---${err.stack.substr(0, 300)}`
-      errorLogReq(errLog)
-    }
   }
 }
