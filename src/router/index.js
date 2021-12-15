@@ -114,14 +114,14 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/page-switch',
+    path: '/setting-switch',
     component: Layout,
     children: [
       {
-        path: 'log',
+        path: 'index',
         component: () => import('@/views/use-example/page-switch'),
-        name: 'PageSwitch',
-        meta: { title: 'Page Switch', icon: 'example' }
+        name: 'SettingSwitch',
+        meta: { title: 'Setting Switch', icon: 'example' }
       }
     ]
   },

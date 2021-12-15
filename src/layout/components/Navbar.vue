@@ -17,10 +17,7 @@
       <LangSelect />
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
-          <img
-            src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
-            class="user-avatar"
-          />
+          <img src="@/assets/layout/animation-image.gif" class="user-avatar" />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
           <!--el-icon-x  is  destructed-->
           <!--<i class="el-icon-caret-bottom" />-->
@@ -69,11 +66,9 @@ const opened = computed(() => {
 const toggleSideBar = () => {
   store.commit('app/M_toggleSideBar')
 }
-
 /*
  * 退出登录
  * */
-
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
     ElMessage({ message: '退出登录成功', type: 'success' })

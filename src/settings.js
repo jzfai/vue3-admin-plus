@@ -47,7 +47,7 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether need animation of main area
    */
-  mainNeedAnimation: true,
+  mainNeedAnimation: false,
   /**
    * @type {boolean} true | false
    * @description Whether need nprogress
@@ -70,12 +70,12 @@ const setting = {
    */
   openProdMock: true,
   /**
-   * @type {string | array} 'serve' | ['build', 'serve']
+   * @type {string | array} 'dev' | ['prod','test','dev'] according to the .env file props of VITE_APP_ENV
    * @description Need show err logs component.
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['build', 'serve']
    */
-  errorLog: ['build'],
+  errorLog: ['prod'],
   /*
    * table height(100vh-delWindowHeight)
    * */

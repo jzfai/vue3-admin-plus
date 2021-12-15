@@ -1,13 +1,23 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
-    <component :is="compType" :name="settings.mainNeedAnimation ?? 'fade-breadcrumb'">
+    <!--has transition  Judging by settings.mainNeedAnimation-->
+    <transition-group name="breadcrumb" v-if="settings.mainNeedAnimation">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
           {{ item.meta?.title }}
         </span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
-    </component>
+    </transition-group>
+    <!--no transition-->
+    <template v-else>
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" >
+        <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
+          {{ item.meta?.title }}
+        </span>
+        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+      </el-breadcrumb-item>
+    </template>
   </el-breadcrumb>
 </template>
 

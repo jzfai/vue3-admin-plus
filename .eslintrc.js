@@ -26,7 +26,8 @@ module.exports = {
     ecmaVersion: 2021
   },
   rules: {
-    'linebreak-style': ['error', 'unix'],
+    //close lf error
+    'linebreak-style': ['off'],
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-absolute-path': 'off',

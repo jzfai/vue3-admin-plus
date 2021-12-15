@@ -10,6 +10,11 @@ import setting from './src/settings'
 const prodMock = setting.openProdMock
 // import packageJson from './package.json'
 export default ({ command, mode }) => {
+  console.log(command, mode)
+  /*
+   console.log(command, mode)
+  * serve serve-dev
+  * */
   return {
     /*
      * "/vue3-admin-plus" nginx deploy folder
@@ -72,8 +77,10 @@ export default ({ command, mode }) => {
       chunkSizeWarningLimit: 2000,
       //remote console.log in prod
       terserOptions: {
+        //detail to look https://terser.org/docs/api-reference#compress-options
         compress: {
-          drop_console: true,
+          drop_console: false,
+          pure_funcs: ['console.log', 'console.info'],
           drop_debugger: true
         }
       },

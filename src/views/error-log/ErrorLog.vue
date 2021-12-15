@@ -47,7 +47,14 @@
       :data="usertableData"
     >
       <el-table-column type="selection" align="center" width="50" />
-      <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300" />
+      <el-table-column align="center" prop="errorLog" label="错误日志" min-width="300">
+        <template #default="{ row }">
+          <div>{{ row.errorLog }}</div>
+          <el-button type="text" size="small" @click="consoleToPlatform(row.errorLog)">
+            click it console to platform to track
+          </el-button>
+        </template>
+      </el-table-column>
       <el-table-column align="center" prop="pageUrl" label="页面路径" width="180" />
       <el-table-column align="center" prop="version" label="版本号" width="60" />
       <el-table-column align="center" prop="browserType" label="浏览器类型" width="180" />
@@ -122,8 +129,11 @@ let testData = ref('testData')
 onMounted(() => {
   console.log('testData', testData)
 })
-let errorLogProd = () => {
+const errorLogProd = () => {
   throw new Error('产生的错误日志')
+}
+const consoleToPlatform = (err) => {
+  console.error(err)
 }
 
 //img loader err test
