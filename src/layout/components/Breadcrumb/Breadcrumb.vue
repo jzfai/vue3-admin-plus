@@ -11,7 +11,7 @@
     </transition-group>
     <!--no transition-->
     <template v-else>
-      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path" >
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
         <span v-if="item.redirect === 'noRedirect' || index === levelList.length - 1" class="no-redirect">
           {{ item.meta?.title }}
         </span>

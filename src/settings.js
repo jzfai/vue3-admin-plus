@@ -47,7 +47,7 @@ const setting = {
    * @type {boolean} true | false
    * @description Whether need animation of main area
    */
-  mainNeedAnimation: false,
+  mainNeedAnimation: true,
   /**
    * @type {boolean} true | false
    * @description Whether need nprogress
