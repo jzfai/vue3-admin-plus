@@ -133,7 +133,8 @@ const errorLogProd = () => {
   throw new Error('产生的错误日志')
 }
 const consoleToPlatform = (err) => {
-  console.error(err)
+  //加个custom不收集
+  console.error('custom' + err)
 }
 
 //img loader err test

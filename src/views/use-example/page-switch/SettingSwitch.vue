@@ -47,19 +47,80 @@
       </div>
     </div>
     <el-button type="primary" @click="testChangeSettings">testChangeSettings</el-button>
+
+    <!--  error test  -->
+    <div class="mt-2">error test</div>
+    <el-button type="primary" @change="sourceFun">buttonCont</el-button>
+    <teleport to="body">
+      <div>111</div>
+    </teleport>
+    <div class="mt-2">抛出unhandledrejection</div>
+    <el-button type="primary" @click="handle">unhandledrejection</el-button>
+
+    <div class="mt-2">抛出vue Error</div>
+    <el-button @click="flag = !1">vue Error</el-button>
+    <span>{{ flag }}</span>
+
+    <div class="mt-2">抛出console.error</div>
+    <el-button @click="consoleErrorFun">onsole.error</el-button>
+
+    <div class="mt-2">normalError</div>
+    <el-button @click="normalError">normalError</el-button>
+
+    <div class="mt-2">跨域</div>
+    <el-button @click="updateReq">updateReq</el-button>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, getCurrentInstance, ref } from 'vue'
 import { useStore } from 'vuex'
 const store = useStore()
 let settings = computed(() => {
-  return store.state.app.settings
+  return store.state.app.settings || {}
 })
 
 const testChangeSettings = () => {
   store.commit('app/M_settings', { sidebarLogo: !settings.value.sidebarLogo })
+}
+
+let source = ref(false)
+const sourceFun = () => {
+  source.value = !source.value
+}
+
+const handle = () => {
+  new Promise((resolve, reject) => {
+    reject('reject promise')
+  }).then((res) => {
+    console.log('ok')
+  })
+}
+
+let flag = ref(null)
+
+const consoleErrorFun = () => {
+  console.error('console.error')
+}
+
+const normalError = () => {
+  throw new Error(' throw new Error("")\n')
+}
+let { proxy } = getCurrentInstance()
+let updateReq = () => {
+  return proxy
+    .$axiosReq({
+      // baseURL: 'http://8.135.1.141/micro-service-test',
+      url: '/ty-user/brand/updateBy',
+      data: { id: 'fai' },
+      method: 'put',
+      isParams: true,
+      bfLoading: true
+    })
+    .then(() => {})
+  // .catch((err) => {
+  //   console.log('接口catch', err)
+  // })
 }
 </script>
 

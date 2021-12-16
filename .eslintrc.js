@@ -46,15 +46,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': ['off'],
     'vue/script-setup-uses-vars': ['off'],
     //can config  to 2 if need more then required
-    '@typescript-eslint/no-unused-vars': [1],
+    '@typescript-eslint/no-unused-vars': [0],
     'no-param-reassign': ['off']
-  },
-  overrides: [
-    {
-      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
-      env: {
-        jest: true
-      }
-    }
-  ]
+  }
 }

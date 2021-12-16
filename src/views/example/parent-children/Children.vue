@@ -3,6 +3,7 @@
     <div>{{ name }}</div>
     <el-button @click="emitFather">emitFather</el-button>
     <el-button @click="getFatherMethod">getFatherMethod</el-button>
+    <el-button @click="changeParentFoo">change parentFoo</el-button>
   </div>
 </template>
 
@@ -28,9 +29,13 @@ const { proxy } = getCurrentInstance()
 let getFatherMethod = () => {
   proxy.$parent.fartherMethod()
 }
+
+const changeParentFoo = () => {
+  emit('update:foo', 'new foo')
+}
 //emit
 // 定义emit事件
-const emit = defineEmits(['emitParent'])
+const emit = defineEmits(['emitParent', 'update:foo'])
 const emitFather = () => {
   emit('emitParent', { val: '子组件传递的信息' })
 }

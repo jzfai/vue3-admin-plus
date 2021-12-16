@@ -1,7 +1,12 @@
 <template>
   <div class="scroll-y">
     <div>这是父组件</div>
-    <Children ref="refChildren" father-name="Vue3Template" @emitParent="emitParent" />
+    <Children
+      ref="refChildren"
+      father-name="Vue3Template"
+      @update:foo="(val) => (foo = val)"
+      @emitParent="emitParent"
+    />
     <el-button @click="childMethod">childMethod</el-button>
   </div>
 </template>
@@ -16,6 +21,8 @@ import Children from './Children.vue'
 // import {useStore} from 'vuex'
 let { proxy } = getCurrentInstance()
 
+let foo = ref(null)
+
 let refChildren = ref(null)
 onMounted(() => {
   /*获取子元素两种方法*/
@@ -27,6 +34,7 @@ onMounted(() => {
 const childMethod = () => {
   console.log(refChildren.value.childMethod())
   console.log(refChildren.value.childRef)
+  console.log('foo', foo.value)
 }
 const emitParent = (data) => {
   console.log('得到子组件的信息111', data)
@@ -35,6 +43,13 @@ const fartherMethod = () => {
   console.log('fartherMethod')
 }
 defineExpose({ fartherMethod })
+
+/*
+vue2
+<comp :foo.sync="bar"></comp>
+vue3
+<comp :foo="bar" @update:foo="val => bar = val"></comp>
+this.$emit('update:foo', newValue)*/
 </script>
 
 <style scoped lang="scss"></style>

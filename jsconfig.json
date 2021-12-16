@@ -5,5 +5,8 @@
             "@/*": ["src/*"]
         }
     },
-    "exclude": ["node_modules", "dist",".husky"]
+    "include": ["src/**/*"]
 }
+
+
+

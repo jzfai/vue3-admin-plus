@@ -51,4 +51,7 @@ import './permission'
 import errorLog from '@/hooks/useErrorLog'
 errorLog(app)
 
+//axios cancel req
+window.__axiosPromiseArr = []
+
 app.use(router).mount('#app')
