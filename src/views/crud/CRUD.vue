@@ -109,9 +109,9 @@ export default {
 import { Delete, FolderAdd } from '@element-plus/icons-vue'
 /*1.初始化引入和实例化*/
 import settings from '@/settings'
+import CRUDForm from './CRUDForm.vue'
 import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 let { proxy } = getCurrentInstance()
-import CRUDForm from './CRUDForm.vue'
 const refCRUDForm = ref(null)
 onActivated(() => {
   console.log('onActivated')
@@ -172,7 +172,7 @@ const searchBtnClick = () => {
 }
 //删除相关
 const refuserTable = ref(null)
-const multiDelBtnClick = async () => {
+const multiDelBtnClick = () => {
   let rowDeleteIdArrMixin = []
   // let selectionArr = proxy.$refs.refuserTable //--c
   let deleteNameTitle = ''
@@ -185,19 +185,23 @@ const multiDelBtnClick = async () => {
     return
   }
   let stringLength = deleteNameTitle.length - 1
-  await proxy.elConfirmMixin('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
-  const data = rowDeleteIdArrMixin
   proxy
-    .$axiosReq({
-      url: `/ty-user/brand/deleteBatchIds`,
-      data,
-      method: 'DELETE',
-      bfLoading: true
+    .elConfirmMixin('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
+    .then(() => {
+      const data = rowDeleteIdArrMixin
+      proxy
+        .$axiosReq({
+          url: `/ty-user/brand/deleteBatchIds`,
+          data,
+          method: 'DELETE',
+          bfLoading: true
+        })
+        .then((res) => {
+          proxy.elMessageMixin('删除成功')
+          selectPageReq()
+        })
     })
-    .then((res) => {
-      proxy.elMessageMixin('删除成功')
-      selectPageReq()
-    })
+    .catch(() => {})
 }
 let deleteByIdReq = (id) => {
   return proxy.$axiosReq({
@@ -208,12 +212,16 @@ let deleteByIdReq = (id) => {
     bfLoading: true
   })
 }
-let tableDelClick = async (row) => {
-  await proxy.elConfirmMixin('确定', `您确定要删除【${row.name}】吗？`)
-  deleteByIdReq(row.id).then(() => {
-    selectPageReq()
-    proxy.elMessageMixin(`【${row.name}】删除成功`)
-  })
+let tableDelClick = (row) => {
+  proxy
+    .elConfirmMixin('确定', `您确定要删除【${row.name}】吗？`)
+    .then(() => {
+      deleteByIdReq(row.id).then(() => {
+        selectPageReq()
+        proxy.elMessageMixin(`【${row.name}】删除成功`)
+      })
+    })
+    .catch(() => {})
 }
 //添加和修改
 let showFrom = ref(false)

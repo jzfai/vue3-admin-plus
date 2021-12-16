@@ -24,6 +24,12 @@
         />
       </div>
     </div>
+    <div class="mt-2 mb-1">Provinces and cities packing</div>
+    <el-cascader :options="regionData" @change="casHandle" v-model="addressArr" class="widthPx-200"></el-cascader>
+
+    <div class="mt-2 mb-1">axios req cancel test(you need setting: Network->slow 3G To Test)</div>
+    <el-button type="primary" @click="testAxiosCancelReq">emit req</el-button>
+    <el-button type="primary" @click="cancelReq">cancel req</el-button>
   </div>
 </template>
 
@@ -32,7 +38,7 @@ import { Plus, CloseBold } from '@element-plus/icons-vue'
 import axiosReq from '@/utils/axiosReq.js'
 import { watermark } from '@/views/crud/imgDillUtils.js'
 import { ElMessage } from 'element-plus'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 let imageList = ref([])
 const refSettingFile = ref(null)
 const fileOnChange = () => {
@@ -63,7 +69,7 @@ const fileUploadSave = (formData) => {
     isUploadFile: true
   }).then((res) => {
     let { shortPath } = res.data
-    // 存储文件名称
+    // filename
     let filename = refSettingFile.value.value
     filename = filename.slice(filename.lastIndexOf('\\') + 1)
     imageList.value.push({
@@ -76,6 +82,33 @@ const fileUploadSave = (formData) => {
 
 const deleteImage = (index) => {
   imageList.value.splice(index, 1)
+}
+
+/*省市区选择器相关*/
+//https://www.npmjs.com/package/element-china-area-data
+import { TextToCode, CodeToText, regionData } from 'element-china-area-data'
+let addressArr = reactive([])
+const casHandle = (dataArr) => {
+  console.log(CodeToText[addressArr[0]], CodeToText[addressArr[1]], CodeToText[addressArr[2]])
+}
+
+/*axios请求取消测试*/
+const testAxiosCancelReq = () => {
+  axiosReq({
+    url: '/ty-user/user/getUserInfo',
+    method: 'post',
+    bfLoading: false,
+    isAlertErrorMsg: false
+  })
+}
+const cancelReq = () => {
+  //cancel all req when page switch
+  if (window.__axiosPromiseArr) {
+    window.__axiosPromiseArr.forEach((ele, ind) => {
+      ele.cancel()
+      delete window.__axiosPromiseArr[ind]
+    })
+  }
 }
 </script>
 

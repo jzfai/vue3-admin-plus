@@ -41,7 +41,6 @@ const setting = {
    * @description Whether show the top Navbar
    */
   showTopNavbar: true,
-
   /* page  animation related*/
   /**
    * @type {boolean} true | false
@@ -75,7 +74,7 @@ const setting = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['build', 'serve']
    */
-  errorLog: ['prod'],
+  errorLog: ['dev'],
   /*
    * table height(100vh-delWindowHeight)
    * */

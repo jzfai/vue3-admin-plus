@@ -144,7 +144,7 @@ const fileUploadSave = () => {
       const filename = proxy.$refs.refSettingFile.value
       proxy.chooseFileNameMixin = filename.slice(filename.lastIndexOf('\\') + 1)
 
-      subForm.image = import.meta.env.VITE_APP_IMAGE_URL + shortPath
+      subForm.image = `${import.meta.env.VITE_APP_IMAGE_URL}/${shortPath}`
       proxy.$refs.refSettingFile.value = ''
     })
     .catch(() => {

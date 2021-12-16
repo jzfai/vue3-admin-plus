@@ -2,13 +2,20 @@ import store from '@/store'
 import axios from 'axios'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import { getToken, setToken } from '@/utils/auth'
-let requestData
+let reqConfig
 let loadingE
 
 const service = axios.create()
 // request
 service.interceptors.request.use(
   (req) => {
+    //axios cancel req https://www.jianshu.com/p/49568b10b29b
+    req.cancelToken = new axios.CancelToken((cancel) => {
+      window.__axiosPromiseArr.push({
+        url: req.url,
+        cancel
+      })
+    })
     // token setting
     req.headers['AUTHORIZE_TOKEN'] = getToken()
     /* download file*/
@@ -23,7 +30,7 @@ service.interceptors.request.use(
       loadingE = ElLoading.service({
         lock: true,
         text: '数据载入中',
-        spinner: 'el-icon-loading',
+        // spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.1)'
       })
     }
@@ -35,7 +42,7 @@ service.interceptors.request.use(
       req.data = {}
     }
     //save req for res to using
-    requestData = req
+    reqConfig = req
     return req
   },
   (err) => {
@@ -45,11 +52,11 @@ service.interceptors.request.use(
 //response
 service.interceptors.response.use(
   (res) => {
-    if (requestData.afHLoading && loadingE) {
+    if (reqConfig.afHLoading && loadingE) {
       loadingE.close()
     }
     // direct return, when download file
-    if (requestData.isDownLoadFile) {
+    if (reqConfig.isDownLoadFile) {
       return res.data
     }
     const { flag, msg, code, isNeedUpdateToken, updateToken } = res.data
@@ -58,8 +65,10 @@ service.interceptors.response.use(
       setToken(updateToken)
     }
     if (flag) {
+      //业务成功处理
       return res.data
     } else {
+      //业务失败处理
       if (code === 403) {
         ElMessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
@@ -71,26 +80,35 @@ service.interceptors.response.use(
           })
         })
       }
-      if (requestData.isAlertErrorMsg) {
+      //是否需要提示错误信息 isAlertErrorMsg:true 提示
+      if (reqConfig.isAlertErrorMsg) {
         ElMessage({
           message: msg,
           type: 'error',
           duration: 2 * 1000
         })
-        return Promise.reject(msg)
-      } else {
-        return res.data
       }
+      //返回错误信息
+      //如果未catch 走unhandledrejection进行收集
+      return Promise.reject(res.data)
     }
   },
   (err) => {
+    /*http错误处理，处理跨域，404，401，500*/
     if (loadingE) loadingE.close()
     ElMessage({
       message: err,
       type: 'error',
       duration: 2 * 1000
     })
-    return Promise.reject(err)
+    //如果是跨域
+    //Network Error,cross origin
+    let errObj = {
+      msg: err.toString(),
+      reqUrl: reqConfig.baseURL + reqConfig.url,
+      params: reqConfig.isParams ? reqConfig.params : reqConfig.data
+    }
+    return Promise.reject(JSON.stringify(errObj))
   }
 )
 
