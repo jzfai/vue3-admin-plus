@@ -78,9 +78,9 @@ let req404 = () => {
     method: 'put',
     isParams: true,
     bfLoading: true
-  })
-    .then((res) => {})
-    .catch((err) => {})
+  }).then((res) => {})
+  //the error will collection to unhandledrejection if you  no catch
+  // .catch((err) => {})
 }
 
 //img loader err test

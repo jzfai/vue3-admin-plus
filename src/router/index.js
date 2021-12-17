@@ -46,6 +46,39 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/setting-switch',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/setting-switch'),
+        name: 'SettingSwitch',
+        meta: { title: 'Setting Switch', icon: 'example' }
+      }
+    ]
+  },
+  {
+    path: '/error-log',
+    component: Layout,
+    name: 'ErrorLog',
+    redirect: '/error-log/list',
+    meta: { title: 'ErrorLog', icon: 'bug' },
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/error-log'),
+        name: 'ErrorLog',
+        meta: { title: 'Error Log' }
+      },
+      {
+        path: 'error-log-test',
+        component: () => import('@/views/error-log/ErrorLogTest.vue'),
+        name: 'ErrorLogTest',
+        meta: { title: 'ErrorLog Test' }
+      }
+    ]
+  },
+  {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
@@ -110,39 +143,6 @@ export const constantRoutes = [
       {
         path: 'https://github.com/jzfai/vue3-admin-plus.git',
         meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-  {
-    path: '/setting-switch',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/use-example/page-switch'),
-        name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example' }
-      }
-    ]
-  },
-  {
-    path: '/error-log',
-    component: Layout,
-    name: 'ErrorLog',
-    redirect: '/error-log/list',
-    meta: { title: 'ErrorLog', icon: 'bug' },
-    children: [
-      {
-        path: 'list',
-        component: () => import('@/views/error-log'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Log' }
-      },
-      {
-        path: 'error-log-test',
-        component: () => import('@/views/error-log/ErrorLogTest.vue'),
-        name: 'ErrorLogTest',
-        meta: { title: 'ErrorLog Test' }
       }
     ]
   },
