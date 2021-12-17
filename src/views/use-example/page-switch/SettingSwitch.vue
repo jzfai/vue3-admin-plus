@@ -37,8 +37,8 @@
       <div class="mb-1 ml-6">
         page animation related
         <div class="mt-2">
-          mainNeedAnimation：
-          <el-switch v-model="store.state.app.settings.mainNeedAnimation" />
+          mainNeedAnimation：places to "settings file" for setting
+          <!-- <el-switch v-model="store.state.app.settings.mainNeedAnimation" />-->
         </div>
         <div class="mt-3">
           isNeedNprogress：
@@ -46,29 +46,8 @@
         </div>
       </div>
     </div>
+    <div class="mt-2 mb-1">store.commit to change</div>
     <el-button type="primary" @click="testChangeSettings">testChangeSettings</el-button>
-
-    <!--  error test  -->
-    <div class="mt-2">error test</div>
-    <el-button type="primary" @change="sourceFun">buttonCont</el-button>
-    <teleport to="body">
-      <div>111</div>
-    </teleport>
-    <div class="mt-2">抛出unhandledrejection</div>
-    <el-button type="primary" @click="handle">unhandledrejection</el-button>
-
-    <div class="mt-2">抛出vue Error</div>
-    <el-button @click="flag = !1">vue Error</el-button>
-    <span>{{ flag }}</span>
-
-    <div class="mt-2">抛出console.error</div>
-    <el-button @click="consoleErrorFun">onsole.error</el-button>
-
-    <div class="mt-2">normalError</div>
-    <el-button @click="normalError">normalError</el-button>
-
-    <div class="mt-2">跨域</div>
-    <el-button @click="updateReq">updateReq</el-button>
   </div>
 </template>
 

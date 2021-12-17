@@ -64,7 +64,8 @@ service.interceptors.response.use(
     if (isNeedUpdateToken) {
       setToken(updateToken)
     }
-    if (flag) {
+    const successCode = '0,200,20000'
+    if (successCode.indexOf(code)) {
       //业务成功处理
       return res.data
     } else {

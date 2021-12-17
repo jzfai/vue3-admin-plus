@@ -128,12 +128,21 @@ export const constantRoutes = [
   {
     path: '/error-log',
     component: Layout,
+    name: 'ErrorLog',
+    redirect: '/error-log/list',
+    meta: { title: 'ErrorLog', icon: 'bug' },
     children: [
       {
-        path: 'log',
+        path: 'list',
         component: () => import('@/views/error-log'),
         name: 'ErrorLog',
-        meta: { title: 'Error Log', icon: 'bug' }
+        meta: { title: 'Error Log' }
+      },
+      {
+        path: 'error-log-test',
+        component: () => import('@/views/error-log/ErrorLogTest.vue'),
+        name: 'ErrorLogTest',
+        meta: { title: 'ErrorLog Test' }
       }
     ]
   },
@@ -148,19 +157,19 @@ export const constantRoutes = [
         path: 'crud',
         component: () => import('@/views/crud'),
         name: 'crud',
-        meta: { title: 'CRUD-Demo', icon: 'guide' }
+        meta: { title: 'CRUD-Demo' }
       },
       {
         path: 'import-export',
         component: () => import('@/views/crud/Vci.vue'),
         name: 'ImportExport',
-        meta: { title: 'Import Export', icon: 'guide' }
+        meta: { title: 'Import Export' }
       },
       {
         path: 'img-address-packing',
         component: () => import('@/views/crud/ImgAddressPacking.vue'),
         name: 'ImgAddressPacking',
-        meta: { title: 'ImgAdd Pack', icon: 'guide' }
+        meta: { title: 'ImgAdd Pack' }
       }
     ]
   },
