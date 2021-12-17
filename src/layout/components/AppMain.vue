@@ -24,11 +24,6 @@ let route = useRoute()
 let settings = computed(() => {
   return store.state.app.settings
 })
-//Whether close the animation fo breadcrumb
-const compType = computed(() => {
-  return 'transition'
-})
-
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
 let oldRoute = null

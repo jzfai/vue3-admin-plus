@@ -33,12 +33,6 @@ let store = useStore()
 let settings = computed(() => {
   return store.state.app.settings
 })
-const compType = computed(() => {
-  if (settings.value.mainNeedAnimation) {
-    return 'transition-group'
-  }
-  return 'div'
-})
 
 const getBreadcrumb = () => {
   // only show routes with meta.title

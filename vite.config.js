@@ -10,7 +10,6 @@ import setting from './src/settings'
 const prodMock = setting.openProdMock
 // import packageJson from './package.json'
 export default ({ command, mode }) => {
-  console.log(command, mode)
   /*
    console.log(command, mode)
   * serve serve-dev
@@ -99,6 +98,7 @@ export default ({ command, mode }) => {
         '~': resolve(__dirname, './'),
         '@': resolve(__dirname, 'src')
       }
+      //why remove it , look for https://github.com/vitejs/vite/issues/6026
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
     css: {

@@ -78,6 +78,8 @@ service.interceptors.response.use(
         }).then(() => {
           store.dispatch('user/resetToken').then(() => {
             location.reload()
+            //direct return
+            return Promise.reject(res.data)
           })
         })
       }
@@ -128,7 +130,7 @@ export default function axiosReq({
 }) {
   return service({
     url: url,
-    method: method ?? 'post',
+    method: method ?? 'get',
     data: data ?? {},
     isParams: isParams ?? false,
     bfLoading: bfLoading ?? true,
