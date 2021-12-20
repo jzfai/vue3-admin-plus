@@ -1,4 +1,4 @@
-# vue3-admin-template
+# vue3-admin-plus
 
 **English** | [中文](./README-zh_CN.md)
 
@@ -75,11 +75,13 @@ git clone https://github.com/jzfai/vue3-admin-plus.git
 # enter the project directory
 cd vue3-admin-plus
 
-# install dependency(Recommend use yarn)
-yarn
+# pnpm address https://pnpm.io/zh/motivation
+# install dependency(Recommend use pnpm)
+# you can  use "npm -g i pnpm" to install pnpm 
+pnpm i
 
 # develop
-yarn run dev
+pnpm run dev
 ```
 
 using the browser to open http://localhost:5001
@@ -88,20 +90,20 @@ using the browser to open http://localhost:5001
 
 ```bash
 # build for test environment
-yarn run build-test
+pnpm run build-test
 
 # build for production environment
-yarn run  build
+pnpm run  build
 ```
 
 ## Others
 
 ```bash
 # preview the release environment effect
-yarn run preview
+pnpm run preview
 
 # code format check
-yarn run lint
+pnpm run lint
 
 ```
 

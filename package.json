@@ -16,18 +16,18 @@
     "@element-plus/icons-vue": "0.2.4",
     "axios": "0.21.3",
     "echarts": "4.2.1",
+    "element-china-area-data": "^5.0.2",
     "element-plus": "1.2.0-beta.6",
     "mitt": "3.0.0",
     "moment-mini": "^2.22.1",
     "nprogress": "0.2.0",
     "path": "0.12.7",
     "path-to-regexp": "^6.2.0",
+    "screenfull": "4.2.0",
     "tinymce": "4.9.11",
     "vue": "3.2.26",
     "vue-router": "4.0.12",
-    "vuex": "4.0.2",
-    "element-china-area-data": "^5.0.2",
-    "screenfull": "4.2.0"
+    "vuex": "4.0.2"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.16.3",
@@ -53,10 +53,13 @@
     "scss": "0.2.4",
     "svg-sprite-loader": "6.0.11",
     "typescript": "4.3.2",
-    "vite": "2.7.1",
+    "vite": "^2.7.3",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
     "vite-plugin-svg-icons": "1.0.5",
     "vue-tsc": "0.28.1"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }

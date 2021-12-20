@@ -4,8 +4,7 @@
 
 
 
-> 这是一个基础的 vue3 admin 管理后台。它只包含了 Element-Plus UI & axios & svg-icon& permission control & lint，这些搭建后台必要的东西。
-
+> vue3-admin-plus提供企业级的开发demo
 
 本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，It's fast!
 
@@ -81,11 +80,13 @@ git clone https://github.com/jzfai/vue3-admin-plus.git
 # 进入项目目录
 cd  vue3-admin-plus
 
-# 安装依赖(建议用yarn)
-yarn
+# pnpm address https://pnpm.io/zh/motivation
+# 安装依赖(建议用pnpm)
+# 你可以使用 "npm -g i pnpm" 去安装pnpm
+pnpm i
 
 # 启动服务
-yarn run dev
+pnpm run dev
 ```
 
 浏览器访问 http://localhost:5001
@@ -95,20 +96,23 @@ yarn run dev
 
 ```bash
 # 构建测试环境
-yarn run build-test
+pnpm run build-serve
 
 # 构建生产环境
-yarn run build
+pnpm run build
 ```
 
 ## 其它
 
 ```bash
+# 预览发布环境效果
+pnpm run preview:build-serve
+
 # 预览生产环境
-yarn run preview
+pnpm run preview
 
 # 代码格式检查并自动修复
-yarn run lint
+pnpm run lint
 ```
 
 ## 功能
