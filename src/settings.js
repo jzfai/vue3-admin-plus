@@ -74,7 +74,7 @@ const setting = {
    * The default is only used in the production env
    * If you want to also use it in dev, you can pass ['dev', 'test']
    */
-  errorLog: ['prod'],
+  errorLog: ['prod', 'dev'],
   /*
    * table height(100vh-delWindowHeight)
    * */
