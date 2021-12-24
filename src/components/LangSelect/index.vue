@@ -22,7 +22,7 @@
 import { computed, reactive, toRefs } from 'vue'
 const state = reactive({
   sizeOptions: [
-    { label: '中文', value: 'zhCn' },
+    { label: '中文', value: 'zh' },
     { label: 'English', value: 'en' }
   ]
 })
