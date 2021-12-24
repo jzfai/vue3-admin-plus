@@ -12,7 +12,7 @@
         @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
         @contextmenu.prevent="openMenu(tag, $event)"
       >
-        {{ tag.title }}
+        {{ generateTitle(tag.title) }}
         <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
       </router-link>
     </div>
@@ -35,6 +35,11 @@ import { useStore } from 'vuex'
 const store = useStore()
 const router = useRouter()
 let { proxy } = getCurrentInstance()
+
+//i18
+import useI18n from '@/hooks/useI18n'
+const { generateTitle } = useI18n()
+
 const state = reactive({
   visible: false,
   top: 0,
