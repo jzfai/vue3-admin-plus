@@ -32,6 +32,11 @@
           showTopNavbar：
           <el-switch v-model="store.state.app.settings.showTopNavbar" />
         </div>
+
+        <div class="mt-3">
+          showVersionInfo：
+          <el-switch v-model="store.state.app.settings.showVersionInfo" />
+        </div>
       </div>
 
       <div class="mb-1 ml-6">

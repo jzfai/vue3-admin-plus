@@ -27,8 +27,8 @@
             v-model="formInline.password"
             :type="passwordType"
             name="password"
-            @keyup.enter="handleLogin"
             placeholder="password(123456)"
+            @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />

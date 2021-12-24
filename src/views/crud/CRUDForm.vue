@@ -1,30 +1,30 @@
 <template>
   <el-dialog
-    :title="dialogTitleMixin"
     v-model="dialogVisibleMixin"
+    :title="dialogTitleMixin"
     width="50vw"
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form label-width="150px" ref="refForm" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
       <el-form-item label="品牌名称" prop="name" :rules="formRulesMixin.isNotNull" label-position="left">
         <el-input v-model="subForm.name" class="widthPx-150" placeholder="品牌名称" />
       </el-form-item>
       <el-form-item label="品牌图片地址" prop="image" :rules="formRulesMixin.isNotNull" label-position="left">
         <div class="rowSE">
-          <img :src="subForm.image" v-if="subForm.image" class="widthPx-120 heightPx-120 border_radius5" />
+          <img v-if="subForm.image" :src="subForm.image" class="widthPx-120 heightPx-120 border_radius5" />
           <div :class="[subForm.image && 'ml-1']" class="rowSS">
             <el-button type="primary" @click="goUploadFileMixin">
               <i class="el-icon-upload2" />
               上传
-              <input type="file" style="display: none" ref="refSettingFile" id="uploadFile" @change="fileUploadSave" />
+              <input id="uploadFile" ref="refSettingFile" type="file" style="display: none" @change="fileUploadSave" />
             </el-button>
             <div class="ml-1">{{ chooseFileNameMixin }}</div>
           </div>
         </div>
       </el-form-item>
       <el-form-item label="品牌的首字母" prop="letter" :rules="formRulesMixin.isNotNull" label-position="left">
-        <el-input maxlength="1" v-model="subForm.letter" class="widthPx-150" placeholder="品牌的首字母" />
+        <el-input v-model="subForm.letter" maxlength="1" class="widthPx-150" placeholder="品牌的首字母" />
       </el-form-item>
       <el-form-item label="排序" prop="seq" :rules="formRulesMixin.isNotNull" label-position="left">
         <el-input v-model="subForm.seq" class="widthPx-150" placeholder="排序" />

@@ -1,11 +1,11 @@
 <template>
   <div class="scroll-y">
     <el-checkbox-group v-model="checkedList" @change="handleChangeChecked">
-      <el-checkbox v-for="item in tableColums" :label="item.prop" :key="item.prop">{{ item.title }}</el-checkbox>
+      <el-checkbox v-for="item in tableColums" :key="item.prop" :label="item.prop">{{ item.title }}</el-checkbox>
     </el-checkbox-group>
     <el-table :data="tableData">
       <template v-for="item in tableColums" :key="item.prop">
-        <el-table-column :prop="item.prop" :label="item.title" v-if="item.show">
+        <el-table-column v-if="item.show" :prop="item.prop" :label="item.title">
           <template #default="scope">
             {{ scope.row[item.prop] }}
           </template>

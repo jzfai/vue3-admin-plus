@@ -26,26 +26,26 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            @change="dateTimePacking"
             class="widthPx-250"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            @change="dateTimePacking"
           />
         </el-form-item>
       </el-form>
       <!--查询按钮-->
-      <el-button @click="searchBtnClick" type="primary">查询</el-button>
+      <el-button type="primary" @click="searchBtnClick">查询</el-button>
     </div>
     <!--表格和分页-->
     <el-table
       id="resetElementDialog"
       ref="refuserTable"
       :height="`calc(100vh - ${settings.delWindowHeight})`"
-      @selection-change="handleSelectionChange"
       size="mini"
       border
       :data="usertableData"
+      @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" align="center" width="50" />
       <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
@@ -81,7 +81,7 @@
       />
     </div>
     <!--详情-->
-    <el-dialog :title="dialogTitleMixin" v-model="detailDialogMixin" width="500px" :close-on-click-modal="false">
+    <el-dialog v-model="detailDialogMixin" :title="dialogTitleMixin" width="500px" :close-on-click-modal="false">
       <div class="detail-container rowBC">
         <div class="detail-container-item">品牌名称：{{ detailData.name }}</div>
       </div>
