@@ -10,7 +10,7 @@
 
 使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
 
-Vite 需要 Node.js 版本 >= 12.0.0。
+使用最先进的包管理工具pnpm
 
 ## 更新日志
 

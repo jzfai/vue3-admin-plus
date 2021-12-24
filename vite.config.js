@@ -9,6 +9,11 @@ import setting from './src/settings'
 // import { loadEnv } from 'vite'
 const prodMock = setting.openProdMock
 // import packageJson from './package.json'
+
+/* use child_process to exec shell */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const child_process = require('child_process')
+const commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
 export default ({ command, mode }) => {
   /*
    console.log(command, mode)
@@ -24,8 +29,13 @@ export default ({ command, mode }) => {
      * */
     base: setting.viteBasePath,
     define: {
+      //fix "path" module issue
       'process.platform': null,
-      'process.version': null
+      'process.version': null,
+      //define global var
+      GLOBAL_VAR: {
+        GIT_COMMIT_ID: commitHash
+      }
     },
     clearScreen: false,
     server: {
