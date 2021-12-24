@@ -1,18 +1,22 @@
 <template>
   <router-view />
-  <div class="show-version-container" v-if="settings.showVersionInfo">
+  <div v-if="settings.showVersionInfo" class="show-version-container">
     {{ showVersionInfo }}
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onBeforeMount } from 'vue'
 import packageJson from '../package.json'
-
 import { useStore } from 'vuex'
 const store = useStore()
 let settings = computed(() => {
   return store.state.app.settings
+})
+import { setToken } from '@/utils/auth'
+onBeforeMount(() => {
+  //set tmp token when setting isNeedLogin false
+  if (!settings.value.isNeedLogin) setToken(settings.value.tmpToken)
 })
 
 const showVersionInfo = computed(() => {
@@ -28,5 +32,6 @@ const showVersionInfo = computed(() => {
   background: #fff;
   padding: 2px 2px;
   border-radius: 2px;
+  opacity: 0.25;
 }
 </style>
