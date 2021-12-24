@@ -68,7 +68,7 @@ export const constantRoutes = [
         path: 'list',
         component: () => import('@/views/error-log'),
         name: 'ErrorLog',
-        meta: { title: 'Error Log' }
+        meta: { title: 'ErrorLog' }
       },
       {
         path: 'error-log-test',
@@ -142,7 +142,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'https://github.com/jzfai/vue3-admin-plus.git',
-        meta: { title: 'External Link', icon: 'link' }
+        meta: { title: 'ExternalLink', icon: 'link' }
       }
     ]
   },
@@ -244,6 +244,12 @@ export const constantRoutes = [
         component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
         name: 'Tinymce',
         meta: { title: 'Tinymce', icon: 'documentation' }
+      },
+      {
+        path: 'i18n-demo',
+        component: () => import('@/views/use-example/i18n/I18n-Demo.vue'),
+        name: 'I18nDemo',
+        meta: { title: 'I18n-Demo', icon: 'documentation' }
       }
     ]
   }

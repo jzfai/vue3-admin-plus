@@ -10,11 +10,15 @@ app.use(store)
 //import element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
+import zh from 'element-plus/es/locale/lang/zh-cn'
 app.use(ElementPlus, {
   size: localStorage.getItem('size') || 'mini',
-  locale: localStorage.getItem('language') === 'zhCn' && zhCn
+  locale: localStorage.getItem('language') === 'zh' && zh
 })
+//i18n
+import i18n from '@/lang'
+app.use(i18n)
+
 //global mixin
 import elementMixin from '@/mixins/elementMixin'
 app.mixin(elementMixin)

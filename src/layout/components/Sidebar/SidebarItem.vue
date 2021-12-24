@@ -4,14 +4,14 @@
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
           <item :meta="onlyOneChild.meta || item.meta" />
-          <template #title>{{ onlyOneChild.meta?.title }}</template>
+          <template #title>{{ generateTitle(onlyOneChild.meta?.title) }}</template>
         </el-menu-item>
       </Link>
     </template>
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template v-if="item.meta" #title>
         <item :meta="item.meta" />
-        <span>{{ item.meta.title }}</span>
+        <span>{{ generateTitle(item.meta.title) }}</span>
       </template>
       <SidebarItem
         v-for="child in item.children"
@@ -25,13 +25,17 @@
 </template>
 
 <script setup>
-/*初始化参数比如引入组件，proxy,state等*/
 import { getCurrentInstance } from 'vue'
+let { proxy } = getCurrentInstance()
+/*初始化参数比如引入组件，proxy,state等*/
 import Link from './Link.vue'
 import Item from './Item.jsx'
 import { isExternal } from '@/utils/validate'
 import path from 'path'
-let { proxy } = getCurrentInstance()
+
+import useI18n from '@/hooks/useI18n'
+const { generateTitle } = useI18n()
+
 defineProps({
   //每一个router Item
   item: {
