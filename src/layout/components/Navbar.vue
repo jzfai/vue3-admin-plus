@@ -10,8 +10,8 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div class="heardCenterTitle" v-if="settings.showNavbarTitle">{{ settings.title }}</div>
-    <div class="right-menu rowSC" v-if="settings.ShowDropDown">
+    <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
+    <div v-if="settings.ShowDropDown" class="right-menu rowSC">
       <ScreenFull />
       <SizeSelect />
       <LangSelect />

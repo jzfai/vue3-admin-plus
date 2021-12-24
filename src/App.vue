@@ -1,6 +1,6 @@
 <template>
   <router-view />
-  <div class="show-version-container">
+  <div class="show-version-container" v-if="settings.showVersionInfo">
     {{ showVersionInfo }}
   </div>
 </template>
@@ -8,6 +8,13 @@
 <script setup>
 import { computed } from 'vue'
 import packageJson from '../package.json'
+
+import { useStore } from 'vuex'
+const store = useStore()
+let settings = computed(() => {
+  return store.state.app.settings
+})
+
 const showVersionInfo = computed(() => {
   return `v${packageJson.version}-${GLOBAL_VAR.GIT_COMMIT_ID}`
 })

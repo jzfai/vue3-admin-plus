@@ -4,7 +4,7 @@
     <div class="imgUpContainer rowSS">
       <!--图片列表-->
       <div class="imgShowList rowSS">
-        <div class="imgItem" v-for="(item, index) in imageList" :key="index">
+        <div v-for="(item, index) in imageList" :key="index" class="imgItem">
           <!--右上角删除按钮-->
           <el-icon class="rightDel" @click="deleteImage(index)"><CloseBold /></el-icon>
           <img class="imgStyle" :src="item.url" />
@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="mt-2 mb-1">Provinces and cities packing</div>
-    <el-cascader :options="regionData" @change="casHandle" v-model="addressArr" class="widthPx-200"></el-cascader>
+    <el-cascader v-model="addressArr" :options="regionData" class="widthPx-200" @change="casHandle"></el-cascader>
 
     <div class="mt-2 mb-1">axios req cancel test(you need setting: Network->slow 3G To Test)</div>
     <el-button type="primary" @click="testAxiosCancelReq">emit req</el-button>

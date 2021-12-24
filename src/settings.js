@@ -83,7 +83,10 @@ const setting = {
    * setting dev token when  isNeedLogin is setting false
    * */
   tmpToken: 'tmp_token',
-
+  /*
+   * show the version info
+   * */
+  showVersionInfo: true,
   /*
    * vite.config.js base config
    * such as

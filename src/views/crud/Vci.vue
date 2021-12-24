@@ -21,11 +21,11 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            @change="dateTimePacking"
             class="widthPx-200"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            @change="dateTimePacking"
           />
         </el-form-item>
       </el-form>
@@ -33,24 +33,24 @@
       <el-button type="primary" @click="searchBtnClick">搜索</el-button>
       <div class="ml-4">
         <ImportExportComp
+          import-file-url="/ty-user/vci/importExcel"
+          import-valid-url="/ty-user/vci/validExcel"
+          export-file-url="/ty-user/vci/exportExcel"
+          :get-search-data="getSearchData"
           @reloadList="selectPageReq"
-          importFileUrl="/ty-user/vci/importExcel"
-          importValidUrl="/ty-user/vci/validExcel"
-          exportFileUrl="/ty-user/vci/exportExcel"
-          :getSearchData="getSearchData"
         />
         <el-button type="primary" @click="downloadTemplate">down template to test</el-button>
       </div>
     </div>
     <!--表格和分页-->
     <el-table
-      height="calc(100vh - 280px)"
-      @selection-change="handleSelectionChange"
       id="resetElementDialog"
       ref="refuserTable"
+      height="calc(100vh - 280px)"
       size="mini"
       border
       :data="VcitableData"
+      @selection-change="handleSelectionChange"
     >
       <el-table-column align="center" type="selection" width="50" />
       <el-table-column align="center" prop="sn" label="设备号" min-width="100" />
@@ -59,7 +59,7 @@
       <el-table-column align="center" prop="status" label="状态" min-width="100">
         <template #default="{ row }">
           <span v-if="row.status === 0">未出库</span>
-          <h4 style="color: green" v-if="row.status === 1">已出库</h4>
+          <h4 v-if="row.status === 1" style="color: green">已出库</h4>
         </template>
       </el-table-column>
       <!--点击操作-->

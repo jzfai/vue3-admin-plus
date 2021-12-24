@@ -1,7 +1,7 @@
 <template>
   <div :class="classObj" class="layout-wrapper">
     <!--left side-->
-    <Sidebar class="sidebar-container" v-if="settings.showLeftMenu" />
+    <Sidebar v-if="settings.showLeftMenu" class="sidebar-container" />
     <!--right container-->
     <div class="main-container">
       <Navbar v-if="settings.showTopNavbar" />

@@ -1,12 +1,12 @@
 <template>
   <el-dialog
-    :title="dialogTitleMixin"
     v-model="dialogVisibleMixin"
+    :title="dialogTitleMixin"
     width="600px"
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form label-width="150px" ref="refForm" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
       <el-form-item label="设备号" prop="sn" :rules="formRulesMixin.isNotNull" label-position="left">
         <el-input v-model="subForm.sn" class="widthPx-150" placeholder="设备号" />
       </el-form-item>
@@ -17,7 +17,7 @@
       <!--        <el-input v-model="subForm.softVersion" class="widthPx-150" placeholder="软件(固件)版本" />-->
       <!--      </el-form-item>-->
       <el-form-item label="状态：" prop="status" :rules="formRulesMixin.isNotNull" label-position="left">
-        <el-select clearable v-model="subForm.status" placeholder="请选择" class="widthPx-120">
+        <el-select v-model="subForm.status" clearable placeholder="请选择" class="widthPx-120">
           <el-option label="未出库" :value="0" />
           <el-option label="已出库" :value="1" />
         </el-select>

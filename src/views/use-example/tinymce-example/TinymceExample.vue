@@ -7,7 +7,7 @@
 
     <Tinymce ref="refTinymce" />
     <div class="mt-2">只读,readOnly为true</div>
-    <Tinymce :readOnly="true" />
+    <Tinymce :read-only="true" />
   </div>
 </template>
 

@@ -5,10 +5,10 @@
     <input ref="refSettingFile" type="file" style="display: none" accept=".xls, .xlsx" @change="excelValidReq" />
   </el-button>
   <el-button v-if="showExport" type="primary" @click="exportExcelReq">导出</el-button>
-  <el-dialog v-if="dialogShow" :title="dialogTitle" v-model="dialogShow" width="500px" :close-on-click-modal="false">
+  <el-dialog v-if="dialogShow" v-model="dialogShow" :title="dialogTitle" width="500px" :close-on-click-modal="false">
     <!--错误信息-->
-    <div class="detail-container rowBC" v-if="!importInfo.checkResult">
-      <h4 class="mbPx-4" style="color: red" v-for="(item, index) in importInfo.errList" :key="index">{{ item }}</h4>
+    <div v-if="!importInfo.checkResult" class="detail-container rowBC">
+      <h4 v-for="(item, index) in importInfo.errList" :key="index" class="mbPx-4" style="color: red">{{ item }}</h4>
     </div>
     <div v-else style="color: #13ce66">需要导入的 {{ importInfo.successNum }} 条数据，检测通过</div>
     <template #footer>
