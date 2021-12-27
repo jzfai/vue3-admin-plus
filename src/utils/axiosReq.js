@@ -57,7 +57,7 @@ service.interceptors.response.use(
     }
     // direct return, when download file
     if (reqConfig.isDownLoadFile) {
-      return res.data
+      return res
     }
     const { flag, msg, code, isNeedUpdateToken, updateToken } = res.data
     //update token
@@ -65,7 +65,7 @@ service.interceptors.response.use(
       setToken(updateToken)
     }
     const successCode = '0,200,20000'
-    if (successCode.indexOf(code)) {
+    if (successCode.indexOf(code) !== -1) {
       //业务成功处理
       return res.data
     } else {
