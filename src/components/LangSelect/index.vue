@@ -20,6 +20,8 @@
 
 <script setup>
 import { computed, reactive, toRefs } from 'vue'
+import settings from '@/settings'
+
 const state = reactive({
   langOptions: [
     { label: '中文', value: 'zh' },
@@ -28,7 +30,7 @@ const state = reactive({
 })
 
 const lang = computed(() => {
-  return localStorage.getItem('language') || 'en'
+  return localStorage.getItem('language') || settings.defaultLanguage
 })
 
 const handleSetlang = (lang) => {
