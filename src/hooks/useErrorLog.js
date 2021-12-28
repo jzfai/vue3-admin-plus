@@ -10,7 +10,7 @@ let errorLogReq = (errLog) => {
       pageUrl: window.location.href,
       errorLog: errLog,
       browserType: navigator.userAgent,
-      version: pack.version
+      version: `${pack.version}-${GLOBAL_VAR.GIT_COMMIT_ID}`
     },
     method: 'post',
     bfLoading: false,
@@ -49,7 +49,7 @@ export default function (app) {
           //console.log('errorString', errLog)
           errorLogReq(errLog)
         } else {
-          let errLog = `${error.stack.substr(0, 300)}`
+          let errLog = `${error.stack?.substr(0, 300)}`
           //console.log('errorString', errLog)
           errorLogReq(errLog)
         }
