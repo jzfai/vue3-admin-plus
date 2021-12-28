@@ -62,5 +62,13 @@
     "vite-plugin-style-import": "1.2.1",
     "vite-plugin-svg-icons": "1.0.5",
     "vue-tsc": "0.28.1"
-  }
+  },
+  "engines": {
+    "node": ">= 14"
+  },
+  "browserslist": [
+    "> 1%",
+    "not ie 11",
+    "not op_mini all"
+  ]
 }
