@@ -8,6 +8,7 @@ import enLocale from './en'
 import zhLocale from './zh'
 import esLocale from './es'
 import jaLocale from './ja'
+import settings from '@/settings'
 
 const messages = {
   en: {
@@ -35,7 +36,7 @@ const i18n = createI18n({
   legacy: false, // you must specify 'legacy: false' option
   // set locale
   // options: en | zh | es
-  locale: localStorage.getItem('language') || 'zh',
+  locale: localStorage.getItem('language') || settings.defaultLanguage,
   // set locale messages
   messages
 })
