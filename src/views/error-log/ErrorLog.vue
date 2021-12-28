@@ -55,7 +55,7 @@
         </template>
       </el-table-column>
       <el-table-column align="center" prop="pageUrl" label="页面路径" min-width="180" />
-      <el-table-column align="center" prop="version" label="版本号" width="60" />
+      <el-table-column align="center" prop="version" label="版本号" width="100" />
       <el-table-column align="center" prop="browserType" label="浏览器类型" min-width="180" />
       <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
       <!--点击操作-->
