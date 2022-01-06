@@ -1,0 +1,269 @@
+{
+  "nodes": [
+    {
+      "id": "父",
+      "color": "#dc5712",
+      "type": "gkNode",
+      "data": {
+        "id": "X202201010903",
+        "bh": "bh12224",
+        "sj": "2022-01-05 10:00:12",
+        "dl": "10A",
+        "img": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.autohome.com.cn%2Falbum%2F2009%2F2%2F19%2Fe53e9b0b-f0bd-4a0d-b7fd-7d38924a6f69.jpg&refer=http%3A%2F%2Fimg.autohome.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1643968757&t=658b4aa47e7355dc55a5beb0e8f76639",
+        "video": "http://8.135.1.141/file/video/test-video.mp4"
+      }
+    },
+    {
+      "id": "子",
+      "color": "#e58308",
+      "type": "DLNode",
+      "data": {
+        "id": "X202201010903",
+        "lb": "bh12224-01"
+      }
+    },
+    {
+      "id": "孙",
+      "color": "#f4d000",
+      "type": "CLNode",
+      "data": {
+        "id": "X2022010109030101",
+        "mc": "bh12224-01-01"
+      }
+    },
+    {
+      "id": "Microsoft",
+      "name": "张三",
+      "age": 18,
+      "color": "#8a977b"
+    },
+    {
+      "id": "Amazon",
+      "color": "#b6c29a"
+    },
+    {
+      "id": "HTC",
+      "color": "#407434"
+    },
+    {
+      "id": "Samsung",
+      "color": "#407434"
+    },
+    {
+      "id": "Apple",
+      "color": "#65934a"
+    },
+    {
+      "id": "Motorola",
+      "color": "#a0bf7c"
+    },
+    {
+      "id": "Nokia",
+      "color": "#407434"
+    },
+    {
+      "id": "Kodak",
+      "color": "#123555"
+    },
+    {
+      "id": "Barnes & Noble",
+      "color": "#d1484f"
+    },
+    {
+      "id": "Foxconn",
+      "color": "#e69b02"
+    },
+    {
+      "id": "Oracle",
+      "color": "#dcd0a8"
+    },
+    {
+      "id": "Google",
+      "color": "#e1eed2"
+    },
+    {
+      "id": "Inventec",
+      "color": "#e3aa25"
+    },
+    {
+      "id": "LG",
+      "color": "#a11715"
+    },
+    {
+      "id": "RIM",
+      "color": "#e5bb81"
+    },
+    {
+      "id": "Sony",
+      "color": "#a12f2f"
+    },
+    {
+      "id": "Qualcomm",
+      "color": "#e6b33d"
+    },
+    {
+      "id": "Huawei",
+      "color": "#e6b33d"
+    },
+    {
+      "id": "ZTE",
+      "color": "#a12f2f"
+    },
+    {
+      "id": "Ericsson",
+      "color": "#a12f2f"
+    }
+  ],
+  "links": [
+    {
+      "source": "父",
+      "target": "子",
+      "type": "licensing"
+    },
+    {
+      "source": "子",
+      "target": "孙",
+      "type": "licensing"
+    },
+    {
+      "source": "Microsoft",
+      "target": "Amazon",
+      "type": "licensing"
+    },
+    {
+      "source": "Microsoft",
+      "target": "HTC",
+      "type": "licensing"
+    },
+    {
+      "source": "Samsung",
+      "target": "Apple",
+      "type": "suit"
+    },
+    {
+      "source": "Motorola",
+      "target": "Apple",
+      "type": "suit"
+    },
+    {
+      "source": "Nokia",
+      "target": "Apple",
+      "type": "resolved"
+    },
+    {
+      "source": "HTC",
+      "target": "Apple",
+      "type": "suit"
+    },
+    {
+      "source": "Kodak",
+      "target": "Apple",
+      "type": "suit"
+    },
+    {
+      "source": "Microsoft",
+      "target": "Barnes & Noble",
+      "type": "suit"
+    },
+    {
+      "source": "Microsoft",
+      "target": "Foxconn",
+      "type": "suit"
+    },
+    {
+      "source": "Oracle",
+      "target": "Google",
+      "type": "suit"
+    },
+    {
+      "source": "Apple",
+      "target": "HTC",
+      "type": "suit"
+    },
+    {
+      "source": "Microsoft",
+      "target": "Inventec",
+      "type": "suit"
+    },
+    {
+      "source": "Samsung",
+      "target": "Kodak",
+      "type": "resolved"
+    },
+    {
+      "source": "LG",
+      "target": "Kodak",
+      "type": "resolved"
+    },
+    {
+      "source": "RIM",
+      "target": "Kodak",
+      "type": "suit"
+    },
+    {
+      "source": "Sony",
+      "target": "LG",
+      "type": "suit"
+    },
+    {
+      "source": "Kodak",
+      "target": "LG",
+      "type": "resolved"
+    },
+    {
+      "source": "Apple",
+      "target": "Nokia",
+      "type": "resolved"
+    },
+    {
+      "source": "Qualcomm",
+      "target": "Nokia",
+      "type": "resolved"
+    },
+    {
+      "source": "Apple",
+      "target": "Motorola",
+      "type": "suit"
+    },
+    {
+      "source": "Microsoft",
+      "target": "Motorola",
+      "type": "suit"
+    },
+    {
+      "source": "Motorola",
+      "target": "Microsoft",
+      "type": "suit"
+    },
+    {
+      "source": "Huawei",
+      "target": "ZTE",
+      "type": "suit"
+    },
+    {
+      "source": "Ericsson",
+      "target": "ZTE",
+      "type": "suit"
+    },
+    {
+      "source": "Kodak",
+      "target": "Samsung",
+      "type": "resolved"
+    },
+    {
+      "source": "Apple",
+      "target": "Samsung",
+      "type": "suit"
+    },
+    {
+      "source": "Kodak",
+      "target": "RIM",
+      "type": "suit"
+    },
+    {
+      "source": "Nokia",
+      "target": "Qualcomm",
+      "type": "suit"
+    }
+  ]
+}
