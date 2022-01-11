@@ -33,9 +33,9 @@
       <el-button type="primary" @click="searchBtnClick">搜索</el-button>
       <div class="ml-4">
         <ImportExportComp
-          import-file-url="/ty-user/vci/importExcel"
-          import-valid-url="/ty-user/vci/validExcel"
-          export-file-url="/ty-user/vci/exportExcel"
+          import-file-url="/integration-front/vci/importExcel"
+          import-valid-url="/integration-front/vci/validExcel"
+          export-file-url="/integration-front/vci/exportExcel"
           :get-search-data="getSearchData"
           @reloadList="selectPageReq"
         />
@@ -125,7 +125,7 @@ const getSearchData = () => {
 
 let selectPageReq = () => {
   let reqConfig = {
-    url: '/ty-user/vci/selectPage',
+    url: '/integration-front/vci/selectPage',
     method: 'get',
     data: getSearchData(),
     isParams: true,
@@ -178,7 +178,7 @@ const hideComp = () => {
 //删除
 let deleteByIdReq = (id) => {
   return proxy.$axiosReq({
-    url: '/ty-user/vci/deleteById',
+    url: '/integration-front/vci/deleteById',
     data: { id: id },
     isParams: true,
     method: 'delete',
@@ -209,7 +209,7 @@ const multiDelBtnClick = async () => {
   const data = rowDeleteIdArrMixin
   proxy
     .$axiosReq({
-      url: `/ty-user/vci/deleteBatchIds`,
+      url: `/integration-front/vci/deleteBatchIds`,
       data,
       method: 'DELETE',
       bfLoading: true

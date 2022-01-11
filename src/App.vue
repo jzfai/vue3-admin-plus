@@ -27,11 +27,13 @@ const showVersionInfo = computed(() => {
 <style scoped lang="scss">
 .show-version-container {
   position: fixed;
+  font-size: 8px;
   bottom: 6px;
   right: 6px;
   background: #fff;
-  padding: 2px 2px;
+  padding: 1px 1px;
   border-radius: 2px;
-  opacity: 0.25;
+  opacity: 0.15;
+  z-index: 999;
 }
 </style>

@@ -60,7 +60,7 @@ let reqCrossOrigin = () => {
   proxy
     .$axiosReq({
       baseURL: 'http://8.135.1.141/micro-service-test',
-      url: '/ty-user/brand/updateBy',
+      url: '/integration-front/brand/updateBy',
       data: { id: 'fai' },
       method: 'put',
       isParams: true,
@@ -73,7 +73,7 @@ import axiosReq from '@/utils/axiosReq'
 let req404 = () => {
   axiosReq({
     // baseURL: 'http://8.135.1.141/micro-service-test',
-    url: '/ty-user/brand/updateBy1',
+    url: '/integration-front/brand/updateBy1',
     data: { id: 'fai' },
     method: 'put',
     isParams: true,

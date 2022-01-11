@@ -62,7 +62,7 @@ const fileOnChange = () => {
 
 const fileUploadSave = (formData) => {
   axiosReq({
-    url: '/ty-upload/upload/image',
+    url: '/ty-example/upload/image',
     data: formData,
     method: 'post',
     bfLoading: true,
@@ -95,7 +95,7 @@ const casHandle = (dataArr) => {
 /*axios请求取消测试*/
 const testAxiosCancelReq = () => {
   axiosReq({
-    url: '/ty-user/user/getUserInfo',
+    url: '/integration-front/user/getUserInfo',
     method: 'post',
     bfLoading: false,
     isAlertErrorMsg: false

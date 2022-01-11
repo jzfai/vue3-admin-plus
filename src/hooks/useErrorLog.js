@@ -5,7 +5,7 @@ import bus from '@/utils/bus'
 import pack from '../../package.json'
 let errorLogReq = (errLog) => {
   request({
-    url: '/ty-user/errorCollection/insert',
+    url: '/integration-front/errorCollection/insert',
     data: {
       pageUrl: window.location.href,
       errorLog: errLog,

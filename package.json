@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-plus",
-  "version": "1.3.3",
+  "version": "1.3.6",
   "license": "ISC",
   "author": "kuanghua(869653722@qq.com)",
   "scripts": {
@@ -8,7 +8,7 @@
     "test": "vite --mode serve-test --host",
     "build:test": "vite build --mode  build-test",
     "build": "vite build --mode build",
-    "preview": "yarn run build && vite preview ",
+    "preview": "npm run build && vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
     "prepare": "husky install"
   },
@@ -19,7 +19,7 @@
     "@element-plus/icons-vue": "0.2.4",
     "axios": "0.21.3",
     "echarts": "4.2.1",
-    "element-china-area-data": "^5.0.2",
+    "element-china-area-data": "5.0.2",
     "element-plus": "1.2.0-beta.6",
     "mitt": "3.0.0",
     "moment-mini": "^2.22.1",
@@ -43,7 +43,6 @@
     "@vitejs/plugin-legacy": "1.6.4",
     "@vitejs/plugin-vue": "1.10.2",
     "@vitejs/plugin-vue-jsx": "1.3.1",
-    "@vue/compiler-sfc": "3.2.26",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-define-config": "1.2.0",
@@ -57,7 +56,7 @@
     "scss": "0.2.4",
     "svg-sprite-loader": "6.0.11",
     "typescript": "4.3.2",
-    "vite": "2.7.3",
+    "vite": "2.7.10",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
     "vite-plugin-svg-icons": "1.0.5",

@@ -11,10 +11,9 @@ specifiers:
   '@vitejs/plugin-legacy': 1.6.4
   '@vitejs/plugin-vue': 1.10.2
   '@vitejs/plugin-vue-jsx': 1.3.1
-  '@vue/compiler-sfc': 3.2.26
   axios: 0.21.3
   echarts: 4.2.1
-  element-china-area-data: ^5.0.2
+  element-china-area-data: 5.0.2
   element-plus: 1.2.0-beta.6
   eslint: 7.32.0
   eslint-config-prettier: 8.3.0
@@ -74,7 +73,6 @@ devDependencies:
   '@vitejs/plugin-legacy': 1.6.4_vite@2.7.3
   '@vitejs/plugin-vue': 1.10.2_vite@2.7.3
   '@vitejs/plugin-vue-jsx': 1.3.1
-  '@vue/compiler-sfc': 3.2.26
   eslint: 7.32.0
   eslint-config-prettier: 8.3.0_eslint@7.32.0
   eslint-define-config: 1.2.0
@@ -874,12 +872,14 @@ packages:
       magic-string: 0.25.7
       postcss: 8.4.5
       source-map: 0.6.1
+    dev: false
 
   /@vue/compiler-ssr/3.2.26:
     resolution: {integrity: sha512-2mywLX0ODc4Zn8qBoA2PDCsLEZfpUGZcyoFRLSOjyGGK6wDy2/5kyDOWtf0S0UvtoyVq95OTSGIALjZ4k2q/ag==}
     dependencies:
       '@vue/compiler-dom': 3.2.26
       '@vue/shared': 3.2.26
+    dev: false
 
   /@vue/devtools-api/6.0.0-beta.20.1:
     resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
@@ -893,6 +893,7 @@ packages:
       '@vue/shared': 3.2.26
       estree-walker: 2.0.2
       magic-string: 0.25.7
+    dev: false
 
   /@vue/reactivity/3.2.26:
     resolution: {integrity: sha512-h38bxCZLW6oFJVDlCcAiUKFnXI8xP8d+eO0pcDxx+7dQfSPje2AO6M9S9QO6MrxQB7fGP0DH0dYQ8ksf6hrXKQ==}

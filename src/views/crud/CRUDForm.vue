@@ -17,7 +17,14 @@
             <el-button type="primary" @click="goUploadFileMixin">
               <i class="el-icon-upload2" />
               上传
-              <input id="uploadFile" ref="refSettingFile" type="file" style="display: none" @change="fileUploadSave" />
+              <input
+                id="uploadFile"
+                ref="refSettingFile"
+                type="file"
+                ccept=".png, .jpg"
+                style="display: none"
+                @change="fileUploadSave"
+              />
             </el-button>
             <div class="ml-1">{{ chooseFileNameMixin }}</div>
           </div>
@@ -72,7 +79,7 @@ const insertReq = () => {
   delete data.id
   proxy
     .$axiosReq({
-      url: '/ty-user/brand/insert',
+      url: '/integration-front/brand/insert',
       data: data,
       method: 'post', //--c
       bfLoading: true
@@ -96,7 +103,7 @@ const reshowData = (row) => {
 let updateReq = () => {
   return proxy
     .$axiosReq({
-      url: '/ty-user/brand/updateById',
+      url: '/integration-front/brand/updateById',
       data: subForm,
       method: 'put',
       bfLoading: true
@@ -131,7 +138,8 @@ const fileUploadSave = () => {
   formData.append('file', proxy.$refs.refSettingFile.files[0])
   proxy
     .$axiosReq({
-      url: '/ty-upload/upload/image',
+      url: '/ty-example/upload/image',
+      timeout: 30000,
       data: formData,
       method: 'post',
       bfLoading: true,
@@ -143,7 +151,6 @@ const fileUploadSave = () => {
       // 存储文件名称
       const filename = proxy.$refs.refSettingFile.value
       proxy.chooseFileNameMixin = filename.slice(filename.lastIndexOf('\\') + 1)
-
       subForm.image = `${import.meta.env.VITE_APP_IMAGE_URL}/${shortPath}`
       proxy.$refs.refSettingFile.value = ''
     })
