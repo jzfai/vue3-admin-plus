@@ -71,17 +71,19 @@ service.interceptors.response.use(
     } else {
       //业务失败处理
       if (code === 403) {
-        ElMessageBox.confirm('请重新登录', {
-          confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
-            //direct return
-            return Promise.reject(res.data)
+        if (location.href.indexOf('/login') === 1) {
+          ElMessageBox.confirm('请重新登录', {
+            confirmButtonText: '重新登录',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            store.dispatch('user/resetToken').then(() => {
+              location.reload()
+              //direct return
+              return Promise.reject(res.data)
+            })
           })
-        })
+        }
       }
       //是否需要提示错误信息 isAlertErrorMsg:true 提示
       if (reqConfig.isAlertErrorMsg) {

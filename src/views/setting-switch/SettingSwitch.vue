@@ -95,7 +95,7 @@ let updateReq = () => {
   return proxy
     .$axiosReq({
       // baseURL: 'http://8.135.1.141/micro-service-test',
-      url: '/ty-user/brand/updateBy',
+      url: '/integration-front/brand/updateBy',
       data: { id: 'fai' },
       method: 'put',
       isParams: true,

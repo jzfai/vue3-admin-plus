@@ -144,7 +144,7 @@ let selectPageReq = () => {
     if (data[fItem] === '' || data[fItem] === null || data[fItem] === undefined) delete data[fItem]
   })
   let reqConfig = {
-    url: '/ty-user/brand/selectPage',
+    url: '/integration-front/brand/selectPage',
     method: 'get',
     data,
     isParams: true
@@ -191,7 +191,7 @@ const multiDelBtnClick = () => {
       const data = rowDeleteIdArrMixin
       proxy
         .$axiosReq({
-          url: `/ty-user/brand/deleteBatchIds`,
+          url: `/integration-front/brand/deleteBatchIds`,
           data,
           method: 'DELETE',
           bfLoading: true
@@ -205,7 +205,7 @@ const multiDelBtnClick = () => {
 }
 let deleteByIdReq = (id) => {
   return proxy.$axiosReq({
-    url: '/ty-user/brand/deleteById',
+    url: '/integration-front/brand/deleteById',
     data: { id: id },
     isParams: true,
     method: 'delete',
@@ -256,7 +256,7 @@ let tableDetailClick = (row) => {
 }
 let getDetailByIdReq = (id) => {
   return proxy.$axiosReq({
-    url: '/ty-user/brand/selectById',
+    url: '/integration-front/brand/selectById',
     data: { id }, //--c
     isParams: true,
     method: 'get'
@@ -266,7 +266,7 @@ let getDetailByIdReq = (id) => {
 /*4.文件上传和时间选择*/
 // let downloadReq = (row) => {
 //   let reqConfig = {
-//     url: '/ty-user/brand/download',
+//     url: '/integration-front/brand/download',
 //     method: 'get',
 //     data: {
 //       id: row.id

@@ -69,7 +69,7 @@ const insertReq = () => {
   delete data.id
   proxy
     .$axiosReq({
-      url: '/ty-user/vci/insert',
+      url: '/integration-front/vci/insert',
       data: data,
       method: 'post',
       bfLoading: true
@@ -93,7 +93,7 @@ const reshowData = (row) => {
 let updateReq = () => {
   return proxy
     .$axiosReq({
-      url: '/ty-user/vci/updateById',
+      url: '/integration-front/vci/updateById',
       data: subForm,
       method: 'put',
       bfLoading: true
@@ -127,7 +127,7 @@ const tableImportReq = () => {
   formData.append('file', proxy.$refs.refSettingFile.files[0])
   proxy
     .$axiosReq({
-      url: '/ty-user/ty-upload/uploadFile',
+      url: '/integration-front/ty-example/uploadFile',
       data: formData,
       method: 'post',
       bfLoading: true,
@@ -147,7 +147,7 @@ const fileUploadSave = () => {
   formData.append('file', proxy.$refs.refSettingFile.files[0])
   proxy
     .$axiosReq({
-      url: '/ty-user/ty-upload/upload/image',
+      url: '/integration-front/ty-example/upload/image',
       data: formData,
       method: 'post',
       bfLoading: true,
