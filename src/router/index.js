@@ -250,6 +250,12 @@ export const constantRoutes = [
         component: () => import('@/views/use-example/i18n/I18n-Demo.vue'),
         name: 'I18nDemo',
         meta: { title: 'I18n-Demo', icon: 'documentation' }
+      },
+      {
+        path: 'd3',
+        component: () => import('@/views/use-example/d3/D3.vue'),
+        name: 'D3',
+        meta: { title: 'd3-force', icon: 'documentation' }
       }
     ]
   }
