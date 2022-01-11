@@ -1,18 +1,18 @@
 <template>
   <div>
-    <el-card class='box-card'>
+    <el-card class="box-card">
       <template #header>
-        <div class='card-header'>
+        <div class="card-header">
           <span>关系图谱</span>
-          <el-button class='button' type='text' @click='restart'>刷新</el-button>
+          <el-button class="button" type="text" @click="restart">刷新</el-button>
         </div>
       </template>
-      <div ref='boxRef' class='contain'>
+      <div ref="boxRef" class="contain">
         <!--        d3画布-->
-        <div id='d3' :style='style'></div>
+        <div id="d3" :style="style"></div>
         <!--        提示-->
-        <transition name='fade'>
-          <div v-show='state.showTip' class='tip' :style='{left: state.tip.left, top: state.tip.top}'>
+        <transition name="fade">
+          <div v-show="state.showTip" class="tip" :style="{ left: state.tip.left, top: state.tip.top }">
             <span>名称：{{ state.tip.content.id }}</span>
             <span>类型：{{ state.tip.content.type || '无' }}</span>
           </div>
@@ -20,27 +20,22 @@
       </div>
     </el-card>
     <!--    节点详情-->
-    <NodeDetail
-      :detail='state' :node-type='nodeType'
-     ></NodeDetail>
+    <NodeDetail :detail="state" :node-type="nodeType"></NodeDetail>
   </div>
-
 </template>
 
 <script>
-
 import { onMounted, ref, reactive, toRef } from 'vue'
-import useData from '@/composables/useDatas'
-import useD3 from '@/composables/useD3'
-import data from './../../../api/data.json'
+import useData from './useDatas'
+import useD3 from './useD3'
+import data from '@/api/data.json'
 import * as d3 from 'd3'
 import comentUtil from '@/utils/comentUtil'
 import NodeDetail from '@/views/use-example/d3/component/NodeDetail.vue'
 
 export default {
-  components: { NodeDetail, },
+  components: { NodeDetail },
   setup(props, context) {
-
     // 定义基本数据
     const state = reactive({
       types: 'CLNode',
@@ -61,7 +56,6 @@ export default {
     const { nodeType } = useData(state) // 导入详情模块
     const { chart } = useD3() // 导入d3模块
 
-
     // 容器样式
     const style = reactive({
       width: '100%',
@@ -71,10 +65,10 @@ export default {
 
     onMounted(() => {
       init()
-      window.onresize = comentUtil.debounce(function() {
+      window.onresize = comentUtil.debounce(function () {
         obj.svg.remove() // 移除画布
         init() // 重新初始化
-      },50)
+      }, 50)
     })
 
     // 获取容器宽度
@@ -83,7 +77,6 @@ export default {
       style.width = width.value + 'px'
       return width
     }
-
 
     // 定义d3相关的对象，用于后续操作
     let obj = reactive({})
@@ -94,12 +87,15 @@ export default {
         width,
         height: state.height,
         data,
-        nodeClick: function() { // 节点点击事件
+        nodeClick: function () {
+          // 节点点击事件
           const data = d3.select(this).datum()
           state.data = data
           state.types = data.type
           state.drawer = true
-        }, nodeMouseOver: function(e) { // 鼠标移入节点事件
+        },
+        nodeMouseOver: function (e) {
+          // 鼠标移入节点事件
           d3.select(this).style('cursor', 'pointer')
           const data = d3.select(this).datum()
           const { layerX, layerY } = e
@@ -107,7 +103,9 @@ export default {
           state.showTip = true
           state.tip.left = layerX + 8 + 'px'
           state.tip.top = layerY + 8 + 'px'
-        }, nodMouseOut: function(e) { // 鼠标移出节点事件
+        },
+        nodMouseOut: function (e) {
+          // 鼠标移出节点事件
           state.showTip = false
         }
       })
@@ -125,14 +123,11 @@ export default {
       nodeType,
       restart
     }
-
   }
 }
-
-
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .box-card {
   min-height: 500px;
 
