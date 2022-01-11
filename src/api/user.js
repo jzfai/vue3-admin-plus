@@ -15,7 +15,8 @@ export function getInfoReq() {
   return request({
     url: '/integration-front/user/getUserInfo',
     bfLoading: false,
-    method: 'post'
+    method: 'post',
+    isAlertErrorMsg: false
   })
 }
 
