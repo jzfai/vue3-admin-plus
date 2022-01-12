@@ -62,18 +62,18 @@ const fileOnChange = () => {
 
 const fileUploadSave = (formData) => {
   axiosReq({
-    url: '/ty-example/upload/image',
+    url: '/ty-example/upload/file',
     data: formData,
     method: 'post',
     bfLoading: true,
     isUploadFile: true
   }).then((res) => {
-    let { shortPath } = res.data
+    let { path } = res.data
     // filename
     let filename = refSettingFile.value.value
     filename = filename.slice(filename.lastIndexOf('\\') + 1)
     imageList.value.push({
-      url: `${import.meta.env.VITE_APP_IMAGE_URL}/${shortPath}`,
+      url: `${import.meta.env.VITE_APP_IMAGE_URL}/${path}`,
       name: filename
     })
   })
