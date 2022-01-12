@@ -147,20 +147,20 @@ const fileUploadSave = () => {
   formData.append('file', proxy.$refs.refSettingFile.files[0])
   proxy
     .$axiosReq({
-      url: '/integration-front/ty-example/upload/image',
+      url: '/ty-example/upload/file',
       data: formData,
       method: 'post',
       bfLoading: true,
       isUploadFile: true
     })
     .then((resData) => {
-      let { shortPath } = resData.data
-      proxy.chooseFileNameMixin = shortPath
+      let { path } = resData.data
+      proxy.chooseFileNameMixin = path
       // 存储文件名称
       const filename = proxy.$refs.refSettingFile.value
       proxy.chooseFileNameMixin = filename.slice(filename.lastIndexOf('\\') + 1)
 
-      subForm.image = import.meta.env.VITE_APP_IMAGE_URL + shortPath
+      subForm.image = import.meta.env.VITE_APP_IMAGE_URL + path
       proxy.$refs.refSettingFile.value = ''
     })
     .catch(() => {
