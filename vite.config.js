@@ -13,7 +13,12 @@ const prodMock = setting.openProdMock
 /* use child_process to exec shell */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const child_process = require('child_process')
-const commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
+let commitHash = ''
+try{
+  commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
+}catch(ex){
+  
+}
 export default ({ command, mode }) => {
   /*
    console.log(command, mode)
