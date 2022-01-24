@@ -20,6 +20,7 @@
 
 <script setup>
 import { computed, reactive, toRefs } from 'vue'
+import setting from '@/settings'
 const state = reactive({
   sizeOptions: [
     { label: 'Large ', value: 'large' },
@@ -29,7 +30,7 @@ const state = reactive({
 })
 
 const size = computed(() => {
-  return localStorage.getItem('size')
+  return localStorage.getItem('size') || setting.defaultSize
 })
 
 const handleSetSize = (size) => {

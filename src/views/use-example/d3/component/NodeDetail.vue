@@ -1,8 +1,8 @@
 <template>
 <!--    抽屉-->
   <el-drawer
-    :size='400'
     v-model='state.drawer'
+    :size='400'
     :title='state.data.id'
   >
     <el-form ref='formRef' label-width='120px' label-position='left'>
