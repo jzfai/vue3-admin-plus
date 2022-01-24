@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, toRefs, reactive, computed, onBeforeUnmount,nextTick} from 'vue'
+import { onMounted, getCurrentInstance, watch, toRefs, reactive, computed, onBeforeUnmount, nextTick } from 'vue'
 import plugins from './plugins'
 import toolbar from './toolbar'
 import loadScript from './dynamicLoadScript'
@@ -115,13 +115,12 @@ const init = () => {
   })
 }
 const setContent = (value) => {
-  if(window.tinymce?.get(state.tinymceId)){
+  if (window.tinymce?.get(state.tinymceId)) {
     window.tinymce.get(state.tinymceId).setContent(value)
   }
-
 }
 const getContent = () => {
-  if(window.tinymce?.get(state.tinymceId)){
+  if (window.tinymce?.get(state.tinymceId)) {
     return window.tinymce.get(state.tinymceId).getContent()
   }
 }

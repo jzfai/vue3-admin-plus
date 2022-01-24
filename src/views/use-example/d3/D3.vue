@@ -73,7 +73,7 @@ export default {
 
     // 获取容器宽度
     const getWidth = () => {
-      let width = boxRef.value.clientWidth
+      let width = boxRef.value?.clientWidth
       style.width = width.value + 'px'
       return width
     }

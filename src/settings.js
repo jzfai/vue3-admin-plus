@@ -93,10 +93,10 @@ const setting = {
    * */
   defaultLanguage: 'en',
   /*
-   * i18n setting default language
-   * en/zh
+   * setting default defaultSize
+   * large / default /small
    * */
-  defaultSize: 'mini',
+  defaultSize: 'small',
   /*
    * vite.config.js base config
    * such as

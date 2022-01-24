@@ -14,10 +14,10 @@ const prodMock = setting.openProdMock
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const child_process = require('child_process')
 let commitHash = ''
-try{
+try {
   commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
-}catch(ex){
-  
+} catch (e) {
+  throw new Error(e.toString())
 }
 export default ({ command, mode }) => {
   /*
@@ -61,10 +61,10 @@ export default ({ command, mode }) => {
     plugins: [
       vue(),
       vueJsx(),
-      legacy({
-        targets: ['ie >= 11'],
-        additionalLegacyPolyfills: ['regenerator-runtime/runtime']
-      }),
+      // legacy({
+      //   targets: ['ie >= 11'],
+      //   additionalLegacyPolyfills: ['regenerator-runtime/runtime']
+      // }),
       viteSvgIcons({
         // config svg dir that can config multi
         iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/nav-bar')],

@@ -42,7 +42,6 @@
       id="resetElementDialog"
       ref="refuserTable"
       :height="`calc(100vh - ${settings.delWindowHeight})`"
-      size="mini"
       border
       :data="usertableData"
       @selection-change="handleSelectionChange"

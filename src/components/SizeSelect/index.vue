@@ -22,15 +22,14 @@
 import { computed, reactive, toRefs } from 'vue'
 const state = reactive({
   sizeOptions: [
-    { label: 'Default', value: 'default' },
-    { label: 'Medium', value: 'medium' },
-    { label: 'Small', value: 'small' },
-    { label: 'Mini', value: 'mini' }
+    { label: 'Large ', value: 'large' },
+    { label: 'Default ', value: 'default ' },
+    { label: 'Small', value: 'small' }
   ]
 })
 
 const size = computed(() => {
-  return localStorage.getItem('size') || 'mini'
+  return localStorage.getItem('size')
 })
 
 const handleSetSize = (size) => {
