@@ -15,7 +15,7 @@
       <ScreenFull />
       <SizeSelect />
       <LangSelect />
-      <el-dropdown trigger="click" size="medium">
+      <el-dropdown trigger="click" size="default">
         <div class="avatar-wrapper">
           <img src="@/assets/layout/animation-image.gif" class="user-avatar" />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />

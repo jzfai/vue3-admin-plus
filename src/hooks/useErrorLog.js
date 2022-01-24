@@ -64,7 +64,7 @@ export default function (app) {
       if (typeof reason === 'string') {
         errLog = reason
       } else {
-        errLog = `${reason.stack.substr(0, 300)}`
+        errLog = `${reason.stack?.substr(0, 300)}`
       }
       errorLogReq(errLog)
       //console.log('unhandledrejection:', errLog) // 捕获后自定义处理

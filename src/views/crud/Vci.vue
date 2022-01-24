@@ -47,7 +47,6 @@
       id="resetElementDialog"
       ref="refuserTable"
       height="calc(100vh - 280px)"
-      size="mini"
       border
       :data="VcitableData"
       @selection-change="handleSelectionChange"

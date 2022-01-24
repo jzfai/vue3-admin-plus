@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
-    <el-form ref="refloginForm" size="medium" class="login-form" :model="formInline" :rules="formRulesMixin">
+    <el-form ref="refloginForm" size="default" class="login-form" :model="formInline" :rules="formRulesMixin">
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
@@ -17,7 +17,7 @@
       </el-form-item>
       <!--<el-form-item prop="password" :rules="formRulesMixin.passwordValid">-->
       <el-form-item prop="password" :rules="formRulesMixin.isNotNull">
-        <div class="rowSC">
+        <div class="rowSC flex-1">
           <span class="svg-container">
             <svg-icon icon-class="password" />
           </span>
@@ -36,7 +36,7 @@
         </div>
       </el-form-item>
       <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="loading" type="primary" class="login-btn" size="medium" @click.prevent="handleLogin">
+      <el-button :loading="loading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
         Login
       </el-button>
     </el-form>
