@@ -2,13 +2,13 @@
   <div class="app-main" :class="{ 'show-tag-view': settings.showTagsView }">
     <router-view v-slot="{ Component }">
       <!--has transition  Judging by settings.mainNeedAnimation-->
-      <transition name="fade-transform" mode="out-in" v-if="settings.mainNeedAnimation">
+      <transition v-if="settings.mainNeedAnimation" name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
       </transition>
       <!-- no transition -->
-      <keep-alive :include="cachedViews" v-else>
+      <keep-alive v-else :include="cachedViews">
         <component :is="Component" :key="key" />
       </keep-alive>
     </router-view>
