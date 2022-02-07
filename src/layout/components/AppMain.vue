@@ -2,13 +2,13 @@
   <div class="app-main" :class="{ 'show-tag-view': settings.showTagsView }">
     <router-view v-slot="{ Component }">
       <!--has transition  Judging by settings.mainNeedAnimation-->
-      <transition v-if="settings.mainNeedAnimation" name="fade-transform" mode="out-in">
+      <transition name="fade-transform" mode="out-in" v-if="settings.mainNeedAnimation">
         <keep-alive :include="cachedViews">
           <component :is="Component" :key="key" />
         </keep-alive>
       </transition>
       <!-- no transition -->
-      <keep-alive v-else :include="cachedViews">
+      <keep-alive :include="cachedViews" v-else>
         <component :is="Component" :key="key" />
       </keep-alive>
     </router-view>
@@ -16,9 +16,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
 let store = useStore()
 let route = useRoute()
 let settings = computed(() => {

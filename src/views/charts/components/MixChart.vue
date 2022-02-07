@@ -8,8 +8,7 @@ import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
-let { proxy } = getCurrentInstance()
-defineProps({
+const props = defineProps({
   className: {
     type: String,
     default: 'chart'
@@ -42,7 +41,7 @@ onBeforeUnmount(() => {
   state.chart = null
 })
 const initChart = () => {
-  state.chart = echarts.init(document.getElementById(proxy.id))
+  state.chart = echarts.init(document.getElementById(props.id))
   const xData = (function () {
     const data = []
     for (let i = 1; i < 13; i++) {

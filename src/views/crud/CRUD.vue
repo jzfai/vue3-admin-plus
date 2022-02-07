@@ -15,14 +15,14 @@
         <span style="vertical-align: middle">删除</span>
       </el-button>
       <!--条件搜索-->
-      <el-form ref="refsearchFormMixin" :inline="true" class="demo-searchFormMixin ml-2">
+      <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-2">
         <el-form-item label-width="0px" label="" prop="username" label-position="left">
           <!--  --c -->
-          <el-input v-model="searchFormMixin.name" class="widthPx-150" placeholder="品牌名字" />
+          <el-input v-model="searchForm.name" class="widthPx-150" placeholder="品牌名字" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
-            v-model="startEndArrMixin"
+            v-model="startEndArr"
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
@@ -74,13 +74,13 @@
         :page-sizes="[10, 20, 50, 100]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="pageTotalMixin"
+        :total="totalPage"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
     </div>
     <!--详情-->
-    <el-dialog v-model="detailDialogMixin" :title="dialogTitleMixin" width="500px" :close-on-click-modal="false">
+    <el-dialog v-model="detailDialog" :title="dialogTitle" width="500px" :close-on-click-modal="false">
       <div class="detail-container rowBC">
         <div class="detail-container-item">品牌名称：{{ detailData.name }}</div>
       </div>
@@ -92,7 +92,7 @@
       </div>
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" @click="detailDialogMixin = false">确 定</el-button>
+          <el-button type="primary" @click="detailDialog = false">确 定</el-button>
         </span>
       </template>
     </el-dialog>
@@ -109,9 +109,6 @@ import { Delete, FolderAdd } from '@element-plus/icons-vue'
 /*1.初始化引入和实例化*/
 import settings from '@/settings'
 import CRUDForm from './CRUDForm.vue'
-import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
-let { proxy } = getCurrentInstance()
-const refCRUDForm = ref(null)
 onActivated(() => {
   console.log('onActivated')
 })
@@ -124,7 +121,7 @@ const handleSelectionChange = (val) => {
   multipleSelection.value = val
 }
 let usertableData = ref([])
-let searchFormMixin = reactive({
+let searchForm = reactive({
   id: '',
   name: '',
   image: '',
@@ -134,8 +131,10 @@ let searchFormMixin = reactive({
 onMounted(() => {
   selectPageReq()
 })
+
+let { startEndArr, totalPage } = useCommon()
 let selectPageReq = () => {
-  const data = Object.assign(searchFormMixin, {
+  const data = Object.assign(searchForm, {
     pageNum: pageNum.value,
     pageSize: pageSize.value
   })
@@ -148,20 +147,20 @@ let selectPageReq = () => {
     data,
     isParams: true
   }
-  proxy.$axiosReq(reqConfig).then((resData) => {
+  axiosReq(reqConfig).then((resData) => {
     usertableData.value = resData.data?.records
-    proxy.pageTotalMixin = resData.data?.total
+    totalPage = resData.data?.total
   })
 }
 import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
 const dateTimePacking = (timeArr) => {
   if (timeArr && timeArr.length === 2) {
-    searchFormMixin.startTime = timeArr[0]
-    searchFormMixin.endTime = timeArr[1]
+    searchForm.startTime = timeArr[0]
+    searchForm.endTime = timeArr[1]
   } else {
-    searchFormMixin.startTime = ''
-    searchFormMixin.endTime = ''
+    searchForm.startTime = ''
+    searchForm.endTime = ''
   }
 }
 const searchBtnClick = () => {
@@ -170,40 +169,37 @@ const searchBtnClick = () => {
   selectPageReq()
 }
 //删除相关
+let { elMessage, elConfirm } = useElement()
 const refuserTable = ref(null)
 const multiDelBtnClick = () => {
-  let rowDeleteIdArrMixin = []
-  // let selectionArr = proxy.$refs.refuserTable //--c
+  let rowDeleteIdArr = []
   let deleteNameTitle = ''
-  rowDeleteIdArrMixin = multipleSelection.value.map((mItem) => {
+  rowDeleteIdArr = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.name + ','
     return mItem.id
   })
-  if (rowDeleteIdArrMixin.length === 0) {
-    proxy.elMessageMixin('表格选项不能为空', 'warning')
+  if (rowDeleteIdArr.length === 0) {
+    elMessage('表格选项不能为空', 'warning')
     return
   }
   let stringLength = deleteNameTitle.length - 1
-  proxy
-    .elConfirmMixin('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
+  elConfirm('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
     .then(() => {
-      const data = rowDeleteIdArrMixin
-      proxy
-        .$axiosReq({
-          url: `/integration-front/brand/deleteBatchIds`,
-          data,
-          method: 'DELETE',
-          bfLoading: true
-        })
-        .then((res) => {
-          proxy.elMessageMixin('删除成功')
-          selectPageReq()
-        })
+      const data = rowDeleteIdArr
+      axiosReq({
+        url: `/integration-front/brand/deleteBatchIds`,
+        data,
+        method: 'DELETE',
+        bfLoading: true
+      }).then((res) => {
+        elMessage('删除成功')
+        selectPageReq()
+      })
     })
     .catch(() => {})
 }
 let deleteByIdReq = (id) => {
-  return proxy.$axiosReq({
+  return axiosReq({
     url: '/integration-front/brand/deleteById',
     data: { id: id },
     isParams: true,
@@ -212,21 +208,21 @@ let deleteByIdReq = (id) => {
   })
 }
 let tableDelClick = (row) => {
-  proxy
-    .elConfirmMixin('确定', `您确定要删除【${row.name}】吗？`)
+  elConfirm('确定', `您确定要删除【${row.name}】吗？`)
     .then(() => {
       deleteByIdReq(row.id).then(() => {
         selectPageReq()
-        proxy.elMessageMixin(`【${row.name}】删除成功`)
+        elMessage(`【${row.name}】删除成功`)
       })
     })
     .catch(() => {})
 }
 //添加和修改
 let showFrom = ref(false)
+const refCRUDForm = ref(null)
 let addBtnClick = () => {
   showFrom.value = true
-  proxy.$nextTick(() => {
+  nextTick(() => {
     refCRUDForm.value.showModal()
   })
 }
@@ -239,53 +235,29 @@ const hideComp = () => {
 let tableEditClick = (row) => {
   getDetailByIdReq(row.id).then((resData) => {
     showFrom.value = true
-    proxy.$nextTick(() => {
+    nextTick(() => {
       refCRUDForm.value.showModal(true, resData.data)
     })
   })
 }
 /*3.详情modal*/
 let detailData = ref({})
+let { dialogTitle, detailDialog } = useElement()
 let tableDetailClick = (row) => {
-  proxy.dialogTitleMixin = `详情【${row.name}】`
+  dialogTitle.value = `详情【${row.name}】`
   getDetailByIdReq(row.id).then((resData) => {
     detailData.value = resData.data
-    proxy.detailDialogMixin = true
+    detailDialog.value = true
   })
 }
 let getDetailByIdReq = (id) => {
-  return proxy.$axiosReq({
+  return axiosReq({
     url: '/integration-front/brand/selectById',
     data: { id }, //--c
     isParams: true,
     method: 'get'
   })
 }
-
-/*4.文件上传和时间选择*/
-// let downloadReq = (row) => {
-//   let reqConfig = {
-//     url: '/integration-front/brand/download',
-//     method: 'get',
-//     data: {
-//       id: row.id
-//     },
-//     isDownLoadFile: true,
-//     isParams: true,
-//     isAlertErrorMsg: false
-//   }
-//   proxy.$axiosReq(reqConfig).then((resData) => {
-//     const url = window.URL.createObjectURL(new Blob([resData]))
-//     const link = document.createElement('a')
-//     link.href = url
-//     link.setAttribute('download', `${row.username}.xls`)
-//     document.body.appendChild(link)
-//     link.click()
-//   })
-// }
-// let tableDownloadClick = (row) => {
-//   downloadReq(row)
-// }
 </script>
 
 <style scoped lang="scss">

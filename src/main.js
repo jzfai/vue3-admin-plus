@@ -23,15 +23,15 @@ import i18n from '@/lang'
 app.use(i18n)
 
 //global mixin
-import elementMixin from '@/mixins/elementMixin'
-app.mixin(elementMixin)
-import commonMixin from '@/mixins/commonMixin'
-app.mixin(commonMixin)
-import routerMixin from '@/mixins/routerMixin'
-app.mixin(routerMixin)
+// import elementMixin from '@/mixins/elementMixin'
+// app.mixin(elementMixin)
+// import commonMixin from '@/mixins/commonMixin'
+// app.mixin(commonMixin)
+// import routerMixin from '@/mixins/routerMixin'
+// app.mixin(routerMixin)
 //import axios req
-import axiosReq from '@/utils/axiosReq'
-app.config.globalProperties.$axiosReq = axiosReq
+// import axiosReq from '@/utils/axiosReq'
+// app.config.globalProperties.$axiosReq = axiosReq
 
 //svg-icon
 //import svg-icon doc in  https://github.com/anncwb/vite-plugin-svg-icons/blob/main/README.zh_CN.md
@@ -40,8 +40,8 @@ import svgIcon from '@/icons/SvgIcon.vue'
 app.component('SvgIcon', svgIcon)
 
 //global mount moment-mini
-import $momentMini from 'moment-mini'
-app.config.globalProperties.$momentMini = $momentMini
+// import $momentMini from 'moment-mini'
+// app.config.globalProperties.$momentMini = $momentMini
 
 //import global directive
 import directive from '@/directive'

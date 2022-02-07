@@ -5,12 +5,10 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, toRefs, reactive, computed, onBeforeUnmount, nextTick } from 'vue'
 import plugins from './plugins'
 import toolbar from './toolbar'
 import loadScript from './dynamicLoadScript'
 const tinymceCDN = 'https://cdn.jsdelivr.net/npm/tinymce-all-in-one@4.9.3/tinymce.min.js'
-let { proxy } = getCurrentInstance()
 const props = defineProps({
   id: {
     type: String,
@@ -60,6 +58,9 @@ let state = reactive({
     ja: 'ja'
   }
 })
+const { elMessage } = useElement()
+
+const emit = defineEmits(['input'])
 
 const initTinymce = () => {
   window.tinymce.init({
@@ -93,7 +94,7 @@ const initTinymce = () => {
       state.hasInit = true
       editor.on('NodeChange Change KeyUp SetContent', () => {
         state.hasChange = true
-        proxy.$emit('input', editor.getContent())
+        emit('input', editor.getContent())
       })
     },
     setup(editor) {
@@ -108,7 +109,7 @@ const initTinymce = () => {
 const init = () => {
   loadScript(tinymceCDN, (err) => {
     if (err) {
-      proxy.$message.error(err.message)
+      elMessage.error(err.message)
       return
     }
     initTinymce()

@@ -73,9 +73,11 @@ export default {
 
     // 获取容器宽度
     const getWidth = () => {
-      let width = boxRef.value?.clientWidth
-      style.width = width.value + 'px'
-      return width
+      if (boxRef.value) {
+        let width = boxRef.value.clientWidth
+        style.width = width.value + 'px'
+        return width
+      }
     }
 
     // 定义d3相关的对象，用于后续操作

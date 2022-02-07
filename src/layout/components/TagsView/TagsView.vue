@@ -12,7 +12,7 @@
         @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
         @contextmenu.prevent="openMenu(tag, $event)"
       >
-        {{ generateTitle(tag.title) }}
+        {{ tag.title }}
         <Close v-if="!isAffix(tag)" class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></Close>
       </router-link>
     </div>
@@ -34,12 +34,7 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
 const router = useRouter()
-let { proxy } = getCurrentInstance()
-
-//i18
-import useI18n from '@/hooks/useI18n'
-const { generateTitle } = useI18n()
-
+const route = useRoute()
 const state = reactive({
   visible: false,
   top: 0,
@@ -56,7 +51,7 @@ const routes = computed(() => {
 })
 
 watch(
-  () => proxy.$route,
+  () => route,
   () => {
     addTags()
     // tag remove has issue
@@ -91,7 +86,7 @@ onMounted(() => {
 })
 
 const isActive = (route) => {
-  return route.path === proxy.$route.path
+  return route.path === route.path
 }
 const isAffix = (tag) => {
   return tag.meta && tag.meta.affix
@@ -129,16 +124,16 @@ const initTags = () => {
 }
 
 const addTags = () => {
-  const { name } = proxy.$route
+  const { name } = route
   if (name) {
-    store.dispatch('tagsView/addView', proxy.$route)
+    store.dispatch('tagsView/addView', route)
   }
   return false
 }
 const refreshSelectedTag = (view) => {
   const { fullPath } = view
-  proxy.$nextTick(() => {
-    proxy.$router.replace({
+  nextTick(() => {
+    router.replace({
       path: '/redirect' + fullPath
     })
   })
@@ -151,7 +146,7 @@ const closeSelectedTag = (view) => {
   })
 }
 const closeOthersTags = () => {
-  proxy.$router.push(state.selectedTag)
+  router.push(state.selectedTag)
   store.dispatch('tagsView/delOthersViews', state.selectedTag)
 }
 const closeAllTags = (view) => {
@@ -177,6 +172,7 @@ const toLastView = (visitedViews, view) => {
     }
   }
 }
+const proxy = getCurrentInstance().proxy
 const openMenu = (tag, e) => {
   const menuMinWidth = 105
   const offsetLeft = proxy.$el.getBoundingClientRect().left // container margin left

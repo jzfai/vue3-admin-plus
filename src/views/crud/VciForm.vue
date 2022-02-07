@@ -1,22 +1,22 @@
 <template>
   <el-dialog
-    v-model="dialogVisibleMixin"
-    :title="dialogTitleMixin"
+    v-model="dialogVisible"
+    :title="dialogTitle"
     width="600px"
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
-      <el-form-item label="设备号" prop="sn" :rules="formRulesMixin.isNotNull" label-position="left">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-5">
+      <el-form-item label="设备号" prop="sn" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="subForm.sn" class="widthPx-150" placeholder="设备号" />
       </el-form-item>
-      <el-form-item label="硬件版本" prop="hardVersion" :rules="formRulesMixin.isNotNull" label-position="left">
+      <el-form-item label="硬件版本" prop="hardVersion" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="subForm.hardVersion" class="widthPx-150" placeholder="硬件版本" />
       </el-form-item>
-      <!--      <el-form-item label="软件(固件)版本" prop="softVersion" :rules="formRulesMixin.isNotNull" label-position="left">-->
+      <!--      <el-form-item label="软件(固件)版本" prop="softVersion" :rules="formRules.isNotNull" label-position="left">-->
       <!--        <el-input v-model="subForm.softVersion" class="widthPx-150" placeholder="软件(固件)版本" />-->
       <!--      </el-form-item>-->
-      <el-form-item label="状态：" prop="status" :rules="formRulesMixin.isNotNull" label-position="left">
+      <el-form-item label="状态：" prop="status" :rules="formRules.isNotNull" label-position="left">
         <el-select v-model="subForm.status" clearable placeholder="请选择" class="widthPx-120">
           <el-option label="未出库" :value="0" />
           <el-option label="已出库" :value="1" />
@@ -34,9 +34,8 @@
 
 <script setup>
 /*1.初始化引入和实例化*/
-import { getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
+import { useCommon } from '@/hooks/global/useCommon'
 
-let { proxy } = getCurrentInstance()
 const emit = defineEmits(['selectPageReq', 'hideComp'])
 
 /*2.modal新增和修改*/
@@ -64,21 +63,20 @@ let confirmBtnClick = () => {
     }
   })
 }
+const { elMessage, formRules, elConfirm } = useElement()
 const insertReq = () => {
   const data = JSON.parse(JSON.stringify(subForm))
   delete data.id
-  proxy
-    .$axiosReq({
-      url: '/integration-front/vci/insert',
-      data: data,
-      method: 'post',
-      bfLoading: true
-    })
-    .then((res) => {
-      proxy.elMessageMixin('保存成功')
-      emit('selectPageReq')
-      emit('hideComp')
-    })
+  axiosReq({
+    url: '/integration-front/vci/insert',
+    data: data,
+    method: 'post',
+    bfLoading: true
+  }).then((res) => {
+    elMessage('保存成功')
+    emit('selectPageReq')
+    emit('hideComp')
+  })
 }
 //修改
 const reshowData = (row) => {
@@ -91,29 +89,28 @@ const reshowData = (row) => {
   })
 }
 let updateReq = () => {
-  return proxy
-    .$axiosReq({
-      url: '/integration-front/vci/updateById',
-      data: subForm,
-      method: 'put',
-      bfLoading: true
-    })
-    .then(() => {
-      proxy.elMessageMixin('更新成功')
-      emit('selectPageReq')
-      emit('hideComp')
-    })
+  return axiosReq({
+    url: '/integration-front/vci/updateById',
+    data: subForm,
+    method: 'put',
+    bfLoading: true
+  }).then(() => {
+    elMessage('更新成功')
+    emit('selectPageReq')
+    emit('hideComp')
+  })
 }
 
 /*3.弹框相关*/
+const { dialogTitle, dialogVisible } = useCommon()
 let showModal = (isEdit, detailData) => {
   if (isEdit) {
-    proxy.dialogTitleMixin = `编辑【${detailData.sn}】`
-    proxy.dialogVisibleMixin = true
+    dialogTitle.value = `编辑【${detailData.sn}】`
+    dialogVisible.value = true
     reshowData(detailData)
   } else {
-    proxy.dialogTitleMixin = '添加【VCI设备表】'
-    proxy.dialogVisibleMixin = true
+    dialogTitle.value = '添加【VCI设备表】'
+    dialogVisible.value = true
   }
 }
 
@@ -121,54 +118,7 @@ let showModal = (isEdit, detailData) => {
 let closeFormModal = () => {
   emit('hideComp')
 }
-/*4.文件上传和时间选择*/
-const tableImportReq = () => {
-  const formData = new FormData()
-  formData.append('file', proxy.$refs.refSettingFile.files[0])
-  proxy
-    .$axiosReq({
-      url: '/integration-front/ty-example/uploadFile',
-      data: formData,
-      method: 'post',
-      bfLoading: true,
-      isUploadFile: true
-    })
-    .then((resData) => {
-      let { ori, shot, name } = resData.data
-      proxy.$refs.refSettingFile.value = ''
-    })
-    .catch((err) => {
-      proxy.$refs.refSettingFile.value = ''
-    })
-}
 
-const fileUploadSave = () => {
-  const formData = new FormData()
-  formData.append('file', proxy.$refs.refSettingFile.files[0])
-  proxy
-    .$axiosReq({
-      url: '/ty-example/upload/file',
-      data: formData,
-      method: 'post',
-      bfLoading: true,
-      isUploadFile: true
-    })
-    .then((resData) => {
-      let { path } = resData.data
-      proxy.chooseFileNameMixin = path
-      // 存储文件名称
-      const filename = proxy.$refs.refSettingFile.value
-      proxy.chooseFileNameMixin = filename.slice(filename.lastIndexOf('\\') + 1)
-
-      subForm.image = import.meta.env.VITE_APP_IMAGE_URL + path
-      proxy.$refs.refSettingFile.value = ''
-    })
-    .catch(() => {
-      proxy.chooseFileNameMixin = ''
-      subForm.image = ''
-      proxy.$refs.refSettingFile.value = ''
-    })
-}
 //导出内部组件属性
 defineExpose({
   showModal

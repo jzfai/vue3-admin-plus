@@ -239,12 +239,12 @@ export const constantRoutes = [
     meta: { title: 'Use Example', icon: 'documentation' },
     alwaysShow: true,
     children: [
-      {
-        path: 'tinymce',
-        component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
-        name: 'Tinymce',
-        meta: { title: 'Tinymce', icon: 'documentation' }
-      },
+      // {
+      //   path: 'tinymce',
+      //   component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
+      //   name: 'Tinymce',
+      //   meta: { title: 'Tinymce', icon: 'documentation' }
+      // },
       {
         path: 'i18n-demo',
         component: () => import('@/views/use-example/i18n/I18n-Demo.vue'),
