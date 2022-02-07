@@ -11,12 +11,10 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, ref } from 'vue'
 import Tinymce from '@/components/Tinymce/Tinymce.vue'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
-let { proxy } = getCurrentInstance()
 /*tinymce操作*/
 const refTinymce = ref(null)
 const setTinyContent = () => {
@@ -24,10 +22,11 @@ const setTinyContent = () => {
     refTinymce.value.setContent('tinymce设置的内容')
   }
 }
+const { elMessage } = useElement()
 const getTinyContent = () => {
   if (refTinymce?.value) {
     let content = refTinymce.value.getContent()
-    proxy.elMessageMixin(content)
+    elMessage(content)
   }
 }
 </script>

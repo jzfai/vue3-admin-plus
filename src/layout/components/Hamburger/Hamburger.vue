@@ -17,15 +17,15 @@
 
 <script setup>
 import { getCurrentInstance } from 'vue'
-let { proxy } = getCurrentInstance()
 defineProps({
   isActive: {
     type: Boolean,
     default: false
   }
 })
+const emits = defineEmits(['toggleClick'])
 const toggleClick = () => {
-  proxy.$emit('toggleClick')
+  emits('toggleClick')
 }
 </script>
 

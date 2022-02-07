@@ -34,19 +34,18 @@
 import errGif from '@/assets/401_images/401.gif'
 import { getCurrentInstance, toRefs, reactive } from 'vue'
 
-let { proxy } = getCurrentInstance()
-
 const state = reactive({
   errGif: errGif + '?' + +new Date(),
   ewizardClap: 'https://wpimg.wallstcn.com/007ef517-bafd-4066-aae4-6883632d9646',
   dialogVisible: false
 })
-
+const route = useRoute()
+const router = useRouter()
 const back = () => {
-  if (proxy.$route.query.noGoBack) {
-    proxy.$router.push({ path: '/dashboard' })
+  if (route.query.noGoBack) {
+    router.push({ path: '/dashboard' })
   } else {
-    proxy.$router.go(-1)
+    router.go(-1)
   }
 }
 //导出属性到页面中使用

@@ -29,22 +29,21 @@
 <script setup>
 import PanThumb from '@/views/dashboard/PanThumb'
 import Mallki from '@/views/dashboard/TextHoverEffect/Mallki.vue'
-import { getCurrentInstance, reactive, computed } from 'vue'
-let { proxy } = getCurrentInstance()
 reactive({
   statisticsData: {
     article_count: 1024,
     pageviews_count: 1024
   }
 })
+const store = useStore()
 computed(() => {
-  return proxy.$store.state.user.name
+  return store.state.user.name
 })
 const avatar = computed(() => {
-  return proxy.$store.state.user.avatar
+  return store.state.user.avatar
 })
 computed(() => {
-  return proxy.$store.state.user.roles
+  return store.state.user.roles
 })
 </script>
 

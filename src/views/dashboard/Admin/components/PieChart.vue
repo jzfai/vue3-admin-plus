@@ -8,7 +8,6 @@ import echarts from 'echarts'
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
-let { proxy } = getCurrentInstance()
 defineProps({
   className: {
     type: String,
@@ -28,7 +27,6 @@ const state = reactive({
 })
 
 //const routes = computed(() => {
-//    return proxy.$store.state.permission.routes;
 //  });
 // watch(() => props.name, (oldValue,newValue) => {
 //
@@ -39,7 +37,7 @@ const state = reactive({
 // const store = useStore()
 // const router = useRouter()
 onMounted(() => {
-  proxy.$nextTick(() => {
+  nextTick(() => {
     initChart()
   })
 })
@@ -50,9 +48,10 @@ onBeforeUnmount(() => {
   state.chart.dispose()
   state.chart = null
 })
+
+const { proxy } = getCurrentInstance()
 const initChart = () => {
   state.chart = echarts.init(proxy.$el, 'macarons')
-
   state.chart.setOption({
     tooltip: {
       trigger: 'item',

@@ -40,7 +40,7 @@ import { watermark } from '@/views/crud/imgDillUtils.js'
 import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
 let imageList = ref([])
-const refSettingFile = ref(null)
+
 const fileOnChange = () => {
   let length = imageList.value.length
   if (length >= 5) {
@@ -59,7 +59,7 @@ const fileOnChange = () => {
     })
   }
 }
-
+const refSettingFile = ref(null)
 const fileUploadSave = (formData) => {
   axiosReq({
     url: '/ty-example/upload/file',
@@ -97,7 +97,7 @@ const testAxiosCancelReq = () => {
   axiosReq({
     url: '/integration-front/user/getUserInfo',
     method: 'post',
-    bfLoading: false,
+    bfLoading: true,
     isAlertErrorMsg: false
   })
 }

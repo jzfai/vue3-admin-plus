@@ -3,10 +3,8 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 
-let { proxy } = getCurrentInstance()
 defineProps({
   className: {
     type: String,
@@ -26,7 +24,7 @@ const state = reactive({
 })
 
 onMounted(() => {
-  proxy.$nextTick(() => {
+  nextTick(() => {
     initChart()
   })
 })
@@ -38,6 +36,8 @@ onBeforeUnmount(() => {
   state.chart = null
 })
 const animationDuration = 6000
+
+const { proxy } = getCurrentInstance()
 const initChart = () => {
   state.chart = echarts.init(proxy.$el, 'macarons')
   state.chart.setOption({

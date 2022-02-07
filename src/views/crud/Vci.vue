@@ -17,7 +17,7 @@
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
-            v-model="startEndArrMixin"
+            v-model="startEndArr"
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
@@ -76,7 +76,7 @@
         :page-sizes="[10, 20, 50, 100]"
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
-        :total="pageTotalMixin"
+        :total="totalPage"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
       />
@@ -87,7 +87,6 @@
 
 <script setup>
 import { onMounted, getCurrentInstance, ref, reactive } from 'vue'
-let { proxy } = getCurrentInstance()
 import VciForm from './VciForm.vue'
 //获取子组件实例
 const refVciForm = ref(null)
@@ -122,6 +121,7 @@ const getSearchData = () => {
   return data
 }
 
+const { totalPage, startEndArr } = useCommon()
 let selectPageReq = () => {
   let reqConfig = {
     url: '/integration-front/vci/selectPage',
@@ -130,9 +130,9 @@ let selectPageReq = () => {
     isParams: true,
     isAlertErrorMsg: false
   }
-  proxy.$axiosReq(reqConfig).then((resData) => {
+  axiosReq(reqConfig).then((resData) => {
     VcitableData.value = resData.data?.records
-    proxy.pageTotalMixin = resData.data?.total
+    totalPage.value = resData.data?.total
   })
 }
 
@@ -159,13 +159,13 @@ const searchBtnClick = () => {
 let showFrom = ref(false)
 let addBtnClick = () => {
   showFrom.value = true
-  proxy.$nextTick(() => {
+  nextTick(() => {
     refVciForm.value.showModal()
   })
 }
 let tableEditClick = (row) => {
   showFrom.value = true
-  proxy.$nextTick(() => {
+  nextTick(() => {
     refVciForm.value.showModal(true, row)
   })
 }
@@ -175,8 +175,9 @@ const hideComp = () => {
 }
 
 //删除
+let { elMessage, elConfirm } = useElement()
 let deleteByIdReq = (id) => {
-  return proxy.$axiosReq({
+  return axiosReq({
     url: '/integration-front/vci/deleteById',
     data: { id: id },
     isParams: true,
@@ -185,38 +186,36 @@ let deleteByIdReq = (id) => {
   })
 }
 let tableDelClick = async (row) => {
-  await proxy.elConfirmMixin('确定', `您确定要删除【${row.sn}】吗？`)
+  await elConfirm('确定', `您确定要删除【${row.sn}】吗？`)
   deleteByIdReq(row.id).then(() => {
     selectPageReq()
-    proxy.elMessageMixin(`【${row.sn}】删除成功`)
+    elMessage(`【${row.sn}】删除成功`)
   })
 }
 //批量删除
 const multiDelBtnClick = async () => {
-  let rowDeleteIdArrMixin = []
+  let rowDeleteIdArr = []
   let deleteNameTitle = ''
-  rowDeleteIdArrMixin = multipleSelection.value.map((mItem) => {
+  rowDeleteIdArr = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.sn + ','
     return mItem.id
   })
-  if (rowDeleteIdArrMixin.length === 0) {
-    proxy.elMessageMixin('表格选项不能为空', 'warning')
+  if (rowDeleteIdArr.length === 0) {
+    elMessage('表格选项不能为空', 'warning')
     return
   }
   let stringLength = deleteNameTitle.length - 1
-  await proxy.elConfirmMixin('删除', `您确定要删除${deleteNameTitle.slice(0, stringLength)}吗`)
-  const data = rowDeleteIdArrMixin
-  proxy
-    .$axiosReq({
-      url: `/integration-front/vci/deleteBatchIds`,
-      data,
-      method: 'DELETE',
-      bfLoading: true
-    })
-    .then(() => {
-      proxy.elMessageMixin('删除成功')
-      selectPageReq()
-    })
+  await elConfirm('删除', `您确定要删除${deleteNameTitle.slice(0, stringLength)}吗`)
+  const data = rowDeleteIdArr
+  axiosReq({
+    url: `/integration-front/vci/deleteBatchIds`,
+    data,
+    method: 'DELETE',
+    bfLoading: true
+  }).then(() => {
+    elMessage('删除成功')
+    selectPageReq()
+  })
 }
 
 //download template

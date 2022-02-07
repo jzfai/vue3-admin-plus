@@ -48,7 +48,7 @@ const mixin = {
       subFormMixin: {},
       searchFormMixin: {},
       /* 表单校验*/
-      formRulesMixin: {
+      formRules: {
         isNotNull: [{ required: true, message: '该字段不能为空', trigger: 'blur' }],
         isNotNullSecond: [{ required: true, message: '不能为空', trigger: 'blur' }],
         mLength8: [
@@ -127,11 +127,10 @@ const mixin = {
      * duration：通知显示时长（ms）
      * */
     elMessageMixin(message, type) {
-      type = type || 'success'
       this.$message({
         showClose: true,
         message: message || '成功',
-        type: type,
+        type: type || 'success',
         center: false
       })
     },

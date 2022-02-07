@@ -1,20 +1,20 @@
 <template>
   <el-dialog
-    v-model="dialogVisibleMixin"
-    :title="dialogTitleMixin"
+    v-model="dialogVisible"
+    :title="dialogTitle"
     width="50vw"
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRulesMixin" class="pr-5">
-      <el-form-item label="品牌名称" prop="name" :rules="formRulesMixin.isNotNull" label-position="left">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-5">
+      <el-form-item label="品牌名称" prop="name" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="subForm.name" class="widthPx-150" placeholder="品牌名称" />
       </el-form-item>
-      <el-form-item label="品牌图片地址" prop="image" :rules="formRulesMixin.isNotNull" label-position="left">
+      <el-form-item label="品牌图片地址" prop="image" :rules="formRules.isNotNull" label-position="left">
         <div class="rowSE">
           <img v-if="subForm.image" :src="subForm.image" class="widthPx-120 heightPx-120 border_radius5" />
           <div :class="[subForm.image && 'ml-1']" class="rowSS">
-            <el-button type="primary" @click="goUploadFileMixin">
+            <el-button type="primary" @click="goUploadFile">
               <i class="el-icon-upload2" />
               上传
               <input
@@ -26,14 +26,14 @@
                 @change="fileUploadSave"
               />
             </el-button>
-            <div class="ml-1">{{ chooseFileNameMixin }}</div>
+            <div class="ml-1">{{ chooseFileName }}</div>
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="品牌的首字母" prop="letter" :rules="formRulesMixin.isNotNull" label-position="left">
+      <el-form-item label="品牌的首字母" prop="letter" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="subForm.letter" maxlength="1" class="widthPx-150" placeholder="品牌的首字母" />
       </el-form-item>
-      <el-form-item label="排序" prop="seq" :rules="formRulesMixin.isNotNull" label-position="left">
+      <el-form-item label="排序" prop="seq" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="subForm.seq" class="widthPx-150" placeholder="排序" />
       </el-form-item>
     </el-form>
@@ -48,8 +48,6 @@
 
 <script setup>
 /*1.初始化引入和实例化*/
-import { getCurrentInstance, ref, reactive } from 'vue'
-let { proxy } = getCurrentInstance()
 const emit = defineEmits(['selectPageReq', 'hideComp'])
 /*2.modal新增和修改*/
 //新增
@@ -74,21 +72,21 @@ let confirmBtnClick = () => {
     }
   })
 }
+const { formRules, elMessage } = useElement()
+
 const insertReq = () => {
   const data = JSON.parse(JSON.stringify(subForm))
   delete data.id
-  proxy
-    .$axiosReq({
-      url: '/integration-front/brand/insert',
-      data: data,
-      method: 'post', //--c
-      bfLoading: true
-    })
-    .then(() => {
-      proxy.elMessageMixin('保存成功')
-      emit('selectPageReq')
-      emit('hideComp')
-    })
+  axiosReq({
+    url: '/integration-front/brand/insert',
+    data: data,
+    method: 'post', //--c
+    bfLoading: true
+  }).then(() => {
+    elMessage('保存成功')
+    emit('selectPageReq')
+    emit('hideComp')
+  })
 }
 //修改
 const reshowData = (row) => {
@@ -101,30 +99,29 @@ const reshowData = (row) => {
   })
 }
 let updateReq = () => {
-  return proxy
-    .$axiosReq({
-      url: '/integration-front/brand/updateById',
-      data: subForm,
-      method: 'put',
-      bfLoading: true
-    })
-    .then(() => {
-      proxy.elMessageMixin('更新成功')
-      emit('selectPageReq')
-      emit('hideComp')
-    })
+  return axiosReq({
+    url: '/integration-front/brand/updateById',
+    data: subForm,
+    method: 'put',
+    bfLoading: true
+  }).then(() => {
+    elMessage('更新成功')
+    emit('selectPageReq')
+    emit('hideComp')
+  })
 }
 
 /*3.弹框相关*/
 //显示弹框
+const { dialogTitle, dialogVisible, chooseFileName } = useCommon()
 let showModal = (isEdit, detailData) => {
   if (isEdit) {
-    proxy.dialogTitleMixin = `编辑【${detailData.name}】`
-    proxy.dialogVisibleMixin = true
+    dialogTitle.value = `编辑【${detailData.name}】`
+    dialogVisible.value = true
     reshowData(detailData)
   } else {
-    proxy.dialogTitleMixin = '添加【brand】'
-    proxy.dialogVisibleMixin = true
+    dialogTitle.value = '添加【brand】'
+    dialogVisible.value = true
   }
 }
 //关闭弹框
@@ -133,31 +130,35 @@ let closeFormModal = () => {
 }
 
 /*4.上传文件相关*/
+const refSettingFile = ref(null)
+const goUploadFile = () => {
+  refSettingFile.value.click()
+}
+
 const fileUploadSave = () => {
   const formData = new FormData()
-  formData.append('file', proxy.$refs.refSettingFile.files[0])
-  proxy
-    .$axiosReq({
-      url: '/ty-example/upload/file',
-      timeout: 30000,
-      data: formData,
-      method: 'post',
-      bfLoading: true,
-      isUploadFile: true
-    })
+  formData.append('file', refSettingFile.value.files[0])
+  axiosReq({
+    url: '/ty-example/upload/file',
+    timeout: 30000,
+    data: formData,
+    method: 'post',
+    bfLoading: true,
+    isUploadFile: true
+  })
     .then((resData) => {
       let { path } = resData.data
-      proxy.chooseFileNameMixin = path
       // 存储文件名称
-      const filename = proxy.$refs.refSettingFile.value
-      proxy.chooseFileNameMixin = filename.slice(filename.lastIndexOf('\\') + 1)
+      const filename = refSettingFile.value.value
+      chooseFileName.value = filename.slice(filename.lastIndexOf('\\') + 1)
       subForm.image = `${import.meta.env.VITE_APP_IMAGE_URL}/${path}`
-      proxy.$refs.refSettingFile.value = ''
+      console.log('subForm', subForm)
+      refSettingFile.value = ''
     })
     .catch(() => {
-      proxy.chooseFileNameMixin = ''
+      chooseFileName.value = ''
       subForm.image = ''
-      proxy.$refs.refSettingFile.value = ''
+      refSettingFile.value = ''
     })
 }
 

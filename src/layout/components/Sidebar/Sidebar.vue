@@ -1,7 +1,7 @@
 <template>
   <div id="Sidebar" class="reset-menu-style">
     <!--logo-->
-    <Logo v-if="settings.sidebarLogo" :collapse="!isCollapse" />
+    <Logo :collapse="!isCollapse" v-if="settings.sidebarLogo" />
     <!--router nav-->
     <el-scrollbar>
       <el-menu

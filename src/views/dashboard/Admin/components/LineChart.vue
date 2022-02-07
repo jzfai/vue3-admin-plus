@@ -3,7 +3,6 @@
 </template>
 
 <script setup>
-import { onMounted, getCurrentInstance, watch, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 //获取store和router
 // import {useRouter} from 'vue-router'
@@ -49,7 +48,7 @@ watch(
 // const store = useStore()
 // const router = useRouter()
 onMounted(() => {
-  proxy.$nextTick(() => {
+  nextTick(() => {
     initChart()
   })
 })

@@ -9,13 +9,6 @@ const service = axios.create()
 // request
 service.interceptors.request.use(
   (req) => {
-    //axios cancel req https://www.jianshu.com/p/49568b10b29b
-    req.cancelToken = new axios.CancelToken((cancel) => {
-      window.__axiosPromiseArr.push({
-        url: req.url,
-        cancel
-      })
-    })
     // token setting
     req.headers['AUTHORIZE_TOKEN'] = getToken()
     /* download file*/
@@ -117,7 +110,7 @@ service.interceptors.response.use(
   }
 )
 
-export default function axiosReq({
+export function axiosReq({
   url,
   data,
   method,
@@ -144,3 +137,4 @@ export default function axiosReq({
     timeout: timeout ?? 15000 // 配置默认超时时间
   })
 }
+export default axiosReq

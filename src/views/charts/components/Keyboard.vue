@@ -6,8 +6,7 @@
 import echarts from 'echarts'
 import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 
-let { proxy } = getCurrentInstance()
-defineProps({
+const props = defineProps({
   className: {
     type: String,
     default: 'chart'
@@ -41,7 +40,7 @@ onBeforeUnmount(() => {
 })
 
 const initChart = () => {
-  state.chart = echarts.init(document.getElementById(proxy.id))
+  state.chart = echarts.init(document.getElementById(props.id))
   const xAxisData = []
   const data = []
   const data2 = []

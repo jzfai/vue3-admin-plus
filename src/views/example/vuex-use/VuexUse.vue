@@ -27,8 +27,6 @@ export default {
 </script>
 
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
 const store = useStore()
 /*getter*/
 let getterValue = ref(null)

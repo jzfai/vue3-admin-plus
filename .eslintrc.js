@@ -15,10 +15,17 @@ module.exports = {
     GLOBAL_VAR: true,
     window: true,
     defineProps: true,
-    defineExpose: true
+    defineExpose: true,
+    $ref: true
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:vue/vue3-recommended', 'prettier'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-recommended',
+    'prettier',
+    './.eslintrc-auto-import.json'
+  ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',

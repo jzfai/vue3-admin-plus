@@ -7,7 +7,6 @@
 //获取store和router
 // import {useRouter} from 'vue-router'
 // import {useStore} from 'vuex'
-//let { proxy } = getCurrentInstance()
 // const props = defineProps({
 //   name: {
 //     require: true,
