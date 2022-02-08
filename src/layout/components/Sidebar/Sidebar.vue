@@ -25,7 +25,6 @@
 import { computed } from 'vue'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
-//导入配置文件
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()

@@ -4,14 +4,14 @@
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
           <item :meta="onlyOneChild.meta || item.meta" />
-          <template #title>{{ onlyOneChild.meta?.title }}</template>
+          <template #title>{{ generateTitle(onlyOneChild.meta?.title) }}</template>
         </el-menu-item>
       </Link>
     </template>
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template v-if="item.meta" #title>
         <item :meta="item.meta" />
-        <span>{{ item.meta.title }}</span>
+        <span>{{ generateTitle(item.meta.title) }}</span>
       </template>
       <SidebarItem
         v-for="child in item.children"
@@ -47,6 +47,11 @@ const props = defineProps({
     default: ''
   }
 })
+
+//i18n
+import useI18n from '@/hooks/useI18n'
+const { generateTitle } = useI18n()
+
 //显示sidebarItem 的情况
 let onlyOneChild = ref(null)
 let showSidebarItem = (children = [], parent) => {

@@ -58,13 +58,13 @@ service.interceptors.response.use(
       setToken(updateToken)
     }
     const successCode = '0,200,20000'
-    if (successCode.indexOf(code) !== -1) {
+    if (successCode.includes(code)) {
       //业务成功处理
       return res.data
     } else {
       //业务失败处理
       if (code === 403) {
-        if (location.href.indexOf('/login') === 1) {
+        if (location.href.includes('/login')) {
           ElMessageBox.confirm('请重新登录', {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
