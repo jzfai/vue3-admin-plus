@@ -60,6 +60,11 @@ export default function (app) {
     //promise被reject并且错误信息没有被处理的时候，会抛出一个unhandledrejection
     //接口错误处理，cross origin , 404,401
     window.addEventListener('unhandledrejection', ({ reason }) => {
+      //未授权不捕捉，不然会死循环
+      const unhandledCode = [403, 401]
+      if (unhandledCode.includes(reason?.code)) {
+        return
+      }
       let errLog = ''
       if (typeof reason === 'string') {
         errLog = reason

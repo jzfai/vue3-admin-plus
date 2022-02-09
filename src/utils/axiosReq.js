@@ -88,6 +88,7 @@ service.interceptors.response.use(
       }
       //返回错误信息
       //如果未catch 走unhandledrejection进行收集
+      //注：如果没有return 则，会放回到请求方法中.then ,返回的res为 undefined
       return Promise.reject(res.data)
     }
   },
