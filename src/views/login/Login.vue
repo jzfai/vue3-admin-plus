@@ -71,7 +71,7 @@ let getOtherQuery = (query) => {
 }
 
 watch(
-  route,
+  route.path,
   (route) => {
     const query = route.query
     if (query) {
