@@ -71,9 +71,8 @@ let getOtherQuery = (query) => {
 }
 
 watch(
-  route.path,
-  (route) => {
-    const query = route.query
+  route.query,
+  (query) => {
     if (query) {
       state.redirect = query.redirect
       state.otherQuery = getOtherQuery(query)

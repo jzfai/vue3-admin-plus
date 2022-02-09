@@ -60,19 +60,20 @@ export default function (app) {
     //promise被reject并且错误信息没有被处理的时候，会抛出一个unhandledrejection
     //接口错误处理，cross origin , 404,401
     window.addEventListener('unhandledrejection', ({ reason }) => {
-      //未授权不捕捉，不然会死循环
-      const unhandledCode = [403, 401]
-      if (unhandledCode.includes(reason?.code)) {
-        return
-      }
       let errLog = ''
       if (typeof reason === 'string') {
         errLog = reason
       } else {
         errLog = `${reason?.stack?.substr(0, 300)}`
       }
-      errorLogReq(errLog)
-      //console.log('unhandledrejection:', errLog) // 捕获后自定义处理
+      //未授权和取消不捕捉
+      //此处可添加不捕捉状态码
+      const unhandledCode = '403, 401'
+      //此处可添加不捕捉string
+      const unhandledString = 'cancel'
+      if (!unhandledCode.includes(reason?.code) && !unhandledString.includes(unhandledString)) {
+        errorLogReq(errLog)
+      }
     })
 
     //些特殊情况下，还需要捕获处理console.error，捕获方式就是重写window.console.error
