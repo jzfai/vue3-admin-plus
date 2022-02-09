@@ -64,7 +64,7 @@ service.interceptors.response.use(
     } else {
       //业务失败处理
       if (code === 403) {
-        if (location.href.includes('/login')) {
+        if (!location.href.includes('/login')) {
           ElMessageBox.confirm('请重新登录', {
             confirmButtonText: '重新登录',
             cancelButtonText: '取消',
