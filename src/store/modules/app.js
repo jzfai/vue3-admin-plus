@@ -4,7 +4,8 @@ const state = {
     opened: true
   },
   settings: defaultSettings,
-  cachedViews: []
+  cachedViews: [],
+  cachedViewsDeep: []
 }
 
 const mutations = {
@@ -38,6 +39,19 @@ const mutations = {
   },
   M_RESET_CACHED_VIEW: (state) => {
     state.cachedViews = []
+  },
+
+  /*third  keepAlive*/
+  M_ADD_CACHED_VIEW_DEEP: (state, view) => {
+    if (state.cachedViewsDeep.includes(view)) return
+    state.cachedViewsDeep.push(view)
+  },
+  M_DEL_CACHED_VIEW_DEEP: (state, view) => {
+    const index = state.cachedViewsDeep.indexOf(view)
+    index > -1 && state.cachedViewsDeep.splice(index, 1)
+  },
+  M_RESET_CACHED_VIEW_DEEP: (state) => {
+    state.cachedViewsDeep = []
   }
 }
 const actions = {
