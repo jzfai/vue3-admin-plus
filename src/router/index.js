@@ -222,14 +222,14 @@ export const constantRoutes = [
         name: 'routerDemoF',
         hidden: true,
         component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
-        meta: { title: 'RouterDemo-F', activeMenu: '/writing-demo/keep-alive' }
+        meta: { title: 'RouterDemo-F', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
       },
       {
         path: 'router-demo-s',
         name: 'routerDemoS',
         hidden: true,
         component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
-        meta: { title: 'RouterDemo-S', activeMenu: '/writing-demo/keep-alive' }
+        meta: { title: 'RouterDemo-S', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
       }
     ]
   },

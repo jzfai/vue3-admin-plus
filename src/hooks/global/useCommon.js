@@ -21,6 +21,7 @@ export const useCommonExample = () => {
     todayTimeLast: '',
     yesterdayTime: null,
     beforeThreeDateTime: '',
+    startEndArr: [],
     /*dialog*/
     dialogTitle: '',
     dialogVisible: false
