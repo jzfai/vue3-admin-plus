@@ -26,6 +26,12 @@ let settings = computed(() => {
 // leaveRmCachePage: is true, keep-alive remote when page leave
 let oldRoute = null
 let deepOldRouter = null
+
+const removeDeepChildren = (deepOldRouter) => {
+  deepOldRouter.children?.forEach((fItem) => {
+    store.commit('app/M_DEL_CACHED_VIEW_DEEP', fItem.name)
+  })
+}
 const key = computed({
   get() {
     const routerLevel = route.matched.length
@@ -34,11 +40,15 @@ const key = computed({
       if (deepOldRouter?.name) {
         if (deepOldRouter.meta?.leaveRmCachePage && deepOldRouter.meta?.cachePage) {
           store.commit('app/M_DEL_CACHED_VIEW', deepOldRouter.name)
+          //remove the deepOldRouter‘s children component
+          removeDeepChildren(deepOldRouter)
         }
       } else {
         if (oldRoute?.name) {
           if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
             store.commit('app/M_DEL_CACHED_VIEW', oldRoute.name)
+            //remove the deepOldRouter‘s children component
+            removeDeepChildren(deepOldRouter)
           }
         }
       }

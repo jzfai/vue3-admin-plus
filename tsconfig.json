@@ -6,7 +6,7 @@
     //启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict， --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。
     "strict": true,
     // 允许编译器编译JS，JSX文件
-    "allowJs": false,
+    "allowJs": true,
     // 允许在JS文件中报错，通常与allowJS一起使用
     "checkJs": false,
     // 允许使用jsx
@@ -43,7 +43,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "~/*": ["typings/*"],
+      "~/*": ["typings/*"]
     },
     //指定默认读取的目录
     //"typeRoots": ["./node_modules/@types/", "./types"],
