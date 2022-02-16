@@ -42,11 +42,12 @@ specifiers:
   vite-plugin-mock: ^2.9.6
   vite-plugin-style-import: 1.2.1
   vite-plugin-svg-icons: 1.0.5
-  vite-plugin-vue-setup-extend: ^0.4.0
+  vite-plugin-vue-setup-extend: 0.4.0
   vue: 3.2.29
   vue-i18n: 9.1.6
   vue-router: 4.0.12
   vue-tsc: 0.28.1
+  vuedraggable: ^4.1.0
   vuex: 4.0.2
 
 dependencies:
@@ -66,6 +67,7 @@ dependencies:
   vue: 3.2.29
   vue-i18n: 9.1.6_vue@3.2.29
   vue-router: 4.0.12_vue@3.2.29
+  vuedraggable: 4.1.0_vue@3.2.29
   vuex: 4.0.2_vue@3.2.29
 
 devDependencies:
@@ -4129,6 +4131,10 @@ packages:
       use: 3.1.1
     dev: true
 
+  /sortablejs/1.14.0:
+    resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
+    dev: false
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -4913,6 +4919,15 @@ packages:
       '@vue/runtime-dom': 3.2.29
       '@vue/server-renderer': 3.2.29_vue@3.2.29
       '@vue/shared': 3.2.29
+    dev: false
+
+  /vuedraggable/4.1.0_vue@3.2.29:
+    resolution: {integrity: sha512-FU5HCWBmsf20GpP3eudURW3WdWTKIbEIQxh9/8GE806hydR9qZqRRxRE3RjqX7PkuLuMQG/A7n3cfj9rCEchww==}
+    peerDependencies:
+      vue: ^3.0.1
+    dependencies:
+      sortablejs: 1.14.0
+      vue: 3.2.29
     dev: false
 
   /vuex/4.0.2_vue@3.2.29:
