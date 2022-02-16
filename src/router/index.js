@@ -278,6 +278,12 @@ export const constantRoutes = [
         component: () => import('@/views/use-example/d3/D3.vue'),
         name: 'D3',
         meta: { title: 'd3-force', icon: 'documentation' }
+      },
+      {
+        path: 'signboard',
+        component: () => import('@/views/use-example/signboard/SignBoard.vue'),
+        name: 'SignBoard-demo',
+        meta: { title: 'signboard', icon: 'documentation' }
       }
     ]
   }
