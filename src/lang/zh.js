@@ -37,6 +37,7 @@ export default {
     'RouterDemo-F': '路由跳转页面1',
     'RouterDemo-S': '路由跳转页面2',
     'Use Example': '使用例子',
+    'Directive':'自定义指令',
     Tinymce: 'Tinymce富文本',
     'I18n-Demo': 'i18n例子',
 
