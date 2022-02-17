@@ -33,6 +33,7 @@ export default {
     'RouterDemo-F': 'RouterDemo-F',
     'RouterDemo-S': 'RouterDemo-S',
     'Use Example': 'Use Example',
+    'directive' :'directive',
     Tinymce: 'Tinymce',
     'I18n-Demo': 'I18n Demo',
     Permission: 'Permission',
