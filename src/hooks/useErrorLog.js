@@ -10,7 +10,7 @@ let errorLogReq = (errLog) => {
       pageUrl: window.location.href,
       errorLog: errLog,
       browserType: navigator.userAgent,
-      version: `${pack.version}-${GLOBAL_VAR.GIT_COMMIT_ID}`
+      version: pack.version
     },
     method: 'post',
     bfLoading: false,
@@ -66,12 +66,14 @@ export default function (app) {
       } else {
         errLog = `${reason?.stack?.substr(0, 300)}`
       }
+
+      console.log("unhandledrejection", reason);
       //未授权和取消不捕捉
       //此处可添加不捕捉状态码
       const unhandledCode = '403, 401'
       //此处可添加不捕捉string
       const unhandledString = 'cancel'
-      if (!unhandledCode.includes(reason?.code) && !unhandledString.includes(unhandledString)) {
+      if (!unhandledCode.includes(reason?.code) && !reason.includes(unhandledString)) {
         errorLogReq(errLog)
       }
     })

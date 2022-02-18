@@ -4,10 +4,7 @@
 
 <script setup>
 import echarts from 'echarts'
-import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
+
 const props = defineProps({
   className: {
     type: String,

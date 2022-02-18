@@ -28,10 +28,6 @@
 <script setup>
 import path from 'path'
 import { Close } from '@element-plus/icons-vue'
-import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed, nextTick } from 'vue'
-//获取store和router
-import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
 const store = useStore()
 const $router = useRouter()
 const $route = useRoute()
@@ -142,6 +138,16 @@ const closeSelectedTag = (view) => {
   store.dispatch('tagsView/delView', view).then(({ visitedViews }) => {
     if (isActive(view)) {
       toLastView(visitedViews, view)
+    }
+    //remove keep-alive by the closeTabRmCache
+    if(view.meta?.closeTabRmCache){
+      const routerLevel = view.matched.length
+      if(routerLevel===2){
+        store.commit('app/M_DEL_CACHED_VIEW', view.name)
+      }
+      if(routerLevel===3){
+        store.commit('app/M_DEL_CACHED_VIEW_DEEP', view.name)
+      }
     }
   })
 }

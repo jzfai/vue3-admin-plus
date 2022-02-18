@@ -5,8 +5,6 @@
 <script setup>
 import echarts from 'echarts'
 //获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
 let { proxy } = getCurrentInstance()
 const props = defineProps({
   className: {
