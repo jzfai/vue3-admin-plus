@@ -128,10 +128,10 @@ export default ({ command, mode }) => {
       // })
     ],
     build: {
-      // minify: 'terser',
+      minify: 'terser',
       brotliSize: false,
-      // 消除打包大小超过500kb警告
-      chunkSizeWarningLimit: 2000,
+      // 消除打包大小超过警告
+      chunkSizeWarningLimit: 5000,
       //remote console.log in prod
       terserOptions: {
         //detail to look https://terser.org/docs/api-reference#compress-options
@@ -161,6 +161,21 @@ export default ({ command, mode }) => {
       // extensions: ['.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.mjs']
     },
     css: {
+      postcss: {
+        //remove build charset warning
+        plugins: [
+          {
+            postcssPlugin: 'internal:charset-removal',
+            AtRule: {
+              charset: (atRule) => {
+                if (atRule.name === 'charset') {
+                  atRule.remove();
+                }
+              }
+            }
+          }
+        ]
+      },
       preprocessorOptions: {
         //define global scss variable
         scss: {

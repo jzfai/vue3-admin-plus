@@ -6,8 +6,6 @@
 import { onMounted, getCurrentInstance, reactive, onBeforeUnmount } from 'vue'
 import echarts from 'echarts'
 //获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
 defineProps({
   className: {
     type: String,

@@ -218,6 +218,13 @@ export const constantRoutes = [
         meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
       },
       {
+        path: 'tab-keep-alive',
+        component: () => import('@/views/example/keep-alive/TabKeepAlive.vue'),
+        name: 'TabKeepAlive',
+        //closeTabRmCache: remove cachePage when tabs close, default false
+        meta: { title: 'Tab-Keep-Alive', cachePage: true, closeTabRmCache: true }
+      },
+      {
         path: 'router-demo-f',
         name: 'routerDemoF',
         hidden: true,
@@ -293,7 +300,7 @@ export const constantRoutes = [
     meta: { title: 'Directive', icon: 'documentation' },
     alwaysShow: true,
     children: [
-   
+
       {
         path: 'copy',
         component: () => import('@/views/directive/copy.vue'),
@@ -318,7 +325,7 @@ export const constantRoutes = [
         name: 'watermark',
         meta: { title: 'v-watermark' }
       },
-     
+
     ]
   }
 ]

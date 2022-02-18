@@ -12,9 +12,6 @@
 
 <script setup>
 import Tinymce from '@/components/Tinymce/Tinymce.vue'
-//获取store和router
-// import {useRouter} from 'vue-router'
-// import {useStore} from 'vuex'
 /*tinymce操作*/
 const refTinymce = ref(null)
 const setTinyContent = () => {
