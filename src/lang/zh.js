@@ -2,6 +2,7 @@ export default {
   route: {
     Dashboard: '首页',
     'Setting Switch': '设置文件测试',
+    'Guide': '引导页',
     ErrorLog: '错误日志',
     'ErrorLog Test': '错误日志测试',
 
