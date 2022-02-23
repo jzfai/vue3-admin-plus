@@ -1,10 +1,3 @@
-<!--
- * @Date: 2022-02-23 16:52:00
- * @LastEditors: Zfj
- * @LastEditTime: 2022-02-23 17:16:38
- * @FilePath: \vue3-admin-plus\src\views\guide\index.vue
- * @Description: 
--->
 <template>
   <div class="app-container">
     <aside>
