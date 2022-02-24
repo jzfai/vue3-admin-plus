@@ -58,6 +58,18 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/guide',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/guide/index.vue'),
+        name: 'Guide',
+        meta: { title: 'Guide', icon: 'guide' }
+      }
+    ]
+  },
+  {
     path: '/error-log',
     component: Layout,
     name: 'ErrorLog',
