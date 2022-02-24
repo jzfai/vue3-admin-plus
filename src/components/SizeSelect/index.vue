@@ -24,7 +24,7 @@ import setting from '@/settings'
 const state = reactive({
   sizeOptions: [
     { label: 'Large ', value: 'large' },
-    { label: 'Default ', value: 'default ' },
+    { label: 'Default ', value: 'default' },
     { label: 'Small', value: 'small' }
   ]
 })
