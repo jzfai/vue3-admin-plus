@@ -20,6 +20,7 @@
     "@element-plus/icons-vue": "0.2.4",
     "axios": "0.21.3",
     "d3": "7.2.1",
+    "driver.js": "^0.9.8",
     "echarts": "4.2.1",
     "element-china-area-data": "5.0.2",
     "element-plus": "^2.0.2",

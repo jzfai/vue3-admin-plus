@@ -2,6 +2,7 @@ export default {
   route: {
     Dashboard: 'Dashboard',
     'Setting Switch': 'Setting Switch',
+    'Guide': 'Guide',
     'Error Log': 'Error Log',
     'ErrorLog Test': 'ErrorLog Test',
     Example: 'Example',

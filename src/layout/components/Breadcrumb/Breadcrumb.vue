@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
+  <el-breadcrumb id="breadcrumb-container" class="app-breadcrumb" separator="/">
     <!--has transition  Judging by settings.mainNeedAnimation-->
     <transition-group v-if="settings.mainNeedAnimation" name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
