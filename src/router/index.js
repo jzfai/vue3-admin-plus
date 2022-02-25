@@ -337,7 +337,12 @@ export const constantRoutes = [
         name: 'watermark',
         meta: { title: 'v-watermark' }
       },
-
+      {
+        path: 'waves',
+        component: () => import('@/views/directive/waves.vue'),
+        name: 'waves',
+        meta: { title: 'v-waves' }
+      },
     ]
   }
 ]
