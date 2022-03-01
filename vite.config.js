@@ -32,7 +32,7 @@ let commitHash = ''
 try {
   commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
 } catch (e) {
-  throw new Error(e.toString())
+  console.log(".git仓库为空或者未安装git")
 }
 export default ({ command, mode }) => {
   /*
