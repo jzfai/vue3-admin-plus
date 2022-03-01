@@ -124,3 +124,10 @@ const loginOut = () => {
   margin-right: 40px;
 }
 </style>
+
+<style lang="scss">
+//reset element divide style
+.el-dropdown-menu__item--divided{
+  height: 1px;
+}
+</style>
