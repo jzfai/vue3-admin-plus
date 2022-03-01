@@ -1,10 +1,10 @@
 <template>
   <div :class="{ hidden: hidden }" class="pagination-container">
     <el-pagination
-      small
-      :background="background"
       v-model:currentPage="currentPage"
       v-model:page-size="pageSize"
+      small
+      :background="background"
       :layout="layout"
       :page-sizes="pageSizes"
       :total="total"
