@@ -24,11 +24,11 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            @change="dateTimePacking"
             class="widthPx-250"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
+            @change="dateTimePacking"
           />
         </el-form-item>
       </el-form>
@@ -41,8 +41,8 @@
       ref="refuserTable"
       :height="`calc(100vh - ${settings.delWindowHeight})`"
       border
-      @selection-change="handleSelectionChange"
       :data="usertableData"
+      @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" align="center" width="50" />
       <el-table-column align="center" prop="errorLog" label="错误日志" width="450">
@@ -79,8 +79,8 @@
     <!--详情-->
     <el-dialog
       v-if="detailDialog"
-      :title="dialogTitle"
       v-model="detailDialog"
+      :title="dialogTitle"
       width="40vw"
       :close-on-click-modal="false"
     >
@@ -88,8 +88,8 @@
         <div class="detail-container-item">DBC文件名：{{ detailData.username }}</div>
       </div>
       <div class="detail-container rowBC elODialogModalBodyH60vh">
-        <div class="detail-container-item" style="color: green" v-if="detailData.status === 1">状态： 启用</div>
-        <div class="detail-container-item" v-else>状态： 停用</div>
+        <div v-if="detailData.status === 1" class="detail-container-item" style="color: green">状态： 启用</div>
+        <div v-else class="detail-container-item">状态： 停用</div>
       </div>
       <div class="detail-container rowBC elODialogModalBodyH60vh">
         <div class="detail-container-item">说明：{{ detailData.remark }}</div>
