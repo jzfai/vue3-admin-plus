@@ -65,6 +65,7 @@
     }
   }
 }
+
 // dropdown
 //.el-dropdown-menu {
 //  a {
@@ -89,14 +90,17 @@
   .el-dialog {
     margin-top: 7vh !important;
   }
+
   .el-dialog__header {
     border-bottom: 1px solid #ddd;
   }
+
   .el-dialog__body {
     padding-top: 10px;
     overflow-y: auto;
   }
 }
+
 .elODialogModalBodyH60vh {
   .el-dialog__body {
     min-height: 50vh;
@@ -117,6 +121,7 @@
     max-height: 55vh;
   }
 }
+
 .elODialogModalBodyW80vh {
   .el-dialog__body {
     width: 80vh;
@@ -126,5 +131,15 @@
 .elFormItemMarginB0px {
   .el-form-item {
     margin-bottom: 12px !important;
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
   }
 }

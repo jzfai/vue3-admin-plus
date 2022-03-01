@@ -251,6 +251,12 @@ export const constantRoutes = [
         meta: { title: 'RouterDemo-S', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
       },
       {
+        path: 'table-with-pagination',
+        component: () => import('@/views/table-with-pagination/index.vue'),
+        name: 'TableWithPagination',
+        meta: { title: 'Table With Pagination' }
+      },
+      {
         path: 'deep-router-keep-alive',
         name: 'DeepRouterKeepAlive',
         component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
