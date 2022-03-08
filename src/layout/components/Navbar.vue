@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar rowBC">
+  <div class="navbar rowBC reset-el-dropdown">
     <div class="rowSC">
       <hamburger
         v-if="settings.showHamburger"
@@ -125,9 +125,3 @@ const loginOut = () => {
 }
 </style>
 
-<style lang="scss">
-//reset element divide style
-.el-dropdown-menu__item--divided{
-  height: 1px;
-}
-</style>

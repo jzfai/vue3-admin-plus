@@ -32,7 +32,7 @@ let commitHash = ''
 try {
   commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim()
 } catch (e) {
-  console.log(".git仓库为空或者未安装git")
+  console.log('.git仓库为空或者未安装git')
 }
 export default ({ command, mode }) => {
   /*
@@ -73,6 +73,11 @@ export default ({ command, mode }) => {
       //     rewrite: (path) => path.replace(/^\/api/, '')
       //   }
       // }
+    },
+    preview: {
+      port: 5006,
+      host: '0.0.0.0',
+      strictPort: true
     },
     plugins: [
       vue({
@@ -169,7 +174,7 @@ export default ({ command, mode }) => {
             AtRule: {
               charset: (atRule) => {
                 if (atRule.name === 'charset') {
-                  atRule.remove();
+                  atRule.remove()
                 }
               }
             }

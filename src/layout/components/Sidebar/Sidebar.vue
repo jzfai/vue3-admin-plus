@@ -10,9 +10,9 @@
         :collapse="!isCollapse"
         :unique-opened="false"
         :collapse-transition="false"
-        :background-color="scssJson.menuBg"
-        :text-color="scssJson.menuText"
-        :active-text-color="scssJson.menuActiveText"
+        :background-color="scssJson.backgroundColor"
+        :text-color="scssJson.textColor"
+        :active-text-color="scssJson.activeTextColor"
         mode="vertical"
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -25,10 +25,11 @@
 import { computed } from 'vue'
 import Logo from './Logo.vue'
 import SidebarItem from './SidebarItem.vue'
+//导入配置文件
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
-const route = useRoute()
+const $route = useRoute()
 let routes = computed(() => {
   return store.state.permission.routes
 })
@@ -57,7 +58,7 @@ const dillScssExportToJson = (scssExportJson) => {
 import scssExportJson from '@/styles/variables-to-js.scss'
 let scssJson = dillScssExportToJson(scssExportJson)
 const activeMenu = computed(() => {
-  const { meta, fullPath } = route
+  const { meta, fullPath } = $route
   // if set path, the sidebar will highlight the path you set
   if (meta.activeMenu) {
     return meta.activeMenu
@@ -74,6 +75,28 @@ const activeMenu = computed(() => {
   .el-scrollbar__wrap {
     padding-bottom: 8vh;
   }
+
+  //menu style
+  .el-menu-item:hover {
+    background-color: $menuHover;
+  }
+  //sub menu style
+  .el-menu--inline {
+    background-color: $subBackgroundColor;
+    .el-menu-item {
+      color: $subTextColor;
+      &:hover {
+        background-color: $subMenuHover;
+      }
+    }
+    .is-active {
+      color: $subActiveTextColor;
+    }
+  }
+
+  //.el-sub-menu {
+  //  background-color: $subBackgroundColor;
+  //}
 }
 
 .el-menu-vertical {
