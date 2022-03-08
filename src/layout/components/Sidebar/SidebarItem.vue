@@ -1,13 +1,13 @@
 <template>
   <template v-if="!item.hidden">
-    <template v-if="showSidebarItem(item.children, item)">
+    <div v-if="showSidebarItem(item.children, item)">
       <Link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }">
           <item :meta="onlyOneChild.meta || item.meta" />
           <template #title>{{ generateTitle(onlyOneChild.meta?.title) }}</template>
         </el-menu-item>
       </Link>
-    </template>
+    </div>
     <el-sub-menu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
       <template v-if="item.meta" #title>
         <item :meta="item.meta" />
