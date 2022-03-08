@@ -71,7 +71,7 @@ let getOtherQuery = (query) => {
 }
 
 watch(
-  route.query,
+  () => route.query,
   (query) => {
     if (query) {
       state.redirect = query.redirect
@@ -205,9 +205,8 @@ $light_gray: #eee;
     height: 42px; //此处调整item的高度
     caret-color: #fff;
   }
-  .el-input__inner{
-    box-shadow:none!important;
+  .el-input__inner {
+    box-shadow: none !important;
   }
-
 }
 </style>

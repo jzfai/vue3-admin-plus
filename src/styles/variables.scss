@@ -1,15 +1,19 @@
 // 全局变量定义
-$menuText: #bfcbd9;
-$menuActiveText: #409eff;
-$subMenuActiveText: #f4f4f5;
-
 $menuBg: #304156;
+
+//sidebar first level style
+$backgroundColor: #304156;
+$textColor: #bfcbd9;
+$activeTextColor: #409eff;
 $menuHover: #263445;
-
-$subMenuBg: #1f2d3d;
+//sidebar second and three level style
+$subBackgroundColor: #1f2d3d;
+$subTextColor: #bfcbd9;
+$subActiveTextColor: #409eff;
 $subMenuHover: #001528;
-$sideBarWidth: 210px;
 
+//width
+$sideBarWidth: 210px;
 //navbar
 $navBarHeight: 50px;
 //tagsView
