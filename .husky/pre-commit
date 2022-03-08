@@ -4,4 +4,4 @@
 #npx --no-install commitlint --edit "$1"
 #npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 #推送之前运行eslint检查
-yarn run lint || echo exit;
+npm run lint || echo exit;
