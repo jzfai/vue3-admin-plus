@@ -9,6 +9,16 @@ const service = axios.create()
 // request
 service.interceptors.request.use(
   (req) => {
+
+    req.cancelToken = new axios.CancelToken((cancel) => {
+      //__axiosPromiseArr收集请求地址
+      window.__axiosPromiseArr.push({
+        url: req.url,
+        cancel
+      })
+    })
+
+
     // token setting
     req.headers['AUTHORIZE_TOKEN'] = getToken()
     /* download file*/
