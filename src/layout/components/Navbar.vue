@@ -10,12 +10,12 @@
       <breadcrumb class="breadcrumb-container" />
     </div>
     <!--nav title-->
-    <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
+    <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.showNavbarTitle }}</div>
     <div v-if="settings.ShowDropDown" class="right-menu rowSC">
       <ScreenFull />
       <SizeSelect />
       <LangSelect />
-      <el-dropdown trigger="click" size="default">
+      <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
           <img src="@/assets/layout/animation-image.gif" class="user-avatar" />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
@@ -50,8 +50,6 @@ import ScreenFull from '@/components/ScreenFull/index.vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import { computed, getCurrentInstance } from 'vue'
-import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
 const store = useStore()
 let settings = computed(() => {
@@ -66,12 +64,13 @@ const toggleSideBar = () => {
 /*
  * 退出登录
  * */
+import { ElMessage } from 'element-plus'
+const router = useRouter()
+const route = useRoute()
 const loginOut = () => {
   store.dispatch('user/logout').then(() => {
-    // ElMessage({ message: '退出登录成功', type: 'success' })
-    // record the back point
-    //此处reload清空路由和重置部分状态
-    location.reload()
+    ElMessage({ message: '退出登录成功', type: 'success' })
+    router.push(`/login?redirect=/`)
   })
 }
 </script>
@@ -124,4 +123,3 @@ const loginOut = () => {
   margin-right: 40px;
 }
 </style>
-

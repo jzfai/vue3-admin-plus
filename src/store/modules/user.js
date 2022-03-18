@@ -1,6 +1,19 @@
 import { loginReq, logoutReq, getInfoReq } from '@/api/user'
 import { setToken, removeToken } from '@/utils/auth'
 
+import router, { asyncRoutes } from '@/router'
+
+//当路由被删除时，所有的别名和子路由也会被同时删除
+//https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E5%88%A0%E9%99%A4%E8%B7%AF%E7%94%B1
+const resetRouter = () => {
+  let asyncRouterNameArr = asyncRoutes.map((mItem) => mItem.name)
+  asyncRouterNameArr.forEach((name) => {
+    if (router.hasRoute(name)) {
+      router.removeRoute(name)
+    }
+  })
+}
+
 const getDefaultState = () => {
   return {
     //token: getToken(),
@@ -19,6 +32,7 @@ const mutations = {
   M_roles: (state, roles) => {
     state.roles = roles
   }
+
   // SET_AVATAR: (state, avatar) => {
   //   state.avatar = avatar
   // }
@@ -73,11 +87,11 @@ const actions = {
     })
   },
   // user logout
-  logout() {
+  logout({ dispatch }) {
     return new Promise((resolve, reject) => {
       logoutReq()
         .then(() => {
-          removeToken() // must remove  token  first
+          dispatch('resetState')
           resolve()
         })
         .catch((error) => {
@@ -85,10 +99,16 @@ const actions = {
         })
     })
   },
-  // remove token
-  resetToken() {
+  resetState({ commit, dispatch }) {
     return new Promise((resolve) => {
+      commit('M_username', '')
+      commit('M_roles', [])
       removeToken() // must remove  token  first
+      resetRouter() // reset the router
+      commit('permission/M_isGetUserInfo', false, { root: true })
+
+      // reset visited views and cached views
+      dispatch('tagsView/delAllViews', null, { root: true })
       resolve()
     })
   }
