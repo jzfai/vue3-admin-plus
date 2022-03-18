@@ -9,13 +9,11 @@ import getPageTitle from '@/utils/getPageTitle'
 
 const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
-  // start progress bar
   if (settings.isNeedNprogress) NProgress.start()
-  // set page title
   document.title = getPageTitle(to.meta.title)
   //set tmp token when setting isNeedLogin false
   if (!settings.isNeedLogin) setToken(settings.tmpToken)
-  const hasToken = getToken()
+  let hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
@@ -40,17 +38,22 @@ router.beforeEach(async (to, from, next) => {
           store.commit('permission/M_routes', accessRoutes)
           // dynamically add accessible routes
           //router4 addRoutes destroyed
+          //添加路由accessRoutes
           accessRoutes.forEach((route) => {
-            router.addRoute(route)
+            if (!router.hasRoute(route.name)) {
+              router.addRoute(route)
+            }
           })
+
           //already get userInfo
           store.commit('permission/M_isGetUserInfo', true)
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
-          await store.dispatch('user/resetToken')
-          next(`/login?redirect=${to.path}`)
+          await store.dispatch('user/resetState')
+          next(`/login`)
+          // next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()
         }
       }

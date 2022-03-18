@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-plus",
-  "version": "1.4.3",
+  "version": "1.4.5",
   "license": "ISC",
   "author": "kuanghua(869653722@qq.com)",
   "scripts": {
@@ -23,7 +23,7 @@
     "driver.js": "^0.9.8",
     "echarts": "4.2.1",
     "element-china-area-data": "5.0.2",
-    "element-plus": "2.0.5",
+    "element-plus": "2.1.4",
     "mitt": "3.0.0",
     "moment-mini": "2.24.0",
     "nprogress": "0.2.0",

@@ -251,12 +251,6 @@ export const constantRoutes = [
         meta: { title: 'RouterDemo-S', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
       },
       {
-        path: 'table-with-pagination',
-        component: () => import('@/views/table-with-pagination/index.vue'),
-        name: 'TableWithPagination',
-        meta: { title: 'Table With Pagination' }
-      },
-      {
         path: 'deep-router-keep-alive',
         name: 'DeepRouterKeepAlive',
         component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
@@ -277,6 +271,12 @@ export const constantRoutes = [
             meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
           }
         ]
+      },
+      {
+        path: 'table-with-pagination',
+        component: () => import('@/views/table-with-pagination/index.vue'),
+        name: 'TableWithPagination',
+        meta: { title: 'Table With Pagination' }
       }
     ]
   },
@@ -309,6 +309,12 @@ export const constantRoutes = [
         component: () => import('@/views/use-example/signboard/SignBoard.vue'),
         name: 'SignBoard-demo',
         meta: { title: 'signboard', icon: 'documentation' }
+      },
+      {
+        path: 'worker-Demo',
+        name: 'WorkerDemo',
+        component: () => import('@/views/use-example/worker'),
+        meta: { title: 'Worker Demo', icon: 'nested' }
       }
     ]
   },

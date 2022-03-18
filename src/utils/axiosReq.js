@@ -2,6 +2,7 @@ import store from '@/store'
 import axios from 'axios'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import { getToken, setToken } from '@/utils/auth'
+import router from '@/router'
 let reqConfig
 let loadingE
 
@@ -9,7 +10,6 @@ const service = axios.create()
 // request
 service.interceptors.request.use(
   (req) => {
-
     req.cancelToken = new axios.CancelToken((cancel) => {
       //__axiosPromiseArr收集请求地址
       window.__axiosPromiseArr.push({
@@ -17,7 +17,6 @@ service.interceptors.request.use(
         cancel
       })
     })
-
 
     // token setting
     req.headers['AUTHORIZE_TOKEN'] = getToken()
@@ -74,16 +73,15 @@ service.interceptors.response.use(
     } else {
       //业务失败处理
       if (code === 403) {
-        ElMessageBox.confirm('请重新登录', {
+        ElMessageBox.confirm('token失效,请重新登录', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
           showCancelButton: false,
           type: 'warning'
         }).then(() => {
-          store.dispatch('user/resetToken').then(() => {
-            location.reload()
+          store.dispatch('user/resetState').then(() => {
             //direct return
-            return Promise.reject(res.data)
+            router.push({ path: '/login' })
           })
         })
       }
