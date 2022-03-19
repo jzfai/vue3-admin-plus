@@ -52,8 +52,7 @@ router.beforeEach(async (to, from, next) => {
           next({ ...to, replace: true })
         } catch (err) {
           await store.dispatch('user/resetState')
-          next(`/login`)
-          // next(`/login?redirect=${to.path}`)
+          next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()
         }
       }
