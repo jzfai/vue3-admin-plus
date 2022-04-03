@@ -8,46 +8,33 @@
     <div class="mt-2">action</div>
     <el-button @click="openSideBar">openSideBar</el-button>
     <el-button @click="closeSideBar">closeSideBar</el-button>
-    <div>是否开启：{{ opened }}</div>
   </div>
 </template>
 
-<script>
-/*可以设置默认的名字*/
-import { mapState } from 'vuex'
-export default {
-  name: 'Login',
-  computed: {
-    ...mapState({
-      opened: (state) => state.app,
-      opened2: (state) => state.app
-    })
-  }
-}
-</script>
-
 <script setup>
-const store = useStore()
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
 /*getter*/
-let getterValue = ref(null)
+const getterValue = ref(null)
 const getterFunc = () => {
-  getterValue.value = store.getters.cachedViews
+  getterValue.value = appStore.cachedViews
 }
 
 /*mutations*/
 /*建议commit用M_开头 action用A_开头*/
+
 const c_openSideBar = () => {
-  store.commit('app/M_sidebar_opened', true)
+  appStore.M_sidebar_opened(true)
 }
 const c_closeSideBar = () => {
-  store.commit('app/M_sidebar_opened', false)
+  appStore.M_sidebar_opened(false)
 }
 /*actions*/
 const openSideBar = () => {
-  store.dispatch('app/A_sidebar_opened', true)
+  appStore.A_sidebar_opened(true)
 }
 const closeSideBar = () => {
-  store.dispatch('app/A_sidebar_opened', false)
+  appStore.A_sidebar_opened(false)
 }
 </script>
 

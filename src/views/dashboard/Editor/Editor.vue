@@ -21,20 +21,20 @@
 import PanThumb from '@/views/dashboard/PanThumb'
 import GithubCorner from '@/views/dashboard/GithubCorner'
 import { toRefs, reactive, computed } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/store/user'
 const state = reactive({
   emptyGif: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
 })
 
-const store = useStore()
+const userStore = useUserStore()
 const name = computed(() => {
-  return store.state.user.name
+  return userStore.name
 })
 const avatar = computed(() => {
-  return store.state.user.avatar
+  return userStore.avatar
 })
 const roles = computed(() => {
-  return store.state.user.roles
+  return userStore.roles
 })
 let { emptyGif } = toRefs(state)
 </script>

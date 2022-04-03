@@ -1,7 +1,3 @@
-import { defineComponent } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { onBeforeMount } from 'vue'
-
 export default defineComponent({
   setup() {
     const route = useRoute()

@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-import { toRefs, reactive, onBeforeMount } from 'vue'
 import { getList } from '@/api/table'
 const statusFilter = (status) => {
   const statusMap = {
@@ -59,14 +58,13 @@ onBeforeMount(() => {
 
 const fetchData = () => {
   state.listLoading = true
-  getList().then((response) => {
-    console.log('response', response)
+  getList({}).then((response) => {
     state.list = response.data?.data.items
     state.listLoading = false
   })
 }
 //导出属性到页面中使用
-let { list, listLoading } = toRefs(state)
+const { list, listLoading } = toRefs(state)
 </script>
 
 <style scoped lang="scss"></style>

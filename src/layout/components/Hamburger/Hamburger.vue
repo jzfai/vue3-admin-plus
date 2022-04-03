@@ -1,5 +1,5 @@
 <template>
-  <div id="hamburger-container" style="padding: 0 12px" @click="toggleClick" >
+  <div style="padding: 0 12px" @click="toggleClick">
     <svg
       :class="{ 'is-active': isActive }"
       class="hamburger"
@@ -16,16 +16,16 @@
 </template>
 
 <script setup>
-import { getCurrentInstance } from 'vue'
 defineProps({
   isActive: {
     type: Boolean,
     default: false
   }
 })
-const emits = defineEmits(['toggleClick'])
+
+const emit = defineEmits(['toggleClick'])
 const toggleClick = () => {
-  emits('toggleClick')
+  emit('toggleClick')
 }
 </script>
 

@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
+// import { onMounted, getCurrentInstance, watch, ref, toRefs, reactive, computed } from 'vue'
 //获取store和router
-
+// import {useRouter} from 'vue-router'
 // const props = defineProps({
 //   name: {
 //     require: true,
@@ -17,6 +18,7 @@
 // });
 
 //const routes = computed(() => {
+//    return proxy.$store.state.permission.routes;
 //  });
 // watch(() => props.name, (oldValue,newValue) => {
 //
@@ -24,7 +26,6 @@
 //   { immediate: true }
 // );
 
-// const store = useStore()
 // const router = useRouter()
 // onMounted(()=>{
 //   console.log("页面挂载了")

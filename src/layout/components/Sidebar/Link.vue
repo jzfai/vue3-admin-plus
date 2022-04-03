@@ -6,13 +6,13 @@
 
 <script setup>
 import { isExternal } from '@/utils/validate'
-import { computed, getCurrentInstance } from 'vue'
 const props = defineProps({
   to: {
     type: String,
     required: true
   }
 })
+
 const isExternalValid = computed(() => {
   return isExternal(props.to)
 })
@@ -34,6 +34,13 @@ const linkProps = (to) => {
     to: to
   }
 }
+const state = reactive({
+  levelList: null
+})
+onMounted(() => {
+  // console.log(state.levelList)
+  // console.log(props.to)
+})
 </script>
 
 <style scoped lang="scss"></style>

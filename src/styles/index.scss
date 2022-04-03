@@ -10,7 +10,6 @@
   height: calc(100vh - #{$navBarHeight} - #{$tagViewHeight} - #{$appMainPadding * 2});
   width: 100%;
 }
-
 .scroll-y {
   @include main-show-wh();
   overflow-y: auto;

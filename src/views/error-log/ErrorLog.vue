@@ -107,7 +107,6 @@
 
 <script setup>
 import { Delete } from '@element-plus/icons-vue'
-import { onMounted, getCurrentInstance, ref, reactive, onActivated, onDeactivated } from 'vue'
 import settings from '@/settings'
 import bus from '@/utils/bus'
 /*
@@ -135,13 +134,12 @@ const errorLogImg = () => {
 
 /*表格查询和筛选*/
 let usertableData = ref([])
-
-import packages from  "/package.json"
-console.log(packages);
+import packages from '/package.json'
 let searchForm = reactive({
   errorLog: '',
   pageUrl: `8.135.1.141/${packages.name}`,
   createTime: '',
+  id: ''
 })
 
 let { totalPage, startEndArr, dialogTitle, detailDialog } = useCommon()

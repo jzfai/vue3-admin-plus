@@ -45,9 +45,9 @@
 
 <script setup>
 import settings from '@/settings'
-import { useRoute, useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/store/user'
 //element valid
 const formRules = useElement().formRules
 //form
@@ -87,7 +87,7 @@ watch(
  * */
 let loading = ref(false)
 let tipMessage = ref('')
-const store = useStore()
+
 const refloginForm = ref(null)
 let handleLogin = () => {
   refloginForm.value.validate((valid) => {
@@ -103,8 +103,9 @@ let handleLogin = () => {
 const router = useRouter()
 let loginReq = () => {
   loading.value = true
-  store
-    .dispatch('user/login', formInline)
+  const userStore = useUserStore()
+  userStore
+    .login(formInline)
     .then(() => {
       ElMessage({ message: '登录成功', type: 'success' })
       router.push({ path: state.redirect || '/', query: state.otherQuery })

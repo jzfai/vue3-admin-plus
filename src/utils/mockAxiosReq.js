@@ -36,7 +36,7 @@ service.interceptors.response.use(
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
       ElMessage({
-        ElMessage: res.ElMessage || 'Error',
+        message: res.ElMessage || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
@@ -48,7 +48,7 @@ service.interceptors.response.use(
   (error) => {
     console.log('err' + error) // for debug
     ElMessage({
-      ElMessage: error.ElMessage,
+      message: error.ElMessage,
       type: 'error',
       duration: 5 * 1000
     })
