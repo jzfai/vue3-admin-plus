@@ -6,7 +6,8 @@ import viteSvgIcons from 'vite-plugin-svg-icons'
 
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
-
+//inject title
+import { createHtmlPlugin } from 'vite-plugin-html'
 //setup name
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 
@@ -127,6 +128,15 @@ export default ({ command, mode }) => {
           globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
         dts: true //auto generation auto-imports.d.ts file
+      }),
+      // auto config of index.html title
+      createHtmlPlugin({
+        inject: {
+          // Inject data into ejs template
+          data: {
+            title: setting.title
+          }
+        }
       })
       // Components({
       //   resolvers: [ElementPlusResolver()]
