@@ -20,23 +20,24 @@ export default {
 
 <script setup>
 import { Sidebar, Navbar, AppMain, TagsView } from './components'
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
-let opened = computed(() => {
-  return store.state.app.sidebar.opened
+
+const appStore = useAppStore()
+const opened = computed(() => {
+  return appStore.sidebar.opened
 })
-let settings = computed(() => {
-  return store.state.app.settings
+
+const settings = computed(() => {
+  return appStore.settings
 })
-let classObj = computed(() => {
+const classObj = computed(() => {
   return {
     closeSidebar: !opened.value,
     hideSidebar: !settings.value.showLeftMenu
   }
 })
-//import ResizeHook to  listen  page size that  open or close
-import ResizeHook from './hook/useResizeHandler'
+//import ResizeHook to   listen  page size that   open or close
+import ResizeHook from './hook/ResizeHandler'
+import { useAppStore } from '@/store/app'
 ResizeHook()
 </script>
 

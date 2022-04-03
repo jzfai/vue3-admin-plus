@@ -25,7 +25,6 @@ onActivated(() => {
 onDeactivated(() => {
   console.log('onDeactivated')
 })
-
 </script>
 
 <style scoped lang="scss"></style>

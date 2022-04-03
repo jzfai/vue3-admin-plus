@@ -17,17 +17,18 @@
       <LangSelect />
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
-          <img src="@/assets/layout/animation-image.gif" class="user-avatar" />
+          <img
+            src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80"
+            class="user-avatar"
+          />
           <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
-          <!--el-icon-x  is  destructed-->
-          <!--<i class="el-icon-caret-bottom" />-->
         </div>
         <template #dropdown>
           <el-dropdown-menu>
             <router-link to="/">
               <el-dropdown-item>Home</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-template">
+            <a target="_blank" href="https://github.com/jzfai/vue3-admin-ts">
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
             <a target="_blank" href="https://juejin.cn/post/7036302298435289095">
@@ -48,27 +49,31 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 
 import { CaretBottom } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import Breadcrumb from './Breadcrumb'
 import Hamburger from './Hamburger'
-import { useStore } from 'vuex'
-const store = useStore()
-let settings = computed(() => {
-  return store.state.app.settings
+
+import { useAppStore } from '@/store/app'
+import { useUserStore } from '@/store/user'
+
+const settings = computed(() => {
+  return appStore.settings
 })
 const opened = computed(() => {
-  return store.state.app.sidebar.opened
+  return appStore.sidebar.opened
 })
+const appStore = useAppStore()
 const toggleSideBar = () => {
-  store.commit('app/M_toggleSideBar')
+  appStore.M_toggleSideBar()
 }
 /*
  * 退出登录
  * */
-import { ElMessage } from 'element-plus'
 const router = useRouter()
 const route = useRoute()
 const loginOut = () => {
-  store.dispatch('user/logout').then(() => {
+  const userStore = useUserStore()
+  userStore.logout().then(() => {
     ElMessage({ message: '退出登录成功', type: 'success' })
     router.push(`/login?redirect=/`)
   })

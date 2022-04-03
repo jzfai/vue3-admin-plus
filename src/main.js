@@ -3,9 +3,6 @@ import App from './App.vue'
 const app = createApp(App)
 import router from './router'
 import '@/styles/index.scss' // global css
-//import vuex
-import store from './store'
-app.use(store)
 
 //import element-plus
 import ElementPlus from 'element-plus'
@@ -40,13 +37,12 @@ import svgIcon from '@/icons/SvgIcon.vue'
 app.component('SvgIcon', svgIcon)
 
 //element svg icon
-import ElSvgIcon from "@/components/ElSvgIcon.vue"
-app.component("ElSvgIcon",ElSvgIcon)
+import ElSvgIcon from '@/components/ElSvgIcon.vue'
+app.component('ElSvgIcon', ElSvgIcon)
 
 //global mount moment-mini
 // import $momentMini from 'moment-mini'
 // app.config.globalProperties.$momentMini = $momentMini
-
 
 //import global directive
 import directive from '@/directive'
@@ -65,5 +61,9 @@ errorLog(app)
 
 //axios cancel req
 window.__axiosPromiseArr = []
+
+//pinia
+import { createPinia } from 'pinia'
+app.use(createPinia())
 
 app.use(router).mount('#app')

@@ -9,10 +9,10 @@
 import Admin from './Admin'
 import Editor from './Editor'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
-const store = useStore()
+import { useUserStore } from '@/store/user'
+const userStore = useUserStore()
 const roles = computed(() => {
-  return store.state.user.roles
+  return userStore.roles
 })
 </script>
 

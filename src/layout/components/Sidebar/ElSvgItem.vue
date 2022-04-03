@@ -13,7 +13,7 @@ const props = defineProps({
     type: String
   }
 })
-let { elSvgName } = props
+const { elSvgName } = props
 </script>
 
 <style scoped lang="scss">

@@ -1,91 +1,79 @@
-import store from '@/store'
 import axios from 'axios'
+import router from '@/router'
 import { ElLoading, ElMessage, ElMessageBox } from 'element-plus'
 import { getToken, setToken } from '@/utils/auth'
-import router from '@/router'
+import { useUserStore } from '@/store/user'
 let reqConfig
 let loadingE
 
 const service = axios.create()
-// request
-service.interceptors.request.use(
-  (req) => {
-    req.cancelToken = new axios.CancelToken((cancel) => {
-      //__axiosPromiseArr收集请求地址
-      window.__axiosPromiseArr.push({
-        url: req.url,
-        cancel
-      })
-    })
 
+// 请求拦截
+service.interceptors.request.use(
+  (request) => {
     // token setting
-    req.headers['AUTHORIZE_TOKEN'] = getToken()
+    request.headers['AUTHORIZE_TOKEN'] = getToken()
     /* download file*/
-    if (req.isDownLoadFile) {
-      req.responseType = 'blob'
+    if (request.isDownLoadFile) {
+      request.responseType = 'blob'
     }
     /* upload file*/
-    if (req.isUploadFile) {
-      req.headers['Content-Type'] = 'multipart/form-data'
+    if (request.isUploadFile) {
+      request.headers['Content-Type'] = 'multipart/form-data'
     }
-    if (req.bfLoading) {
+    reqConfig = request
+    if (request.bfLoading) {
       loadingE = ElLoading.service({
         lock: true,
         text: '数据载入中',
-        // spinner: 'el-icon-loading',
+        // spinner: 'el-icon-ElLoading',
         background: 'rgba(0, 0, 0, 0.1)'
       })
     }
     /*
-     *params会拼接到url上,such as  "a=1&b=2"
+     *params会拼接到url上
      * */
-    if (req.isParams) {
-      req.params = req.data
-      req.data = {}
+    if (request.isParams) {
+      request.params = request.data
+      request.data = {}
     }
-    //save req for res to using
-    reqConfig = req
-    return req
+    return request
   },
   (err) => {
     Promise.reject(err)
   }
 )
-//response
+// 响应拦截
 service.interceptors.response.use(
   (res) => {
     if (reqConfig.afHLoading && loadingE) {
       loadingE.close()
     }
-    // direct return, when download file
+    // 如果是下载文件直接返回
     if (reqConfig.isDownLoadFile) {
       return res
     }
-    const { flag, msg, code, isNeedUpdateToken, updateToken } = res.data
-    //update token
+    const { flag, msg, isNeedUpdateToken, updateToken, code } = res.data
+    //更新token保持登录状态
     if (isNeedUpdateToken) {
       setToken(updateToken)
     }
     const successCode = '0,200,20000'
     if (successCode.includes(code)) {
-      //业务成功处理
       return res.data
     } else {
-      //业务失败处理
       if (code === 403) {
-        ElMessageBox.confirm('token失效,请重新登录', {
+        ElMessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
-          showCancelButton: false,
           type: 'warning'
         }).then(() => {
-          store.dispatch('user/resetState').then(() => {
-            //direct return
+          const userStore = useUserStore()
+          userStore.resetState().then(() => {
             router.push({ path: '/login' })
           })
         })
       }
-      //是否需要提示错误信息 isAlertErrorMsg:true 提示
       if (reqConfig.isAlertErrorMsg) {
         ElMessage({
           message: msg,
@@ -109,7 +97,7 @@ service.interceptors.response.use(
     })
     //如果是跨域
     //Network Error,cross origin
-    let errObj = {
+    const errObj = {
       msg: err.toString(),
       reqUrl: reqConfig.baseURL + reqConfig.url,
       params: reqConfig.isParams ? reqConfig.params : reqConfig.data
@@ -129,20 +117,21 @@ export function axiosReq({
   isDownLoadFile,
   baseURL,
   timeout,
-  isAlertErrorMsg
+  isAlertErrorMsg = true
 }) {
   return service({
     url: url,
     method: method ?? 'get',
     data: data ?? {},
     isParams: isParams ?? false,
-    bfLoading: bfLoading ?? true,
+    bfLoading: bfLoading ?? false,
     afHLoading: afHLoading ?? true,
     isUploadFile: isUploadFile ?? false,
     isDownLoadFile: isDownLoadFile ?? false,
-    isAlertErrorMsg: isAlertErrorMsg ?? true,
-    baseURL: baseURL ?? import.meta.env.VITE_APP_BASE_URL, // 设置基本基础url
-    timeout: timeout ?? 15000 // 配置默认超时时间
+    isAlertErrorMsg: isAlertErrorMsg,
+    baseURL: baseURL ?? import.meta.env.VITE_APP_BASE_URL,
+    timeout: timeout ?? 15000
   })
 }
+
 export default axiosReq

@@ -4,6 +4,7 @@
 
 <script setup>
 // 获取store和router
+
 const props = defineProps({
   name: {
     require: true,
@@ -14,10 +15,8 @@ const props = defineProps({
 const state = reactive({
   levelList: null
 })
-const store = useStore()
-const routes = computed(() => {
-  return store.state.permission.routes
-})
+
+const routes = computed(() => 'value')
 watch(
   () => props.name,
   (oldValue, newValue) => {},
@@ -31,10 +30,10 @@ onMounted(() => {
 let helloFunc = () => {
   console.log('helloFunc')
 }
+// 导出给父元素使用
+defineExpose({ helloFunc })
 // 导出属性到页面中使用
 let { levelList } = toRefs(state)
-// 导出给父组件使用
-defineExpose({ helloFunc })
 </script>
 
 <style scoped lang="scss"></style>

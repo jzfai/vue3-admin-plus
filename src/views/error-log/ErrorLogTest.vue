@@ -26,15 +26,10 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
-const store = useStore()
+const appStore = useAppStore()
 let settings = computed(() => {
-  return store.state.app.settings || {}
+  return appStore.settings || {}
 })
-
-const testChangeSettings = () => {
-  store.commit('app/M_settings', { sidebarLogo: !settings.value.sidebarLogo })
-}
 
 const handle = () => {
   new Promise((resolve, reject) => {
@@ -65,6 +60,7 @@ let reqCrossOrigin = () => {
 }
 
 import axiosReq from '@/utils/axiosReq'
+import { useAppStore } from '@/store/app'
 let req404 = () => {
   axiosReq({
     // baseURL: 'http://8.135.1.141/micro-service-test',

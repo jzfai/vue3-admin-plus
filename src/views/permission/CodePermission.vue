@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 //获取store和router
 const codeArr = computed(() => {
   return localStorage.getItem('codeArr')
@@ -21,7 +20,12 @@ const codeArr = computed(() => {
 // const emit = defineEmits(['change'])
 const switchRoles = computed({
   get() {
-    return JSON.parse(localStorage.getItem('codeArr'))
+    const jsonData = localStorage.getItem('codeArr')
+    if (jsonData) {
+      return JSON.parse(jsonData)
+    } else {
+      return '[]'
+    }
   },
   set(val) {
     localStorage.setItem('codeArr', JSON.stringify(val))

@@ -13,7 +13,6 @@
 </template>
 
 <script setup>
-import { watch, toRefs, reactive, ref } from 'vue'
 const state = reactive({
   filterText: '',
   data2: [
@@ -84,5 +83,5 @@ const filterNode = (value, data) => {
   return data.label.indexOf(value) !== -1
 }
 //export to page for using
-let { filterText, data2, defaultProps } = toRefs(state)
+const { filterText, data2, defaultProps } = toRefs(state)
 </script>

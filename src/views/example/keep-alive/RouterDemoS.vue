@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup name="routerDemoS">
+<script setup>
 let searchForm = useCommon().searchForm
 let { routerBack, routerPush, getQueryParam } = useVueRouter()
 onMounted(() => {

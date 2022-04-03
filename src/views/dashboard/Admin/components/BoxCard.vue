@@ -29,21 +29,22 @@
 <script setup>
 import PanThumb from '@/views/dashboard/PanThumb'
 import Mallki from '@/views/dashboard/TextHoverEffect/Mallki.vue'
+import { useUserStore } from '@/store/user'
 reactive({
   statisticsData: {
     article_count: 1024,
     pageviews_count: 1024
   }
 })
-const store = useStore()
+const userStore = useUserStore()
 computed(() => {
-  return store.state.user.name
+  return userStore.name
 })
 const avatar = computed(() => {
-  return store.state.user.avatar
+  return userStore.avatar
 })
 computed(() => {
-  return store.state.user.roles
+  return userStore.roles
 })
 </script>
 

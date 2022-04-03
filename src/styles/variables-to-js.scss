@@ -1,7 +1,10 @@
 :export {
-  backgroundColor: $backgroundColor;
-  textColor: $textColor;
-  activeTextColor: $activeTextColor;
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
   menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;
 }
