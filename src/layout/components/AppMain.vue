@@ -92,12 +92,15 @@ watch(
         }
       }
 
-      if (route.name) {
-        if (route.meta?.cachePage) {
-          deepOldRouter = parentRoute
-          //取的是第二级的name和第三级的name进行缓存
-          appStore.M_ADD_CACHED_VIEW(deepOldRouter.name)
-          appStore.M_ADD_CACHED_VIEW_DEEP(route.name)
+      //取的是第二级的name
+      if (parentRoute.name && parentRoute.meta?.cachePage) {
+        deepOldRouter = parentRoute
+        appStore.M_ADD_CACHED_VIEW(deepOldRouter.name)
+        if (route.name) {
+          if (route.meta?.cachePage) {
+            //和第三级的name进行缓存
+            appStore.M_ADD_CACHED_VIEW_DEEP(route.name)
+          }
         }
       }
     }
