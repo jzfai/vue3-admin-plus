@@ -4,12 +4,12 @@
       <!--has transition  Judging by settings.mainNeedAnimation-->
       <transition v-if="settings.mainNeedAnimation" name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
-          <component :is="Component" :key="key" />
+          <component :is="Component" />
         </keep-alive>
       </transition>
       <!-- no transition -->
       <keep-alive v-else :include="cachedViews">
-        <component :is="Component" :key="key" />
+        <component :is="Component" />
       </keep-alive>
     </router-view>
   </div>
@@ -31,6 +31,9 @@ const cachedViews = computed(() => {
   return appStore.cachedViews
 })
 
+// import { $ref } from 'vue'
+// const fai = $ref(111)
+// console.log(fai)
 /*listen the component name changing, then to keep-alive the page*/
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
@@ -45,7 +48,6 @@ const removeDeepChildren = (deepOldRouter) => {
 }
 
 const { generateTitle } = useI18n()
-
 watch(
   () => route.name,
   () => {
