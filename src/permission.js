@@ -13,7 +13,7 @@ router.beforeEach(async (to, from, next) => {
   // start progress bar
   if (settings.isNeedNprogress) NProgress.start()
   // set page title
-  document.title = getPageTitle(to.meta.title)
+  // document.title = getPageTitle(to.meta.title)
   if (!settings.isNeedLogin) setToken(settings.tmpToken)
   const hasToken = getToken()
 

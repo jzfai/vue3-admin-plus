@@ -17,6 +17,8 @@
 
 <script setup>
 import { useAppStore } from '@/store/app'
+import getPageTitle from '@/utils/getPageTitle'
+import useI18n from '@/hooks/useI18n'
 
 const route = useRoute()
 const settings = computed(() => {
@@ -42,11 +44,16 @@ const removeDeepChildren = (deepOldRouter) => {
   })
 }
 
+const { generateTitle } = useI18n()
+
 watch(
   () => route.name,
   () => {
+    //设置title
+    // set page title
+    document.title = getPageTitle(generateTitle(route.meta.title))
+    /*二三级路由缓存*/
     const routerLevel = route.matched.length
-
     //二级路由处理
     if (routerLevel === 2) {
       if (deepOldRouter?.name) {
