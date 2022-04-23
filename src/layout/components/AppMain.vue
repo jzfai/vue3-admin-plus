@@ -4,12 +4,12 @@
       <!--has transition  Judging by settings.mainNeedAnimation-->
       <transition v-if="settings.mainNeedAnimation" name="fade-transform" mode="out-in">
         <keep-alive :include="cachedViews">
-          <component :is="Component" :key="key" />
+          <component :is="Component" />
         </keep-alive>
       </transition>
       <!-- no transition -->
       <keep-alive v-else :include="cachedViews">
-        <component :is="Component" :key="key" />
+        <component :is="Component" />
       </keep-alive>
     </router-view>
   </div>
@@ -17,6 +17,8 @@
 
 <script setup>
 import { useAppStore } from '@/store/app'
+import getPageTitle from '@/utils/getPageTitle'
+import useI18n from '@/hooks/useI18n'
 
 const route = useRoute()
 const settings = computed(() => {
@@ -29,6 +31,9 @@ const cachedViews = computed(() => {
   return appStore.cachedViews
 })
 
+// import { $ref } from 'vue'
+// const fai = $ref(111)
+// console.log(fai)
 /*listen the component name changing, then to keep-alive the page*/
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
@@ -42,11 +47,15 @@ const removeDeepChildren = (deepOldRouter) => {
   })
 }
 
+const { generateTitle } = useI18n()
 watch(
   () => route.name,
   () => {
+    //设置title
+    // set page title
+    document.title = getPageTitle(generateTitle(route.meta.title))
+    /*二三级路由缓存*/
     const routerLevel = route.matched.length
-
     //二级路由处理
     if (routerLevel === 2) {
       if (deepOldRouter?.name) {
