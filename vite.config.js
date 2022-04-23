@@ -113,7 +113,6 @@ export default ({ command, mode }) => {
         // resolvers: [ElementPlusResolver()],
         imports: [
           'vue',
-          'pinia',
           'vue-router',
           {
             '@/hooks/global/useCommon': ['useCommon'],
