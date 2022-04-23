@@ -36,7 +36,7 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ## 例子
 
- ---- 我们先看看加载速度和构建后的包大小：
+---- 我们先看看加载速度和构建后的包大小：
 
 ![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
 
@@ -212,7 +212,8 @@ Modern browsers and Internet Explorer 11+.
 | <img src="http://8.135.1.141/file/images/wxpay-code.png" height="220" /> | <img src="http://8.135.1.141/file/images/alipay-code.png" height="220" /> |
 
 >如果属于特别赞助，需注明信息，必要时可以提供特别帮助
-> If it is a special sponsorship, the information must be indicated, and special assistance can be provided if necessary
+>
+>If it is a special sponsorship, the information must be indicated, and special assistance can be provided if necessary
 
 
 ## 版本
