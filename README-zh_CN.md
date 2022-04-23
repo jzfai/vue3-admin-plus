@@ -202,11 +202,24 @@ Modern browsers and Internet Explorer 11+.
 ## 讨论和交流(含vue3+ts视频教程)
 [WeChat group](http://8.135.1.141/file/images/wx-groud.png)
 
+
+## 赞赏(appreciate)
+
+如果可以请我喝杯下午茶(Treat me to afternoon tea if you can)
+
+| 微信 | 支付宝 |
+| :-: | :-: |
+| <img src="http://8.135.1.141/file/images/wxpay-code.png" height="220" /> | <img src="http://8.135.1.141/file/images/alipay-code.png" height="220" /> |
+
+>如果属于特别赞助，需注明信息，必要时可以提供特别帮助
+> If it is a special sponsorship, the information must be indicated, and special assistance can be provided if necessary
+
+
 ## 版本
 
 [MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
 
-Copyright (c) 2021-present  kuanghua
+Copyright (c) 2022-present  kuanghua
 
 
 
