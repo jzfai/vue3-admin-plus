@@ -27,7 +27,7 @@
     //输出目录
     "outDir": "./ts-out-dir",
     //是否输出src2.js.map文件
-    "sourceMap": false,
+    "sourceMap": true,
     //变量定义了但是未使用
     "noUnusedLocals": false,
     //是否允许把json文件当做模块进行解析
