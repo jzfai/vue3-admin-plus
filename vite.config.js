@@ -9,7 +9,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 //inject title
 import { createHtmlPlugin } from 'vite-plugin-html'
 //setup name
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 
 //auto import element-plus has some issue
 // import Components from 'unplugin-vue-components/vite'

@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-plus",
-  "version": "1.5.1",
+  "version": "1.5.5",
   "license": "ISC",
   "author": "kuanghua(869653722@qq.com)",
   "scripts": {
@@ -11,7 +11,7 @@
     "preview": "npm run build && vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
     "prepare": "husky install",
-    "tsc-check": "tsc"
+    "test:unit": "jest"
   },
   "peerDependencies": {
     "vue": "^3.2.26"
@@ -68,8 +68,20 @@
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
     "vite-plugin-svg-icons": "1.0.5",
-    "vite-plugin-vue-setup-extend": "0.4.0",
-    "vue-tsc": "0.28.1"
+    "vite-plugin-vue-setup-extend-plus": "0.0.2",
+    "vue-tsc": "0.28.1",
+    "jest": "<27",
+    "ts-jest": "<27",
+    "tslib": "^2.4.0",
+    "vue-jest": "^5.0.0-alpha.10",
+    "@babel/preset-env": "^7.17.10",
+    "@types/jest": "<27",
+    "@vue/test-utils": "^2.0.0-rc.18",
+    "babel-jest": "<27",
+    "jest-serializer-vue": "^2.0.2",
+    "jest-transform-stub": "^2.0.0",
+    "@babel/preset-typescript": "7.16.7",
+    "ts-node": "10.7.0"
   },
   "browserslist": [
     "> 1%",
