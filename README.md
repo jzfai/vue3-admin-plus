@@ -10,15 +10,12 @@ Use eslint+prettier+gitHooks format and verification code to improve code standa
 
 Vite need Node.js >= 12.0.0。
 
-## Update log
-
---- to look the doc
-
-- [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
 
 ## Documents
 
-- [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
+- [official documentation](https://github.jzfai.top/vue3-admin-doc/)
+
+- [中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
 
 ## Online experience
 
