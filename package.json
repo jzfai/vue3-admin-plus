@@ -11,7 +11,10 @@
     "preview": "npm run build && vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
     "prepare": "husky install",
-    "test:unit": "jest"
+    "test:unit": "vue-cli-service test:unit",
+    "test:watchAll": "vue-cli-service test:unit --watchAll",
+    "test:cov": "vue-cli-service test:unit --coverage",
+    "test:majestic": "majestic"
   },
   "peerDependencies": {
     "vue": "^3.2.26"
@@ -81,7 +84,10 @@
     "jest-serializer-vue": "^2.0.2",
     "jest-transform-stub": "^2.0.0",
     "@babel/preset-typescript": "7.16.7",
-    "ts-node": "10.7.0"
+    "ts-node": "10.7.0",
+    "majestic": "1.8.1",
+    "@vue/cli-plugin-unit-jest": "4.5.17",
+    "@vue/cli-service": "4.5.17"
   },
   "browserslist": [
     "> 1%",

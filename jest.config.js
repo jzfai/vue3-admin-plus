@@ -25,6 +25,14 @@ module.exports = {
   // serializer for snapshots
   snapshotSerializers: ['jest-serializer-vue'],
   testMatch: ['**/tests/**/**/*.spec.[jt]s?(x)', '**/__tests__/*.[jt]s?(x)'],
+  collectCoverageFrom: [
+    'src/utils/**/*.{js,vue}',
+    '!src/utils/auth.js',
+    '!src/utils/axiosReq.js',
+    'src/components/**/*.{js,vue}'
+  ],
+  coverageDirectory: '<rootDir>/tests/coverage',
+  // collectCoverage: true,
   // https://github.com/facebook/jest/issues/6766
   testURL: 'http://localhost/'
 }
