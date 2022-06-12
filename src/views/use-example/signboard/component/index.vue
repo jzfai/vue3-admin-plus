@@ -19,8 +19,6 @@
 </template>
 
 <script setup>
-import draggable from "vuedraggable";
-
 const props = defineProps({
   headerText: {
     type: String,

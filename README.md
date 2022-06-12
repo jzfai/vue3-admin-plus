@@ -21,9 +21,9 @@ Vite need Node.js >= 12.0.0。
 
 [github address](https://github.com/jzfai/vue3-admin-plus.git)
 
-[Access address](http://8.135.1.141/vue3-admin-plus)
+[Access address](https://github.jzfai.top/vue3-admin-plus)
 
-国内体验地址：http://8.135.1.141/vue3-admin-plus
+国内体验地址：https://github.jzfai.top/vue3-admin-plus
 
 github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
@@ -31,9 +31,9 @@ github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 ---- Let's look at the loading speed and the size of the built package first.：
 
-![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
+![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/plus-demo.png)
+![template-demo](https://github.jzfai.top/file/images/plus-demo.png)
 
 ## Related items
 
@@ -74,7 +74,7 @@ cd vue3-admin-plus
 
 # pnpm address https://pnpm.io/zh/motivation
 # install dependency(Recommend use pnpm)
-# you can  use "npm -g i pnpm" to install pnpm 
+# you can  use "npm -g i pnpm@6.32.3" to install pnpm 
 pnpm i
 
 # develop
@@ -120,7 +120,7 @@ Modern browsers and Internet Explorer 11+.
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
 ## Discussion and Communication
-[WeChat group](http://8.135.1.141/file/images/wx-groud.png)
+[WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
 
 ## 赞赏(appreciate)
 
@@ -128,7 +128,7 @@ Modern browsers and Internet Explorer 11+.
 
 | 微信 | 支付宝 |
 | :-: | :-: |
-| <img src="http://8.135.1.141/file/images/wxpay-code.png" height="220" /> | <img src="http://8.135.1.141/file/images/alipay-code.png" height="220" /> |
+| <img src="https://github.jzfai.top/file/images/wxpay-code.png" height="220" /> | <img src="https://github.jzfai.top/file/images/alipay-code.png" height="220" /> |
 
 >如果属于特别赞助，需注明信息，必要时可以提供特别帮助
 >

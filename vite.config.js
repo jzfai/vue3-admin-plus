@@ -44,9 +44,9 @@ export default ({ command, mode }) => {
     /*
      * "/vue3-admin-plus" nginx deploy folder
      * detail to look https://vitejs.cn/config/#base
-     * how to config, such as http://8.135.1.141/vue3-admin-plus/#/dashboard
+     * how to config, such as https://github.jzfai.top/vue3-admin-plus/#/dashboard
      * "/vue3-admin-plus/" --> config to base is you need
-     * http://8.135.1.141 --> if you config "/" , you can visit attached  to http://8.135.1.141
+     * https://github.jzfai.top --> if you config "/" , you can visit attached  to https://github.jzfai.top
      * */
     base: setting.viteBasePath,
     //define global var

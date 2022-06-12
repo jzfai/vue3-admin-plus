@@ -88,7 +88,7 @@ const { proxy } = getCurrentInstance()
 const updateReq = () => {
   return proxy
     .$axiosReq({
-      // baseURL: 'http://8.135.1.141/micro-service-test',
+      // baseURL: 'https://github.jzfai.top/micro-service-test',
       url: '/integration-front/brand/updateBy',
       data: { id: 'fai' },
       method: 'put',
