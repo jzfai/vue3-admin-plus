@@ -64,8 +64,10 @@
       <!--点击操作-->
       <el-table-column align="center" label="操作" width="120px">
         <template #default="{ row }">
-          <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+          <div class="rowSS">
+            <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
+            <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>
@@ -221,7 +223,7 @@ const multiDelBtnClick = async () => {
 //download template
 const downloadTemplate = () => {
   const link = document.createElement('a')
-  link.href = 'http://8.135.1.141/file/template/export-import-template.xlsx'
+  link.href = 'https://github.jzfai.top/file/template/export-import-template.xlsx'
   link.setAttribute('download', `import-export-template.xls`)
   document.body.appendChild(link)
   link.click()

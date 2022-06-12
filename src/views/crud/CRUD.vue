@@ -60,9 +60,11 @@
       <!--点击操作-->
       <el-table-column fixed="right" align="center" label="操作" width="180">
         <template #default="{ row }">
-          <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-          <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
-          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+          <div class="rowSS">
+            <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
+            <el-button type="text" size="small" @click="tableDetailClick(row)">详情</el-button>
+            <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+          </div>
         </template>
       </el-table-column>
     </el-table>

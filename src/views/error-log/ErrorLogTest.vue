@@ -50,7 +50,7 @@ const normalError = () => {
 }
 let reqCrossOrigin = () => {
   axiosReq({
-    baseURL: 'http://8.135.1.141/micro-service-test',
+    baseURL: 'https://github.jzfai.top/micro-service-test',
     url: '/integration-front/brand/updateBy',
     data: { id: 'fai' },
     method: 'put',
@@ -63,7 +63,7 @@ import axiosReq from '@/utils/axiosReq'
 import { useAppStore } from '@/store/app'
 let req404 = () => {
   axiosReq({
-    // baseURL: 'http://8.135.1.141/micro-service-test',
+    // baseURL: 'https://github.jzfai.top/micro-service-test',
     url: '/integration-front/brand/updateBy1',
     data: { id: 'fai' },
     method: 'put',

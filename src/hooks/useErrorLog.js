@@ -3,7 +3,7 @@ import request from '@/utils/axiosReq'
 import setting from '@/settings'
 import bus from '@/utils/bus'
 import pack from '../../package.json'
-import { jsErrorCollection } from 'js-errorlog-collection'
+import { jsErrorCollection } from 'js-error-collection'
 const errorLogReq = (errLog) => {
   request({
     url: '/integration-front/errorCollection/insert',

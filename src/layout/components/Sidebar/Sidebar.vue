@@ -60,12 +60,12 @@ import { useAppStore } from '@/store/app'
 import { usePermissionStore } from '@/store/permission'
 const scssJson = dillScssExportToJson(scssExportJson)
 const activeMenu = computed(() => {
-  const { meta, fullPath } = route
+  const { meta, path } = route
   // if set path, the sidebar will highlight the path you set
   if (meta.activeMenu) {
     return meta.activeMenu
   }
-  return fullPath
+  return path
 })
 </script>
 

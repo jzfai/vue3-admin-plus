@@ -27,20 +27,20 @@
 
 [github address](https://github.com/jzfai/vue3-admin-plus.git)
 
-[Access address](http://8.135.1.141/vue3-admin-plus)
+[Access address](https://github.jzfai.top/vue3-admin-plus)
 
 github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
-国内体验地址：http://8.135.1.141/vue3-admin-plus
+国内体验地址：https://github.jzfai.top/vue3-admin-plus
 
 
 ## 例子
 
 ---- 我们先看看加载速度和构建后的包大小：
 
-![template-speed-analysis](http://8.135.1.141/file/images/template-speed-analysis.png)
+![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
 
-![template-demo](http://8.135.1.141/file/images/template-demo.png)
+![template-demo](https://github.jzfai.top/file/images/template-demo.png)
 
 ## 相关项目
 
@@ -82,7 +82,7 @@ cd  vue3-admin-plus
 
 # pnpm address https://pnpm.io/zh/motivation
 # 安装依赖(建议用pnpm)
-# 你可以使用 "npm -g i pnpm" 去安装pnpm
+# 你可以使用 "npm -g i pnpm@6.32.3" 去安装pnpm
 pnpm i
 
 # 启动服务
@@ -200,7 +200,7 @@ Modern browsers and Internet Explorer 11+.
 |Edge| last 2 versions| last 2 versions| last 2 versions
 
 ## 讨论和交流(含vue3+ts视频教程)
-[WeChat group](http://8.135.1.141/file/images/wx-groud.png)
+[WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
 
 
 ## 赞赏(appreciate)
@@ -209,7 +209,7 @@ Modern browsers and Internet Explorer 11+.
 
 | 微信 | 支付宝 |
 | :-: | :-: |
-| <img src="http://8.135.1.141/file/images/wxpay-code.png" height="220" /> | <img src="http://8.135.1.141/file/images/alipay-code.png" height="220" /> |
+| <img src="https://github.jzfai.top/file/images/wxpay-code.png" height="220" /> | <img src="https://github.jzfai.top/file/images/alipay-code.png" height="220" /> |
 
 >如果属于特别赞助，需注明信息，必要时可以提供特别帮助
 >如果公司需要技术合作，可以单独联系(进群找群主)

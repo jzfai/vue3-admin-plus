@@ -137,7 +137,7 @@ let usertableData = ref([])
 import packages from '/package.json'
 let searchForm = reactive({
   errorLog: '',
-  pageUrl: `8.135.1.141/${packages.name}`,
+  pageUrl: `https://github.jzfai.top/${packages.name}`,
   createTime: '',
   id: ''
 })

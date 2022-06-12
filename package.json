@@ -1,9 +1,11 @@
 {
   "name": "vue3-admin-plus",
-  "version": "1.5.5",
+  "version": "1.6.1",
   "license": "ISC",
   "author": "kuanghua(869653722@qq.com)",
+  "packageManager": "pnpm@6.32.3",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "vite --mode serve-dev --host",
     "test": "vite --mode serve-test --host",
     "build:test": "vite build --mode  build-test",
@@ -20,26 +22,26 @@
     "vue": "^3.2.26"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "1.1.4",
-    "js-errorlog-collection": "^1.0.5",
+    "@element-plus/icons-vue": "2.0.4",
+    "js-error-collection": "^1.0.7",
     "axios": "0.21.3",
     "d3": "7.2.1",
     "driver.js": "^0.9.8",
     "echarts": "4.2.1",
     "element-china-area-data": "5.0.2",
-    "element-plus": "2.1.9",
+    "element-plus": "2.2.5",
     "mitt": "3.0.0",
     "moment-mini": "2.24.0",
     "nprogress": "0.2.0",
     "path": "0.12.7",
     "path-to-regexp": "^6.2.0",
-    "pinia": "2.0.13",
+    "pinia": "2.0.14",
     "screenfull": "4.2.0",
     "tinymce": "4.9.11",
-    "vue": "3.2.33",
+    "vue": "3.2.37",
     "vue-i18n": "9.1.6",
     "vue-router": "4.0.12",
-    "vuedraggable": "^4.1.0"
+    "sortablejs": "^1.15.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.16.3",
@@ -66,7 +68,7 @@
     "typescript": "4.3.2",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-vue-components": "^0.17.14",
-    "vite": "2.9.5",
+    "vite": "2.9.12",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-style-import": "1.2.1",
@@ -95,6 +97,6 @@
     "not op_mini all"
   ],
   "engines": {
-    "node": ">= 14"
+    "node": ">= 14<18"
   }
 }

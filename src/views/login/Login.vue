@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
     <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRules">
@@ -43,7 +42,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="Login">
 import settings from '@/settings'
 
 import { ElMessage } from 'element-plus'
@@ -191,6 +190,10 @@ $light_gray: #eee;
 <style lang="scss">
 //css 样式重置 增加个前缀避免全局污染
 .login-container {
+  .el-input__wrapper {
+    background-color: transparent;
+    box-shadow: none;
+  }
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);
