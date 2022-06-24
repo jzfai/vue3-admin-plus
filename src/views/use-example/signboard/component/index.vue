@@ -3,22 +3,16 @@
     <div class="board-column-header">
       {{ headerText }}
     </div>
-    <draggable
-      :list="list"
-      group="people"
-      class="board-column-content"
-      item-key="id"
-      @start="drag = true"
-      @end="drag = false"
-    >
-      <template #item="{ element }">
-        <div class="board-item">{{ element.name }}</div>
-      </template>
-    </draggable>
+    <div :id="headerText" class="board-column-content">
+      <div v-for="(item, index) in list" :key="index" class="board-item">
+        {{ item.name }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
+import Sortable from "sortableJs";
 const props = defineProps({
   headerText: {
     type: String,
@@ -32,7 +26,21 @@ const props = defineProps({
     },
   },
 });
-let drag = ref(false);
+//拖拽
+onMounted(() => {
+  console.log(props.list);
+  nextTick(() => {
+    rowDrop();
+  });
+});
+const rowDrop = () => {
+  new Sortable(document.querySelector("#" + props.headerText), {
+    group: {
+      name: "group",
+      put: true,
+    },
+  });
+};
 </script>
 <style lang="scss" scoped>
 .board-column {
