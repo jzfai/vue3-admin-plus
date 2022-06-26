@@ -16,20 +16,21 @@
       </el-button>
       <!--条件搜索-->
       <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-2">
-        <el-form-item prop="name">
-          <el-input v-model="searchForm.name" style="width: 120px" placeholder="品牌名称" />
+        <el-form-item label-width="0px" label="" prop="username" label-position="left">
+          <!--  --c -->
+          <el-input v-model="searchForm.name" class="widthPx-150" placeholder="品牌名字" />
         </el-form-item>
-        <el-form-item prop="letter">
-          <el-input v-model="searchForm.letter" style="width: 120px" placeholder="品牌的首字母" />
-        </el-form-item>
-        <el-form-item label="创建时间">
-          <el-cascader
-            :options="cascadeCreateTime"
-            clearable="clearable"
-            filterable="filterable"
-            placeholder="创建时间"
-            :show-all-levels="false"
-            style="width: 120px"
+        <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
+          <el-date-picker
+            v-model="startEndArr"
+            type="datetimerange"
+            format="YYYY-MM-DD"
+            value-format="YYYY-MM-DD HH:mm:ss"
+            class="widthPx-250"
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            @change="dateTimePacking"
           />
         </el-form-item>
       </el-form>
@@ -41,25 +42,23 @@
       id="resetElementDialog"
       ref="refuserTable"
       :height="`calc(100vh - ${settings.delWindowHeight})`"
-      border="border"
+      border
       :data="usertableData"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" align="center" width="50" />
-      <el-table-column align="center" prop="name" label="品牌名称" min-width="120">
+      <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
+      <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
         <template #default="{ row }">
-          <span v-if="row.name == 1">1</span>
+          <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="image" label="品牌图片地址" min-width="120">
-        <template #default="{ row }">
-          <img :src="row.image" style="border-radius: 10px; width: 120px; height: 120px" />
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="letter" label="品牌的首字母" min-width="120" />
-      <el-table-column align="center" prop="seq" label="排序" min-width="120" />
+      <el-table-column align="center" prop="letter" label="首字母" width="80" />
+      <el-table-column align="center" prop="seq" label="排序" width="80" />
+      <el-table-column align="center" prop="createTime" label="创建时间" width="140" />
+      <el-table-column align="center" prop="updateTime" label="更新时间" width="140" />
       <!--点击操作-->
-      <el-table-column fixed="right" align="center" label="操作" width="130">
+      <el-table-column fixed="right" align="center" label="操作" width="180">
         <template #default="{ row }">
           <el-button text size="small" @click="tableEditClick(row)">编辑</el-button>
           <el-button text size="small" @click="tableDetailClick(row)">详情</el-button>
@@ -67,6 +66,8 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <!--分页-->
     <div class="block columnCC mt-2">
       <el-pagination
         :current-page="pageNum"
@@ -78,18 +79,13 @@
         @current-change="handleCurrentChange"
       />
     </div>
+    <!--详情-->
     <el-dialog v-model="detailDialog" :title="dialogTitle" width="500px" :close-on-click-modal="false">
-      <div class="detail-container rowBC">
-        <div class="detail-container-item">id：{{ detailData.id }}</div>
-      </div>
       <div class="detail-container rowBC">
         <div class="detail-container-item">品牌名称：{{ detailData.name }}</div>
       </div>
       <div class="detail-container rowBC">
-        <div class="detail-container-item">品牌图片地址：{{ detailData.image }}</div>
-      </div>
-      <div class="detail-container rowBC">
-        <div class="detail-container-item">品牌的首字母：{{ detailData.letter }}</div>
+        <div class="detail-container-item">品牌首字母：{{ detailData.letter }}</div>
       </div>
       <div class="detail-container rowBC">
         <div class="detail-container-item">排序：{{ detailData.seq }}</div>
@@ -103,25 +99,47 @@
     <CRUDForm v-if="showFrom" ref="refCRUDForm" @hideComp="hideComp" @selectPageReq="selectPageReq" />
   </div>
 </template>
-<script setup="setup" name="Brand">
+<script>
+export default {
+  name: 'Brand'
+}
+</script>
+<script setup>
 import { Delete, FolderAdd } from '@element-plus/icons-vue'
-import tablePageHook from '@/hooks/useTablePage'
+/*1.初始化引入和实例化*/
 import settings from '@/settings'
 import CRUDForm from './CRUDForm.vue'
-let totalPage = $ref(0)
-let startEndArr = $ref([])
+onActivated(() => {
+  console.log('onActivated')
+})
+onDeactivated(() => {
+  console.log('onDeactivated')
+})
 /*2.表格操作和查询*/
-let multipleSelection = $ref([])
+let multipleSelection = ref([])
 const handleSelectionChange = (val) => {
-  multipleSelection = val
+  multipleSelection.value = val
 }
-let usertableData = $ref([])
-let searchForm = reactive({ id: '', name: '', image: '', letter: '', seq: '' })
-/*查询搜索相关*/
+let usertableData = ref([])
+let searchForm = reactive({
+  id: '',
+  name: '',
+  image: '',
+  letter: '',
+  seq: ''
+})
+onMounted(() => {
+  selectPageReq()
+})
+
+let { startEndArr, totalPage } = useCommon()
 let selectPageReq = () => {
   const data = Object.assign(searchForm, {
-    pageNum: pageNum,
-    pageSize: pageSize
+    pageNum: pageNum.value,
+    pageSize: pageSize.value
+  })
+  Object.keys(data).forEach((fItem) => {
+    if (data[fItem] === '' || data[fItem] === null || data[fItem] === undefined) delete data[fItem]
   })
   let reqConfig = {
     url: '/integration-front/brand/selectPage',
@@ -130,44 +148,33 @@ let selectPageReq = () => {
     isParams: true
   }
   axiosReq(reqConfig).then((resData) => {
-    usertableData = resData.data?.records
+    usertableData.value = resData.data?.records
     totalPage = resData.data?.total
   })
 }
+import tablePageHook from '@/hooks/useTablePage'
 let { pageNum, pageSize, handleCurrentChange, handleSizeChange } = tablePageHook(selectPageReq)
-let cascadeCreateTime = $ref([])
-const cascadeProps = {
-  multiple: false,
-  value:
-    '{"privileges":"select,insert,update,references","originField":"create_time","rule":"isNotNull","type":"Long","tableSchema":"micro-service-plus","datetimePrecision":0,"tableName":"tb_brand","optionDataArr":[{"label":1,"value":1}],"children":"children","extra":"on update CURRENT_TIMESTAMP","api":"","valueKey":"code","value":"value","componentType":"cascaderApi","method":"get","tbName":"create_time","dataType":"datetime","generationExpression":"","columnComment":"创建时间","optionData":"","fieldCase":"CreateTime","label":"label","ordinalPosition":6,"columnType":"datetime","field":"createTime","isNullable":"YES","width":120,"tableCatalog":"def","labelKey":"name","columnKey":"","columnName":"create_time","desc":"创建时间"}',
-  label: 'label',
-  children: 'children'
-}
-const cascadeCreateTimeReq = () => {
-  let reqConfig = {
-    url: '',
-    method: 'get'
+const dateTimePacking = (timeArr) => {
+  if (timeArr && timeArr.length === 2) {
+    searchForm.startTime = timeArr[0]
+    searchForm.endTime = timeArr[1]
+  } else {
+    searchForm.startTime = ''
+    searchForm.endTime = ''
   }
-  axiosReq(reqConfig).then((resData) => {
-    cascadeCreateTime = resData.data
-  })
-}
-const handleCascade = (data) => {
-  console.log(data)
 }
 const searchBtnClick = () => {
   //此处要重置页数，也是常出的bug
-  pageNum = 1
+  pageNum.value = 1
   selectPageReq()
 }
 //删除相关
 let { elMessage, elConfirm } = useElement()
-//多个删除
-const refuserTable = $ref(null)
+const refuserTable = ref(null)
 const multiDelBtnClick = () => {
   let rowDeleteIdArr = []
   let deleteNameTitle = ''
-  rowDeleteIdArr = multipleSelection.map((mItem) => {
+  rowDeleteIdArr = multipleSelection.value.map((mItem) => {
     deleteNameTitle = deleteNameTitle + mItem.name + ','
     return mItem.id
   })
@@ -176,13 +183,13 @@ const multiDelBtnClick = () => {
     return
   }
   let stringLength = deleteNameTitle.length - 1
-  elConfirm('删除', `您确定要删除${deleteNameTitle}吗`)
+  elConfirm('删除', `您确定要删除【${deleteNameTitle.slice(0, stringLength)}】吗`)
     .then(() => {
       const data = rowDeleteIdArr
       axiosReq({
         url: `/integration-front/brand/deleteBatchIds`,
         data,
-        method: 'delete',
+        method: 'DELETE',
         bfLoading: true
       }).then((res) => {
         elMessage('删除成功')
@@ -191,7 +198,6 @@ const multiDelBtnClick = () => {
     })
     .catch(() => {})
 }
-//单个删除
 let deleteByIdReq = (id) => {
   return axiosReq({
     url: '/integration-front/brand/deleteById',
@@ -212,59 +218,59 @@ let tableDelClick = (row) => {
     .catch(() => {})
 }
 //添加和修改
+let showFrom = ref(false)
+const refCRUDForm = ref(null)
+let addBtnClick = () => {
+  showFrom.value = true
+  nextTick(() => {
+    refCRUDForm.value.showModal()
+  })
+}
+onMounted(() => {
+  console.log('import', import.meta.env.VITE_APP_IMAGE_URL)
+})
+const hideComp = () => {
+  showFrom.value = false
+}
 let tableEditClick = (row) => {
   getDetailByIdReq(row.id).then((resData) => {
-    showFrom = true
+    showFrom.value = true
     nextTick(() => {
-      refCRUDForm.showModal(true, resData.data)
+      refCRUDForm.value.showModal(true, resData.data)
     })
   })
 }
-let showFrom = $ref(false)
-const refCRUDForm = $ref(null)
-let addBtnClick = () => {
-  showFrom = true
-  nextTick(() => {
-    refCRUDForm.showModal()
-  })
-}
-const hideComp = () => {
-  showFrom = false
-}
 /*3.详情modal*/
-let detailData = $ref({})
-let dialogTitle = $ref('')
-let detailDialog = $ref(false)
+let detailData = ref({})
+let { dialogTitle, detailDialog } = useElement()
 let tableDetailClick = (row) => {
-  dialogTitle = `详情【${row.name}】`
+  dialogTitle.value = `详情【${row.name}】`
   getDetailByIdReq(row.id).then((resData) => {
-    detailData = resData.data
-    detailDialog = true
+    detailData.value = resData.data
+    detailDialog.value = true
   })
 }
 let getDetailByIdReq = (id) => {
   return axiosReq({
     url: '/integration-front/brand/selectById',
-    data: { id },
+    data: { id }, //--c
     isParams: true,
     method: 'get'
   })
 }
-onMounted(() => {
-  selectPageReq()
-  cascadeCreateTimeReq()
-})
 </script>
 
-<style scoped="scoped" lang="scss">
+<style scoped lang="scss">
 /*详情*/
 .detail-container {
   flex-wrap: wrap;
 }
+
 .detail-container-item {
   min-width: 40%;
   margin-bottom: 20px;
 }
+
 .detailDialog-title {
   margin-bottom: 14px;
   font-weight: bold;

@@ -62,7 +62,7 @@ const fileOnChange = () => {
 const refSettingFile = ref(null)
 const fileUploadSave = (formData) => {
   axiosReq({
-    url: '/basic-func/upload/file',
+    url: '/basis-func/upload/file',
     data: formData,
     method: 'post',
     bfLoading: true,
