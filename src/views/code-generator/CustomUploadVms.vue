@@ -57,7 +57,7 @@ const uploadFrontTemp = async (uploadFileList) => {
 const downloadTmpFront = () => {
   const link = document.createElement('a')
   link.href = 'https://github.jzfai.top/file/velocity-template/front-vms.zip'
-  link.setAttribute('download', `import-export-template.xls`)
+  link.setAttribute('download', `front-vms.zip`)
   document.body.appendChild(link)
   link.click()
 }
@@ -70,7 +70,7 @@ const downloadTmpFront = () => {
 const downloadTmpBack = () => {
   const link = document.createElement('a')
   link.href = 'https://github.jzfai.top/file/velocity-template/back-vms.zip'
-  link.setAttribute('download', `import-export-template.xls`)
+  link.setAttribute('download', `ack-vms.zip`)
   document.body.appendChild(link)
   link.click()
 }
