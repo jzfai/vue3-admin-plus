@@ -25,12 +25,6 @@ const useExampleRouter = {
       meta: { title: 'signboard', icon: 'documentation' }
     },
     {
-      path: 'sortable',
-      name: 'Sortable',
-      component: () => import('@/views/use-example/Sortable'),
-      meta: { title: 'Sortable', icon: 'nested' }
-    },
-    {
       path: 'worker-Demo',
       name: 'WorkerDemo',
       component: () => import('@/views/use-example/worker'),

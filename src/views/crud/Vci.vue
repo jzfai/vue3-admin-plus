@@ -65,8 +65,8 @@
       <el-table-column align="center" label="操作" width="120px">
         <template #default="{ row }">
           <div class="rowSS">
-            <el-button type="text" size="small" @click="tableEditClick(row)">编辑</el-button>
-            <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+            <el-button text size="small" @click="tableEditClick(row)">编辑</el-button>
+            <el-button text size="small" @click="tableDelClick(row)">删除</el-button>
           </div>
         </template>
       </el-table-column>

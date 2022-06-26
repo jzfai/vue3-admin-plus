@@ -4,7 +4,7 @@
       <template #header>
         <div class="card-header">
           <span>关系图谱</span>
-          <el-button class="button" type="text" @click="restart">刷新</el-button>
+          <el-button class="button" text @click="restart">刷新</el-button>
         </div>
       </template>
       <div ref="boxRef" class="contain">
