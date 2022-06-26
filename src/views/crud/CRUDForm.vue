@@ -131,7 +131,7 @@ const fileUploadSave = () => {
   const formData = new FormData()
   formData.append('file', refSettingFile.files[0])
   axiosReq({
-    url: '/ty-example/upload/file',
+    url: '/basic-func/upload/file',
     timeout: 30000,
     data: formData,
     method: 'post',
