@@ -1,5 +1,5 @@
 <template>
-  <el-icon  :size="size" :color="color">
+  <el-icon :size="size" :color="color">
     <component :is="ElSvg[name]" />
   </el-icon>
 </template>
@@ -12,12 +12,12 @@ const props = defineProps({
     default: 'Fold',
     type: String
   },
-  size:{
+  size: {
     require: false,
-    default: 18,
+    default: 16,
     type: Number
   },
-  color:{
+  color: {
     require: false,
     default: '',
     type: String

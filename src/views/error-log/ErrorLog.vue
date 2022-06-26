@@ -48,7 +48,7 @@
       <el-table-column align="center" prop="errorLog" label="错误日志" width="450">
         <template #default="{ row }">
           <div>{{ row.errorLog }}</div>
-          <el-button type="text" size="small" @click="consoleToPlatform(row.errorLog)">
+          <el-button text size="small" @click="consoleToPlatform(row.errorLog)">
             click it console to platform to track
           </el-button>
         </template>
@@ -60,7 +60,7 @@
       <!--点击操作-->
       <el-table-column fixed="right" align="center" label="操作" width="80">
         <template #default="{ row }">
-          <el-button type="text" size="small" @click="tableDelClick(row)">删除</el-button>
+          <el-button text size="small" @click="tableDelClick(row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -626,6 +626,9 @@ flex布局 第一个字母为主轴
 .widthPx-360 {
   width: 360px !important;
 }
+.widthPx-500 {
+  width: 500px !important;
+}
 /*height*/
 .heightPx-50 {
   height: 50px !important;
@@ -1023,6 +1026,20 @@ flex布局 第一个字母为主轴
 }
 .mrPx-8 {
   margin-right: 8px;
+}
+
+/*px mt*/
+.mtPx-2 {
+  margin-top: 2px;
+}
+.mtPx-4 {
+  margin-top: 4px;
+}
+.mtPx-6 {
+  margin-top: 6px;
+}
+.mtPx-8 {
+  margin-top: 8px;
 }
 
 .p-0 {
