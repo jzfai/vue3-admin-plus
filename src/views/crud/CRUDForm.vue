@@ -2,15 +2,18 @@
   <el-dialog
     v-model="dialogVisible"
     :title="dialogTitle"
-    width="60vw"
+    width="50vw"
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
     <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-5">
-      <el-form-item prop="name" :rules="formRules.isNotNull">
+      <el-form-item label="品牌名称" prop="name" :rules="formRules.isNotNull" label-position="left">
+        <el-input v-model="subForm.name" class="widthPx-150" placeholder="品牌名称" />
+      </el-form-item>
+      <el-form-item label="品牌图片地址" prop="image" :rules="formRules.isNotNull" label-position="left">
         <div class="rowSE">
-          <img v-if="subForm.name" :src="subForm.name" class="widthPx-120 heightPx-120 border_radius5" />
-          <div :class="[subForm.name && 'ml-1']" class="rowSS">
+          <img v-if="subForm.image" :src="subForm.image" class="widthPx-120 heightPx-120 border_radius5" />
+          <div :class="[subForm.image && 'ml-1']" class="rowSS">
             <el-button type="primary" @click="goUploadFile">
               <i class="el-icon-upload2" />
               上传
@@ -18,7 +21,7 @@
                 id="uploadFile"
                 ref="refSettingFile"
                 type="file"
-                accept=".png, .jpg"
+                ccept=".png, .jpg"
                 style="display: none"
                 @change="fileUploadSave"
               />
@@ -27,14 +30,11 @@
           </div>
         </div>
       </el-form-item>
-      <el-form-item label="品牌图片地址" prop="image" :rules="formRules.isNotNull">
-        <el-input v-model="subForm.image" style="width: 120px" placeholder="品牌图片地址" />
+      <el-form-item label="品牌的首字母" prop="letter" :rules="formRules.isNotNull" label-position="left">
+        <el-input v-model="subForm.letter" maxlength="1" class="widthPx-150" placeholder="品牌的首字母" />
       </el-form-item>
-      <el-form-item label="品牌的首字母" prop="letter" :rules="formRules.isNotNull">
-        <el-input v-model="subForm.letter" style="width: 120px" placeholder="品牌的首字母" />
-      </el-form-item>
-      <el-form-item label="排序" prop="seq" :rules="formRules.isNotNull">
-        <el-input v-model="subForm.seq" style="width: 120px" placeholder="排序" />
+      <el-form-item label="排序" prop="seq" :rules="formRules.isNotNull" label-position="left">
+        <el-input v-model="subForm.seq" class="widthPx-150" placeholder="排序" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -46,15 +46,21 @@
   </el-dialog>
 </template>
 
-<script setup="setup">
+<script setup>
+/*1.初始化引入和实例化*/
 const emit = defineEmits(['selectPageReq', 'hideComp'])
-const { formRules, elMessage } = useElement()
 /*2.modal新增和修改*/
 //新增
-let subForm = reactive({ id: '', name: '', image: '', letter: '', seq: '' })
-const refForm = $ref(null)
+let subForm = reactive({
+  id: '',
+  name: '',
+  image: '',
+  letter: '',
+  seq: ''
+})
+const refForm = ref(null)
 let confirmBtnClick = () => {
-  refForm.validate((valid) => {
+  refForm.value.validate((valid) => {
     if (valid) {
       if (subForm.id) {
         updateReq()
@@ -66,13 +72,15 @@ let confirmBtnClick = () => {
     }
   })
 }
+const { formRules, elMessage } = useElement()
+
 const insertReq = () => {
   const data = JSON.parse(JSON.stringify(subForm))
   delete data.id
   axiosReq({
     url: '/integration-front/brand/insert',
     data: data,
-    method: 'post',
+    method: 'post', //--c
     bfLoading: true
   }).then(() => {
     elMessage('保存成功')
@@ -90,11 +98,11 @@ const reshowData = (row) => {
     })
   })
 }
-const updateReq = () => {
+let updateReq = () => {
   return axiosReq({
     url: '/integration-front/brand/updateById',
     data: subForm,
-    method: 'update',
+    method: 'put',
     bfLoading: true
   }).then(() => {
     elMessage('更新成功')
@@ -105,33 +113,33 @@ const updateReq = () => {
 
 /*3.弹框相关*/
 //显示弹框
-let dialogTitle = $ref(null)
-let dialogVisible = $ref(null)
-let chooseFileName = $ref(null)
+const { dialogTitle, dialogVisible, chooseFileName } = useCommon()
 let showModal = (isEdit, detailData) => {
   if (isEdit) {
-    dialogTitle = `编辑【品牌表】`
-    dialogVisible = true
+    dialogTitle.value = `编辑【${detailData.name}】`
+    dialogVisible.value = true
     reshowData(detailData)
   } else {
-    dialogTitle = '添加【品牌表】'
-    dialogVisible = true
+    dialogTitle.value = '添加【brand】'
+    dialogVisible.value = true
   }
 }
 //关闭弹框
 let closeFormModal = () => {
   emit('hideComp')
 }
-/*上传图片(单张))*/
-const refSettingFile = $ref(null)
+
+/*4.上传文件相关*/
+const refSettingFile = ref(null)
 const goUploadFile = () => {
-  refSettingFile.click()
+  refSettingFile.value.click()
 }
+
 const fileUploadSave = () => {
   const formData = new FormData()
-  formData.append('file', refSettingFile.files[0])
+  formData.append('file', refSettingFile.value.files[0])
   axiosReq({
-    url: '/basic-func/upload/file',
+    url: '/basis-func/upload/file',
     timeout: 30000,
     data: formData,
     method: 'post',
@@ -140,20 +148,27 @@ const fileUploadSave = () => {
   })
     .then((resData) => {
       let { path } = resData.data
-      const filename = refSettingFile.value
-      chooseFileName = filename.slice(filename.lastIndexOf('\\') + 1)
+      // 存储文件名称
+      const filename = refSettingFile.value.value
+      chooseFileName.value = filename.slice(filename.lastIndexOf('\\') + 1)
       subForm.image = `${import.meta.env.VITE_APP_IMAGE_URL}/${path}`
+      console.log('subForm', subForm)
       refSettingFile.value = ''
     })
     .catch(() => {
-      chooseFileName = ''
+      chooseFileName.value = ''
       subForm.image = ''
       refSettingFile.value = ''
     })
 }
-onMounted(() => {})
+
 //导出给refs使用
-defineExpose({ showModal })
+defineExpose({
+  showModal
+})
+
+//导出属性到页面中使用
+// let {levelList} = toRefs(state);
 </script>
 
-<style scoped="scoped" lang="scss"></style>
+<style scoped lang="scss"></style>
