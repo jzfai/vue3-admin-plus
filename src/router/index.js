@@ -174,6 +174,21 @@ export const constantRoutes = [
   },
   chartsRouter,
   {
+    path: '/excel',
+    component: Layout,
+    meta: { title: 'EXCEL', icon: 'excel' },
+    alwaysShow: true,
+    children: [
+      {
+        path: 'exportExcel',
+        component: () => import('@/views/excel/exportExcel.vue'),
+        name: 'exportExcel',
+        meta: { title: 'exportExcel' }
+      },
+     
+    ]
+  },
+  {
     path: '/crud',
     component: Layout,
     meta: { title: 'CRUD', icon: 'guide' },
