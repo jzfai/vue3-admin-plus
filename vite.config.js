@@ -198,7 +198,7 @@ export default ({ command, mode }) => {
       }
     },
     optimizeDeps: {
-      include: ['moment-mini', 'sortablejs']
+      include: ['moment-mini']
     }
   }
 }
