@@ -12,35 +12,35 @@
 </template>
 
 <script setup>
-import Sortable from "sortableJs";
+import SortableJsExample from 'sortablejs'
 const props = defineProps({
   headerText: {
     type: String,
-    default: "Header",
+    default: 'Header'
   },
 
   list: {
     type: Array,
     default() {
-      return [];
-    },
-  },
-});
+      return []
+    }
+  }
+})
 //拖拽
 onMounted(() => {
-  console.log(props.list);
+  console.log(props.list)
   nextTick(() => {
-    rowDrop();
-  });
-});
+    rowDrop()
+  })
+})
 const rowDrop = () => {
-  new Sortable(document.querySelector("#" + props.headerText), {
+  new SortableJsExample(document.querySelector('#' + props.headerText), {
     group: {
-      name: "group",
-      put: true,
-    },
-  });
-};
+      name: 'group',
+      put: true
+    }
+  })
+}
 </script>
 <style lang="scss" scoped>
 .board-column {
