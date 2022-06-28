@@ -185,6 +185,12 @@ export const constantRoutes = [
         name: 'exportExcel',
         meta: { title: 'exportExcel' }
       },
+      {
+        path: 'importExcel',
+        component: () => import('@/views/excel/importExcel.vue'),
+        name: 'importExcel',
+        meta: { title: 'importExcel' }
+      },
      
     ]
   },
