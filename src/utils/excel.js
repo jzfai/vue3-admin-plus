@@ -1,10 +1,3 @@
-/*
- * @Date: 2022-06-21 10:43:32
- * @LastEditors: Zfj
- * @LastEditTime: 2022-06-28 10:32:28
- * @FilePath: \vue3-admin-plus\src\utils\excel.js
- * @Description: 
- */
 import * as xlsx from 'xlsx'
 const { utils, writeFile,read } = xlsx;
 const DEF_FILE_NAME = 'new-excel.xlsx';
