@@ -16,6 +16,7 @@ export default {
     menu2: '菜单 2',
     Table: '表格',
     exportExcel: '导出Excel',
+    importExcel: '导入Excel',
     ExternalLink: '外链',
 
     Charts: '图表',
