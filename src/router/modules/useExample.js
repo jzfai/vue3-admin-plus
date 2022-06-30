@@ -25,11 +25,17 @@ const useExampleRouter = {
       meta: { title: 'signboard', icon: 'documentation' }
     },
     {
+      path: 'dragpane-demo',
+      name: 'dragpaneDemo',
+      component: () => import('@/views/use-example/dragPane/dragPane.vue'),
+      meta: { title: 'dragPane', icon: 'documentation' }
+    },
+    {
       path: 'worker-Demo',
       name: 'WorkerDemo',
       component: () => import('@/views/use-example/worker'),
       meta: { title: 'Worker Demo', icon: 'nested' }
-    }
+    },
   ]
 }
 

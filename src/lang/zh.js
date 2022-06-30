@@ -42,7 +42,7 @@ export default {
     'Directive':'自定义指令',
     Tinymce: 'Tinymce富文本',
     'I18n-Demo': 'i18n例子',
-
+    'dragPane': '拖拽面板',
     Permission: '权限',
     'Role Index': '角色权限',
     'Page Permission': '角色权限页面',
