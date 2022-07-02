@@ -1,41 +1,46 @@
 <template>
-  <div class="login-container columnCE">
-    <div class="login-hero">
-      <img src="@/assets/layout/login.svg" :alt="settings.title" />
+  <div class="login-container columnCC">
+    <div class="login-bg">
+      <img src="@/assets/layout/login-bg.svg" :alt="settings.title" />
     </div>
-    <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRules">
-      <div class="title-container">
-        <h3 class="title text-center">{{ settings.title }}</h3>
-      </div>
-      <el-form-item prop="username" :rules="formRules.isNotNull">
-        <span class="svg-container">
-          <ElSvgIcon name="User" :size="14" />
-        </span>
-        <el-input v-model="formInline.username" placeholder="用户名(admin)" />
-          <!--占位-->
-      </el-form-item>
-      <el-form-item prop="password" :rules="formRules.isNotNull">
-        <span class="svg-container">
-          <ElSvgIcon name="Lock" :size="14" />
-        </span>
-        <el-input
-          :key="passwordType"
-          ref="refPassword"
-          v-model="formInline.password"
-          :type="passwordType"
-          name="password"
-          placeholder="密码(123456)"
-          @keyup.enter="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
-      </el-form-item>
-      <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="loading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
-        登录
-      </el-button>
-    </el-form>
+    <div class="login-pane">
+      <img src="@/assets/layout/login-top.svg" class="login-top" :alt="settings.title" />
+      <img src="@/assets/layout/login-front.svg" class="login-front" :alt="settings.title" />
+      <el-form ref="refloginForm" class="login-form" :model="formInline" :rules="formRules">
+        <div class="title-container">
+          <h3 class="title text-center">{{ settings.title }}</h3>
+        </div>
+        <el-form-item prop="username" :rules="formRules.isNotNull">
+          <span class="svg-container">
+            <ElSvgIcon name="User" :size="14" />
+          </span>
+          <el-input v-model="formInline.username" placeholder="用户名(admin)" />
+            <!--占位-->
+        </el-form-item>
+        <el-form-item prop="password" :rules="formRules.isNotNull">
+          <span class="svg-container">
+            <ElSvgIcon name="Lock" :size="14" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="refPassword"
+            v-model="formInline.password"
+            :type="passwordType"
+            name="password"
+            placeholder="密码(123456)"
+            @keyup.enter="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span>
+        </el-form-item>
+        <div class="tip-message">{{ tipMessage }}</div>
+        <el-button :loading="loading" type="warning" class="login-btn" size="default" round @click.prevent="handleLogin">
+          登录
+        </el-button>
+      </el-form>
+    </div>
+
   </div>
 </template>
 
@@ -133,7 +138,7 @@ let showPwd = () => {
 </script>
 
 <style lang="scss" scoped>
-$bg: #FBFCFF;
+$bg: #FFE4B5;
 $dark_gray: #333;
 $gray: #999;
 $light_gray: #eee;
@@ -142,21 +147,30 @@ $light_gray: #eee;
   position: relative;
   width: 100%;
   background-color: $bg;
+  .login-pane{
+    position:relative;
+    .login-top,.login-front{
+      position: absolute;
+      top:0;
+      left:50%;
+    }
+    .login-top{
+      z-index: 0;
+      transform: translateY(-85%) translateX(-50%);
+    }
+    .login-front{
+      z-index: 11;
+      transform: translateY(-35%) translateX(-50%);
+    }
+  }
   .login-form {
-    width: 360px;
+    width: 340px;
     padding: 40px 30px;
     background: #fff;
-    box-shadow: 0px 4px 16px rgba(4, 61, 175, 0.15);
+    box-shadow: 0px 4px 16px rgba(158, 105, 25, 0.15);
     border-radius: 8px;
-    margin-right: 20vw;
+    position:relative;
     z-index: 10;
-    @media screen and (min-width: 769px) and (max-width: 992px) {
-        margin-right: 10vw;
-    }
-    @media only screen and (max-width: 768px) {
-        margin-right: auto;
-        margin-left: auto;
-    }
   }
   .title-container {
     .title {
@@ -168,23 +182,17 @@ $light_gray: #eee;
     }
   }
 }
-.login-hero{
-  width:40vw;
+.login-bg{
+  width:100%;
+  height: 100%;
   position: absolute;
-  top:50%;
-  left:15vw;
+  top:0;
+  left:0;
   z-index: 0;
-  transform: translateY(-50%);
-  @media screen and (min-width: 769px) and (max-width: 992px) {
-      width:60vw;
-      left:5vw;
-  }
-  @media screen and (max-width: 768px) {
-      width:100vw;
-      left:0;
-  }
   img{
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 .svg-container {
@@ -209,7 +217,11 @@ $light_gray: #eee;
 //登录按钮
 .login-btn {
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  --el-button-bg-color: #FBCF47;
+  --el-button-border-color:  #FBCF47;
+  --el-button-text-color: #8F5C0E;
+  --el-button-hover-text-color:  #8F5C0E;
 }
 .show-pwd {
   width: 50px;
@@ -230,21 +242,25 @@ $light_gray: #eee;
   .el-input__wrapper {
     background-color: transparent;
     box-shadow: none;
+    border-radius: 50px;
   }
   .el-form-item {
     border:  1px solid #E0E0E0;
     background: #fff;
-    border-radius: 4px;
+    border-radius: 50px;
     color: #999;
     &__content{
       position: relative;
+    }
+    &__error{
+      padding-left: 40px;
     }
   }
   .el-input input {
     background: transparent;
     border: 0px;
     -webkit-appearance: none;
-    border-radius: 0px;
+    border-radius: 50px;
     padding: 10px 5px 10px 35px;
     color: #999;
     height: 42px; //此处调整item的高度
