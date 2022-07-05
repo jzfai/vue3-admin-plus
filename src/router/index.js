@@ -351,6 +351,12 @@ export const constantRoutes = [
         component: () => import('@/views/directive/waves.vue'),
         name: 'waves',
         meta: { title: 'v-waves' }
+      },
+      {
+        path: 'clickoutside',
+        component: () => import('@/views/directive/clickoutside.vue'),
+        name: 'clickoutside',
+        meta: { title: 'v-clickoutside' }
       }
     ]
   }
