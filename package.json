@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.0.4",
+    "@vueuse/core": "^8.7.5",
     "js-error-collection": "^1.0.7",
     "axios": "0.21.3",
     "d3": "7.2.1",
