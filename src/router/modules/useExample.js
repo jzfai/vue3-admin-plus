@@ -36,6 +36,12 @@ const useExampleRouter = {
       component: () => import('@/views/use-example/worker'),
       meta: { title: 'Worker Demo', icon: 'nested' }
     },
+    {
+      path: 'count-To',
+      name: 'count-To',
+      component: () => import('@/views/use-example/countTo/countTo.vue'),
+      meta: { title: 'countTo', icon: 'nested' }
+    }
   ]
 }
 
