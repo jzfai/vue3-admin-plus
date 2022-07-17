@@ -22,6 +22,7 @@ export const changeDashToCase = (str) => {
 
 //首字母转大写和_转驼峰
 export const changeDashToCaseAndFirstWord = (str) => {
+  if (!str) return str
   let changeStr = ``
   if (str && str.includes('_')) {
     let arr = str.split(`_`)
@@ -30,9 +31,8 @@ export const changeDashToCaseAndFirstWord = (str) => {
     })
     changeStr = newArr.join(``)
   }
-  if (typeof str === 'string') {
-    changeStr = changeStr.slice(0, 1).toUpperCase() + changeStr.slice(1)
-  }
+  changeStr = changeStr || str
+  changeStr = changeStr.slice(0, 1).toUpperCase() + changeStr.slice(1)
   return changeStr
 }
 
@@ -69,7 +69,7 @@ export const tbTypeMapping = (type) => {
     return 'Double'
   } else if ('int,bit,tinyint'.includes(type)) {
     return 'Integer'
-  } else if ('bigInt'.includes(type)) {
+  } else if ('bigint'.includes(type)) {
     return 'Long'
   } else if ('datetime,timestamp'.includes(type)) {
     return 'Date'
@@ -129,16 +129,32 @@ export const listTableComponentTypeArr = [
  * @author 熊猫哥
  * @date 2022/6/4 10:23
  */
+const commitTail = ':'
+const commitExampleTail = '='
+const commitExampleSplit = ','
 export const componentTypeMapping = (type, commont, field) => {
   if (field.includes('id')) {
     return ''
   }
-  if (commont.includes('；') || commont.includes('1：')) {
+  if (commont.includes(commitTail) || commont.includes(commitExampleTail)) {
     return 'select'
   }
-  if ('datetime,timestamp,Date'.includes(type)) {
+  if ('datetime,timestamp,Date,time'.includes(type)) {
     return 'datetime'
   }
+  return 'input'
+}
+
+export const listTableComponentTypeMapping = (type, commont, field) => {
+  if (field.includes('id')) {
+    return ''
+  }
+  if (commont.includes(commitTail) || commont.includes(commitExampleTail)) {
+    return 'select'
+  }
+  // if ('datetime,timestamp,Date,time'.includes(type)) {
+  //   return 'datetime'
+  // }
   return 'input'
 }
 
@@ -153,7 +169,7 @@ export const ruleMapping = [
 export const splitDescReturnDesc = (desc) => {
   if (isSelectType(desc)) {
     desc = desc.replace(/[\r\n\t]/g, '').replace(/\ +/g, '')
-    const index = desc.indexOf('；')
+    const index = desc.indexOf(commitTail)
     return desc.substring(0, index)
   }
   return desc
@@ -162,7 +178,7 @@ export const splitDescReturnDesc = (desc) => {
 export const splitDescReturnOptionData = (desc) => {
   if (isSelectType(desc)) {
     desc = desc.replace(/[\r\n\t]/g, '').replace(/\ +/g, '')
-    const index = desc.indexOf('；')
+    const index = desc.indexOf(commitTail)
     return desc.substr(index + 1)
   }
   return ''
@@ -171,7 +187,7 @@ export const splitDescReturnOptionData = (desc) => {
 /**
  *
  * @param string 传入的string
- * @example '1：大于短信，2：阿里短信'
+ * @example '1=大于短信,2=阿里短信'
  * @return
  * @author 邝华
  * @email kuanghua@aulton.com
@@ -179,7 +195,7 @@ export const splitDescReturnOptionData = (desc) => {
  */
 const { elMessage } = useElement()
 export const isSelectType = (desc) => {
-  return desc.includes('1：')
+  return desc.includes('1=')
 }
 export const splitTheOptionArr = (string) => {
   if (!string) {
@@ -189,14 +205,14 @@ export const splitTheOptionArr = (string) => {
     elMessage(string + '传入有误', 'warning')
     return []
   }
-  let tsArr = string.split('，')
+  let tsArr = string.split(commitExampleSplit)
   tsArr = tsArr.map((mfItem) => {
     //去除空格和换行
     return mfItem.replace(/[\r\n]/g, '').replace(/\ +/g, '')
   })
 
   return tsArr.map((mItem) => {
-    let splitArr = mItem.split('：')
+    let splitArr = mItem.split(commitExampleTail)
     return {
       value: splitArr[0],
       label: splitArr[1]

@@ -10,15 +10,8 @@
     </div>
   </div>
 </template>
-<!--原理vue2.0-->
-<script>
-/*可以设置默认的名字*/
-export default {
-  name: 'Layout'
-}
-</script>
 
-<script setup>
+<script setup name="Layout">
 import { Sidebar, Navbar, AppMain, TagsView } from './components'
 
 const appStore = useAppStore()
@@ -45,13 +38,14 @@ ResizeHook()
 .main-container {
   min-height: 100%;
   transition: margin-left 0.28s;
-  margin-left: $sideBarWidth;
+  margin-left: var(--side-bar-width);
   position: relative;
+  border-left: 1px solid var(--layout-border-left-color);
 }
 .sidebar-container {
   transition: width 0.28s;
-  width: $sideBarWidth !important;
-  background-color: $menuBg;
+  width: var(--side-bar-width) !important;
+  background-color: var(--el-menu-bg-color);
   height: 100%;
   position: fixed;
   font-size: 0;

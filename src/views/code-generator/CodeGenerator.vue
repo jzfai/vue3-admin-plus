@@ -223,7 +223,7 @@ const dbChooseRadioClick = (item) => {
     tableName: changeDashToCase(removeTbOrT(item.tableName)),
     originTableName: item.tableName,
     tableDesc: item.tableComment,
-    tableNameCase: changeTheFirstWordToCase(removeTbOrT(item.tableName)),
+    tableNameCase: changeTheFirstWordToCase(changeDashToCase(removeTbOrT(item.tableName))),
     uniKey: 'id'
   }
 }
@@ -404,7 +404,7 @@ const generatorSubData = () => {
       apiConfig: {
         queryApi: `${reqApiPre}/selectPage`,
         queryApiType: 'get',
-        insertApi: `/insert`,
+        insertApi: `${reqApiPre}/insert`,
         insertApiType: 'post',
         updateApi: `${reqApiPre}/updateById`,
         updateApiType: 'update',

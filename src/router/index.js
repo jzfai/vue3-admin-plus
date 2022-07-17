@@ -4,6 +4,7 @@ import Layout from '@/layout'
 /* Router Modules */
 import chartsRouter from './modules/charts'
 import useExample from './modules/useExample'
+import codeGenerator from './modules/codeGenerator'
 
 export const constantRoutes = [
   {
@@ -46,19 +47,7 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/generation-code',
-    component: Layout,
-    redirect: '/generation-code/index',
-    children: [
-      {
-        path: 'index',
-        name: 'CodeGenerator',
-        component: () => import('@/views/code-generator'),
-        meta: { title: 'CodeGenerator', icon: 'tree' }
-      }
-    ]
-  },
+  codeGenerator,
   {
     path: '/setting-switch',
     component: Layout,
@@ -190,8 +179,7 @@ export const constantRoutes = [
         component: () => import('@/views/excel/importExcel.vue'),
         name: 'importExcel',
         meta: { title: 'importExcel' }
-      },
-
+      }
     ]
   },
   {

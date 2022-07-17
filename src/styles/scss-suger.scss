@@ -1,16 +1,3 @@
-body {
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --success: #28a745;
-  --danger: #dc3545;
-  --warning: #ffc107;
-  --light: #f8f9fa;
-  --dark: #343a40;
-  --muted: #6c757d;
-  --white: #fff;
-  --borderColor: #dee2e6;
-  --lightmuted: #b2b2b2;
-}
 /*脱落文档流定位*/
 .center-50 {
   //居中定位
@@ -451,37 +438,6 @@ flex布局 第一个字母为主轴
   border-left-width: 0;
 }
 
-.border-primary {
-  border-color: var(--primary) !important;
-}
-.border-secondary {
-  border-color: var(--secondary) !important;
-}
-.border-success {
-  border-color: var(--success) !important;
-}
-.border-danger {
-  border-color: var(--danger) !important;
-}
-.border-warning {
-  border-color: var(--warning) !important;
-}
-.border-info {
-  border-color: var(--info) !important;
-}
-.border-light {
-  border-color: var(--light) !important;
-}
-.border-dark {
-  border-color: var(--dark) !important;
-}
-.border-white {
-  border-color: var(--white) !important;
-}
-.border-light-secondary {
-  border-color: #f1f1f1 !important;
-}
-
 .rounded {
   border-radius: 5px;
 }
@@ -490,72 +446,6 @@ flex布局 第一个字母为主轴
 }
 .rounded-0 {
   border-radius: 0;
-}
-
-/* 字体颜色和bg */
-.text-primary {
-  color: var(--primary) !important;
-}
-.text-secondary {
-  color: var(--secondary) !important;
-}
-.text-success {
-  color: var(--success) !important;
-}
-.text-danger {
-  color: var(--danger) !important;
-}
-.text-warning {
-  color: var(--warning) !important;
-}
-.text-info {
-  color: var(--info) !important;
-}
-.text-light {
-  color: var(--light) !important;
-}
-.text-dark {
-  color: var(--dark) !important;
-}
-.text-muted {
-  color: var(--muted) !important;
-}
-.text-light-muted {
-  color: var(--lightmuted) !important;
-}
-.text-white {
-  color: var(--white) !important;
-}
-
-.bg-primary {
-  background-color: var(--primary) !important;
-}
-.bg-secondary {
-  background-color: var(--secondary) !important;
-}
-.bg-success {
-  background-color: var(--success) !important;
-}
-.bg-danger {
-  background-color: var(--danger) !important;
-}
-.bg-warning {
-  background-color: var(--warning) !important;
-}
-.bg-info {
-  background-color: var(--info) !important;
-}
-.bg-light {
-  background-color: var(--light) !important;
-}
-.bg-dark {
-  background-color: var(--dark) !important;
-}
-.bg-white {
-  background-color: var(--white) !important;
-}
-.bg-light-secondary {
-  background-color: #f1f1f1 !important;
 }
 
 /*width和height*/
@@ -625,9 +515,6 @@ flex布局 第一个字母为主轴
 }
 .widthPx-360 {
   width: 360px !important;
-}
-.widthPx-500 {
-  width: 500px !important;
 }
 /*height*/
 .heightPx-50 {
@@ -1028,20 +915,6 @@ flex布局 第一个字母为主轴
   margin-right: 8px;
 }
 
-/*px mt*/
-.mtPx-2 {
-  margin-top: 2px;
-}
-.mtPx-4 {
-  margin-top: 4px;
-}
-.mtPx-6 {
-  margin-top: 6px;
-}
-.mtPx-8 {
-  margin-top: 8px;
-}
-
 .p-0 {
   padding-left: 0;
   padding-right: 0;
@@ -1238,14 +1111,7 @@ flex布局 第一个字母为主轴
   margin-right: 4px;
 }
 
-/*重置element-ui样式*/
-//.el-checkbox__inner{
-//  border: 1px solid #bbb !important;
-//  width:15px;
-//  height:15px;
-//
-//}
-.fixBtnToBottom {
+.fix-btn-to-bottom {
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -1254,89 +1120,4 @@ flex布局 第一个字母为主轴
   height: 60px;
   background: #fff;
   width: 100vw;
-}
-
-/*element-ui样式重写*/
-.resetElementDialogFull {
-  .el-dialog {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 60px;
-    height: 100%;
-  }
-  .el-dialog__body {
-    padding-top: 10px;
-  }
-  .el-dialog__footer {
-    text-align: center;
-  }
-  .el-dialog__wrapper {
-    background: #fff;
-  }
-}
-
-.resetElementDialogFull {
-  .el-dialog {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-bottom: 60px;
-    height: 100%;
-  }
-  .el-dialog__body {
-    padding-top: 10px;
-  }
-  .el-dialog__footer {
-    text-align: center;
-  }
-  .el-dialog__wrapper {
-    background: #fff;
-  }
-}
-
-/*修改input文件默认样式*/
-.inputFileClass {
-  width: 72px;
-  margin-right: 8px;
-  overflow-y: hidden !important;
-}
-
-.upload-image-global-style {
-  width: 60px;
-  height: 60px;
-}
-
-/*地图marker的样式*/
-.amap-marker > div {
-  color: #fff !important;
-}
-.monitor-marker-container {
-  position: relative;
-  .monitor-icon {
-    width: 24px;
-    height: 32px;
-  }
-  .markerSpeedTitle-container {
-    position: absolute;
-    top: -25px;
-    left: -50px;
-    height: 24px;
-    h3 {
-      position: relative;
-      padding: 0 6px;
-      line-height: 23px;
-      text-align: center;
-      background-color: #000;
-      font-size: 14px;
-      color: #fff;
-    }
-    h4 {
-      padding: 0 6px;
-      line-height: 23px;
-      width: 100px;
-      font-size: 14px;
-      text-align: center;
-      background-color: #fcca00;
-      color: #000;
-    }
-  }
 }

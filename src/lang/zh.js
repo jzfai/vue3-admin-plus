@@ -2,7 +2,7 @@ export default {
   route: {
     Dashboard: '首页',
     'Setting Switch': '设置文件测试',
-    'Guide': '引导页',
+    Guide: '引导页',
     ErrorLog: '错误日志',
     'ErrorLog Test': '错误日志测试',
 
@@ -17,6 +17,7 @@ export default {
     Table: '表格',
     exportExcel: '导出Excel',
     importExcel: '导入Excel',
+    CodeGenerator: '低代码平台',
     ExternalLink: '外链',
 
     Charts: '图表',
@@ -39,11 +40,11 @@ export default {
     'RouterDemo-F': '路由跳转页面1',
     'RouterDemo-S': '路由跳转页面2',
     'Use Example': '使用例子',
-    'Directive':'自定义指令',
+    Directive: '自定义指令',
     Tinymce: 'Tinymce富文本',
     'I18n-Demo': 'i18n例子',
-    'dragPane': '拖拽面板',
-     'countTo' :'数字动画',
+    dragPane: '拖拽面板',
+    countTo: '数字动画',
     Permission: '权限',
     'Role Index': '角色权限',
     'Page Permission': '角色权限页面',
