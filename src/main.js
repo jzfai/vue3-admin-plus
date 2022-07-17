@@ -2,19 +2,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 const app = createApp(App)
 import router from './router'
+
 import '@/styles/index.scss' // global css
 
 //import element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-import settings from '@/settings'
-import zh from 'element-plus/es/locale/lang/zh-cn'
-import en from 'element-plus/es/locale/lang/en' // element-ui lang
-let lang = { zh, en }
-app.use(ElementPlus, {
-  size: localStorage.getItem('size') || settings.defaultSize,
-  locale: lang[localStorage.getItem('language') || settings.defaultLanguage]
-})
+app.use(ElementPlus)
+
 //i18n
 import i18n from '@/lang'
 app.use(i18n)
@@ -37,15 +32,15 @@ import svgIcon from '@/icons/SvgIcon.vue'
 app.component('SvgIcon', svgIcon)
 
 //element svg icon
-import ElSvgIcon from '@/components/ElSvgIcon.vue'
-app.component('ElSvgIcon', ElSvgIcon)
+// import ElSvgIcon from '@/components/ElSvgIcon.vue'
+// app.component('ElSvgIcon', ElSvgIcon)
 
 //global mount moment-mini
 // import $momentMini from 'moment-mini'
 // app.config.globalProperties.$momentMini = $momentMini
 
 //import global directive
-import directive from '@/directive'
+import directive from '@/directives'
 directive(app)
 
 //import global directive

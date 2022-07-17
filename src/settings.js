@@ -93,6 +93,11 @@ const setting = {
    * */
   defaultLanguage: 'en',
   /*
+   *  default theme
+   * base-theme/lighting-theme/dark-theme
+   * */
+  defaultTheme: 'base-theme',
+  /*
    * setting default defaultSize
    * large / default /small
    * */

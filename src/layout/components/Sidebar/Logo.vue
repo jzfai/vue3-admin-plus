@@ -2,11 +2,11 @@
   <div class="sidebar-logo-container" :class="{ collapse: collapse }">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <svg-icon v-if="logo" icon-class="sidebar-logo" class="sidebar-logo" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <svg-icon v-if="logo" icon-class="sidebar-logo" class="sidebar-logo" />
         <h1 class="sidebar-title">{{ title }}</h1>
       </router-link>
     </transition>
@@ -15,6 +15,7 @@
 
 <script setup>
 import setting from '@/settings'
+import SvgIcon from '@/icons/SvgIcon.vue'
 defineProps({
   collapse: {
     type: Boolean,
@@ -23,7 +24,7 @@ defineProps({
 })
 const state = reactive({
   title: setting.title,
-  logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+  logo: 'https://github.jzfai.top/file/images/pd-logo.svg'
 })
 //export to page for
 const { title, logo } = toRefs(state)
@@ -47,7 +48,7 @@ const { title, logo } = toRefs(state)
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: #2b2f3a;
+  background: var(--sidebar-logo-background);
   padding-left: 14px;
   text-align: left;
   overflow: hidden;
@@ -55,15 +56,16 @@ const { title, logo } = toRefs(state)
     height: 100%;
     width: 100%;
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      color: var(--sidebar-logo-color);
+      width: var(--sidebar-logo-width);
+      height: var(--sidebar-logo-height);
       vertical-align: middle;
       margin-right: 12px;
     }
     & .sidebar-title {
       display: inline-block;
       margin: 0;
-      color: #fff;
+      color: var(--sidebar-logo-title-color);
       font-weight: 600;
       line-height: 50px;
       font-size: 14px;

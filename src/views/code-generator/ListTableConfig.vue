@@ -116,7 +116,8 @@ import {
   splitDescReturnDesc,
   splitDescReturnOptionData,
   splitTheOptionArr,
-  changeDashToCaseAndFirstWord
+  changeDashToCaseAndFirstWord,
+  listTableComponentTypeMapping
 } from './generatorUtis'
 import commonUtil from '@/utils/commonUtil'
 const setListTableData = (checkColumnArr) => {
@@ -129,7 +130,7 @@ const setListTableData = (checkColumnArr) => {
       fItem.tbName = fItem.columnName
 
       fItem.type = tbTypeMapping(fItem.dataType) //数据库和java中的类型做映射
-      fItem.componentType = componentTypeMapping(fItem.dataType, fItem.columnComment, fItem.columnName) //数据库和前端控件中的类型做映射
+      fItem.componentType = listTableComponentTypeMapping(fItem.dataType, fItem.columnComment, fItem.columnName) //数据库和前端控件中的类型做映射
       fItem.rule = 'isNotNull'
       fItem.value = 'value'
       fItem.label = 'label'

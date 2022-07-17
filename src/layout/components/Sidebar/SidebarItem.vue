@@ -81,17 +81,3 @@ const resolvePath = (routePath) => {
   return path.resolve(props.basePath, routePath)
 }
 </script>
-
-<style lang="scss">
-// menu hover
-/* .submenu-title-noDropdown,
-  .el-submenu__title {
-    &:hover {
-      background-color: $menuHover !important;
-    }
-  }
-
-  .is-active>.el-submenu__title {
-    color: $subMenuActiveText !important;
-  }*/
-</style>
