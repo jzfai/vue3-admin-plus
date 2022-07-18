@@ -7,7 +7,7 @@
           v-for="item in themeOptions"
           :key="item.value"
           :command="item.value"
-          :disabled="theme === item.value"
+          :disabled="appStore.theme === item.value"
         >
           <h3 class="pt-1 pb-1 font-themePx14">{{ item.label }}</h3>
         </el-dropdown-item>
@@ -17,9 +17,6 @@
 </template>
 
 <script setup>
-import { computed, reactive, toRefs } from 'vue'
-import settings from '@/settings'
-
 const state = reactive({
   themeOptions: [
     { label: 'base', value: 'base-theme' },
@@ -28,17 +25,17 @@ const state = reactive({
   ]
 })
 
-const theme = computed(() => {
-  return localStorage.getItem('Theme') || settings.defaultTheme
-})
-import { toggleHtmlClass } from '@/theme/utils'
-toggleHtmlClass(localStorage.getItem('Theme') || settings.defaultTheme)
-
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
 const handleSettheme = (theme) => {
-  localStorage.setItem('Theme', theme)
+  localStorage.setItem('theme', theme)
+  appStore.theme = theme
   toggleHtmlClass(theme)
-  location.reload()
+  // location.reload()
 }
+
+import { toggleHtmlClass } from '@/theme/utils'
+toggleHtmlClass(appStore.theme)
 //导出属性到页面中使用
 let { themeOptions } = toRefs(state)
 </script>
