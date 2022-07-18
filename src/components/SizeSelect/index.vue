@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown id="size-select" trigger="click" type="primary" @command="handleSetSize" >
+  <el-dropdown id="size-select" trigger="click" type="primary" @command="handleSetSize">
     <div class="pl-1 pr-1">
       <svg-icon icon-class="size" class="nav-svg-icon" />
     </div>
@@ -9,7 +9,7 @@
           v-for="item in sizeOptions"
           :key="item.value"
           :command="item.value"
-          :disabled="size === item.value"
+          :disabled="appStore.size === item.value"
         >
           <h3 class="pt-1 pb-1 font-sizePx14">{{ item.label }}</h3>
         </el-dropdown-item>
@@ -19,8 +19,6 @@
 </template>
 
 <script setup>
-import { computed, reactive, toRefs } from 'vue'
-import setting from '@/settings'
 const state = reactive({
   sizeOptions: [
     { label: 'Large ', value: 'large' },
@@ -29,13 +27,16 @@ const state = reactive({
   ]
 })
 
-const size = computed(() => {
-  return localStorage.getItem('size') || setting.defaultSize
-})
+// const size = computed(() => {
+//   return localStorage.getItem('size') || setting.defaultSize
+// })
 
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
 const handleSetSize = (size) => {
   localStorage.setItem('size', size)
-  location.reload()
+  appStore.size = size
+  // location.reload()
 }
 //导出属性到页面中使用
 let { sizeOptions } = toRefs(state)

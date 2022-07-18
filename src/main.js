@@ -11,8 +11,8 @@ import 'element-plus/dist/index.css'
 app.use(ElementPlus)
 
 //i18n
-import i18n from '@/lang'
-app.use(i18n)
+import { setupI18n } from '@/lang'
+app.use(setupI18n)
 
 //global mixin
 // import elementMixin from '@/mixins/elementMixin'

@@ -9,7 +9,7 @@
           v-for="item in langOptions"
           :key="item.value"
           :command="item.value"
-          :disabled="lang === item.value"
+          :disabled="appStore.language === item.value"
         >
           <h3 class="pt-1 pb-1 font-langPx14">{{ item.label }}</h3>
         </el-dropdown-item>
@@ -19,23 +19,22 @@
 </template>
 
 <script setup>
-import { computed, reactive, toRefs } from 'vue'
-import settings from '@/settings'
-
 const state = reactive({
   langOptions: [
     { label: '中文', value: 'zh' },
     { label: 'English', value: 'en' }
   ]
 })
-
-const lang = computed(() => {
-  return localStorage.getItem('language') || settings.defaultLanguage
-})
-
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
 const handleSetlang = (lang) => {
   localStorage.setItem('language', lang)
-  location.reload()
+  appStore.language = lang
+  //auto refresh not reload the page
+  locale.value = lang
+  // location.reload()
 }
 //导出属性到页面中使用
 let { langOptions } = toRefs(state)

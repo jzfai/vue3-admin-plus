@@ -1,4 +1,4 @@
-import defaultSettings from '@/settings'
+import settings from '@/settings'
 import { defineStore } from 'pinia'
 export const useAppStore = defineStore('app', {
   /***
@@ -9,9 +9,12 @@ export const useAppStore = defineStore('app', {
     return {
       sidebar: { opened: true },
       device: 'desktop',
-      settings: defaultSettings,
+      settings,
       cachedViews: [],
-      cachedViewsDeep: []
+      cachedViewsDeep: [],
+      language: localStorage.getItem('language') || settings.defaultLanguage,
+      theme: localStorage.getItem('theme') || settings.defaultTheme,
+      size: localStorage.getItem('size') || settings.defaultSize
     }
   },
 
