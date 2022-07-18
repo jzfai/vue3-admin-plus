@@ -140,6 +140,7 @@ $light_gray: #eee;
 .login-container {
   height: 100vh;
   position: relative;
+  overflow-y: hidden;
   width: 100%;
   background-color: $bg;
   .login-form {
