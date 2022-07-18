@@ -145,8 +145,40 @@ $light_gray: #eee;
 .login-container {
   height: 100vh;
   position: relative;
+  overflow-y: hidden;
   width: 100%;
   background-color: $bg;
+  :deep(.el-input__wrapper){
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 50px;
+  }
+  :deep(.el-form-item){
+    border:  1px solid #E0E0E0;
+    background: #fff;
+    border-radius: 50px;
+    color: #999;
+    .el-form-item__content{
+      position: relative;
+    }
+    .el-form-item__error{
+      padding-left: 40px;
+    }
+  }
+  :deep(.el-input input){
+    background: transparent;
+    border: 0px;
+    -webkit-appearance: none;
+    border-radius: 50px;
+    padding: 10px 5px 10px 35px;
+    color: #999;
+    height: 42px; //此处调整item的高度
+    caret-color: #999;
+  }
+  //hiden the input border
+  :deep(.el-input__inner){
+    box-shadow: none !important;
+  }
   .login-pane{
     position:relative;
     .login-top,.login-front{
@@ -236,39 +268,3 @@ $light_gray: #eee;
 }
 </style>
 
-<style lang="scss">
-//css 样式重置 增加个前缀避免全局污染
-.login-container {
-  .el-input__wrapper {
-    background-color: transparent;
-    box-shadow: none;
-    border-radius: 50px;
-  }
-  .el-form-item {
-    border:  1px solid #E0E0E0;
-    background: #fff;
-    border-radius: 50px;
-    color: #999;
-    &__content{
-      position: relative;
-    }
-    &__error{
-      padding-left: 40px;
-    }
-  }
-  .el-input input {
-    background: transparent;
-    border: 0px;
-    -webkit-appearance: none;
-    border-radius: 50px;
-    padding: 10px 5px 10px 35px;
-    color: #999;
-    height: 42px; //此处调整item的高度
-    caret-color: #999;
-  }
-  //hiden the input border
-  .el-input__inner {
-    box-shadow: none !important;
-  }
-}
-</style>
