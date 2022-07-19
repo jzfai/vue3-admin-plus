@@ -134,13 +134,13 @@ pnpm run lint
 
 - 全局功能
   #- 国际化多语言
-  #- 多种动态换肤
+  - 多种动态换肤
   - 动态侧边栏（支持多级路由嵌套）
   - 动态面包屑
   - 快捷导航(标签页)
   - Svg Sprite 图标
   - 本地/后端 mock 数据
-  #- Screenfull全屏
+  - Screenfull全屏
   - 自适应收缩侧边栏
 
 - 编辑器
@@ -148,9 +148,9 @@ pnpm run lint
   - Markdown
   #- JSON 等多格式
 
-#- Excel
-  #- 导出excel
-  #- 导入excel
+- Excel
+  - 导出excel
+  - 导入excel
   #- 前端可视化excel
   #- 导出zip
 
@@ -168,19 +168,19 @@ pnpm run lint
   - 返回顶部
   #- 拖拽Dialog
   #- 拖拽Select
-  #- 拖拽看板
+  - 拖拽看板
   #- 列表拖拽
-  #- SplitPane
+  - SplitPane
   #- Dropzone
   #- Sticky
-  #- CountTo
+  - CountTo
 
 - 综合实例
 - 错误日志
 - Dashboard
 #- 引导页
 - ECharts 图表
-#- Clipboard(剪贴复制)
+- Clipboard(剪贴复制)
 #- Markdown2html
 ```
 
@@ -188,7 +188,7 @@ pnpm run lint
 
 ## 额外
 
-架构开发不易，如果感觉好，请给我点个 start ，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
+架构开发不易，如果感觉好，请给我点个 star ，架构还在不断完善中，欢迎加入我开发，一起成为Contributors ！！！！
 
 ## 浏览器支持
 
