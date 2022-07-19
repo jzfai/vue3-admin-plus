@@ -8,7 +8,7 @@ A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plu
 
 Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
-Vite need Node.js >= 12.0.0。
+Vite need  Node.js 14.18+。
 
 
 ## Documents
