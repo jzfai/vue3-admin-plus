@@ -4,7 +4,7 @@
 
 > vue3 admin plus provides enterprise-level development demo
 
-A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus ，It's fast!
+A new  generation admin  construct   using  vue3(setup-script)+vite3+element-plus ，It's fast!
 
 Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
@@ -61,7 +61,7 @@ The framework is available in js, ts , plus and electron versions
 - **Rewrite the implementation of virtual DOM and Tree-Shaking**
 
 
-[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
+[Comparison of packaging speed between vite3 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
 ## Build Setup
 

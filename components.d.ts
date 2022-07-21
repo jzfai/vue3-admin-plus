@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     ScreenFull: typeof import('./src/components/ScreenFull/index.vue')['default']
+    ScreenLock: typeof import('./src/components/ScreenLock/index.vue')['default']
     SizeSelect: typeof import('./src/components/SizeSelect/index.vue')['default']
     TestUnit: typeof import('./src/components/TestUnit.vue')['default']
     ThemeSelect: typeof import('./src/components/ThemeSelect/index.vue')['default']
