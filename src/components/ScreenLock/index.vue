@@ -90,6 +90,11 @@ const onMouseup = () => {
     }
   }
 };
+watch(() => open.value, () => {
+  if (open.value) {
+    isTrigger.value = false
+  }
+})
 
 const icon = computed(() => {
   return isTrigger.value ? Unlock : ArrowRightBold;
