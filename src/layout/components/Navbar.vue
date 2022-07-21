@@ -13,6 +13,7 @@
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.showNavbarTitle }}</div>
     <div v-if="settings.ShowDropDown" class="right-menu rowSC">
       <ScreenFull />
+      <ScreenLock />
       <ThemeSelect />
       <SizeSelect />
       <LangSelect />
@@ -46,7 +47,7 @@ import SizeSelect from '@/components/SizeSelect/index.vue'
 import LangSelect from '@/components/LangSelect/index.vue'
 import ScreenFull from '@/components/ScreenFull/index.vue'
 import ThemeSelect from '@/components/ThemeSelect/index.vue'
-
+import ScreenLock from '@/components/ScreenLock/index.vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import Breadcrumb from './Breadcrumb'
