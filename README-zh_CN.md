@@ -6,7 +6,7 @@
 
 > vue3-admin-plus提供企业级的开发demo
 
-本架构使用的技术为：vue3(setup-script)+vite2+element-plus 的新一代的前端框架，It's fast!
+本架构使用的技术为：vue3(setup-script)+vite3+element-plus 的新一代的前端框架，It's fast!
 
 使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
 
