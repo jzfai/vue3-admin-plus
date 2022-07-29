@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.4",
+    "@tinymce/tinymce-vue": "^4",
     "@vueuse/core": "^8.7.5",
     "axios": "0.21.3",
     "crypto-js": "^4.1.1",
@@ -41,7 +42,7 @@
     "screenfull": "4.2.0",
     "sortablejs": "1.15.0",
     "splitpanes": "^3.1.1",
-    "tinymce": "4.9.11",
+    "tinymce": "6.1.0",
     "vue": "3.2.37",
     "vue-i18n": "^9.1.10",
     "vue-router": "4.0.14",
