@@ -16,7 +16,7 @@ declare module '@vue/runtime-core' {
     SizeSelect: typeof import('./src/components/SizeSelect/index.vue')['default']
     TestUnit: typeof import('./src/components/TestUnit.vue')['default']
     ThemeSelect: typeof import('./src/components/ThemeSelect/index.vue')['default']
-    Tinymce: typeof import('./src/components/Tinymce/Tinymce.vue')['default']
+    Tinymce: typeof import('./src/components/Tinymce/index.vue')['default']
   }
 }
 
