@@ -41,6 +41,12 @@ const useExampleRouter = {
       name: 'count-To',
       component: () => import('@/views/use-example/countTo/countTo.vue'),
       meta: { title: 'countTo', icon: 'nested' }
+    },
+    {
+      path: 'tinymce-example',
+      name: 'tinymce-example',
+      component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
+      meta: { title: 'Tinymce', icon: 'nested' }
     }
   ]
 }
