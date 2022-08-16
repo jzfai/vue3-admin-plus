@@ -6,18 +6,18 @@
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-5">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-50px">
       <el-form-item label="设备号" prop="sn" :rules="formRules.isNotNull" label-position="left">
-        <el-input v-model="subForm.sn" class="widthPx-150" placeholder="设备号" />
+        <el-input v-model="subForm.sn" class="w-150px" placeholder="设备号" />
       </el-form-item>
       <el-form-item label="硬件版本" prop="hardVersion" :rules="formRules.isNotNull" label-position="left">
-        <el-input v-model="subForm.hardVersion" class="widthPx-150" placeholder="硬件版本" />
+        <el-input v-model="subForm.hardVersion" class="w-150px" placeholder="硬件版本" />
       </el-form-item>
       <!--      <el-form-item label="软件(固件)版本" prop="softVersion" :rules="formRules.isNotNull" label-position="left">-->
-      <!--        <el-input v-model="subForm.softVersion" class="widthPx-150" placeholder="软件(固件)版本" />-->
+      <!--        <el-input v-model="subForm.softVersion" class="w-150px" placeholder="软件(固件)版本" />-->
       <!--      </el-form-item>-->
       <el-form-item label="状态：" prop="status" :rules="formRules.isNotNull" label-position="left">
-        <el-select v-model="subForm.status" clearable placeholder="请选择" class="widthPx-120">
+        <el-select v-model="subForm.status" clearable placeholder="请选择" class="w-120px">
           <el-option label="未出库" :value="0" />
           <el-option label="已出库" :value="1" />
         </el-select>

@@ -13,10 +13,10 @@
       <!--条件搜索-->
       <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-2">
         <el-form-item label-width="0px" label="" prop="errorLog" label-position="left">
-          <el-input v-model="searchForm.errorLog" class="widthPx-150" placeholder="错误日志" />
+          <el-input v-model="searchForm.errorLog" class="w-150px" placeholder="错误日志" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="pageUrl" label-position="left">
-          <el-input v-model="searchForm.pageUrl" class="widthPx-200" placeholder="页面路径" />
+          <el-input v-model="searchForm.pageUrl" class="w-200px" placeholder="页面路径" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
@@ -24,7 +24,7 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            class="widthPx-250"
+            class="w-250px"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"

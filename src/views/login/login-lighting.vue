@@ -39,7 +39,8 @@
   </div>
 </template>
 
-<script setup name="Login">
+<script setup>
+defineOptions({ name: 'Login' })
 import settings from '@/settings'
 
 import { ElMessage } from 'element-plus'

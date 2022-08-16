@@ -9,7 +9,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 //inject title
 import { createHtmlPlugin } from 'vite-plugin-html'
 //setup name
-import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
+// import VueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 
 // auto import element-plus has some issue
 import Components from 'unplugin-vue-components/vite'
@@ -17,6 +17,12 @@ import Components from 'unplugin-vue-components/vite'
 
 //auto import vue https://www.npmjs.com/package/unplugin-auto-import
 import AutoImport from 'unplugin-auto-import/vite'
+
+import UnoCSS from 'unocss/vite'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
+
+import mkcert from 'vite-plugin-mkcert'
+import DefineOptions from 'unplugin-vue-define-options/vite'
 
 //  import image
 //  直接使用 <img :src="Logo" />
@@ -62,7 +68,9 @@ export default ({ command, mode }) => {
       // 服务配置
       port: 5006, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
-      cors: true // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
+      cors: true, // 类型： boolean | CorsOptions 为开发服务器配置 CORS。默认启用并允许任何源
+      host: true,
+      https: false //whether open https 开启https首次运行比较慢 且有个输入密码过程
       //proxy look for https://vitejs.cn/config/#server-proxy
       // proxy: {
       //   '/api': {
@@ -74,7 +82,7 @@ export default ({ command, mode }) => {
     },
     preview: {
       port: 5006,
-      host: '0.0.0.0',
+      host: true,
       strictPort: true
     },
     plugins: [
@@ -86,11 +94,17 @@ export default ({ command, mode }) => {
         //   })
         // ]
       }),
-      vueJsx(),
+      UnoCSS({
+        presets: [presetUno(), presetAttributify(), presetIcons()]
+      }),
+      DefineOptions(),
+      mkcert(),
+      //compatible with old browsers
       // legacy({
-      //   targets: ['ie >= 11'],
+      //   targets: ['chrome 52'],
       //   additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       // }),
+      vueJsx(),
       viteSvgIcons({
         // config svg dir that can config multi
         iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/nav-bar')],
@@ -109,7 +123,7 @@ export default ({ command, mode }) => {
         `,
         logger: true
       }),
-      VueSetupExtend(),
+      // VueSetupExtend(), instance of  DefineOptions
       //https://github.com/antfu/unplugin-auto-import/blob/HEAD/src/types.ts
       AutoImport({
         // resolvers: [ElementPlusResolver()],
@@ -193,13 +207,15 @@ export default ({ command, mode }) => {
       // },
       preprocessorOptions: {
         //define global scss variable
-        scss: {
-          additionalData: `@use '@/theme/index.scss' as * ;`
-        }
+        // scss: {
+        //   additionalData: `@use '@/theme/index.scss' as * ;`
+        // }
       }
     },
     optimizeDeps: {
-      include: ['element-plus/es', 'moment-mini', ...optimizeDepsArr()]
+      //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
+      // include: [...optimizeDependencies] //on-demand dependencies in package.json
+      include: ['moment-mini']
     }
   }
 }
