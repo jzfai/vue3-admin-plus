@@ -18,7 +18,7 @@
       <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-2">
         <el-form-item label-width="0px" label="" prop="username" label-position="left">
           <!--  --c -->
-          <el-input v-model="searchForm.name" class="widthPx-150" placeholder="品牌名字" />
+          <el-input v-model="searchForm.name" class="w-150px" placeholder="品牌名字" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="createTime" label-position="left">
           <el-date-picker
@@ -26,7 +26,7 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            class="widthPx-250"
+            style="width: 250px"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
@@ -50,7 +50,7 @@
       <el-table-column align="center" prop="name" label="品牌名称" min-width="100" />
       <el-table-column align="center" prop="image" label="品牌图片地址" min-width="100">
         <template #default="{ row }">
-          <img :src="row.image" class="widthPx-120 heightPx-120" style="border-radius: 10px" />
+          <img :src="row.image" class="w-120px heightPx-120" style="border-radius: 10px" />
         </template>
       </el-table-column>
       <el-table-column align="center" prop="letter" label="首字母" width="80" />

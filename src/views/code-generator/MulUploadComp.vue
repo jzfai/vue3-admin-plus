@@ -22,7 +22,7 @@
           @change="fileOnChange"
         />
       </div>
-      <el-button type="primary" class="ml-2" :disabled="!uploadFileList.length" @click="uploadTheVmsTemp">
+      <el-button type="primary" class="ml-20px" :disabled="!uploadFileList.length" @click="uploadTheVmsTemp">
         上传
       </el-button>
     </div>

@@ -23,7 +23,8 @@
   </el-dialog>
 </template>
 
-<script setup="setup" name="GeneratorConfigSaveForm">
+<script setup="setup">
+defineOptions({ name: 'GeneratorConfigSaveForm' })
 const emit = defineEmits(['selectPageReq', 'hideComp'])
 const { formRules, elMessage } = useElement()
 /*2.modal新增和修改*/

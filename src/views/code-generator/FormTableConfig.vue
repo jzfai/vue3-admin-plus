@@ -63,25 +63,25 @@
           <el-input
             v-if="['selectApi', 'cascaderApi'].includes(row.componentType)"
             v-model="row.method"
-            class="mtPx-4 widthPx-100"
+            class="mt-4px w-100px"
             placeholder="请求方法"
           />
           <el-input
             v-if="['selectApi', 'cascaderApi'].includes(row.componentType)"
             v-model="row.labelKey"
-            class="mtPx-4 widthPx-100"
+            class="mt-4px w-100px"
             placeholder="label-key"
           />
           <el-input
             v-if="['selectApi', 'cascaderApi'].includes(row.componentType)"
             v-model="row.valueKey"
-            class="mtPx-4 widthPx-100"
+            class="mt-4px w-100px"
             placeholder="value-key"
           />
           <el-input
             v-if="['select', 'radio', 'checkbox', 'switch'].includes(row.componentType)"
             v-model="row.optionData"
-            class="mtPx-4"
+            class="mt-4px"
             type="textarea"
             rows="2"
             placeholder="数据枚举"
@@ -90,7 +90,7 @@
           <el-input
             v-if="['cascaderApi'].includes(row.componentType)"
             v-model="row.children"
-            class="mtPx-4 widthPx-100"
+            class="mt-4px w-100px"
             placeholder="childrenKey"
           />
         </div>

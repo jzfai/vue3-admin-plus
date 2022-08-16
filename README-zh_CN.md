@@ -12,22 +12,15 @@
 
 使用最先进的包管理工具pnpm
 
-## 更新日志
-
----请查看架构文档
-
-- [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
-
+Vite need  Node.js 16+
 
 ## 文档
 
 - [真香定律！带你用vue3+vite2撸后台（系列文章入口）](https://juejin.cn/post/7036302298435289095)
 
+- [中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
+
 ## 线上体验
-
-[github address](https://github.com/jzfai/vue3-admin-plus.git)
-
-[Access address](https://github.jzfai.top/vue3-admin-plus)
 
 github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
@@ -82,7 +75,7 @@ cd  vue3-admin-plus
 
 # pnpm address https://pnpm.io/zh/motivation
 # 安装依赖(建议用pnpm)
-# 你可以使用 "npm -g i pnpm@6.32.3" 去安装pnpm
+# 你可以使用 "npm -g i pnpm@7.9.0" 去安装pnpm
 pnpm i
 
 # 启动服务
@@ -133,7 +126,7 @@ pnpm run lint
   - lint
 
 - 全局功能
-  #- 国际化多语言
+  - 国际化多语言
   - 多种动态换肤
   - 动态侧边栏（支持多级路由嵌套）
   - 动态面包屑
@@ -146,18 +139,18 @@ pnpm run lint
 - 编辑器
   - 富文本
   - Markdown
-  #- JSON 等多格式
+  - JSON 等多格式
 
 - Excel
   - 导出excel
   - 导入excel
-  #- 前端可视化excel
-  #- 导出zip
+  - 前端可视化excel
+  - 导出zip
 
 - 表格
   - 动态表格
-  #- 拖拽表格
-  #- 内联编辑
+  - 拖拽表格
+  - 内联编辑
 
 - 错误页面
   - 401
@@ -166,19 +159,19 @@ pnpm run lint
 - 組件
   - 头像上传
   - 返回顶部
-  #- 拖拽Dialog
-  #- 拖拽Select
+  - 拖拽Dialog
+  - 拖拽Select
   - 拖拽看板
-  #- 列表拖拽
+  - 列表拖拽
   - SplitPane
-  #- Dropzone
-  #- Sticky
+  - Dropzone
+  - Sticky
   - CountTo
 
 - 综合实例
 - 错误日志
 - Dashboard
-#- 引导页
+- 引导页
 - ECharts 图表
 - Clipboard(剪贴复制)
 #- Markdown2html
@@ -193,35 +186,13 @@ pnpm run lint
 ## 浏览器支持
 
 注意：vue3不在支持IE浏览器
-Modern browsers and Internet Explorer 11+.
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-|Edge| last 2 versions| last 2 versions| last 2 versions
+
+
 
 ## 讨论和交流(含vue3+ts视频教程)
 [WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
 
-
-## 赞赏(appreciate)
-
-如果可以请我喝杯下午茶(Treat me to afternoon tea if you can)
-
-| 微信 | 支付宝 |
-| :-: | :-: |
-| <img src="https://github.jzfai.top/file/images/wxpay-code.png" height="220" /> | <img src="https://github.jzfai.top/file/images/alipay-code.png" height="220" /> |
-
->如果属于特别赞助，需注明信息，必要时可以提供特别帮助
->如果公司需要技术合作，可以单独联系(进群找群主)
-> 
->If it is a special sponsorship, the information must be indicated, and special assistance can be provided if necessary
-
-
-## 版本
-
-[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
-
-Copyright (c) 2022-present  kuanghua
 
 
 

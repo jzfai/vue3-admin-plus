@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown trigger="click" type="primary" @command="handleSettheme">
+  <el-dropdown trigger="click" type="primary" @command="handleSetTheme">
     <svg-icon icon-class="theme-icon" class="theme-icon-style" />
     <template #dropdown>
       <el-dropdown-menu>
@@ -9,7 +9,7 @@
           :command="item.value"
           :disabled="appStore.theme === item.value"
         >
-          <h3 class="pt-1 pb-1 font-themePx14">{{ item.label }}</h3>
+          <h3 class="pt-6px pb-10px text-16px">{{ item.label }}</h3>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -27,14 +27,17 @@ const state = reactive({
 
 import { useAppStore } from '@/store/app'
 const appStore = useAppStore()
-const handleSettheme = (theme) => {
+const handleSetTheme = (theme) => {
   localStorage.setItem('theme', theme)
   appStore.theme = theme
   toggleHtmlClass(theme)
   // location.reload()
 }
 
+//init the Theme
 import { toggleHtmlClass } from '@/theme/utils'
+
+console.log(appStore.theme)
 toggleHtmlClass(appStore.theme)
 //导出属性到页面中使用
 let { themeOptions } = toRefs(state)

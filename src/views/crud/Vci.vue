@@ -7,10 +7,10 @@
       <!--条件搜索-->
       <el-form ref="refsearchForm" :inline="true" class="demo-searchForm ml-3">
         <el-form-item label-width="0px" label="" prop="sn" label-position="left">
-          <el-input v-model="searchForm.sn" class="widthPx-150" placeholder="设备号" />
+          <el-input v-model="searchForm.sn" class="w-150px" placeholder="设备号" />
         </el-form-item>
         <el-form-item label-width="0px" label="" prop="status" label-position="left">
-          <el-select v-model="searchForm.status" clearable placeholder="状态" class="widthPx-120">
+          <el-select v-model="searchForm.status" clearable placeholder="状态" class="w-120px">
             <el-option label="未出库" :value="0" />
             <el-option label="已出库" :value="1" />
           </el-select>
@@ -21,7 +21,7 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            class="widthPx-200"
+            style="width: 250px"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"

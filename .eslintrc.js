@@ -16,6 +16,7 @@ module.exports = {
     window: true,
     defineProps: true,
     defineExpose: true,
+    defineOptions: true,
     $ref: true
   },
   plugins: ['@typescript-eslint', 'prettier', 'import'],

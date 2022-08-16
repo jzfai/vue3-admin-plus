@@ -61,4 +61,9 @@ window.__axiosPromiseArr = []
 import { createPinia } from 'pinia'
 app.use(createPinia())
 
+//import theme
+import './theme/index.scss'
+//import unocss
+import 'uno.css'
+
 app.use(router).mount('#app')
