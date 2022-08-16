@@ -1,5 +1,5 @@
 <template>
-  <div id="screenfull" class="pl-1 pr-1 mtPx-2" >
+  <div id="screenfull" class="pl-6px pr-6px mt-2px">
     <svg-icon :icon-class="isFullscreen ? 'exit-fullscreen' : 'fullscreen'" class="nav-svg-icon" @click="click" />
   </div>
 </template>

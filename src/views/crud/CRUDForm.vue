@@ -6,13 +6,13 @@
     :close-on-click-modal="false"
     :before-close="closeFormModal"
   >
-    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-5">
+    <el-form ref="refForm" label-width="150px" :inline="false" :model="subForm" :rules="formRules" class="pr-50px">
       <el-form-item label="品牌名称" prop="name" :rules="formRules.isNotNull" label-position="left">
-        <el-input v-model="subForm.name" class="widthPx-150" placeholder="品牌名称" />
+        <el-input v-model="subForm.name" class="w-150px" placeholder="品牌名称" />
       </el-form-item>
       <el-form-item label="品牌图片地址" prop="image" :rules="formRules.isNotNull" label-position="left">
         <div class="rowSE">
-          <img v-if="subForm.image" :src="subForm.image" class="widthPx-120 heightPx-120 border_radius5" />
+          <img v-if="subForm.image" :src="subForm.image" class="w-120px heightPx-120 border_radius5" />
           <div :class="[subForm.image && 'ml-1']" class="rowSS">
             <el-button type="primary" @click="goUploadFile">
               <i class="el-icon-upload2" />
@@ -31,10 +31,10 @@
         </div>
       </el-form-item>
       <el-form-item label="品牌的首字母" prop="letter" :rules="formRules.isNotNull" label-position="left">
-        <el-input v-model="subForm.letter" maxlength="1" class="widthPx-150" placeholder="品牌的首字母" />
+        <el-input v-model="subForm.letter" maxlength="1" class="w-150px" placeholder="品牌的首字母" />
       </el-form-item>
       <el-form-item label="排序" prop="seq" :rules="formRules.isNotNull" label-position="left">
-        <el-input v-model="subForm.seq" class="widthPx-150" placeholder="排序" />
+        <el-input v-model="subForm.seq" class="w-150px" placeholder="排序" />
       </el-form-item>
     </el-form>
     <template #footer>

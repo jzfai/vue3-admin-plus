@@ -1,9 +1,10 @@
 <template>
   <div class="mt-2">DeepChildren.vue third router render</div>
-  <el-input v-model="testInput" placeholder="input test keepAlive(DeepChildren)" class="widthPx-300" />
+  <el-input v-model="testInput" placeholder="input test keepAlive(DeepChildren)" class="w-300px" />
 </template>
 
-<script setup name="DeepChildren">
+<script setup>
+defineOptions({ name: 'DeepChildren' })
 let testInput = ref('')
 </script>
 

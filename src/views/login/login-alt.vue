@@ -15,7 +15,7 @@
             <ElSvgIcon name="User" :size="14" />
           </span>
           <el-input v-model="formInline.username" placeholder="用户名(admin)" />
-            <!--占位-->
+          <!--占位-->
         </el-form-item>
         <el-form-item prop="password" :rules="formRules.isNotNull">
           <span class="svg-container">
@@ -35,16 +35,22 @@
           </span>
         </el-form-item>
         <div class="tip-message">{{ tipMessage }}</div>
-        <el-button :loading="loading" type="warning" class="login-btn" size="default" round @click.prevent="handleLogin">
+        <el-button
+          :loading="loading"
+          type="warning"
+          class="login-btn"
+          size="default"
+          round
+          @click.prevent="handleLogin"
+        >
           登录
         </el-button>
       </el-form>
     </div>
-
   </div>
 </template>
 
-<script setup name="Login">
+<script setup>
 import settings from '@/settings'
 
 import { ElMessage } from 'element-plus'
@@ -138,7 +144,7 @@ let showPwd = () => {
 </script>
 
 <style lang="scss" scoped>
-$bg: #FFE4B5;
+$bg: #ffe4b5;
 $dark_gray: #333;
 $gray: #999;
 $light_gray: #eee;
@@ -148,24 +154,24 @@ $light_gray: #eee;
   overflow-y: hidden;
   width: 100%;
   background-color: $bg;
-  :deep(.el-input__wrapper){
+  :deep(.el-input__wrapper) {
     background-color: transparent;
     box-shadow: none;
     border-radius: 50px;
   }
-  :deep(.el-form-item){
-    border:  1px solid #E0E0E0;
+  :deep(.el-form-item) {
+    border: 1px solid #e0e0e0;
     background: #fff;
     border-radius: 50px;
     color: #999;
-    .el-form-item__content{
+    .el-form-item__content {
       position: relative;
     }
-    .el-form-item__error{
+    .el-form-item__error {
       padding-left: 40px;
     }
   }
-  :deep(.el-input input){
+  :deep(.el-input input) {
     background: transparent;
     border: 0px;
     -webkit-appearance: none;
@@ -176,21 +182,22 @@ $light_gray: #eee;
     caret-color: #999;
   }
   //hiden the input border
-  :deep(.el-input__inner){
+  :deep(.el-input__inner) {
     box-shadow: none !important;
   }
-  .login-pane{
-    position:relative;
-    .login-top,.login-front{
+  .login-pane {
+    position: relative;
+    .login-top,
+    .login-front {
       position: absolute;
-      top:0;
-      left:50%;
+      top: 0;
+      left: 50%;
     }
-    .login-top{
+    .login-top {
       z-index: 0;
       transform: translateY(-85%) translateX(-50%);
     }
-    .login-front{
+    .login-front {
       z-index: 11;
       transform: translateY(-35%) translateX(-50%);
     }
@@ -201,7 +208,7 @@ $light_gray: #eee;
     background: #fff;
     box-shadow: 0px 4px 16px rgba(158, 105, 25, 0.15);
     border-radius: 8px;
-    position:relative;
+    position: relative;
     z-index: 10;
   }
   .title-container {
@@ -214,14 +221,14 @@ $light_gray: #eee;
     }
   }
 }
-.login-bg{
-  width:100%;
+.login-bg {
+  width: 100%;
   height: 100%;
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   z-index: 0;
-  img{
+  img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -250,10 +257,10 @@ $light_gray: #eee;
 .login-btn {
   width: 100%;
   margin-bottom: 10px;
-  --el-button-bg-color: #FBCF47;
-  --el-button-border-color:  #FBCF47;
-  --el-button-text-color: #8F5C0E;
-  --el-button-hover-text-color:  #8F5C0E;
+  --el-button-bg-color: #fbcf47;
+  --el-button-border-color: #fbcf47;
+  --el-button-text-color: #8f5c0e;
+  --el-button-hover-text-color: #8f5c0e;
 }
 .show-pwd {
   width: 50px;
@@ -267,4 +274,3 @@ $light_gray: #eee;
   transform: translateY(-50%);
 }
 </style>
-

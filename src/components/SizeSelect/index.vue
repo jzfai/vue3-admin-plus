@@ -1,6 +1,6 @@
 <template>
   <el-dropdown id="size-select" trigger="click" type="primary" @command="handleSetSize">
-    <div class="pl-1 pr-1">
+    <div class="pl-6px pr-6px">
       <svg-icon icon-class="size" class="nav-svg-icon" />
     </div>
     <template #dropdown>
@@ -11,7 +11,7 @@
           :command="item.value"
           :disabled="appStore.size === item.value"
         >
-          <h3 class="pt-1 pb-1 font-sizePx14">{{ item.label }}</h3>
+          <h3 class="pt-10px pb-10px font-sizePx14">{{ item.label }}</h3>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

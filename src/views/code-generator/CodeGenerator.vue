@@ -9,7 +9,7 @@
     </div>
     <!--项目和作者信息配置-->
     <div class="mb-1">项目和作者信息配置</div>
-    <el-form ref="refForm" label-width="150px" :inline="true" :model="poaForm" :rules="formRules" class="pr-5">
+    <el-form ref="refForm" label-width="150px" :inline="true" :model="poaForm" :rules="formRules" class="pr-50px">
       <el-form-item label="author" prop="author" :rules="formRules.isNotNull" label-position="left">
         <el-input v-model="poaForm.author" placeholder="author" />
       </el-form-item>
@@ -54,7 +54,7 @@
     <!-- 获取库和表信息 -->
     <div class="mb-1 mt-3">获取库和表信息(如想使用，请先提供自己的数据源接口)</div>
     <div class="rowSS">
-      <el-input v-model="dataBaseUrl" class="widthPx-500" placeholder="dataBaseUrl" />
+      <el-input v-model="dataBaseUrl" class="w-500px" placeholder="dataBaseUrl" />
       <el-button type="primary" @click="searchDataBase">查询表</el-button>
     </div>
     <div class="mt-3 mb-1">请选择表(支持多表)</div>
@@ -78,16 +78,16 @@
     <!-- 表信息-->
     <div class="mb-1 mt-3">表信息</div>
     <div class="rowSS mt-1">
-      <el-input v-model="dbTableUrl" class="widthPx-500" placeholder="dbTableUrl" />
-      <el-input v-model="tbName" class="widthPx-150" placeholder="tbName" />
+      <el-input v-model="dbTableUrl" class="w-500px" placeholder="dbTableUrl" />
+      <el-input v-model="tbName" class="w-150px" placeholder="tbName" />
       <el-button :disabled="!tbName" type="primary" @click="searchDbTable">查询表字段</el-button>
     </div>
 
     <!--  多表关系配置(用于多表查询)  -->
     <div class="mt-3 mb-1">多表字段关系配置</div>
     <div class="mb-1 rowSS">
-      <el-input v-model="multiTableName" placeholder="多表实体类名" class="widthPx-150 mr-2" />
-      <el-input v-model="multiTableDesc" placeholder="多表相关注释" class="widthPx-150" />
+      <el-input v-model="multiTableName" placeholder="多表实体类名" class="w-150px mr-2" />
+      <el-input v-model="multiTableDesc" placeholder="多表相关注释" class="w-150px" />
     </div>
     <div v-for="(item, index) in multiTableConfig" :key="index" class="rowSC">
       <div class="mr-1">{{ item.originTableName }}：</div>

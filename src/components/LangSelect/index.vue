@@ -1,6 +1,6 @@
 <template>
   <el-dropdown trigger="click" type="primary" @command="handleSetlang">
-    <div class="pl-1 pr-4">
+    <div class="pl-6px pr-30px">
       <svg-icon icon-class="language" class="nav-svg-icon" />
     </div>
     <template #dropdown>
@@ -11,7 +11,7 @@
           :command="item.value"
           :disabled="appStore.language === item.value"
         >
-          <h3 class="pt-1 pb-1 font-langPx14">{{ item.label }}</h3>
+          <h3 class="pt-10px pb-10px font-langPx14">{{ item.label }}</h3>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>

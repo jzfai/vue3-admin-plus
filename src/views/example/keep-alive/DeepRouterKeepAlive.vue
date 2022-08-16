@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-1">DeepRouterKeepAlive.vue</div>
-    <el-input v-model="testInput" class="widthPx-300 mb-3" placeholder="input test keepAlive(DeepRouterKeepAlive)" />
+    <el-input v-model="testInput" class="w-300px mb-3" placeholder="input test keepAlive(DeepRouterKeepAlive)" />
     <!--  three router   -->
     <router-view v-slot="{ Component }">
       <keep-alive :include="cachedViewsDeep">
@@ -11,7 +11,8 @@
   </div>
 </template>
 
-<script setup name="DeepRouterKeepAlive">
+<script setup>
+defineOptions({ name: 'DeepRouterKeepAlive' })
 import { useAppStore } from '@/store/app'
 
 let testInput = ref('')

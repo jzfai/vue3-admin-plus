@@ -24,10 +24,10 @@
         />
       </div>
     </div>
-    <div class="mt-2 mb-1">Provinces and cities packing</div>
-    <el-cascader v-model="addressArr" :options="regionData" class="widthPx-200" @change="casHandle"></el-cascader>
+    <div class="mt-20px mb-10px">Provinces and cities packing</div>
+    <el-cascader v-model="addressArr" :options="regionData" class="w-200px" @change="casHandle"></el-cascader>
 
-    <div class="mt-2 mb-1">axios req cancel test(you need setting: Network->slow 3G To Test)</div>
+    <div class="mt-20px mb-10px">axios req cancel test(you need setting: Network->slow 3G To Test)</div>
     <el-button type="primary" @click="testAxiosCancelReq">emit req</el-button>
     <el-button type="primary" @click="cancelReq">cancel req</el-button>
   </div>

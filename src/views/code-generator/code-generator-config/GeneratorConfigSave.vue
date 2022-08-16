@@ -82,7 +82,8 @@
     />
   </div>
 </template>
-<script setup="setup" name="GeneratorConfigSave">
+<script setup="setup">
+defineOptions({ name: 'GeneratorConfigSave' })
 import { Delete, FolderAdd } from '@element-plus/icons-vue'
 import tablePageHook from '@/hooks/useTablePage'
 import settings from '@/settings'
