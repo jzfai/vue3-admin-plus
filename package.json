@@ -100,8 +100,23 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "vue-template-compiler",
+        "html-webpack-plugin",
         "vite-plugin-mock",
+        "unplugin-auto-import",
+        "unplugin-vue-components",
+        "vue-template-compiler",
+        "unocss",
+        "unplugin",
+        "vite-plugin-mock",
+        "@vitejs/plugin-legacy",
+        "@vitejs/plugin-vue",
+        "@vitejs/*",
+        "@babel/*",
+        "vite",
+        "vue",
+        "@unocss/vite",
+        "rollup",
+        "vue-jest",
         "@babel/*"
       ]
     }
