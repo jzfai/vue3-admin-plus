@@ -27,13 +27,6 @@ Vite need  Node.js 16+
 
 github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
-## Demo
-
----- Let's look at the loading speed and the size of the built package first.：
-
-![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
-
-![template-demo](https://github.jzfai.top/file/images/plus-demo.png)
 
 ## Related items
 
