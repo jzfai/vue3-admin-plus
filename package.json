@@ -100,7 +100,9 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "**/**/*"
+        "vue-template-compiler",
+        "vite-plugin-mock",
+        "@babel/*"
       ]
     }
   },
