@@ -47,7 +47,13 @@ const useExampleRouter = {
       name: 'tinymce-example',
       component: () => import('@/views/use-example/tinymce-example/TinymceExample.vue'),
       meta: { title: 'Tinymce', icon: 'nested' }
-    }
+    },
+    {
+      path: 'vxe-table',
+      name: 'vxe-table',
+      component: () => import('@/views/use-example/vxeTable/vxeTable.vue'),
+      meta: { title: 'vxe-table', icon: 'nested' }
+    },
   ]
 }
 
