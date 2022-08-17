@@ -66,4 +66,9 @@ import './theme/index.scss'
 //import unocss
 import 'uno.css'
 
+//import vxe-table
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
+app.use(VXETable)
+
 app.use(router).mount('#app')
