@@ -57,8 +57,8 @@ watch(
   () => $route.path,
   () => {
     addTags()
+    moveToCurrentTag()
     // tag remove has issue
-    // moveToCurrentTag()
   }
 )
 watch(
@@ -71,18 +71,6 @@ watch(
     }
   }
 )
-
-watch(
-  () => state.visible,
-  (value) => {
-    if (value) {
-      document.body.addEventListener('click', closeMenu)
-    } else {
-      document.body.removeEventListener('click', closeMenu)
-    }
-  }
-)
-
 onMounted(() => {
   initTags()
   addTags()
@@ -94,7 +82,18 @@ const isActive = (route) => {
 const isAffix = (tag) => {
   return tag.meta && tag.meta.affix
 }
-
+const refTag = ref(null)
+const moveToCurrentTag= ()=> {
+    for (const tag of refTag.value) {
+          if (tag.to.path === $route.path) {
+            // when query is different then update
+            if (tag.to.fullPath !== $route.fullPath) {
+              tagsViewStore.updateVisitedView($route)
+            }
+            break
+          }
+        }
+    }
 const filterAffixTags = (routes, basePath = '/') => {
   let tags = []
   routes.forEach((route) => {
