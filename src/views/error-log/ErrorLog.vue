@@ -24,7 +24,7 @@
             type="datetimerange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD HH:mm:ss"
-            class="w-250px"
+            style="width: 250px"
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
@@ -65,7 +65,7 @@
       </el-table-column>
     </el-table>
     <!--分页-->
-    <div class="block columnCC mt-2">
+    <div class="columnCC mt-2">
       <el-pagination
         :current-page="pageNum"
         :page-sizes="[10, 20, 50, 100]"

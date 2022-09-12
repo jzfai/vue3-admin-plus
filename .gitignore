@@ -3,6 +3,9 @@
 /dist-ssr
 /node_modules
 
+#lock
+pnpm-lock.yaml
+
 # Logs
 logs
 *.log

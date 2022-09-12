@@ -66,9 +66,8 @@
         </template>
       </el-table-column>
     </el-table>
-
     <!--分页-->
-    <div class="block columnCC mt-2">
+    <div class="rowCS mt-20px">
       <el-pagination
         :current-page="pageNum"
         :page-sizes="[10, 20, 50, 100]"

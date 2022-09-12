@@ -47,7 +47,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="block columnCC mt-2">
+    <div class="columnCC mt-2">
       <el-pagination
         :current-page="pageNum"
         :page-sizes="[10, 20, 50, 100]"
