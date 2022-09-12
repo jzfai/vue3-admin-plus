@@ -25,8 +25,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-recommended',
     'prettier',
-    './.eslintrc-auto-import.json',
-    './tests/.eslintrc-unit-test.json'
+    './.eslintrc-auto-import.json'
   ],
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -57,7 +56,7 @@ module.exports = {
     'vue/no-setup-props-destructure': ['off'],
     '@typescript-eslint/no-empty-function': ['off'],
     'vue/script-setup-uses-vars': ['off'],
-    //can config  to 2 if need more then required
+    // can config  to 2 if need more then required
     '@typescript-eslint/no-unused-vars': [0],
     'no-param-reassign': ['off']
   }

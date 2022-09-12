@@ -21,7 +21,8 @@ const state = reactive({
   themeOptions: [
     { label: 'base', value: 'base-theme' },
     { label: 'dark', value: 'dark' },
-    { label: 'lighting', value: 'lighting-theme' }
+    { label: 'lighting', value: 'lighting-theme' },
+    { label: 'china-red', value: 'china-red' }
   ]
 })
 

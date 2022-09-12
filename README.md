@@ -28,6 +28,16 @@ Vite need  Node.js 16+
 github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
 
+## recommended study
+
+> A minimal version of element-plus
+
+a minimal version of  element-plus , you can learn it better than learning element-plus directly
+
+[element-plus-mini]( https://github.com/jzfai/element-plus-mini.git)
+
+
+
 ## Related items
 
 The framework is available in js, ts , plus and electron versions
@@ -40,21 +50,6 @@ The framework is available in js, ts , plus and electron versions
 > development and  experience：two words  Really fragrant！！！！！
 
 
-
-#### Comparison of performance between vue3 and vue2
-
-- 41% reduction in package size
-
-- The initial rendering is 55% faster, the update rendering is 133% faster
-
-- Memory reduction 54%
-
-- **Use Proxy instead of defineProperty to implement data responsiveness**
-
-- **Rewrite the implementation of virtual DOM and Tree-Shaking**
-
-
-[Comparison of packaging speed between vite3 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
 
 ## Build Setup
 
@@ -105,8 +100,6 @@ Architecture development is not easy. If you feel good, please give me a **start
 ## Browsers support
 
 Note: Vue3 is not supported the Internet Explorer
-
-
 
 
 

@@ -1,9 +1,11 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "~/*": ["typings/*"]
     }
   },
-  "include": ["src/*/**"]
+  "include": ["src", "typings", "auto-imports.d.ts"],
+  "exclude": ["node_modules", "**/dist"]
 }
