@@ -5,7 +5,6 @@ import Layout from '@/layout'
 import chartsRouter from './modules/charts'
 import useExample from './modules/useExample'
 import writingDemo from './modules/writingDemo'
-import codeGenerator from './modules/codeGenerator'
 
 export const constantRoutes = [
   {
@@ -48,7 +47,16 @@ export const constantRoutes = [
       }
     ]
   },
-  codeGenerator,
+  {
+    path: '/low-code-platform',
+    component: Layout,
+    children: [
+      {
+        path: 'https://github.jzfai.top/low-code-platform',
+        meta: { title: 'lowCodePlatform', icon: 'link' }
+      }
+    ]
+  },
   {
     path: '/setting-switch',
     component: Layout,
@@ -152,16 +160,7 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://github.com/jzfai/vue3-admin-plus.git',
-        meta: { title: 'ExternalLink', icon: 'link' }
-      }
-    ]
-  },
+
   chartsRouter,
   {
     path: '/excel',
