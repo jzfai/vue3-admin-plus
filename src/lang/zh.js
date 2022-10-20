@@ -17,9 +17,7 @@ export default {
     Table: '表格',
     exportExcel: '导出Excel',
     importExcel: '导入Excel',
-    CodeGenerator: '低代码平台',
-    ExternalLink: '外链',
-
+    lowCodePlatform: '低代码平台',
     Charts: '图表',
     'Keyboard Chart': '键盘图表',
     'Line Chart': '折线图',

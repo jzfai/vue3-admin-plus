@@ -2,7 +2,7 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 // import legacy from '@vitejs/plugin-legacy'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import viteSvgIcons from 'vite-plugin-svg-icons'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 //mock
 import { viteMockServe } from 'vite-plugin-mock'
 //inject title
@@ -84,7 +84,7 @@ export default ({ command, mode }: any) => {
       //   targets: ['chrome 52'],
       //   additionalLegacyPolyfills: ['regenerator-runtime/runtime']
       // }),
-      viteSvgIcons({
+      createSvgIconsPlugin({
         // config svg dir that can config multi
         iconDirs: [path.resolve(process.cwd(), 'src/icons/common'), path.resolve(process.cwd(), 'src/icons/nav-bar')],
         // appoint svg icon using mode
