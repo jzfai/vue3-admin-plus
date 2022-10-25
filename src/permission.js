@@ -33,25 +33,27 @@ router.beforeEach(async (to, from, next) => {
           let accessRoutes = []
           if (settings.isNeedLogin) {
             // get user info
-            // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-            const { roles } = await userStore.getInfo()
-            accessRoutes = await permissionStore.generateRoutes(roles)
+            const { menuList, roles, codes } = await userStore.getUserInfo()
+            //filter Router
+            accessRoutes = await permissionStore.generateRoutes(menuList, roles, codes)
           } else {
             accessRoutes = asyncRoutes
           }
           // setting constRouters and accessRoutes to vuex , in order to sideBar for using
-          permissionStore.M_routes(accessRoutes)
+          permissionStore.setRoutes(accessRoutes)
+          console.log('accessRoutes', accessRoutes)
           // dynamically add accessible routes
           //router4 addRoutes destroyed
           accessRoutes.forEach((route) => {
             router.addRoute(route)
           })
           //already get userInfo
-          permissionStore.M_isGetUserInfo(true)
+          permissionStore.setGetUserInfo(true)
           // hack method to ensure that addRoutes is complete
           // set the replace: true, so the navigation will not leave a history record
           next({ ...to, replace: true })
         } catch (err) {
+          console.error(err)
           await userStore.resetState()
           next(`/login?redirect=${to.path}`)
           if (settings.isNeedNprogress) NProgress.done()

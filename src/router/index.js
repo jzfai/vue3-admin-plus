@@ -53,7 +53,17 @@ export const constantRoutes = [
     children: [
       {
         path: 'https://github.jzfai.top/low-code-platform',
-        meta: { title: 'lowCodePlatform', icon: 'link' }
+        meta: { title: 'LowCodePlatform', icon: 'link' }
+      }
+    ]
+  },
+  {
+    path: '/RBAC',
+    component: Layout,
+    children: [
+      {
+        path: 'https://github.jzfai.top/low-code-platform/#/permission-center/user-table-query',
+        meta: { title: 'RBAC', icon: 'link' }
       }
     ]
   },
@@ -270,7 +280,7 @@ export const asyncRoutes = [
     meta: {
       title: 'Permission',
       icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['test', 'editor'] // you can set roles in root nav
     },
     children: [
       {

@@ -2,7 +2,7 @@ import request from '@/utils/axiosReq'
 
 export function loginReq(data) {
   return request({
-    url: '/integration-front/user/loginValid',
+    url: '/basis-func/user/loginValid',
     data,
     method: 'post',
     bfLoading: false,
@@ -11,10 +11,12 @@ export function loginReq(data) {
   })
 }
 
-export function getInfoReq() {
+export function getInfoReq(plateFormId) {
   return request({
-    url: '/integration-front/user/getUserInfo',
+    url: '/basis-func/user/getUserInfo',
     bfLoading: false,
+    data: { plateFormId },
+    isParams: true,
     method: 'post',
     isAlertErrorMsg: false
   })
@@ -22,7 +24,7 @@ export function getInfoReq() {
 
 export function logoutReq() {
   return request({
-    url: '/integration-front/user/loginOut',
+    url: '/basis-func/user/loginOut',
     method: 'post'
   })
 }

@@ -10,11 +10,11 @@
         <div class="title-container">
           <h3 class="title text-center">{{ settings.title }}</h3>
         </div>
-        <el-form-item prop="username" :rules="formRules.isNotNull">
+        <el-form-item prop="keyword" :rules="formRules.isNotNull">
           <span class="svg-container">
             <ElSvgIcon name="User" :size="14" />
           </span>
-          <el-input v-model="formInline.username" placeholder="用户名(admin)" />
+          <el-input v-model="formInline.keyword" placeholder="用户名(panda)" />
           <!--占位-->
         </el-form-item>
         <el-form-item prop="password" :rules="formRules.isNotNull">
@@ -59,7 +59,7 @@ import { useUserStore } from '@/store/user'
 const formRules = useElement().formRules
 //form
 let formInline = reactive({
-  username: 'admin',
+  keyword: 'panda',
   password: '123456'
 })
 let state = reactive({
