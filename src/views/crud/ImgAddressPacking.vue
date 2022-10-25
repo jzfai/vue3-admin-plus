@@ -95,7 +95,7 @@ const casHandle = (dataArr) => {
 /*axios请求取消测试*/
 const testAxiosCancelReq = () => {
   axiosReq({
-    url: '/integration-front/user/getUserInfo',
+    url: '/basis-func/user/getUserInfo',
     method: 'post',
     bfLoading: true,
     isAlertErrorMsg: false

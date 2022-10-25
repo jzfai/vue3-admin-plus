@@ -5,6 +5,7 @@ import debounce from './debounce'
 import watermark from './watermark'
 import waves from './waves/waves'
 import clickoutside from './clickoutside'
+import buttonCodes from './button-codes'
 export default function (app) {
   app.directive('permission', permission)
   app.directive('copy', copy)
@@ -12,5 +13,6 @@ export default function (app) {
   app.directive('debounce', debounce)
   app.directive('watermark', watermark)
   app.directive('waves', waves)
-  app.directive('clickoutside',clickoutside)
+  app.directive('clickoutside', clickoutside)
+  app.directive('button-codes', buttonCodes)
 }

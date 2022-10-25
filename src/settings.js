@@ -60,9 +60,9 @@ const setting = {
    */
   isNeedLogin: true,
   /**
-   * @type {string} 'roles' | 'code'
+   * @type {string} 'rbac'|'roles' | 'code'
    */
-  permissionMode: 'roles',
+  permissionMode: 'rbac',
   /**
    * @type {boolean} true | false
    * @description Whether  open prod mock
@@ -106,7 +106,10 @@ const setting = {
    * vite.config.js base config
    * such as
    * */
-  viteBasePath: './'
+  viteBasePath: './',
+
+  //平台id  2->vue3-admin-plus
+  plateFormId: 2
 }
 
 export default setting

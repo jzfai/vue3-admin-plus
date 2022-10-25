@@ -27,8 +27,7 @@ const switchRoles = computed({
   },
   set(val) {
     const roles = [val]
-    localStorage.setItem('roles', JSON.stringify(roles))
-    location.reload()
+    userStore.setRoles(roles)
   }
 })
 </script>
