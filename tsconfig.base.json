@@ -1,9 +1,10 @@
 {
+  //设置files为空,则不会自动扫描默认目录，也就是只会扫描include配置的目录
   "files": [],
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    //	启用所有严格类型检查选项。
+    //启用所有严格类型检查选项。
     //启用 --strict相当于启用 --noImplicitAny, --noImplicitThis, --alwaysStrict， --strictNullChecks和 --strictFunctionTypes和--strictPropertyInitialization。
     "strict": true,
     // 允许编译器编译JS，JSX文件
@@ -28,7 +29,7 @@
     //输出目录
     "outDir": "./ts-out-dir",
     //是否输出src2.js.map文件
-    "sourceMap": true,
+    "sourceMap": false,
     //变量定义了但是未使用
     "noUnusedLocals": false,
     //是否允许把json文件当做模块进行解析

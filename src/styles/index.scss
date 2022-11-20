@@ -1,8 +1,52 @@
-@import './variables.scss';
-@import './transition.scss';
+//scss 语法糖包含常用的布局方式 flex column
 @import './scss-suger.scss';
-@import './reset-style.scss';
-@import './elemenet-style-overflow.scss';
+//重置 element-plus 样式
+@import './reset-elemenet-plus-style.scss';
+//动画文件
+@import './transition.scss';
+
+//reset style
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+* {
+  box-sizing: border-box;
+}
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+a:focus,
+a:active {
+  outline: none;
+}
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+span,
+output {
+  display: inline-block;
+  line-height: 1;
+}
 
 //scroll
 @mixin main-show-wh() {

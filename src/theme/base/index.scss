@@ -79,4 +79,17 @@ html.base-theme {
   --nav-bar-background: #fff;
   --nav-bar-box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
   --nav-bar-right-menu-background: #fff;
+
+  //transition 动画
+  //侧边栏切换动画时长
+  --sideBar-switch-duration: 0.2s;
+  //logo切换动画时长
+  --logo-switch-duration: 1.5s;
+  //页面动画时长
+  --page-transform-duration: 0.2s;
+  //面包屑导航动画时长
+  --breadcrumb-change-duration: 0.2s;
+
+  //进度条颜色
+  --pregress-bar-color: #409eff;
 }
