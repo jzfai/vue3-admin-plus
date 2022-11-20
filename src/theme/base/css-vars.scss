@@ -6,7 +6,7 @@
 @use 'element-plus/theme-chalk/src/mixins/mixins.scss' as *;
 
 html.dark {
-  color-scheme: dark;
+  color-scheme: base;
 
   // hex colors
   @each $type in (primary, success, warning, danger, error, info) {

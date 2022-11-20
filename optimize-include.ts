@@ -6,6 +6,8 @@
 // console.log(console.dir(files))
 // console.log(console.dir(files.slice(20)))
 
+import { resolve } from 'path'
+
 const elementPlusComponentNameArr = [
   'affix',
   'alert',
@@ -110,13 +112,22 @@ const elementPlusComponentNameArr = [
   'upload',
   'virtual-list'
 ]
-export const optimizeDepsArr = () => {
+
+export const pkgPath = resolve(__dirname, './package.json')
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+let { dependencies } = require(pkgPath)
+dependencies = Object.keys(dependencies).filter((dep) => !dep.startsWith('@types/'))
+
+const EPDepsArr = () => {
   const depsArr = [] as string[]
   elementPlusComponentNameArr.forEach((feItem) => {
     depsArr.push(`element-plus/es/components/${feItem}/style/index`)
   })
-
   return depsArr
 }
+
+export const optimizeElementPlus = EPDepsArr()
+export const optimizeDependencies = dependencies
 
 export default []

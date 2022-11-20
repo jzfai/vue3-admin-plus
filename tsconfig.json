@@ -6,6 +6,6 @@
       "~/*": ["typings/*"]
     }
   },
-  "include": ["src", "typings", "auto-imports.d.ts"],
+  "include": ["src", "typings"],
   "exclude": ["node_modules", "**/dist"]
 }

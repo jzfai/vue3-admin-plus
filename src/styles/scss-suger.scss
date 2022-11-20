@@ -256,3 +256,19 @@ flex布局 第一个字母为主轴
   background: #fff;
   width: 100vw;
 }
+
+//table操作栏
+.table-operation-btn {
+  span {
+    //点击样式
+    cursor: pointer;
+    color: #477ef5;
+  }
+}
+
+//table操作栏
+.btn-click-style {
+  //点击样式
+  cursor: pointer;
+  color: #477ef5;
+}
