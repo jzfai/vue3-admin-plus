@@ -1,5 +1,4 @@
 import router from '@/router'
-
 export const getQueryParam = () => {
   const route: any = router.currentRoute
   if (route.value?.query.params) {
@@ -34,6 +33,10 @@ export const routerReplace = (name, params) => {
     name,
     query: data
   })
+}
+
+export const routeInfo = () => {
+  return router.currentRoute
 }
 export const routerBack = () => {
   router.go(-1)

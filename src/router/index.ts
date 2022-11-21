@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Layout from '@/layout/index.vue'
-import type { RouterTypes } from '~/basic'
 import basicDemo from './modules/basic-demo'
+import type { RouterTypes } from '~/basic'
+import Layout from '@/layout/index.vue'
 
 export const constantRoutes: RouterTypes = [
   {
@@ -40,7 +40,7 @@ export const constantRoutes: RouterTypes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'Dashboard', elSvgIcon: 'Fold' }
+        meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
       }
     ]
   },
@@ -50,7 +50,7 @@ export const constantRoutes: RouterTypes = [
     children: [
       {
         path: 'https://github.jzfai.top/low-code-platform',
-        meta: { title: 'LowCodePlatform', icon: 'link' }
+        meta: { title: 'LowCodePlatFrom', icon: 'link' }
       }
     ]
   },
@@ -60,7 +60,7 @@ export const constantRoutes: RouterTypes = [
     children: [
       {
         path: 'https://github.jzfai.top/low-code-platform/#/permission-center/user-table-query',
-        meta: { title: 'RBAC', icon: 'link' }
+        meta: { title: 'RBAC', icon: 'skill' }
       }
     ]
   },
@@ -72,10 +72,11 @@ export const constantRoutes: RouterTypes = [
         path: 'index',
         component: () => import('@/views/setting-switch/index.vue'),
         name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example', affix: true }
+        meta: { title: 'Setting Switch', icon: 'example' }
       }
     ]
   },
+  basicDemo,
   {
     path: '/error-log',
     component: Layout,
@@ -96,7 +97,6 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
-
   {
     path: '/nested',
     component: Layout,
@@ -154,19 +154,7 @@ export const constantRoutes: RouterTypes = [
         meta: { title: 'menu2' }
       }
     ]
-  },
-  {
-    path: '/external-link',
-    component: Layout,
-    children: [
-      {
-        component: () => {},
-        path: 'https://github.com/jzfai/vue3-admin-ts.git',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
-  },
-  basicDemo
+  }
 ]
 
 //角色和code数组动态路由

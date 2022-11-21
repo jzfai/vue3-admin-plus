@@ -2,6 +2,11 @@
 import useClipboard from 'vue-clipboard3'
 import { ElMessage } from 'element-plus'
 
+// i18n language  match title
+import { i18n } from '@/lang'
+// the keys using  zh file
+import langEn from '@/lang/zh'
+
 export const sleepTimeout = (time: number) => {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
@@ -16,16 +21,13 @@ export function cloneDeep(value) {
   return JSON.parse(JSON.stringify(value))
 }
 
+//copyValueToClipboard
 const { toClipboard } = useClipboard()
 export const copyValueToClipboard = (value: any) => {
   toClipboard(JSON.stringify(value))
   ElMessage.success('复制成功')
 }
-
-// i18n language  match title
-import { i18n } from '@/lang'
 const { t, te } = i18n.global
-import langEn from '@/lang/en'
 export const langTitle = (title) => {
   for (const key of Object.keys(langEn)) {
     if (te(`${key}.${title}`) && t(`${key}.${title}`)) {
@@ -33,4 +35,9 @@ export const langTitle = (title) => {
     }
   }
   return title
+}
+
+//get i18n instance
+export const getLangInstance = () => {
+  return i18n.global as ObjKeys
 }

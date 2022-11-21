@@ -12,8 +12,8 @@
     <el-button @click="setSize('small')">small</el-button>
 
     <div v-lang class="mt-10px mb-10px font-bold">switch language</div>
-    <el-button @click="setLanguage('en')">en</el-button>
-    <el-button @click="setLanguage('zh')">zh</el-button>
+    <el-button @click="changeLanguage('en')">en</el-button>
+    <el-button @click="changeLanguage('zh')">zh</el-button>
 
     <!--example components -->
     <div v-lang class="mb-10px font-bold mt-20px">Button Group</div>
@@ -37,34 +37,15 @@
   </div>
 </template>
 <script setup lang="ts">
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles'
-  }
-]
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { useConfigStore } from '@/store/config'
-const { setTheme, theme, setSize, size, setLanguage, language } = useConfigStore()
-setTheme(theme)
-setSize(size)
-setLanguage(language)
+
+const { setTheme, theme, setSize, size, setLanguage } = useConfigStore()
+const route = useRoute()
+const changeLanguage = (langParam) => {
+  setLanguage(langParam, route.meta?.title)
+}
 const count = ref(0)
 const showObj = ref(GLOBAL_VAR)
 </script>

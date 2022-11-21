@@ -1,7 +1,7 @@
+import packageJson from '../package.json'
 import type { SettingsConfig } from '~/basic'
-
 export const settings: SettingsConfig = {
-  title: 'Vue3 Admin Plus',
+  title: packageJson.name,
   /**
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar

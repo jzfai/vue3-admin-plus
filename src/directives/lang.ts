@@ -1,7 +1,7 @@
+import { watch } from 'vue'
+import { storeToRefs } from 'pinia/dist/pinia'
 import { langTitle } from '@/hooks/use-common'
 import { useConfigStore } from '@/store/config'
-import { storeToRefs } from 'pinia/dist/pinia'
-
 //element-plus
 const componentToProps = {
   ElInput: 'placeholder',
