@@ -1,3 +1,4 @@
+import NProgress from 'nprogress'
 import type { RouteRawConfig, RouterTypes, rawConfig } from '~/basic'
 import type { RouteRecordName } from 'vue-router'
 /**
@@ -6,7 +7,6 @@ import type { RouteRecordName } from 'vue-router'
  * return 过滤后的异步路由
  */
 // @ts-ignore
-import NProgress from 'nprogress'
 import Layout from '@/layout/index.vue'
 /*
  * 路由操作

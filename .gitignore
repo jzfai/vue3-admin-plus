@@ -49,3 +49,4 @@ pnpm*
 auto-imports.d.ts
 components.d.ts
 stats.html
+ts-out-dir

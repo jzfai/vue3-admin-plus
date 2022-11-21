@@ -1,10 +1,8 @@
-import { langTitle } from '@/hooks/use-common'
 import { defineStore } from 'pinia'
+import { langTitle } from '@/hooks/use-common'
 import settings from '@/settings'
 import { toggleHtmlClass } from '@/theme/utils'
 import { i18n } from '@/lang'
-const { locale }: any = i18n.global
-import router from '@/router'
 export const useConfigStore = defineStore('config', {
   state: () => {
     return {
@@ -25,11 +23,11 @@ export const useConfigStore = defineStore('config', {
     setSize(data: string) {
       this.size = data
     },
-    setLanguage(lang: string) {
+    setLanguage(lang: string, title) {
+      const { locale }: any = i18n.global
       this.language = lang
       locale.value = lang
-      const route = router.currentRoute
-      document.title = langTitle(route.value.meta?.title) // i18 page title
+      document.title = langTitle(title) // i18 page title
     }
   }
 })

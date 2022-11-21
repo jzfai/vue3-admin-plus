@@ -31,15 +31,15 @@
 </template>
 
 <script setup lang="ts">
-import { langTitle } from '@/hooks/use-common'
 import { getCurrentInstance, nextTick, onMounted, reactive, toRefs, watch } from 'vue'
 import { Close } from '@element-plus/icons-vue'
 import { resolve } from 'path-browserify'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia/dist/pinia'
+import type { RouterTypes } from '~/basic'
 import { useBasicStore } from '@/store/basic'
 import { useTagsViewStore } from '@/store/tags-view'
-import type { RouterTypes } from '~/basic'
+import { langTitle } from '@/hooks/use-common'
 const route = useRoute()
 const router = useRouter()
 const state = reactive({

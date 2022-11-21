@@ -23,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { langTitle } from '@/hooks/use-common'
 import { ref, watch } from 'vue'
 import { compile } from 'path-to-regexp'
 import { useRoute, useRouter } from 'vue-router'
-import { useBasicStore } from '@/store/basic'
 import type { RouterTypes } from '~/basic'
+import { useBasicStore } from '@/store/basic'
+import { langTitle } from '@/hooks/use-common'
 const levelList = ref()
 const { settings } = useBasicStore()
 const route = useRoute()

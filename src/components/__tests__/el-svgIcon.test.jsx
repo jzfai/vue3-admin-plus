@@ -10,7 +10,6 @@ import ElSvgIcon from '../ElSvgIcon.vue'
 describe('ElSvgIcon.vue', () => {
   it('create', () => {
     const wrapper = mount(() => <ElSvgIcon name="Edit" size={30} color={'red'} />)
-
     // console.log(111111, wrapper.classes())
     // expect(wrapper.classes()).toContain('el-icon')
   })
