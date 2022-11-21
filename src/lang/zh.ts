@@ -30,14 +30,19 @@ export default {
     'Third KeepAlive': '三级路由缓存',
     SecondChild: '三级路由示例1',
     ThirdChild: '三级路由示例2',
-
     Worker: '多线程',
     Permission: '权限路由',
-
     'Permission Switch': '权限切换',
     'Role Index': '角色权限',
     'Code Index': 'Code权限',
-    'Button Permission': '按钮权限'
+    'Button Permission': '按钮权限',
+
+    Charts: '图表',
+    Excel: 'Excel',
+    'Rich Text': '富文本',
+    Table: '表格',
+    Guid: '使用引导',
+    Other: '其他'
   },
 
   tagsView: {
