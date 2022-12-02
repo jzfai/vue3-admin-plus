@@ -13,8 +13,7 @@
     <el-button type="primary" @click="backClick">返回</el-button>
   </div>
 </template>
-<script setup lang="ts">
-defineOptions({ name: 'SecondChild' })
+<script setup lang="ts" name="SecondChild">
 const searchForm = reactive({
   name: '',
   age: ''

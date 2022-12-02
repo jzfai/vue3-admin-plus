@@ -13,9 +13,8 @@
     <el-button type="primary" @click="routerDemoF">to SecondChild.vue</el-button>
   </div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="SecondKeepAlive">
 //使用keep-alive 1.设置name（必须） 2.在路由配置处设置cachePage：即可缓存
-defineOptions({ name: 'SecondKeepAlive' })
 const searchForm = reactive({
   name: '',
   age: ''

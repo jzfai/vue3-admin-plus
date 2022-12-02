@@ -1,15 +1,15 @@
 
- 
-> the plus version of vue3-admin-ts , provide enterprise-class using demo
+# The plus version of vue3-admin-ts , provide enterprise-class using demo
 
 suggestion the Node.js >= 16.0.0。
 
 
+
 ## Documents
 
-- [Official Documentation](https://github.jzfai.top/vue3-admin-doc/)
+- [Official Documentation](https://github.jzfai.top/vue3-admin-en-doc/)
 
-- [中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
+- [中文官网](https://github.jzfai.top/vue3-admin-cn-doc/)
 
 
 
@@ -27,6 +27,7 @@ The framework is available in js,ts, plus and electron versions
 - js version：[vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git) -- basic version
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - ts version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- ts version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
 - java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
 
 

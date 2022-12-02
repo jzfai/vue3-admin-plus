@@ -39,6 +39,7 @@ onBeforeUnmount(() => {
 })
 
 const initChart = () => {
+  // eslint-disable-next-line unicorn/prefer-query-selector
   state.chart = echarts.init(document.getElementById(props.id))
   const xAxisData = []
   const data = []

@@ -2,19 +2,19 @@
   <div class="scroll-y">
     <div className="mb-1">折线图</div>
     <div className="rowSS">
-      <div id="echartsContainerLineF" style="width: 550px; height: 400px"></div>
-      <div id="echartsContainerLineS" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerLineF" style="width: 550px; height: 400px"/>
+      <div id="echartsContainerLineS" style="width: 550px; height: 400px"/>
     </div>
     <div className="mb-1">柱状图</div>
     <div className="rowSS">
-      <div id="echartsContainerBarF" style="width: 550px; height: 400px"></div>
-      <div id="echartsContainerBarS" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerBarF" style="width: 550px; height: 400px"/>
+      <div id="echartsContainerBarS" style="width: 550px; height: 400px"/>
     </div>
 
     <div className="mb-1">饼图</div>
     <div className="rowSS">
-      <div id="echartsContainerPieF" style="width: 550px; height: 400px"></div>
-      <div id="echartsContainerPieS" style="width: 550px; height: 400px"></div>
+      <div id="echartsContainerPieF" style="width: 550px; height: 400px"/>
+      <div id="echartsContainerPieS" style="width: 550px; height: 400px"/>
     </div>
   </div>
 </template>
@@ -22,10 +22,10 @@
 //echarts 例子地址 https://echarts.apache.org/examples/zh/index.html#chart-type-line
 import * as echarts from 'echarts'
 /*折线图*/
-let echartsInstanceF = ref(null)
+const echartsInstanceF = ref(null)
 const initEchartsF = () => {
-  echartsInstanceF.value = echarts.init(document.getElementById('echartsContainerLineF'))
-  let option = {
+  echartsInstanceF.value = echarts.init(document.querySelector('#echartsContainerLineF'))
+  const option = {
     title: {
       text: '一天用电量分布',
       subtext: '纯属虚构'
@@ -142,10 +142,10 @@ const initEchartsF = () => {
   }
   echartsInstanceF.value.setOption(option)
 }
-let echartsInstanceS = ref(null)
+const echartsInstanceS = ref(null)
 const initEchartsS = () => {
-  echartsInstanceS.value = echarts.init(document.getElementById('echartsContainerLineS'))
-  let option = {
+  echartsInstanceS.value = echarts.init(document.querySelector('#echartsContainerLineS'))
+  const option = {
     xAxis: {
       type: 'category',
       boundaryGap: false,
@@ -166,10 +166,10 @@ const initEchartsS = () => {
 }
 
 /*柱状图*/
-let echartsBarF = ref(null)
+const echartsBarF = ref(null)
 const initBarF = () => {
-  echartsBarF.value = echarts.init(document.getElementById('echartsContainerBarF'))
-  let option = {
+  echartsBarF.value = echarts.init(document.querySelector('#echartsContainerBarF'))
+  const option = {
     xAxis: {
       type: 'category',
       data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -190,10 +190,10 @@ const initBarF = () => {
   }
   echartsBarF.value.setOption(option)
 }
-let echartsBarS = ref(null)
+const echartsBarS = ref(null)
 const initBarS = () => {
-  echartsBarS.value = echarts.init(document.getElementById('echartsContainerBarS'))
-  let option = {
+  echartsBarS.value = echarts.init(document.querySelector('#echartsContainerBarS'))
+  const option = {
     title: {
       text: '某地区蒸发量和降水量',
       subtext: '纯属虚构'
@@ -260,10 +260,10 @@ const initBarS = () => {
 }
 
 /*饼图*/
-let echartsPieF = ref(null)
+const echartsPieF = ref(null)
 const initPieF = () => {
-  echartsPieF.value = echarts.init(document.getElementById('echartsContainerPieF'))
-  let option = {
+  echartsPieF.value = echarts.init(document.querySelector('#echartsContainerPieF'))
+  const option = {
     title: {
       text: '某站点用户访问来源',
       subtext: '纯属虚构',
@@ -300,10 +300,10 @@ const initPieF = () => {
   }
   echartsPieF.value.setOption(option)
 }
-let echartsPieS = ref(null)
+const echartsPieS = ref(null)
 const initPieS = () => {
-  echartsPieS.value = echarts.init(document.getElementById('echartsContainerPieS'))
-  let option = {
+  echartsPieS.value = echarts.init(document.querySelector('#echartsContainerPieS'))
+  const option = {
     tooltip: {
       trigger: 'item'
     },

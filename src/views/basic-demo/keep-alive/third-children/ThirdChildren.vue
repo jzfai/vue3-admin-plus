@@ -3,8 +3,7 @@
   <el-input v-model="testInput" placeholder="input test keepAlive" style="width: 400px" />
 </template>
 
-<script setup>
-defineOptions({ name: 'ThirdChildren' })
+<script setup name="ThirdChildren">
 const testInput = ref('')
 </script>
 

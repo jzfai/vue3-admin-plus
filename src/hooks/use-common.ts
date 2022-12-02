@@ -6,6 +6,7 @@ import { ElMessage } from 'element-plus'
 import { i18n } from '@/lang'
 // the keys using  zh file
 import langEn from '@/lang/zh'
+import settings from '@/settings'
 
 export const sleepTimeout = (time: number) => {
   return new Promise((resolve) => {
@@ -29,6 +30,9 @@ export const copyValueToClipboard = (value: any) => {
 }
 const { t, te } = i18n.global
 export const langTitle = (title) => {
+  if (!title) {
+    return settings.title
+  }
   for (const key of Object.keys(langEn)) {
     if (te(`${key}.${title}`) && t(`${key}.${title}`)) {
       return t(`${key}.${title}`)

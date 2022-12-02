@@ -11,8 +11,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-defineOptions({ name: 'ThirdKeepAlive' })
+<script setup lang="ts" name="ThirdKeepAlive">
 const testInput = ref()
 const { cachedViewsDeep } = useBasicStore()
 </script>

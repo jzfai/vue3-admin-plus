@@ -38,11 +38,12 @@ onBeforeUnmount(() => {
   state.chart = null
 })
 const initChart = () => {
+  // eslint-disable-next-line unicorn/prefer-query-selector
   state.chart = echarts.init(document.getElementById(props.id))
   const xData = (function () {
     const data = []
     for (let i = 1; i < 13; i++) {
-      data.push(i + 'month')
+      data.push(`${i  }month`)
     }
     return data
   })()
