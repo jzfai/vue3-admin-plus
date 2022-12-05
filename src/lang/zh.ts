@@ -38,6 +38,7 @@ export default {
     'Button Permission': '按钮权限',
 
     Charts: '图表',
+    Directive: '指令',
     Excel: 'Excel',
     'Rich Text': '富文本',
     Table: '表格',

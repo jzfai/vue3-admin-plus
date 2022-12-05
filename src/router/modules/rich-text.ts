@@ -6,10 +6,10 @@ const richText = {
   alwaysShow: true,
   children: [
     {
-      path: 'index',
-      component: () => import('@/views/rich-text/index.vue'),
-      name: 'Index',
-      meta: { title: 'Index' }
+      path: 'tinymce',
+      name: 'Tinymce',
+      component: () => import('@/views/rich-text/TinymceExample.vue'),
+      meta: { title: 'Tinymce', icon: 'nested' }
     }
   ]
 }

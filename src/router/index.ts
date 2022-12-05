@@ -4,6 +4,7 @@ import charts from './modules/charts'
 import richText from './modules/rich-text'
 import table from './modules/table'
 import excel from './modules/excel'
+import directive from './modules/directive'
 import other from './modules/other'
 import guid from './modules/guid'
 import type { RouterTypes } from '~/basic'
@@ -157,6 +158,7 @@ export const constantRoutes: RouterTypes = [
   richText,
   charts,
   table,
+  directive,
   excel,
   other
 ]
