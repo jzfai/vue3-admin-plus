@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-let input = ref('')
+const input = ref('')
 </script>
 
 <style lang="scss" scoped>

@@ -38,7 +38,7 @@
 
 <script setup>
 import { Download } from '@element-plus/icons-vue'
-import { toRefs, onBeforeMount } from 'vue'
+import { onBeforeMount, toRefs } from 'vue'
 import { transactionList } from '@/api/remote-search'
 import { aoaToSheetXlsx } from './excel'
 import { ElMessage } from 'element-plus'
@@ -77,11 +77,11 @@ const handleExportExcel = () => {
     })
     return
   }
-  let table = unref(state.list)
-  let header = ['ID', '订单号', '价格', '用户名']
-  let data = table.map((item, index) => {
+  const table = unref(state.list)
+  const header = ['ID', '订单号', '价格', '用户名']
+  const data = table.map((item, index) => {
     // eslint-disable-next-line camelcase
-    let { id, order_no, price, username } = item
+    const { id, order_no, price, username } = item
     // eslint-disable-next-line camelcase
     return [index, order_no, price, username]
   })
@@ -93,7 +93,7 @@ const handleExportExcel = () => {
 }
 
 //导出属性到页面中使用
-let { list, listLoading } = toRefs(state)
+const { list, listLoading } = toRefs(state)
 </script>
 
 <style scoped lang="scss"></style>

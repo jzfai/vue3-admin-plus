@@ -10,7 +10,7 @@ export default {
         // 定义变量
         let pressTimer = null;
         // 创建计时器（ 2秒后执行函数 ）
-        let start = (e) => {
+        const start = (e) => {
             if (e.button) {
                 if (e.type === 'click' && e.button !== 0) {
                     return;
@@ -23,7 +23,7 @@ export default {
             }
         };
         // 取消计时器
-        let cancel = (e) => {
+        const cancel = (e) => {
             if (pressTimer !== null) {
                 clearTimeout(pressTimer);
                 pressTimer = null;

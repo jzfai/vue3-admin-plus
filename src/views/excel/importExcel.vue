@@ -48,7 +48,7 @@ const handleOnChange = (uploadFile) => {
 }
 
 //导出属性到页面中使用
-let { list, headers, listLoading } = toRefs(state)
+const { list, headers, listLoading } = toRefs(state)
 </script>
 
 <style scoped lang="scss"></style>

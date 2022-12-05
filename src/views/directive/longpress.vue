@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-let data = ref("");
+const data = ref("");
 const setData = () => {
   data.value = "执行长按指令";
 };

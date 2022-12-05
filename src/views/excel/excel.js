@@ -23,15 +23,15 @@ export function importsExcel(file) {
     const reader = new FileReader()
 
     reader.onload = (e) => {
-      let data = new Uint8Array(e.target.result)
-      let workbook = read(data, { type: 'array' })
+      const data = new Uint8Array(e.target.result)
+      const workbook = read(data, { type: 'array' })
       //  console.log("workbook: ", workbook);
 
       //将Excel 第一个sheet内容转为json格式
-      let worksheet = workbook.Sheets[workbook.SheetNames[0]]
-      let json = utils.sheet_to_json(worksheet)
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]]
+      const json = utils.sheet_to_json(worksheet)
       //   console.log("jsonExcel:", jsonExcel);
-      let headers = getHeaderRow(worksheet)
+      const headers = getHeaderRow(worksheet)
       resolve({ tableData: json, headers })
     }
 

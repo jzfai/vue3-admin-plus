@@ -5,7 +5,7 @@
  */
 import { ElMessage } from 'element-plus';
 function handleClick(ev) {
-    let input = document.createElement('input');
+    const input = document.createElement('input');
     input.value = this.copyData.toLocaleString();
     document.body.appendChild(input);
     input.select();
