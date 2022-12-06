@@ -42,9 +42,9 @@
     "xlsx": "^0.18.5",
     "d3": "7.2.1",
     "splitpanes": "^3.1.1",
-    "vxe-table": "4.3.5",
+    "vxe-table": "^4.3.5",
     "xe-utils": "^3.5.6",
-    "tinymce": "6.1.0",
+    "tinymce": "^6.1.0",
     "driver.js": "^0.9.8",
     "sortablejs": "1.15.0"
   },

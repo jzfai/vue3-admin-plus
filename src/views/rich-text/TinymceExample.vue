@@ -1,6 +1,6 @@
 <template>
   <div class="scroll-y">
-    <div class="mb-1">
+    <div class="mb-10px">
       <el-button @click="setTinyContent">设置文本消息</el-button>
       <el-button @click="getTinyContent">获取文本消息</el-button>
       <el-button @click="clearTinyContent">清空内容</el-button>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import Tinymce from './component/index.vue'
+import Tinymce from './tinymce/index.vue'
 /*tinymce操作*/
 const refTinymce = ref(null)
 const setTinyContent = () => {
