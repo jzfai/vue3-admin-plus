@@ -10,7 +10,7 @@
 <script setup lang="ts">
 //@ts-ignore
 import { onMounted, onUnmounted, reactive, toRefs } from 'vue'
-import screen from 'screenfull'
+import screenfull from 'screenfull'
 import { ElMessage } from 'element-plus'
 import SvgIcon from '@/icons/SvgIcon.vue'
 const state = reactive({
@@ -22,9 +22,8 @@ onMounted(() => {
 onUnmounted(() => {
   destroy()
 })
-const screenfull: any = screen
 const toggleScreen = () => {
-  if (!screenfull.enabled) {
+  if (!screenfull.isEnabled) {
     ElMessage({
       message: 'you browser can not work',
       type: 'warning'
@@ -37,12 +36,12 @@ const change = () => {
   state.isFullscreen = screenfull.isFullscreen
 }
 const init = () => {
-  if (screenfull.enabled) {
+  if (screenfull.isEnabled) {
     screenfull.on('change', change)
   }
 }
 const destroy = () => {
-  if (screenfull.enabled) {
+  if (screenfull.isEnabled) {
     screenfull.off('change', change)
   }
 }

@@ -3,6 +3,7 @@ export default {
     Dashboard: '首页',
     LowCodePlatFrom: '低代码平台',
     RBAC: '用户权限角色',
+    Guide: '指引',
     'Setting Switch': '配置文件',
     'Error Log': '错误日志',
     'Error Index': '错误日志列表',

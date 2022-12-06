@@ -52,6 +52,8 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
+  guid,
+
   {
     path: '/RBAC',
     component: Layout,
@@ -62,6 +64,13 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
+  basicDemo,
+  richText,
+  charts,
+  table,
+  directive,
+  excel,
+  other,
   {
     path: '/setting-switch',
     component: Layout,
@@ -74,7 +83,6 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
-
   {
     path: '/error-log',
     component: Layout,
@@ -152,15 +160,7 @@ export const constantRoutes: RouterTypes = [
         meta: { title: 'menu2' }
       }
     ]
-  },
-  basicDemo,
-  guid,
-  richText,
-  charts,
-  table,
-  directive,
-  excel,
-  other
+  }
 ]
 
 //角色和code数组动态路由

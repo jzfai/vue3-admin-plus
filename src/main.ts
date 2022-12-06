@@ -44,4 +44,9 @@ directive(app)
 //element-plus
 app.use(ElementPlus)
 
+//import vxe-table
+import VXETable from 'vxe-table'
+import 'vxe-table/lib/style.css'
+app.use(VXETable)
+
 app.mount('#app')
