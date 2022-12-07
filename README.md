@@ -1,3 +1,4 @@
+# vue3-admin-plus
 
 The plus version of vue3-admin-ts , provide enterprise-class using demo
 
@@ -49,7 +50,6 @@ pnpm i
 pnpm run dev
 ```
 
-using the browser to open http://localhost:5001
 
 ## Build
 
