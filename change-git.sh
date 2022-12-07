@@ -1,6 +1,6 @@
 git filter-branch --env-filter '
 
-OLD_EMAIL="869653722@qq.com" // 要替换的邮箱
+OLD_EMAIL="869653722qq.com" // 要替换的邮箱
 CORRECT_NAME="jzfai" // 新的用户名
 CORRECT_EMAIL="869653722@qq.com" // 新的邮箱
 

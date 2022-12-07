@@ -57,12 +57,11 @@ const showSidebarItem = (children = [], parent) => {
     if (item.hidden) {
       return false
     } else {
-      // Temp set(will be used if only has one showing child)
-      onlyOneChild.value = item
       return true
     }
   })
   if (showingChildren.length === 1 && !parent?.alwaysShow) {
+    onlyOneChild.value = showingChildren[0]
     return true
   }
   if (showingChildren.length === 0) {
