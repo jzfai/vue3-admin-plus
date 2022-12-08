@@ -47,7 +47,7 @@ resizeHandler()
   left: 0;
   z-index: 1001;
   overflow: hidden;
-  border-right: 0.5px solid #eee;
+  border-right: 0.5px solid var(--side-bar-border-right-color);
 }
 .closeSidebar {
   .sidebar-container {

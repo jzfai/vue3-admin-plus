@@ -7,7 +7,7 @@
 html.china-red {
   color-scheme: china-red;
   @each $type in (primary, success, warning, danger, error, info) {
-    @include set-css-color-rgb($colors, $type);
+    @include set-css-color-rgb($colors,$type);
   }
 
   @each $type in (primary, success, warning, danger, error, info) {
