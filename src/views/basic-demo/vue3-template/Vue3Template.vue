@@ -4,7 +4,6 @@
 
 <script setup>
 // 获取store和router
-
 const props = defineProps({
   name: {
     require: true,

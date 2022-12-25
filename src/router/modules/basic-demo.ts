@@ -36,26 +36,26 @@ const BasicDemo = {
       meta: { title: 'Parent Children' }
     },
     {
-      path: 'second-keep-alive',
+      path: 'keep-alive-group',
       component: () => import('@/views/basic-demo/keep-alive/index.vue'),
-      name: 'SecondKeepAlive',
+      name: 'KeepAliveGroup',
       //cachePage: cachePage when page enter, default false
       //leaveRmCachePage: remove cachePage when page leave, default false
-      meta: { title: 'Second KeepAlive', cachePage: true, leaveRmCachePage: false }
+      meta: { title: 'KeepAlive Group', cacheGroup: ['KeepAliveGroup', 'SecondChild', 'ThirdChild'] }
     },
     {
       path: 'second-child',
       name: 'SecondChild',
       hidden: true,
       component: () => import('@/views/basic-demo/keep-alive/second-child.vue'),
-      meta: { title: 'SecondChild', cachePage: true, activeMenu: '/basic-demo/second-keep-alive' }
+      meta: { title: 'SecondChild', activeMenu: '/basic-demo/second-keep-alive' }
     },
     {
       path: 'third-child',
       name: 'ThirdChild',
       hidden: true,
       component: () => import('@/views/basic-demo/keep-alive/third-child.vue'),
-      meta: { title: 'ThirdChild', cachePage: true, activeMenu: '/basic-demo/second-keep-alive' }
+      meta: { title: 'ThirdChild', activeMenu: '/basic-demo/second-keep-alive' }
     },
     //tab-keep-alive
     {
@@ -78,13 +78,13 @@ const BasicDemo = {
           path: 'second-children',
           name: 'SecondChildren',
           component: () => import('@/views/basic-demo/keep-alive/third-children/SecondChildren.vue'),
-          meta: { title: 'SecondChild', cachePage: true, leaveRmCachePage: true }
+          meta: { title: 'SecondChildren', cachePage: true, leaveRmCachePage: true }
         },
         {
           path: 'third-children',
           name: 'ThirdChildren',
           component: () => import('@/views/basic-demo/keep-alive/third-children/ThirdChildren.vue'),
-          meta: { title: 'ThirdChild', cachePage: true, leaveRmCachePage: false }
+          meta: { title: 'ThirdChildren', cachePage: true, leaveRmCachePage: false }
         }
       ]
     },

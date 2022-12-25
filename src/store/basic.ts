@@ -102,7 +102,7 @@ export const useBasicStore = defineStore('basic', {
         state.cachedViewsDeep.push(view)
       })
     },
-    setCacheViewDeep(view) {
+    delCacheViewDeep(view) {
       this.$patch((state) => {
         const index = state.cachedViewsDeep.indexOf(view)
         index > -1 && state.cachedViewsDeep.splice(index, 1)

@@ -23,11 +23,11 @@ export default {
     Mock: '',
     'Svg Icon': '',
     'Parent Children': '',
-    'Second KeepAlive': '',
+    'KeepAlive Group': '',
     'Tab KeepAlive': '',
     'Third KeepAlive': '',
-    SecondChild: '',
-    ThirdChild: '',
+    SecondChildren: '',
+    ThirdChildren: '',
 
     Worker: '',
 

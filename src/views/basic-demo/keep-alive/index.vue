@@ -13,7 +13,7 @@
     <el-button type="primary" @click="routerDemoF">to SecondChild.vue</el-button>
   </div>
 </template>
-<script setup lang="ts" name="SecondKeepAlive">
+<script setup lang="ts" name="KeepAliveGroup">
 //使用keep-alive 1.设置name（必须） 2.在路由配置处设置cachePage：即可缓存
 const searchForm = reactive({
   name: '',
@@ -29,27 +29,7 @@ onActivated(() => {
 onDeactivated(() => {
   console.log('onDeactivated')
 })
-const route: any = useRoute()
-// cacheGroup为缓存分组  SecondKeepAlive->SecondChild->ThirdChild
-const cacheGroup = ['SecondKeepAlive', 'SecondChild', 'ThirdChild']
-const { delCachedView } = useBasicStore()
-const unWatch = watch(
-  () => route.name,
-  () => {
-    if (!cacheGroup.includes(route.name)) {
-      sleepTimeout(300).then(() => {
-        cacheGroup.forEach((fItem) => delCachedView(fItem))
-      })
-      //remove watch
-      unWatch()
-    }
-  },
-  //deep: true
-  { immediate: true }
-)
-const cancelWatch = () => {
-  unWatch()
-}
+
 const routerDemoF = () => {
   //推荐路由跳转根据router的name,这样在你修改路径时，只要不修改name，就没有影响。
   //推荐传递的是query参数，好处是刷新时可以回显，传入的obj对象会反序列化。
