@@ -76,7 +76,7 @@ const init = {
   // convert_urls: false,
   // 初始化完成
   init_instance_callback: (editor) => {
-    console.log('初始化完成：', editor)
+    // console.log('初始化完成：', editor)
   }
   // 此处为自定义图片上传处理函数，
   // images_upload_handler: (blobInfo, progress) => {
