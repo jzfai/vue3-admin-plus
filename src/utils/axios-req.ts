@@ -6,27 +6,25 @@ import { useBasicStore } from '@/store/basic'
 const service = axios.create()
 
 //请求前拦截
-service.interceptors.request.use(
-  (req) => {
-    const { token, axiosPromiseArr } = useBasicStore()
-    //axiosPromiseArr收集请求地址,用于取消请求
-    req.cancelToken = new axios.CancelToken((cancel) => {
-      axiosPromiseArr.push({
-        url: req.url,
-        cancel
-      })
+service.interceptors.request.use((req) => {
+  const { token, axiosPromiseArr } = useBasicStore()
+  //axiosPromiseArr收集请求地址,用于取消请求
+  req.cancelToken = new axios.CancelToken((cancel) => {
+    axiosPromiseArr.push({
+      url: req.url,
+      cancel
     })
-    //设置token到header
-    req.headers['AUTHORIZE_TOKEN'] = token
-    //如果req.method给get 请求参数设置为 ?name=xxx
-    if ('get'.includes(req.method?.toLowerCase() as string)) req.params = req.data
-    return req
-  },
-  (err) => {
-    //发送请求失败
-    Promise.reject(err)
-  }
-)
+  })
+  //设置token到header
+  // @ts-ignore
+  req.headers['AUTHORIZE_TOKEN'] = token
+  //如果req.method给get 请求参数设置为 ?name=xxx
+  if ('get'.includes(req.method?.toLowerCase() as string)) req.params = req.data
+  return req
+}, (err) => {
+  //发送请求失败
+  Promise.reject(err)
+})
 //请求后拦截
 service.interceptors.response.use(
   (res) => {
@@ -39,7 +37,9 @@ service.interceptors.response.use(
       if (noAuthCode.includes(code) && !location.href.includes('/login')) {
         ElMessageBox.confirm('请重新登录', {
           confirmButtonText: '重新登录',
-          cancelButtonText: '取消',
+          closeOnClickModal: false,
+          showCancelButton: false,
+          showClose: false,
           type: 'warning'
         }).then(() => {
           useBasicStore().resetStateAndToLogin()
