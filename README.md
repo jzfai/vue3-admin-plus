@@ -29,7 +29,7 @@ The framework is available in js,ts, plus and electron versions
 - ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
 - ts version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
 - ts version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
-- java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
+- java Micro-service background data：[micro-service-single](https://github.com/jzfai/micro-service-single)
 
 
 ## Build Setup

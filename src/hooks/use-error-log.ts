@@ -3,11 +3,13 @@ import { jsErrorCollection } from 'js-error-collection'
 import pack from '../../package.json'
 import settings from '@/settings'
 import bus from '@/utils/bus'
+//此处不要使用utils下的axios
 import axiosReq from 'axios'
 const reqUrl = '/integration-front/errorCollection/insert'
+let repeatErrorLogJudge = ''
 const errorLogReq = (errLog: string) => {
   axiosReq({
-    url: reqUrl,
+    url: import.meta.env.VITE_APP_BASE_URL+reqUrl,
     data: {
       pageUrl: window.location.href,
       errorLog: errLog,
@@ -25,8 +27,11 @@ export const useErrorLog = () => {
   //判断该环境是否需要收集错误日志,由settings配置决定
   if (settings.errorLog?.includes(import.meta.env.VITE_APP_ENV)) {
     jsErrorCollection({ runtimeError: true, rejectError: true, consoleError: true }, (errLog) => {
-      //判断是否是reqUrl错误，避免死循环
-      if (!errLog.includes(reqUrl)) errorLogReq(errLog)
+      if (!repeatErrorLogJudge || !errLog.includes(repeatErrorLogJudge)) {
+        errorLogReq(errLog)
+        //移除重复日志，fix重复提交错误日志，避免造成死循环
+        repeatErrorLogJudge = errLog.slice(0, 20)
+      }
     })
   }
 }
