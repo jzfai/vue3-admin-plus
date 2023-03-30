@@ -126,6 +126,7 @@ watch(
 .app-main {
   padding: var(--app-main-padding);
   /*50 = navbar  */
+  z-index: 0;
   position: relative;
   overflow: hidden;
   background-color: var(--app-main-background);
