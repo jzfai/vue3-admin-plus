@@ -129,9 +129,10 @@ watch(
   position: relative;
   overflow: hidden;
   background-color: var(--app-main-background);
+  min-height: calc(100vh - #{var(--nav-bar-height)}) !important;
 }
 .show-tag-view {
-  height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)}) !important;
+  min-height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)}) !important;
 }
 .fixed-header + .app-main {
   padding-top: 50px;
