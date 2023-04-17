@@ -101,7 +101,7 @@ const loginFunc = () => {
     .then(({ data }) => {
       elMessage('登录成功')
       basicStore.setToken(data?.jwtToken)
-      router.push('/')
+      router.push({ path: state.redirect || '/', query: state.otherQuery })
     })
     .catch((err) => {
       tipMessage = err?.msg

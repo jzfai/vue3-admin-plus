@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
 import LangSelect from './component/LangSelect.vue'
@@ -68,9 +68,10 @@ const toggleSideBar = () => {
 }
 //退出登录
 const router = useRouter()
+const route = useRoute()
 const loginOut = () => {
   elMessage('退出登录成功')
-  router.push(`/login?redirect=/`)
+  router.push(`/login?redirect=${route.path}`)
   nextTick(() => {
     resetState()
   })
