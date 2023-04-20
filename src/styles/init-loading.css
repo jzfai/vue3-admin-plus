@@ -1,0 +1,17 @@
+/*开屏loading样式设置*/
+.loader-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.loading-gif{
+
+}
+
+.load_title{
+  margin-top: 30px;
+  font-size: 16px;
+}
