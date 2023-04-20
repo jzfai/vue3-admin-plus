@@ -8,7 +8,7 @@ import { i18n } from '@/lang'
 import langEn from '@/lang/zh'
 import settings from '@/settings'
 
-export const sleepTimeout = (time: number) => {
+export const sleepTimeout = (time) => {
   return new Promise((resolve) => {
     const timer = setTimeout(() => {
       clearTimeout(timer)
@@ -24,7 +24,7 @@ export function cloneDeep(value) {
 
 //copyValueToClipboard
 const { toClipboard } = useClipboard()
-export const copyValueToClipboard = (value: any) => {
+export const copyValueToClipboard = (value) => {
   toClipboard(JSON.stringify(value))
   ElMessage.success('复制成功')
 }
@@ -38,10 +38,52 @@ export const langTitle = (title) => {
       return t(`${key}.${title}`)
     }
   }
+
   return title
 }
 
 //get i18n instance
 export const getLangInstance = () => {
-  return i18n.global as ObjKeys
+  return i18n.global
+}
+
+//生成唯一的uuid
+export const getGuid = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = Math.trunc(Math.random() * 16)
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+}
+
+//根据url下载模板
+export const downLoadTempByUrl = (url) => {
+  //得到主键key
+  const link = document.createElement('a')
+  link.href = url
+  document.body.appendChild(link)
+  link.click()
+}
+
+//下载模板
+export const downLoadTemp = (res) => {
+  //得到主键key
+  const url = window.URL.createObjectURL(new Blob([res.data]))
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', decodeURI('111.xlsx'))
+  document.body.appendChild(link)
+  link.click()
+}
+
+//下载模板
+export const downLoadTempByApi = (reqConfig) => {
+  axiosReq(Object.assign(reqConfig, { responseType: 'blob' })).then((res) => {
+    downLoadTemp(res)
+  })
+}
+
+export const resetData = (from, formString) => {
+  const backData = JSON.parse(formString)
+  Object.keys(backData).forEach((key) => (from[key] = backData[key]))
 }

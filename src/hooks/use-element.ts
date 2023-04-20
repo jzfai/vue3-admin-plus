@@ -1,6 +1,5 @@
 import { reactive, ref, toRefs } from 'vue'
 import { ElLoading, ElMessage, ElMessageBox, ElNotification } from 'element-plus'
-import type { EpPropMergeType } from 'element-plus/es/utils'
 export const useElement = () => {
   // 正整数
   const upZeroInt = (rule, value, callback, msg) => {
@@ -73,33 +72,34 @@ export const useElement = () => {
     /* 表单校验*/
     formRules: {
       //非空
-      isNull: (msg: string) => [{ required: false, message: `${msg}`, trigger: 'blur' }],
-      isNotNull: (msg: string) => [{ required: true, message: `${msg}`, trigger: 'blur' }],
+      notValid: () => [],
+      isNull: (msg) => [{ required: false, message: `${msg}`, trigger: 'blur' }],
+      isNotNull: (msg) => [{ required: true, message: `${msg}`, trigger: 'blur' }],
       // 正整数
-      upZeroInt: (msg: string) => [
+      upZeroInt: (msg) => [
         { required: true, validator: (rule, value, callback) => upZeroInt(rule, value, callback, msg), trigger: 'blur' }
       ],
       // 正整数（包括0）
-      zeroInt: (msg: string) => [
+      zeroInt: (msg) => [
         { required: true, validator: (rule, value, callback) => zeroInt(rule, value, callback, msg), trigger: 'blur' }
       ],
       // 金额
-      money: (msg: string) => [
+      money: (msg) => [
         { required: true, validator: (rule, value, callback) => money(rule, value, callback, msg), trigger: 'blur' }
       ],
       // 手机号
-      phone: (msg: string) => [
+      phone: (msg) => [
         { required: true, validator: (rule, value, callback) => phone(rule, value, callback, msg), trigger: 'blur' }
       ],
       // 邮箱
-      email: (msg: string) => [
+      email: (msg) => [
         { required: true, validator: (rule, value, callback) => email(rule, value, callback, msg), trigger: 'blur' }
       ]
     },
     /* 时间packing相关*/
     datePickerOptions: {
       //选择今天以后的日期，包括今天
-      disabledDate: (time: any) => {
+      disabledDate: (time) => {
         return time.getTime() < Date.now() - 86400000
       }
     },
@@ -128,11 +128,11 @@ export const useElement = () => {
  * type：通知类型
  * duration：通知显示时长（ms）
  * */
-export const elMessage = (message: string, type?) => {
+export const elMessage = (message, type) => {
   ElMessage({
     showClose: true,
     message: message || '成功',
-    type: type || ('success' as string),
+    type: type || 'success',
     center: false
   })
 }
@@ -140,8 +140,8 @@ export const elMessage = (message: string, type?) => {
  * loading加载框
  * 调用后通过 loadingId.close() 进行关闭
  * */
-let loadingId: any = null
-export const elLoading = (msg?: string) => {
+let loadingId = null
+export const elLoading = (msg) => {
   loadingId = ElLoading.service({
     lock: true,
     text: msg || '数据载入中',
@@ -159,12 +159,7 @@ export const closeElLoading = () => {
  * title：提示标题
  * duration：提示时长（ms）
  * */
-export const elNotify = (
-  message: string,
-  type: EpPropMergeType<any, any, any> | undefined,
-  title: string,
-  duration: number
-) => {
+export const elNotify = (message, type, title, duration) => {
   ElNotification({
     title: title || '提示',
     type: type || 'success',
@@ -180,7 +175,7 @@ export const elNotify = (
 * message:提示的内容
 * return Promise
 * */
-export const elConfirmNoCancelBtn = (title: string, message: string) => {
+export const elConfirmNoCancelBtn = (title, message) => {
   return ElMessageBox({
     message: message || '你确定要删除吗',
     title: title || '确认框',
@@ -196,7 +191,7 @@ export const elConfirmNoCancelBtn = (title: string, message: string) => {
  * message:提示的内容
  * return Promise
  * */
-export const elConfirm = (title: string, message: string) => {
+export const elConfirm = (title, message) => {
   return ElMessageBox({
     message: message || '你确定要删除吗',
     title: title || '确认框',

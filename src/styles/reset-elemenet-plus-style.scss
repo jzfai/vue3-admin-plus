@@ -2,3 +2,26 @@
 .el-scrollbar__view {
   padding-bottom: 80px;
 }
+
+
+//button icon
+.fixed-width {
+  .el-button {
+    padding: 7px 0!important;
+  }
+}
+//button
+.el-button{
+  padding: 7px 13px!important;
+}
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+}
+
+
+.el-scrollbar{
+  --el-menu-base-level-padding:15px;
+}

@@ -15,7 +15,7 @@ import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend'
 // import { visualizer } from 'rollup-plugin-visualizer'
 const pathSrc = resolve(__dirname, 'src')
 export default defineConfig(({ command, mode }) => {
-  //const env = loadEnv(mode, process.cwd(), '') //获取环境变量
+  const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
     base: setting.viteBasePath,
     define: {
@@ -29,7 +29,14 @@ export default defineConfig(({ command, mode }) => {
       port: 5005, // 类型： number 指定服务器端口;
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
-      https: false
+      https: false,
+      proxy: {
+        [env.VITE_APP_BASE_URL]: {
+          target: env.VITE_PROXY_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_URL}`), '')
+        }
+      }
     },
     preview: {
       port: 5006,
@@ -81,7 +88,7 @@ export default defineConfig(({ command, mode }) => {
           }
         ],
         //配置后会自动扫描目录下的文件
-        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/api/**', 'src/directives/**'],
+        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/directives/**'],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './eslintrc/.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`

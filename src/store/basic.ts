@@ -1,27 +1,26 @@
 import { nextTick } from 'vue'
 import { defineStore } from 'pinia'
-import type { RouterTypes } from '~/basic'
 import defaultSettings from '@/settings'
 import router, { constantRoutes } from '@/router'
 export const useBasicStore = defineStore('basic', {
   state: () => {
     return {
+      //user info
       token: '',
       getUserInfo: false,
-      userInfo: { username: '', avatar: '' }, //user info
+      userInfo: { username: '', avatar: '' },
       //router
-      allRoutes: [] as RouterTypes,
-      buttonCodes: [],
+      allRoutes: [],
       filterAsyncRoutes: [],
-      roles: [] as Array<string>,
-      codes: [] as Array<number>,
+      roles: [],
+      permission: [],
       //keep-alive
-      cachedViews: [] as Array<string>,
-      cachedViewsDeep: [] as Array<string>,
+      cachedViews: [],
+      cachedViewsDeep: [],
       //other
       sidebar: { opened: true },
       //axios req collection
-      axiosPromiseArr: [] as Array<ObjKeys>,
+      axiosPromiseArr: [],
       settings: defaultSettings
     }
   },
@@ -30,6 +29,15 @@ export const useBasicStore = defineStore('basic', {
     paths: ['token']
   },
   actions: {
+    remotePromiseArrByReqUrl(reqUrl) {
+      this.$patch((state) => {
+        state.axiosPromiseArr.forEach((fItem, index) => {
+          if (fItem.url === reqUrl) {
+            state.axiosPromiseArr.splice(index, 1)
+          }
+        })
+      })
+    },
     setToken(data) {
       this.token = data
     },
@@ -39,24 +47,22 @@ export const useBasicStore = defineStore('basic', {
         state.allRoutes = constantRoutes.concat(routes)
       })
     },
-    setUserInfo({ userInfo, roles, codes }) {
-      const { username, avatar } = userInfo
+    setUserInfo({ user, roles, permissions }) {
       this.$patch((state) => {
         state.roles = roles
-        state.codes = codes
+        state.permission = permissions
         state.getUserInfo = true
-        state.userInfo.username = username
-        state.userInfo.avatar = avatar
+        state.userInfo.username = user.username
+        state.userInfo.avatar = user.avatar
       })
     },
     resetState() {
       this.$patch((state) => {
         state.token = '' //reset token
         state.roles = []
-        state.codes = []
+        state.permission = []
         //reset router
         state.allRoutes = []
-        state.buttonCodes = []
         state.filterAsyncRoutes = []
         //reset userInfo
         state.userInfo.username = ''

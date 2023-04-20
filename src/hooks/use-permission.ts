@@ -1,6 +1,4 @@
 import NProgress from 'nprogress'
-import type { RouteRawConfig, RouterTypes, rawConfig } from '~/basic'
-import type { RouteRecordName } from 'vue-router'
 /**
  * 根据请求，过滤异步路由
  * @param:menuList 异步路由数组
@@ -16,15 +14,10 @@ import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
 
-const buttonCodes: Array<Number> = [] //按钮权限
-interface menuRow {
-  category: number
-  code: number
-  children: RouterTypes
-}
+const buttonCodes = [] //按钮权限
 export const filterAsyncRoutesByMenuList = (menuList) => {
-  const filterRouter: RouterTypes = []
-  menuList.forEach((route: menuRow) => {
+  const filterRouter = []
+  menuList.forEach((route) => {
     //button permission
     if (route.category === 3) {
       buttonCodes.push(route.code)
@@ -40,8 +33,8 @@ export const filterAsyncRoutesByMenuList = (menuList) => {
   })
   return filterRouter
 }
-const getRouteItemFromReqRouter = (route): RouteRawConfig => {
-  const tmp: rawConfig = { meta: { title: '' } }
+const getRouteItemFromReqRouter = (route) => {
+  const tmp = { meta: { title: '' } }
   const routeKeyArr = ['path', 'component', 'redirect', 'alwaysShow', 'name', 'hidden']
   const metaKeyArr = ['title', 'activeMenu', 'elSvgIcon', 'icon']
   // @ts-ignore
@@ -80,7 +73,7 @@ const getRouteItemFromReqRouter = (route): RouteRawConfig => {
       }
     })
   }
-  return tmp as RouteRawConfig
+  return tmp
 }
 
 /**
@@ -90,9 +83,9 @@ const getRouteItemFromReqRouter = (route): RouteRawConfig => {
  * return 过滤后的异步路由
  */
 export function filterAsyncRoutesByRoles(routes, roles) {
-  const res: RouterTypes = []
+  const res = []
   routes.forEach((route) => {
-    const tmp: RouteRawConfig = { ...route }
+    const tmp = { ...route }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutesByRoles(tmp.children, roles)
@@ -117,8 +110,8 @@ function hasPermission(roles, route) {
  * return 过滤后的异步路由
  */
 export function filterAsyncRouterByCodes(codesRoutes, codes) {
-  const filterRouter: RouterTypes = []
-  codesRoutes.forEach((routeItem: RouteRawConfig) => {
+  const filterRouter = []
+  codesRoutes.forEach((routeItem) => {
     if (hasCodePermission(codes, routeItem)) {
       if (routeItem.children) routeItem.children = filterAsyncRouterByCodes(routeItem.children, codes)
       filterRouter.push(routeItem)
@@ -134,25 +127,96 @@ function hasCodePermission(codes, routeItem) {
   }
 }
 //过滤异步路由
-export function filterAsyncRouter({ menuList, roles, codes }) {
+export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
-  let accessRoutes: RouterTypes = []
-  const permissionMode = basicStore.settings?.permissionMode
-  if (permissionMode === 'rbac') {
-    accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
-  } else if (permissionMode === 'roles') {
-    accessRoutes = filterAsyncRoutesByRoles(roleCodeRoutes, roles) //by roles
-  } else {
-    accessRoutes = filterAsyncRouterByCodes(roleCodeRoutes, codes) //by codes
-  }
+  let accessRoutes = []
+  // if (permissionMode === 'rbac') {
+  //   accessRoutes = filterAsyncRoutesByMenuList(menuList) //by menuList
+  // } else if (permissionMode === 'roles') {
+  //   accessRoutes = filterAsyncRoutesByRoles(roleCodeRoutes, roles) //by roles
+  // } else {
+  //   accessRoutes = filterAsyncRouterByCodes(roleCodeRoutes, codes) //by codes
+  // }
+  const fileAfterRouter = filterAsyncRouterByReq(data)
+  accessRoutes = [fileAfterRouter[0]]
   accessRoutes.forEach((route) => router.addRoute(route))
-  asyncRoutes.forEach((item) => router.addRoute(item))
+  console.log(accessRoutes)
+  // asyncRoutes.forEach((item) => router.addRoute(item))
   basicStore.setFilterAsyncRoutes(accessRoutes)
 }
+
+import ParentView from '@/components/ParentView/index.vue'
+import InnerLink from '@/components/InnerLink/index.vue'
+// 过滤请求的应用
+export const filterAsyncRouterByReq = (asyncRouterMap, lastRouter = false, type = false) => {
+  return asyncRouterMap.filter((route) => {
+    if (type && route.children) {
+      route.children = filterChildren(route.children)
+    }
+    if (route.component) {
+      // Layout ParentView 组件特殊处理
+      if (route.component === 'Layout') {
+        route.component = Layout
+      } else if (route.component === 'ParentView') {
+        route.component = ParentView
+      } else if (route.component === 'InnerLink') {
+        route.component = InnerLink
+      } else {
+        route.component = modules[`../views${route.component}`]
+      }
+    }
+    if (route.children != null && route.children && route.children.length) {
+      route.children = filterAsyncRouterByReq(route.children, route, type)
+    } else {
+      delete route['children']
+      delete route['redirect']
+    }
+    return true
+  })
+}
+
+const filterChildren = (childrenMap, lastRouter = false) => {
+  let children = []
+  childrenMap.forEach((el) => {
+    if (el.children && el.children.length) {
+      if (el.component === 'ParentView' && !lastRouter) {
+        el.children.forEach((c) => {
+          c.path = `${el.path}/${c.path}`
+          if (c.children && c.children.length) {
+            children = children.concat(filterChildren(c.children, c))
+            return
+          }
+          children.push(c)
+        })
+        return
+      }
+    }
+    if (lastRouter) {
+      el.path = `${lastRouter.path}/${el.path}`
+    }
+    children = children.concat(el)
+  })
+  return children
+}
+
+// 匹配views里面所有的.vue文件
+const modules = import.meta.glob('../views/**/**.vue')
+console.log(modules)
+const loadView = (view) => {
+  let res
+  for (const path in modules) {
+    const dir = path.split('views/')[1].split('.vue')[0]
+    if (dir === view) {
+      res = () => modules[path]()
+    }
+  }
+  return res
+}
+
 //重置路由
 export function resetRouter() {
   //移除之前存在的路由
-  const routeNameSet: Set<RouteRecordName> = new Set()
+  const routeNameSet = new Set()
   router.getRoutes().forEach((fItem) => {
     if (fItem.name) routeNameSet.add(fItem.name)
   })

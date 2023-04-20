@@ -1,16 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import basicDemo from './modules/basic-demo'
-import charts from './modules/charts'
-import richText from './modules/rich-text'
-import table from './modules/table'
-import excel from './modules/excel'
-import directive from './modules/directive'
-import other from './modules/other'
-import guid from './modules/guid'
-import type { RouterTypes } from '~/basic'
 import Layout from '@/layout/index.vue'
 
-export const constantRoutes: RouterTypes = [
+export const constantRoutes = [
   {
     path: '/redirect',
     component: Layout,
@@ -22,7 +13,6 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
-
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -52,163 +42,128 @@ export const constantRoutes: RouterTypes = [
       }
     ]
   },
-  guid,
 
   {
-    path: '/RBAC',
+    path: '/system',
     component: Layout,
-    children: [
-      {
-        path: 'https://github.jzfai.top/low-code-plateform/#/permission-center/user-table-query',
-        meta: { title: 'RBAC', icon: 'skill' }
-      }
-    ]
-  },
-  basicDemo,
-  richText,
-  charts,
-  table,
-  directive,
-  excel,
-  other,
-  {
-    path: '/setting-switch',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/setting-switch/index.vue'),
-        name: 'SettingSwitch',
-        meta: { title: 'Setting Switch', icon: 'example' }
-      }
-    ]
-  },
-  {
-    path: '/error-log',
-    component: Layout,
-    meta: { title: 'Error Log', icon: 'eye' },
     alwaysShow: true,
+    meta: { title: '系统管理', icon: 'example' },
     children: [
       {
-        path: 'error-log',
-        component: () => import('@/views/error-log/index.vue'),
-        name: 'ErrorLog',
-        meta: { title: 'Error Index' }
+        path: 'user/index',
+        component: () => import('@/views/system/user/index.vue'),
+        name: 'User',
+        meta: { title: '用户管理', icon: 'Fold' }
       },
       {
-        path: 'error-generator',
-        component: () => import('@/views/error-log/error-generator.vue'),
-        name: 'ErrorGenerator',
-        meta: { title: 'Error Generator' }
-      }
-    ]
-  },
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index.vue'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1/index.vue'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2/index.vue'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1/index.vue'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2/index.vue'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3/index.vue'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'user-auth/role/:userId(\\d+)',
+        component: () => import('@/views/system/user/auth-role.vue'),
+        hidden: true,
+        name: 'AuthRole',
+        meta: { title: '分配角色', activeMenu: '/system/user/index' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index.vue'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'role/index',
+        component: () => import('@/views/system/role/index.vue'),
+        name: 'Role',
+        meta: { title: '角色管理', icon: 'Fold' }
+      },
+      {
+        path: 'role-auth/user/:roleId(\\d+)',
+        component: () => import('@/views/system/role/auth-user.vue'),
+        hidden: true,
+        name: 'AuthUser',
+        meta: { title: '分配角色', activeMenu: '/system/role/index' }
+      },
+      {
+        path: 'menu/index',
+        component: () => import('@/views/system/menu/index.vue'),
+        name: 'Menu',
+        meta: { title: '菜单管理', icon: 'Fold' }
       }
     ]
   }
+  // {
+  //   path: '/setting-switch',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/setting-switch/index.vue'),
+  //       name: 'SettingSwitch',
+  //       meta: { title: 'Setting Switch', icon: 'example' }
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/error-log',
+  //   component: Layout,
+  //   meta: { title: 'Error Log', icon: 'eye' },
+  //   alwaysShow: true,
+  //   children: [
+  //     {
+  //       path: 'error-log',
+  //       component: () => import('@/views/error-log/index.vue'),
+  //       name: 'ErrorLog',
+  //       meta: { title: 'Error Index' }
+  //     },
+  //     {
+  //       path: 'error-generator',
+  //       component: () => import('@/views/error-log/error-generator.vue'),
+  //       name: 'ErrorGenerator',
+  //       meta: { title: 'Error Generator' }
+  //     }
+  //   ]
+  // }
+  // basicDemo
 ]
 
 //角色和code数组动态路由
-export const roleCodeRoutes: RouterTypes = [
-  {
-    path: '/roles-codes',
-    component: Layout,
-    redirect: '/roles-codes/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/roles-codes/index.vue'),
-        name: 'RolesCodes',
-        meta: { title: 'Permission Switch' }
-      },
-      {
-        path: 'roleIndex',
-        component: () => import('@/views/roles-codes/role-index.vue'),
-        name: 'RoleIndex',
-        meta: { title: 'Role Index', roles: ['admin'] }
-      },
-      {
-        path: 'code-index',
-        component: () => import('@/views/roles-codes/code-index.vue'),
-        name: 'CodeIndex',
-        meta: { title: 'Code Index', code: 16 }
-      },
-      {
-        path: 'button-permission',
-        component: () => import('@/views/roles-codes/button-permission.vue'),
-        name: 'ButtonPermission',
-        meta: { title: 'Button Permission' }
-      }
-    ]
-  }
+export const roleCodeRoutes = [
+  // {
+  //   path: '/roles-codes',
+  //   component: Layout,
+  //   redirect: '/roles-codes/page',
+  //   alwaysShow: true, // will always show the root menu
+  //   name: 'Permission',
+  //   meta: {
+  //     title: 'Permission',
+  //     icon: 'lock',
+  //     roles: ['admin', 'editor'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/roles-codes/index.vue'),
+  //       name: 'RolesCodes',
+  //       meta: { title: 'Permission Switch' }
+  //     },
+  //     {
+  //       path: 'roleIndex',
+  //       component: () => import('@/views/roles-codes/role-index.vue'),
+  //       name: 'RoleIndex',
+  //       meta: { title: 'Role Index', roles: ['admin'] }
+  //     },
+  //     {
+  //       path: 'code-index',
+  //       component: () => import('@/views/roles-codes/code-index.vue'),
+  //       name: 'CodeIndex',
+  //       meta: { title: 'Code Index', code: 16 }
+  //     },
+  //     {
+  //       path: 'button-permission',
+  //       component: () => import('@/views/roles-codes/button-permission.vue'),
+  //       name: 'ButtonPermission',
+  //       meta: { title: 'Button Permission' }
+  //     }
+  //   ]
+  // }
 ]
 /**
  * asyncRoutes
  * the routes that need to be dynamically loaded based on user roles
  */
-export const asyncRoutes: RouterTypes = [
+export const asyncRoutes = [
   // 404 page must be placed at the end !!!
   { path: '/:catchAll(.*)', name: 'CatchAll', redirect: '/404', hidden: true }
 ]

@@ -221,6 +221,8 @@ const { visible, top, left, selectedTag } = toRefs(state)
   background: var(--tags-view-background);
   border-bottom: 1px solid var(--tags-view-border-bottom);
   box-shadow: var(--tags-view-box-shadow);
+  position: relative;
+  z-index: 10;
   .tags-view-wrapper {
     .tags-view-item {
       display: inline-block;
