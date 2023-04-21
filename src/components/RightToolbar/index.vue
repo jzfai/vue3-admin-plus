@@ -70,7 +70,7 @@ function refresh() {
 
 // 右侧列表元素变化
 function dataChange(data) {
-  for (let item in props.columns) {
+  for (const item in props.columns) {
     const key = props.columns[item].key;
     // eslint-disable-next-line vue/no-mutating-props
     props.columns[item].visible = !data.includes(key);
@@ -83,7 +83,7 @@ function showColumn() {
 }
 
 // 显隐列初始默认隐藏列
-for (let item in props.columns) {
+for (const item in props.columns) {
   if (props.columns[item].visible === false) {
     value.value.push(Number.parseInt(item));
   }

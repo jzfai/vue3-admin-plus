@@ -163,8 +163,8 @@ function selected(name) {
 }
 /** 图标外层点击隐藏下拉列表 */
 function hideSelectIcon(event) {
-  let elem = event.relatedTarget || event.srcElement || event.target || event.currentTarget
-  let className = elem.className
+  const elem = event.relatedTarget || event.srcElement || event.target || event.currentTarget
+  const className = elem.className
   if (className !== 'el-input__inner') {
     showChooseIcon.value = false
   }
@@ -173,8 +173,8 @@ function hideSelectIcon(event) {
 const formRules = useElement().formRules
 /** 提交按钮 */
 const menuRef = ref('')
-let open = ref(false)
-let title = ref('新增菜单')
+const open = ref(false)
+const title = ref('新增菜单')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
 const { sys_show_hide, sys_normal_disable } = useDict('sys_show_hide', 'sys_normal_disable')
@@ -239,7 +239,7 @@ const reshowData = (addEditForm, detailData) => {
     }
   })
 }
-let parentIdOptions = ref([])
+const parentIdOptions = ref([])
 const getNameData = () => {
   parentIdReq().then(({ data }) => {
     const menu = { menuId: 0, menuName: '主类目', children: [] }

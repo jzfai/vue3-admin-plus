@@ -133,7 +133,7 @@ const resetQuery = () => {
 }
 
 const handleAddByParent = ({ menuId }) => {
-  refAddEditModal.value.showModal({ menuId: menuId || ids[0], parentId: menuId })
+  refAddEditModal.value.showModal({ menuId:"", parentId: menuId })
 }
 
 const handleUpdate = (row) => {

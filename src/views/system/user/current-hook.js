@@ -15,7 +15,7 @@ const refExport = ref(null)
 export const handleImport = () => {
   refExport.value.showModal()
 }
-let tableHeadColumns = ref([
+const tableHeadColumns = ref([
   { prop: 'userName', label: '用户名称', minWidth: 100, isTemplate: false, showColumn: true },
   { prop: 'nickName', label: '用户昵称', minWidth: 100, isTemplate: false, showColumn: true },
   { prop: 'dept.deptName', label: '部门', minWidth: 100, isTemplate: false, showColumn: true },

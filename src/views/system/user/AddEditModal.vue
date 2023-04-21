@@ -115,12 +115,12 @@ import { resetData } from '@/hooks/use-common'
 const formRules = useElement().formRules
 /** 提交按钮 */
 const userRef = ref('')
-let open = ref(false)
-let title = ref('新增用户')
+const open = ref(false)
+const title = ref('新增用户')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
 const { sys_user_sex, sys_normal_disable } = useDict('sys_user_sex', 'sys_normal_disable')
-let addEditForm = reactive({
+const addEditForm = reactive({
   nickName: '',
   userId: 0,
   deptId: '',
@@ -159,8 +159,8 @@ const cancel = () => {
   open.value = false
   resetData(addEditForm, formString)
 }
-let postIdsOptions = ref([])
-let roleIdsOptions = ref([])
+const postIdsOptions = ref([])
+const roleIdsOptions = ref([])
 const showModal = (row) => {
   if (row.userId) {
     getUser(row.userId).then(({ data }) => {
@@ -186,7 +186,7 @@ const reshowData = (addEditForm, detailData) => {
     }
   })
 }
-let deptIdOptions = ref([])
+const deptIdOptions = ref([])
 const getImageData = () => {
   deptIdReq().then(({ data }) => {
     deptIdOptions.value = data

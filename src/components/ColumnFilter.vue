@@ -54,7 +54,7 @@ const props = defineProps({
 
 const emit = defineEmits(['colChange'])
 
-let heardColsString = ref('') // 弹框显隐
+const heardColsString = ref('') // 弹框显隐
 
 const draggableList = computed(() => {
   return props.cols

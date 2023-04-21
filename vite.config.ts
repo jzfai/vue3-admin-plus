@@ -44,7 +44,7 @@ export default defineConfig(({ command, mode }) => {
       strictPort: true
     },
     plugins: [
-      vue({ reactivityTransform: true }),
+      vue(),
       vueJsx(),
       UnoCSS({
         presets: [presetUno(), presetAttributify(), presetIcons()]

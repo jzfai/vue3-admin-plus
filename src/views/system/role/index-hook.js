@@ -16,7 +16,7 @@ export const handleImport = () => {
   refExport.value.showModal()
 }
 
-let tableHeadColumns = ref([
+const tableHeadColumns = ref([
   { prop: 'roleName', label: '角色名称', minWidth: 100, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'roleKey', label: '权限字符', minWidth: 100, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'roleSort', label: '显示顺序', minWidth: 100, isTemplate: false, align: 'center', showColumn: true },

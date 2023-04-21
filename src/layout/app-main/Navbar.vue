@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Breadcrumb from './Breadcrumb.vue'
 import Hamburger from './Hamburger.vue'
 import LangSelect from './component/LangSelect.vue'

@@ -4,12 +4,12 @@ import { useBasicStore } from '@/store/basic'
 
 //使用axios.create()创建一个axios请求实例
 const service = axios.create()
-let loadingInstance = null //loading实例
+let loadingInstance:any = null //loading实例
 let tempReqUrlSave = ''
 //请求前拦截
 service.interceptors.request.use(
-  (req) => {
-    const { token, axiosPromiseArr } = useBasicStore()
+  (req:any) => {
+    const { token, axiosPromiseArr }:any = useBasicStore()
     //axiosPromiseArr收集请求地址,用于取消请求
     req.cancelToken = new axios.CancelToken((cancel) => {
       tempReqUrlSave = req.url
@@ -27,15 +27,14 @@ service.interceptors.request.use(
     //req loading
     // @ts-ignore
     if (req.reqLoading ?? true) {
-      // loadingInstance = ElLoading.service({
-      //   lock: true,
-      //   fullscreen: true,
-      //   // spinner: 'CircleCheck',
-      //   text: '数据载入中...',
-      //   background: 'rgba(0, 0, 0, 0.1)'
-      // })
+      loadingInstance = ElLoading.service({
+        lock: true,
+        fullscreen: true,
+        // spinner: 'CircleCheck',
+        text: '数据载入中...',
+        background: 'rgba(0, 0, 0, 0.1)'
+      })
     }
-
     return req
   },
   (err) => {

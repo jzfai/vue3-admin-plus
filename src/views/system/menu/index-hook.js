@@ -15,7 +15,7 @@ export const handleImport = () => {
   refExport.value.showModal()
 }
 
-let tableHeadColumns = ref([
+const tableHeadColumns = ref([
   { prop: 'menuName', label: '菜单名称', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'icon', label: '图标', minWidth: 100, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'orderNum', label: '排序', minWidth: 40, isTemplate: false, align: 'center', showColumn: true },
@@ -61,18 +61,18 @@ watch(
  * @param {*} children 孩子节点字段 默认 'children'
  */
 export function handleTree(data, id, parentId, children) {
-  let config = {
+  const config = {
     id: id || 'id',
     parentId: parentId || 'parentId',
     childrenList: children || 'children'
   }
 
-  let childrenListMap = {}
-  let nodeIds = {}
-  let tree = []
+  const childrenListMap = {}
+  const nodeIds = {}
+  const tree = []
 
-  for (let d of data) {
-    let parentId = d[config.parentId]
+  for (const d of data) {
+    const parentId = d[config.parentId]
     if (childrenListMap[parentId] == null) {
       childrenListMap[parentId] = []
     }
@@ -80,14 +80,14 @@ export function handleTree(data, id, parentId, children) {
     childrenListMap[parentId].push(d)
   }
 
-  for (let d of data) {
-    let parentId = d[config.parentId]
+  for (const d of data) {
+    const parentId = d[config.parentId]
     if (nodeIds[parentId] == null) {
       tree.push(d)
     }
   }
 
-  for (let t of tree) {
+  for (const t of tree) {
     adaptToChildrenList(t)
   }
 
@@ -96,7 +96,7 @@ export function handleTree(data, id, parentId, children) {
       o[config.childrenList] = childrenListMap[o[config.id]]
     }
     if (o[config.childrenList]) {
-      for (let c of o[config.childrenList]) {
+      for (const c of o[config.childrenList]) {
         adaptToChildrenList(c)
       }
     }

@@ -60,10 +60,10 @@ import { getRole } from '@/api/role'
 const formRules = useElement().formRules
 /** 提交按钮 */
 const dataAuthRef = ref('')
-let open = ref(false)
-let title = ref('新增数据权限')
+const open = ref(false)
+const title = ref('新增数据权限')
 const emits = defineEmits([])
-let addEditForm = reactive({
+const addEditForm = reactive({
   roleName: '',
   roleId: '',
   roleKey: '',
@@ -95,9 +95,9 @@ const submitForm = () => {
 /** 所有部门节点数据 */
 const getDeptAllCheckedKeys = () => {
   // 目前被选中的部门节点
-  let checkedKeys = deptRef.value.getCheckedKeys()
+  const checkedKeys = deptRef.value.getCheckedKeys()
   // 半选中的部门节点
-  let halfCheckedKeys = deptRef.value.getHalfCheckedKeys()
+  const halfCheckedKeys = deptRef.value.getHalfCheckedKeys()
   // eslint-disable-next-line prefer-spread
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys)
   return checkedKeys
@@ -148,7 +148,7 @@ const deptNodeAll = ref(false)
 const deptOptions = ref([])
 const deptRef = ref(null)
 function handleCheckedTreeExpand(value) {
-  let treeList = deptOptions.value
+  const treeList = deptOptions.value
   for (const element of treeList) {
     deptRef.value.store.nodesMap[element.id].expanded = value
   }

@@ -83,12 +83,12 @@ import { useCommon } from '../../../../ts-out-dir/src/hooks/use-common'
 const formRules = useElement().formRules
 /** 提交按钮 */
 const roleRef = ref('')
-let open = ref(false)
-let title = ref('新增角色')
+const open = ref(false)
+const title = ref('新增角色')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict('sys_normal_disable')
-let addEditForm = reactive({
+const addEditForm = reactive({
   roleName: '',
   roleId: '',
   menuOptions: [],
@@ -169,7 +169,7 @@ onMounted(() => {
 
 /** 树权限（展开/折叠）*/
 const handleCheckedTreeExpand = (value, type) => {
-  let treeList = menuOptions.value
+  const treeList = menuOptions.value
   for (const element of treeList) {
     menuRef.value.store.nodesMap[element.id].expanded = value
   }
@@ -194,9 +194,9 @@ const handleCheckedTreeConnect = (value) => {
 /** 所有菜单节点数据 */
 const getMenuAllCheckedKeys = () => {
   // 目前被选中的菜单节点
-  let checkedKeys = menuRef.value.getCheckedKeys()
+  const checkedKeys = menuRef.value.getCheckedKeys()
   // 半选中的菜单节点
-  let halfCheckedKeys = menuRef.value.getHalfCheckedKeys()
+  const halfCheckedKeys = menuRef.value.getHalfCheckedKeys()
   // eslint-disable-next-line prefer-spread
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys)
   return checkedKeys
