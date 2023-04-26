@@ -1,8 +1,7 @@
-<!--suppress ALL -->
 <template>
   <div class="login-container columnCC">
     <el-form ref="refLoginForm" :model="loginForm" class="login-form">
-      <h3 class="title">Hugo后台管理系统</h3>
+      <h3 class="title">vue3-admin-plus</h3>
       <el-form-item prop="username" :rules="formRules.isNotNull('用户名不能为空')">
         <el-input v-model="loginForm.username" type="text" size="large" auto-compconste="off" placeholder="账号">
           <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
@@ -20,21 +19,21 @@
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
-      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
-        <el-input
-            v-model="loginForm.code"
-            size="large"
-            auto-compconste="off"
-            placeholder="验证码"
-            style="width: 63%"
-            @keyup.enter="handleLogin"
-        >
-          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
-        </el-input>
-        <div class="login-code">
-          <img :src="codeUrl" class="login-code-img" @click="getCode" />
-        </div>
-      </el-form-item>
+<!--      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">-->
+<!--        <el-input-->
+<!--            v-model="loginForm.code"-->
+<!--            size="large"-->
+<!--            auto-compconste="off"-->
+<!--            placeholder="验证码"-->
+<!--            style="width: 63%"-->
+<!--            @keyup.enter="handleLogin"-->
+<!--        >-->
+<!--          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>-->
+<!--        </el-input>-->
+<!--        <div class="login-code">-->
+<!--          <img :src="codeUrl" class="login-code-img" @click="getCode" />-->
+<!--        </div>-->
+<!--      </el-form-item>-->
       <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 0px"
@@ -73,7 +72,7 @@ const formRules = useElement().formRules
 //form
 const loginForm = reactive({
   username: 'admin',
-  password: '123456',
+  password: '666666',
   rememberMe: 'true',
   code: '',
   uuid: ''
@@ -125,7 +124,7 @@ const loginFunc = () => {
         elMessage('登录成功')
         basicStore.setToken(`Bearer ${data?.token}`)
         recordLoginInfo()
-        router.push('/')
+        router.push('/index')
       })
       .catch((err) => {
         tipMessage.value = err?.msg
@@ -192,7 +191,7 @@ const showLoginInfo = () => {
 
 onBeforeMount(() => {
   showLoginInfo()
-  getCode()
+  // getCode()
 })
 </script>
 

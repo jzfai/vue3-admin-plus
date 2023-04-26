@@ -30,13 +30,13 @@ export default defineConfig(({ command, mode }) => {
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
       https: false,
-      proxy: {
-        [env.VITE_APP_BASE_URL]: {
-          target: env.VITE_PROXY_URL,
-          changeOrigin: true,
-          rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_URL}`), '')
-        }
-      }
+      // proxy: {
+      //   [env.VITE_APP_BASE_URL]: {
+      //     target: env.VITE_PROXY_URL,
+      //     changeOrigin: true,
+      //     rewrite: (path) => path.replace(new RegExp(`^${env.VITE_APP_BASE_URL}`), '')
+      //   }
+      // }
     },
     preview: {
       port: 5006,

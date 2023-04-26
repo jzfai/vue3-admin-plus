@@ -4,7 +4,7 @@ import request from '@/utils/axios-req'
 export const userInfoReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
-      url: '/author/userInfo',
+      url: '/getInfo',
       method: 'get'
     }
     request(reqConfig).then(({ data }) => {
@@ -29,7 +29,7 @@ export const getRouterReq = () => {
 //登录
 export const loginReq = (subForm) => {
   return request({
-    url: '/author/login',
+    url: '/login',
     data: subForm,
     method: 'post'
   })
@@ -38,7 +38,7 @@ export const loginReq = (subForm) => {
 //退出登录
 export const loginOutReq = () => {
   return request({
-    url: '/author/logout',
+    url: '/logout',
     method: 'post'
   })
 }

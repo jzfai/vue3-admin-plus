@@ -12,7 +12,7 @@ import { storeToRefs } from 'pinia/dist/pinia'
 import { useRoute } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { useConfigStore } from '@/store/config'
-import { useErrorLog } from '@/hooks/use-error-log'
+// import { useErrorLog } from '@/hooks/use-error-log'
 
 //reshow default setting
 import { toggleHtmlClass } from '@/theme/utils'
@@ -26,7 +26,7 @@ onBeforeMount(() => {
 })
 onMounted(() => {
   //lanch the errorLog collection
-  useErrorLog()
+  // useErrorLog()
 })
 const route = useRoute()
 onMounted(() => {
