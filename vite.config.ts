@@ -39,7 +39,7 @@ export default defineConfig(({ command, mode }) => {
       // }
     },
     preview: {
-      port: 5006,
+      port: 5010,
       host: true,
       strictPort: true
     },
