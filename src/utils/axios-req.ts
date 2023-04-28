@@ -6,6 +6,7 @@ import { useBasicStore } from '@/store/basic'
 const service = axios.create()
 let loadingInstance:any = null //loading实例
 let tempReqUrlSave = ''
+let authorTipDoor=true
 //请求前拦截
 service.interceptors.request.use(
   (req:any) => {
@@ -51,7 +52,7 @@ service.interceptors.response.use(
       loadingInstance && loadingInstance.close()
     }
     //download file
-    if (res.data?.size || res.headers['content-type'].includes('sheet')) {
+    if (res.data?.size) {
       return res
     }
     const { code, msg } = res.data
@@ -60,25 +61,31 @@ service.interceptors.response.use(
     if (successCode.includes(code)) {
       return res.data
     } else {
-      if (noAuthCode.includes(code)) {
-        ElMessageBox.confirm('请重新登录', {
-          confirmButtonText: '重新登录',
-          closeOnClickModal: false,
-          showCancelButton: false,
-          showClose: false,
-          type: 'warning'
-        }).then(() => {
-          useBasicStore().resetStateAndToLogin()
-        })
+      //authorTipDoor 防止多个请求 多次alter
+      if(authorTipDoor){
+        if (noAuthCode.includes(code)) {
+          authorTipDoor=false
+          ElMessageBox.confirm('请重新登录', {
+            confirmButtonText: '重新登录',
+            closeOnClickModal: false,
+            showCancelButton: false,
+            showClose: false,
+            type: 'warning'
+          }).then(() => {
+            useBasicStore().resetStateAndToLogin()
+            authorTipDoor=true
+          })
+        }else{
+          // @ts-ignore
+          if (!res.config?.isNotTipErrorMsg) {
+            ElMessage.error({
+              message: msg,
+              duration: 2 * 1000
+            })
+          }
+          return Promise.reject(msg)
+        }
       }
-      // @ts-ignore
-      if (!res.config?.isNotTipErrorMsg) {
-        ElMessage.error({
-          message: msg,
-          duration: 2 * 1000
-        })
-      }
-      return Promise.reject(msg)
     }
   },
   //响应报错

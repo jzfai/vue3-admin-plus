@@ -105,7 +105,8 @@ export const exportReq = (reqConfig) => {
   return request({
     url: `/system/user/export`,
     method: 'post',
-    params: Object.assign(reqConfig, { responseType: 'blob' })
+    responseType: 'blob',
+    params: Object.assign(reqConfig)
   })
 }
 

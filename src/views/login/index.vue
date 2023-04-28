@@ -19,21 +19,21 @@
           <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
         </el-input>
       </el-form-item>
-<!--      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">-->
-<!--        <el-input-->
-<!--            v-model="loginForm.code"-->
-<!--            size="large"-->
-<!--            auto-compconste="off"-->
-<!--            placeholder="验证码"-->
-<!--            style="width: 63%"-->
-<!--            @keyup.enter="handleLogin"-->
-<!--        >-->
-<!--          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>-->
-<!--        </el-input>-->
-<!--        <div class="login-code">-->
-<!--          <img :src="codeUrl" class="login-code-img" @click="getCode" />-->
-<!--        </div>-->
-<!--      </el-form-item>-->
+      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
+        <el-input
+            v-model="loginForm.code"
+            size="large"
+            auto-compconste="off"
+            placeholder="验证码"
+            style="width: 63%"
+            @keyup.enter="handleLogin"
+        >
+          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
+        </el-input>
+        <div class="login-code">
+          <img :src="codeUrl" class="login-code-img" @click="getCode" />
+        </div>
+      </el-form-item>
       <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 0px"
@@ -191,7 +191,7 @@ const showLoginInfo = () => {
 
 onBeforeMount(() => {
   showLoginInfo()
-  // getCode()
+   getCode()
 })
 </script>
 

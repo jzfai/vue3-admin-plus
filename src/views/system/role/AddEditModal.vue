@@ -77,7 +77,6 @@ import { ElMessage } from 'element-plus'
 import { addRole, getRole, menuOptionsReq, roleMenuTreeselect, updateRole } from '@/api/role'
 import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
-import { useCommon } from '../../../../ts-out-dir/src/hooks/use-common'
 
 //element valid
 const formRules = useElement().formRules

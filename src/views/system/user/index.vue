@@ -54,7 +54,7 @@
         <el-button type="info" plain icon="Upload" @click="handleImport">导入</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
+        <el-button type="warning" plain icon="Download" @click="handleExport()">导出</el-button>
       </el-col>
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="userList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />

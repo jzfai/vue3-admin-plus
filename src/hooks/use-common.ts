@@ -68,10 +68,10 @@ export const downLoadTempByUrl = (url) => {
 //下载模板
 export const downLoadTemp = (res) => {
   //得到主键key
-  const url = window.URL.createObjectURL(new Blob([res]))
+  const url = window.URL.createObjectURL(new Blob([res.data]))
   const link = document.createElement('a')
   link.href = url
-  link.setAttribute('download', decodeURI('111.xlsx'))
+  link.setAttribute('download', decodeURI(res.headers['file-name']))
   document.body.appendChild(link)
   link.click()
 }
