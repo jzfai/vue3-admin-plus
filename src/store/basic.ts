@@ -15,8 +15,8 @@ export const useBasicStore = defineStore('basic', {
       roles: [],
       permission: [],
       //keep-alive
-      cachedViews: [],
-      cachedViewsDeep: [],
+      cachedViews: [] as Array<string>,
+      cachedViewsDeep: [] as Array<string>,
       //other
       sidebar: { opened: true },
       //axios req collection
@@ -31,7 +31,7 @@ export const useBasicStore = defineStore('basic', {
   actions: {
     remotePromiseArrByReqUrl(reqUrl) {
       this.$patch((state) => {
-        state.axiosPromiseArr.forEach((fItem, index) => {
+        state.axiosPromiseArr.forEach((fItem:any, index) => {
           if (fItem.url === reqUrl) {
             state.axiosPromiseArr.splice(index, 1)
           }
@@ -42,7 +42,7 @@ export const useBasicStore = defineStore('basic', {
       this.token = data
     },
     setFilterAsyncRoutes(routes) {
-      this.$patch((state) => {
+      this.$patch((state:any) => {
         state.filterAsyncRoutes = routes
         state.allRoutes = constantRoutes.concat(routes)
       })
