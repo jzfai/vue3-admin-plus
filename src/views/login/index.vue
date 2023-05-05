@@ -54,7 +54,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2022-{{ new Date().getFullYear() }} Hugo All Rights Reserved.</span>
+      <span>Copyright © 2022-{{ new Date().getFullYear() }} KuangHua All Rights Reserved.</span>
     </div>
   </div>
 </template>
@@ -120,11 +120,19 @@ const basicStore = useBasicStore()
 
 const loginFunc = () => {
   loginReq(loginForm)
-      .then(({ data }) => {
-        elMessage('登录成功')
-        basicStore.setToken(`Bearer ${data?.token}`)
-        recordLoginInfo()
-        router.push('/index')
+      .then(({data}) => {
+        const {code,msg}=data
+        const errCode="500"
+        if(errCode.includes(code)){
+          elMessage(msg,"error")
+          loginForm.code=""
+          getCode()
+        }else{
+          elMessage('登录成功')
+          basicStore.setToken(`Bearer ${data?.token}`)
+          recordLoginInfo()
+          router.push('/index')
+        }
       })
       .catch((err) => {
         tipMessage.value = err?.msg

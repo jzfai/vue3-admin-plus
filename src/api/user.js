@@ -31,7 +31,8 @@ export const loginReq = (subForm) => {
   return request({
     url: '/login',
     data: subForm,
-    method: 'post'
+    method: 'post',
+    isNotTipErrorMsg:true,
   })
 }
 

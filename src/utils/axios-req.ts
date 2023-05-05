@@ -82,6 +82,8 @@ service.interceptors.response.use(
               message: msg,
               duration: 2 * 1000
             })
+          }else{
+            return res
           }
           return Promise.reject(msg)
         }

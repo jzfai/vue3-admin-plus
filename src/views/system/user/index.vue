@@ -89,18 +89,18 @@
       </template>
 
       <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-tooltip v-if="scope.row.userId !== 1" content="修改" placement="top">
-            <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(scope.row)" />
+        <template #default="{row}">
+          <el-tooltip v-if="row.userId !== 1" content="修改" placement="top">
+            <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
           </el-tooltip>
-          <el-tooltip v-if="scope.row.userId !== 1" content="删除" placement="top">
-            <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(scope.row)" />
+          <el-tooltip v-if="row.userId !== 1" content="删除" placement="top">
+            <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
           </el-tooltip>
-          <el-tooltip v-if="scope.row.userId !== 1" content="重置密码" placement="top">
-            <el-button link type="primary" icon="Key" size="large" @click="handleResetPwd(scope.row)" />
+          <el-tooltip v-if="row.userId !== 1" content="重置密码" placement="top">
+            <el-button link type="primary" icon="Key" size="large" @click="handleResetPwd(row)" />
           </el-tooltip>
-          <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
-            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(scope.row)" />
+          <el-tooltip v-if="row.userId !== 1" content="分配角色" placement="top">
+            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(row)" />
           </el-tooltip>
         </template>
       </el-table-column>
@@ -137,7 +137,7 @@ const queryParams = reactive({
   status: '', //状态
   beginTime: '', //创建时间开始时间
   endTime: '', //创建时间结束时间
-  dateRange: '' //创建时间
+  dateRange: [] //创建时间
 })
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
@@ -161,7 +161,7 @@ const handleUpdate = (row) => {
 }
 const getList = () => {
   loading.value = true
-  if (dateRange.value.at(-1)) {
+  if (dateRange.value.length) {
     queryParams.beginTime = dateRange.value.at(-1)
     queryParams.endTime = dateRange.value.at(-2)
   }

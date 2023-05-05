@@ -140,7 +140,7 @@ export const elMessage = (message, type) => {
  * loading加载框
  * 调用后通过 loadingId.close() 进行关闭
  * */
-let loadingId = null
+let loadingId:any = null
 export const elLoading = (msg) => {
   loadingId = ElLoading.service({
     lock: true,

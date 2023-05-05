@@ -136,7 +136,6 @@ const queryParams = reactive({
   status: '0', //状态
   beginTime: '', //创建时间开始时间
   endTime: '', //创建时间结束时间
-  dateRange: '' //创建时间
 })
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
@@ -161,17 +160,21 @@ const handleStatusChange = (row) => {
 //重置
 const resetQuery = () => {
   resetData(queryParams, bakQueryParams)
+  dateRange.value=[]
   handleQuery()
 }
 const handleUpdate = (row) => {
-  const roleId = row.roleId || ids[0]
+  const roleId = row.roleId || ids.value[0]
   refAddEditModal.value.showModal({ roleId })
 }
 const getList = () => {
   loading.value = true
-  if (dateRange.value.at(-1)) {
-    queryParams.beginTime = dateRange.value.at(-1)
-    queryParams.endTime = dateRange.value.at(-2)
+  if (dateRange.value?.length) {
+    queryParams.beginTime = dateRange.value.at(-2)
+    queryParams.endTime = dateRange.value.at(-1)
+  }else{
+    queryParams.beginTime=""
+    queryParams.endTime=""
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
     loading.value = false

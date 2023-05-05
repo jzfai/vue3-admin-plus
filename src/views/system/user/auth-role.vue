@@ -71,9 +71,9 @@ const form = ref({
 })
 
 /** 单击选中行数据 */
-const roleRef = $ref('')
+const roleRef = ref('')
 function clickRow(row) {
-  roleRef.toggleRowSelection(row)
+  roleRef.value.toggleRowSelection(row)
 }
 /** 多选框选中数据 */
 function handleSelectionChange(selection) {
@@ -107,7 +107,7 @@ onMounted(() => {
       nextTick(() => {
         roles.value.forEach((row) => {
           if (row.flag) {
-            roleRef.toggleRowSelection(row)
+            roleRef.value.toggleRowSelection(row)
           }
         })
       })

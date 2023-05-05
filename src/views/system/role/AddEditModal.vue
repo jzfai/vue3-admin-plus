@@ -28,12 +28,12 @@
       <el-form-item label="角色顺序" prop="roleSort" :rules="formRules.isNotNull('角色顺序不能为空')">
         <el-input-number v-model="addEditForm.roleSort" controls-position="right" :min="0" />
       </el-form-item>
-      <el-form-item label="状态">
+      <el-form-item v-if="addEditForm.roleKey!=='admin'" label="状态">
         <el-radio-group v-model="addEditForm.status">
           <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="菜单权限">
+      <el-form-item v-if="addEditForm.roleKey!=='admin'" label="菜单权限">
         <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
         <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
         <el-checkbox v-model="addEditForm.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">

@@ -60,7 +60,7 @@ export const constantRoutes = [
   //       component: () => import('@/views/system/user/auth-role.vue'),
   //       hidden: true,
   //       name: 'AuthRole',
-  //       meta: { title: '分配用户', activeMenu: '/system/user/index' }
+  //       meta: { title: '分配角色', activeMenu: '/system/user/index' }
   //     },
   //     {
   //       path: 'role/index',
@@ -73,7 +73,7 @@ export const constantRoutes = [
   //       component: () => import('@/views/system/role/auth-user.vue'),
   //       hidden: true,
   //       name: 'AuthUser',
-  //       meta: { title: '分配角色', activeMenu: '/system/role/index' }
+  //       meta: { title: '分配用户', activeMenu: '/system/role/index' }
   //     },
   //     {
   //       path: 'menu/index',

@@ -38,6 +38,7 @@ export const importReq = (updateSupport) => {
 export const exportReq = (reqConfig) => {
   return request({
     url: `/system/role/export`,
+    responseType: 'blob',
     method: 'post',
     params: Object.assign(reqConfig, { responseType: 'blob' })
   })
