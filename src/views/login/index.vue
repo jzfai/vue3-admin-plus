@@ -4,7 +4,9 @@
       <h3 class="title">vue3-admin-plus</h3>
       <el-form-item prop="username" :rules="formRules.isNotNull('用户名不能为空')">
         <el-input v-model="loginForm.username" type="text" size="large" auto-compconste="off" placeholder="账号">
-          <template #prefix><svg-icon icon-class="user" class="el-input__icon input-icon" /></template>
+          <template #prefix>
+            <svg-icon icon-class="user" class="el-input__icon input-icon"/>
+          </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="password" :rules="formRules.isNotNull('password')">
@@ -16,24 +18,28 @@
             placeholder="密码"
             @keyup.enter="handleLogin"
         >
-          <template #prefix><svg-icon icon-class="password" class="el-input__icon input-icon" /></template>
+          <template #prefix>
+            <svg-icon icon-class="password" class="el-input__icon input-icon"/>
+          </template>
         </el-input>
       </el-form-item>
-      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
-        <el-input
-            v-model="loginForm.code"
-            size="large"
-            auto-compconste="off"
-            placeholder="验证码"
-            style="width: 63%"
-            @keyup.enter="handleLogin"
-        >
-          <template #prefix><svg-icon icon-class="validCode" class="el-input__icon input-icon" /></template>
-        </el-input>
-        <div class="login-code">
-          <img :src="codeUrl" class="login-code-img" @click="getCode" />
-        </div>
-      </el-form-item>
+<!--      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">-->
+<!--        <el-input-->
+<!--            v-model="loginForm.code"-->
+<!--            size="large"-->
+<!--            auto-compconste="off"-->
+<!--            placeholder="验证码"-->
+<!--            style="width: 63%"-->
+<!--            @keyup.enter="handleLogin"-->
+<!--        >-->
+<!--          <template #prefix>-->
+<!--            <svg-icon icon-class="validCode" class="el-input__icon input-icon"/>-->
+<!--          </template>-->
+<!--        </el-input>-->
+<!--        <div class="login-code">-->
+<!--          <img :src="codeUrl" class="login-code-img" @click="getCode"/>-->
+<!--        </div>-->
+<!--      </el-form-item>-->
       <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 0px"
@@ -60,20 +66,21 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useBasicStore } from '@/store/basic'
-import { elMessage, useElement } from '@/hooks/use-element'
-import { getCodeImg, loginReq } from '@/api/user'
+import {onMounted, reactive, ref, watch} from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import {useBasicStore} from '@/store/basic'
+import {elMessage, useElement} from '@/hooks/use-element'
+import {getCodeImg, loginReq} from '@/api/user'
+import {useConfigStore} from "@/store/config.ts";
 /* listen router change and set the query  */
-const { settings } = useBasicStore()
+const {settings} = useBasicStore()
 //element valid
 const formRules = useElement().formRules
 //form
 const loginForm = reactive({
-  username: 'admin',
-  password: '666666',
-  rememberMe: 'true',
+  username: '',
+  password: '',
+  rememberMe: false,
   code: '',
   uuid: ''
 })
@@ -98,7 +105,7 @@ watch(
         state.otherQuery = getOtherQuery(query)
       }
     },
-    { immediate: true }
+    {immediate: true}
 )
 
 /*
@@ -121,13 +128,13 @@ const basicStore = useBasicStore()
 const loginFunc = () => {
   loginReq(loginForm)
       .then(({data}) => {
-        const {code,msg}=data
-        const errCode="500"
-        if(errCode.includes(code)){
-          elMessage(msg,"error")
-          loginForm.code=""
+        const {code, msg} = data
+        const errCode = "500"
+        if (errCode.includes(code)) {
+          elMessage(msg, "error")
+          loginForm.code = ""
           getCode()
-        }else{
+        } else {
           elMessage('登录成功')
           basicStore.setToken(`Bearer ${data?.token}`)
           recordLoginInfo()
@@ -167,39 +174,39 @@ const redirect = ref(undefined)
 
 //获取code
 const getCode = () => {
-  getCodeImg().then(({ data }) => {
-    if (data.captchaEnabled) {
-      captchaEnabled.value = true
-      codeUrl.value = `data:image/gif;base64,${data.img}`
-      loginForm.uuid = data.uuid
-    }
-  })
+  // getCodeImg().then(({data}) => {
+  //   if (data.captchaEnabled) {
+  //     captchaEnabled.value = true
+  //     codeUrl.value = `data:image/gif;base64,${data.img}`
+  //     loginForm.uuid = data.uuid
+  //   }
+  // })
 }
+
+const {rememberMe, username, password, setLoginInfo} = useConfigStore()
 
 const recordLoginInfo = () => {
   //remember password
   if (loginForm.rememberMe) {
-    localStorage.setItem('usename', loginForm.username)
-    localStorage.setItem('password', loginForm.password)
-    localStorage.setItem('rememberMe', loginForm.rememberMe)
+    setLoginInfo(loginForm)
   } else {
-    localStorage.setItem('usename', '')
-    localStorage.setItem('password', '')
-    localStorage.setItem('rememberMe', '')
+    loginForm.username = ""
+    loginForm.password = ""
+    loginForm.rememberMe = false
+    setLoginInfo(loginForm)
   }
 }
 
-//show lgoin info
+
 const showLoginInfo = () => {
-  //reshow password
-  loginForm.username = localStorage.getItem('usename') || loginForm.usename
-  loginForm.password = localStorage.getItem('password') || loginForm.password
-  loginForm.rememberMe = localStorage.getItem('rememberMe') || loginForm.rememberMe
+  loginForm.username = username
+  loginForm.password = password
+  loginForm.rememberMe = rememberMe
 }
 
 onBeforeMount(() => {
   showLoginInfo()
-   getCode()
+  getCode()
 })
 </script>
 
@@ -226,37 +233,45 @@ $light_gray: #eee;
   text-align: center;
   color: #707070;
 }
+
 .login-form {
   border-radius: 6px;
   background: #ffffff;
   width: 400px;
   padding: 25px 25px 5px 25px;
+
   .el-input {
     height: 40px;
+
     input {
       height: 40px;
     }
   }
+
   .input-icon {
     height: 39px;
     width: 14px;
     margin-left: 0px;
   }
 }
+
 .login-tip {
   font-size: 13px;
   text-align: center;
   color: #bfbfbf;
 }
+
 .login-code {
   width: 33%;
   height: 40px;
   float: right;
+
   img {
     cursor: pointer;
     vertical-align: middle;
   }
 }
+
 .el-login-footer {
   height: 40px;
   line-height: 40px;
@@ -269,6 +284,7 @@ $light_gray: #eee;
   font-size: 12px;
   constter-spacing: 1px;
 }
+
 .login-code-img {
   height: 40px;
   padding-left: 12px;

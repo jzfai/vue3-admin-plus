@@ -109,7 +109,12 @@ export const settings: SettingsConfig = {
    * such as
    * */
   //平台id  2->vue3-admin-plus
-  plateFormId: 2
+  plateFormId: 2,
+
+  //login info
+  rememberMe: true,
+  username: "test",
+  password: "666666",
 }
 
 export default settings

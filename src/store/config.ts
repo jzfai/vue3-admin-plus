@@ -8,14 +8,22 @@ export const useConfigStore = defineStore('config', {
     return {
       language: settings.defaultLanguage,
       theme: settings.defaultTheme,
-      size: settings.defaultSize
+      size: settings.defaultSize,
+      rememberMe: settings.rememberMe,
+      username: settings.username,
+      password: settings.username,
     }
   },
   persist: {
     storage: localStorage,
-    paths: ['language', 'theme', 'size']
+    paths: ['language', 'theme', 'size',"rememberMe","username","password"]
   },
   actions: {
+    setLoginInfo({username,password,rememberMe}){
+      this.username = username
+      this.password = password
+      this.rememberMe = rememberMe
+    },
     setTheme(data: string) {
       this.theme = data
       toggleHtmlClass(data)
