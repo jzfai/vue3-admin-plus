@@ -113,7 +113,7 @@ export const settings: SettingsConfig = {
 
   //login info
   rememberMe: true,
-  username: "test",
+  username: "admin",
   password: "666666",
 }
 
