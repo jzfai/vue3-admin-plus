@@ -11,7 +11,7 @@ export const useConfigStore = defineStore('config', {
       size: settings.defaultSize,
       rememberMe: settings.rememberMe,
       username: settings.username,
-      password: settings.username,
+      password: settings.password,
     }
   },
   persist: {
