@@ -107,7 +107,7 @@
 
 <script setup>
 import { ElMessage } from 'element-plus'
-import { addUser, deptIdReq, getUser, updateUser } from '@/api/user'
+import {addUser, deptIdReq, getUser, getUserInfo, updateUser} from '@/api/user'
 import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
 
@@ -122,7 +122,7 @@ const emits = defineEmits([])
 const { sys_user_sex, sys_normal_disable } = useDict('sys_user_sex', 'sys_normal_disable')
 const addEditForm = reactive({
   nickName: '',
-  userId: 0,
+  userId: "",
   deptId: '',
   phonenumber: '',
   email: '',
@@ -138,7 +138,7 @@ const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
   userRef.value.validate((valid) => {
     if (valid) {
-      if (addEditForm.userId !== '') {
+      if (addEditForm.userId) {
         updateUser(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
           open.value = false
@@ -174,8 +174,12 @@ const showModal = (row) => {
       title.value = '编辑用户'
     })
   } else {
-    addEditForm.password = ''
-    title.value = '新增用户'
+    getUserInfo().then(({data})=>{
+      postIdsOptions.value = data.posts
+      roleIdsOptions.value = data.roles
+      addEditForm.password = ''
+      title.value = '新增用户'
+    })
   }
   open.value = true
 }
@@ -187,13 +191,13 @@ const reshowData = (addEditForm, detailData) => {
   })
 }
 const deptIdOptions = ref([])
-const getImageData = () => {
+const getDeptData = () => {
   deptIdReq().then(({ data }) => {
     deptIdOptions.value = data
   })
 }
 onMounted(() => {
-  getImageData()
+  getDeptData()
 })
 //导出给refs使用
 defineExpose({ cancel, showModal })

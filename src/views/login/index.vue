@@ -11,8 +11,9 @@
       </el-form-item>
       <el-form-item prop="password" :rules="formRules.isNotNull('password')">
         <el-input
+            ref="refPassword"
             v-model="loginForm.password"
-            type="password"
+            :type="passwordType"
             size="large"
             auto-compconste="off"
             placeholder="密码"
@@ -21,25 +22,31 @@
           <template #prefix>
             <svg-icon icon-class="password" class="el-input__icon input-icon"/>
           </template>
+          <template #append>
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
+            </span>
+          </template>
         </el-input>
       </el-form-item>
-<!--      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">-->
-<!--        <el-input-->
-<!--            v-model="loginForm.code"-->
-<!--            size="large"-->
-<!--            auto-compconste="off"-->
-<!--            placeholder="验证码"-->
-<!--            style="width: 63%"-->
-<!--            @keyup.enter="handleLogin"-->
-<!--        >-->
-<!--          <template #prefix>-->
-<!--            <svg-icon icon-class="validCode" class="el-input__icon input-icon"/>-->
-<!--          </template>-->
-<!--        </el-input>-->
-<!--        <div class="login-code">-->
-<!--          <img :src="codeUrl" class="login-code-img" @click="getCode"/>-->
-<!--        </div>-->
-<!--      </el-form-item>-->
+      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
+        <el-input
+            v-model="loginForm.code"
+            size="large"
+            auto-compconste="off"
+            placeholder="验证码"
+            style="width: 63%"
+            @keyup.enter="handleLogin"
+        >
+          <template #prefix>
+            <svg-icon icon-class="validCode" class="el-input__icon input-icon"/>
+          </template>
+
+        </el-input>
+        <div class="login-code">
+          <img :src="codeUrl" class="login-code-img" @click="getCode"/>
+        </div>
+      </el-form-item>
       <el-checkbox
           v-model="loginForm.rememberMe"
           style="margin: 0px 0px 25px 0px"
@@ -108,6 +115,19 @@ watch(
     {immediate: true}
 )
 
+/*password show or hidden*/
+const passwordType = ref('password')
+const refPassword = ref()
+const showPwd = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = ''
+  } else {
+    passwordType.value = 'password'
+  }
+  nextTick(() => {
+    refPassword.value.focus()
+  })
+}
 /*
  *  login relative
  * */
@@ -138,7 +158,7 @@ const loginFunc = () => {
           elMessage('登录成功')
           basicStore.setToken(`Bearer ${data?.token}`)
           recordLoginInfo()
-          router.push('/index')
+          router.push('/')
         }
       })
       .catch((err) => {
@@ -148,21 +168,7 @@ const loginFunc = () => {
         subLoading.value = false
       })
 }
-/*
- *  password show or hidden
- * */
-const passwordType = ref('password')
-const refPassword = ref(null)
-const showPwd = () => {
-  if (passwordType.value === 'password') {
-    passwordType.value = ''
-  } else {
-    passwordType.value = 'password'
-  }
-  nextTick(() => {
-    refPassword.value.focus()
-  })
-}
+
 
 const codeUrl = ref('')
 const loading = ref(false)
@@ -174,13 +180,13 @@ const redirect = ref(undefined)
 
 //获取code
 const getCode = () => {
-  // getCodeImg().then(({data}) => {
-  //   if (data.captchaEnabled) {
-  //     captchaEnabled.value = true
-  //     codeUrl.value = `data:image/gif;base64,${data.img}`
-  //     loginForm.uuid = data.uuid
-  //   }
-  // })
+  getCodeImg().then(({data}) => {
+    if (data.captchaEnabled) {
+      captchaEnabled.value = true
+      codeUrl.value = `data:image/gif;base64,${data.img}`
+      loginForm.uuid = data.uuid
+    }
+  })
 }
 
 const {rememberMe, username, password, setLoginInfo} = useConfigStore()
@@ -288,6 +294,11 @@ $light_gray: #eee;
 .login-code-img {
   height: 40px;
   padding-left: 12px;
+}
+
+//是否显示密码
+.show-pwd{
+  cursor: pointer;
 }
 </style>
 

@@ -94,10 +94,11 @@ export const multiDeleteReq = (id) => {
 }
 
 //导入
-export const importReq = (updateSupport) => {
+export const importReq = (updateSupport,data) => {
   return request({
     url: `/system/user/importData?updateSupport=${updateSupport}`,
-    method: 'post'
+    method: 'post',
+    data
   })
 }
 
@@ -140,6 +141,14 @@ export const updateUser = (data) => {
 export const getUser = (id) => {
   return request({
     url: `/system/user/${id}`,
+    method: 'get'
+  })
+}
+
+//详情
+export const getUserInfo = () => {
+  return request({
+    url: `/system/user`,
     method: 'get'
   })
 }

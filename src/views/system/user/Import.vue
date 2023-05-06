@@ -60,13 +60,15 @@ import { downloadTemplateReq, importReq } from '@/api/user'
 //提交按钮
 const fileList = ref([])
 const updateSupport = ref(false)
+const emits = defineEmits([])
 const submitFileForm = () => {
   const formData = new FormData()
   fileList.value.forEach((fItem) => {
     formData.append('file', fItem.raw)
   })
-  importReq(formData).then(({ msg }) => {
+  importReq(updateSupport.value,formData).then(({ msg }) => {
     elConfirm('提示', msg)
+    emits('getList')
     resetModal()
   })
 }
