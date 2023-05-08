@@ -87,3 +87,12 @@ export const resetData = (from, formString) => {
   const backData = JSON.parse(formString)
   Object.keys(backData).forEach((key) => (from[key] = backData[key]))
 }
+
+export const reshowData = (addEditForm, detailData) => {
+  Object.keys(addEditForm).forEach((fItem) => {
+    // eslint-disable-next-line no-prototype-builtins
+    if (detailData && detailData[fItem]) {
+      addEditForm[fItem] = detailData[fItem]
+    }
+  })
+}

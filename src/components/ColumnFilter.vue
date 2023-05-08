@@ -68,7 +68,7 @@ onMounted(() => {
 })
 
 const handleReset = () => {
-  emit('colChange', JSON.parse(heardColsString))
+  emit('colChange', JSON.parse(heardColsString.value))
 }
 </script>
 

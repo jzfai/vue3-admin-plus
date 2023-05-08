@@ -232,13 +232,7 @@ const showModal = (row) => {
   title.value = '新增菜单'
   open.value = true
 }
-const reshowData = (addEditForm, detailData) => {
-  Object.keys(addEditForm).forEach((fItem) => {
-    if (detailData[fItem]) {
-      addEditForm[fItem] = detailData[fItem]
-    }
-  })
-}
+
 const parentIdOptions = ref([])
 const getNameData = () => {
   parentIdReq().then(({ data }) => {

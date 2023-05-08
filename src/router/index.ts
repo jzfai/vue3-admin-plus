@@ -43,46 +43,52 @@ export const constantRoutes = [
     ]
   },
 
-  // {
-  //   path: '/system',
-  //   component: Layout,
-  //   alwaysShow: true,
-  //   meta: { title: '系统管理', icon: 'example' },
-  //   children: [
-  //     {
-  //       path: 'user/index',
-  //       component: () => import('@/views/system/user/index.vue'),
-  //       name: 'User',
-  //       meta: { title: '用户管理', icon: 'Fold' }
-  //     },
-  //     {
-  //       path: 'user-auth/role/:userId(\\d+)',
-  //       component: () => import('@/views/system/user/auth-role.vue'),
-  //       hidden: true,
-  //       name: 'AuthRole',
-  //       meta: { title: '分配角色', activeMenu: '/system/user/index' }
-  //     },
-  //     {
-  //       path: 'role/index',
-  //       component: () => import('@/views/system/role/index.vue'),
-  //       name: 'Role',
-  //       meta: { title: '角色管理', icon: 'Fold' }
-  //     },
-  //     {
-  //       path: 'role-auth/user/:roleId(\\d+)',
-  //       component: () => import('@/views/system/role/auth-user.vue'),
-  //       hidden: true,
-  //       name: 'AuthUser',
-  //       meta: { title: '分配用户', activeMenu: '/system/role/index' }
-  //     },
-  //     {
-  //       path: 'menu/index',
-  //       component: () => import('@/views/system/menu/index.vue'),
-  //       name: 'Menu',
-  //       meta: { title: '菜单管理', icon: 'Fold' }
-  //     }
-  //   ]
-  // }
+  {
+    path: '/system',
+    component: Layout,
+    alwaysShow: true,
+    meta: { title: '系统管理', icon: 'example' },
+    children: [
+      // {
+      //   path: 'user/index',
+      //   component: () => import('@/views/system/user/index.vue'),
+      //   name: 'User',
+      //   meta: { title: '用户管理', icon: 'Fold' }
+      // },
+      // {
+      //   path: 'user-auth/role/:userId(\\d+)',
+      //   component: () => import('@/views/system/user/auth-role.vue'),
+      //   hidden: true,
+      //   name: 'AuthRole',
+      //   meta: { title: '分配角色', activeMenu: '/system/user/index' }
+      // },
+      // {
+      //   path: 'role/index',
+      //   component: () => import('@/views/system/role/index.vue'),
+      //   name: 'Role',
+      //   meta: { title: '角色管理', icon: 'Fold' }
+      // },
+      // {
+      //   path: 'role-auth/user/:roleId(\\d+)',
+      //   component: () => import('@/views/system/role/auth-user.vue'),
+      //   hidden: true,
+      //   name: 'AuthUser',
+      //   meta: { title: '分配用户', activeMenu: '/system/role/index' }
+      // },
+      // {
+      //   path: 'menu/index',
+      //   component: () => import('@/views/system/menu/index.vue'),
+      //   name: 'Menu',
+      //   meta: { title: '菜单管理', icon: 'Fold' }
+      // }
+      // {
+      //   path: 'dict/index',
+      //   component: () => import('@/views/system/dict/index.vue'),
+      //   name: 'Dict',
+      //   meta: { title: '字典管理', icon: 'Fold' }
+      // }
+    ]
+  }
   // {
   //   path: '/setting-switch',
   //   component: Layout,

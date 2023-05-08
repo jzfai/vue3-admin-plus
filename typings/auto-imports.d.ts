@@ -75,6 +75,7 @@ declare global {
   const resetData: typeof import('../src/hooks/use-common')['resetData']
   const resetRouter: typeof import('../src/hooks/use-permission')['resetRouter']
   const resetState: typeof import('../src/hooks/use-permission')['resetState']
+  const reshowData: typeof import('../src/hooks/use-common')['reshowData']
   const resizeHandler: typeof import('../src/hooks/use-layout')['resizeHandler']
   const resolveComponent: typeof import('vue')['resolveComponent']
   const resolveDirective: typeof import('vue')['resolveDirective']
