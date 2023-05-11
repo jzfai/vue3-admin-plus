@@ -75,7 +75,6 @@
 
 <script setup name="AuthUser">
 import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/role'
-import DicTag from '../../../components/DicTag.vue'
 import { ElMessage } from 'element-plus'
 import SelectUser from './SelectUser.vue'
 import { resetData } from '@/hooks/use-common'

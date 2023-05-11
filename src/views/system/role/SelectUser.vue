@@ -70,7 +70,7 @@
 import { authUserSelectAll, unallocatedUserList } from '@/api/role'
 import { useDict } from '@/hooks/use-dict'
 import { ElMessage } from 'element-plus'
-import DicTag from '../../../components/DicTag.vue'
+import DicTag from '../../../components/DictTag.vue'
 const props = defineProps({
   roleId: {
     type: [Number, String]
