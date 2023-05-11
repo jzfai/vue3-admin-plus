@@ -75,7 +75,9 @@
           :label="item.label"
         >
           <template #default="{ row }">
-            <span>{{ row.dictType }}</span>
+            <el-button link type="primary" @click="routerPush('DictDataList', { dictType: row.dictType })">
+              {{ row.dictType }}
+            </el-button>
           </template>
         </el-table-column>
         <!--状态-->
@@ -164,10 +166,10 @@ const resetQuery = () => {
   handleQuery()
 }
 const handleUpdate = (row) => {
-  console.log('row', row)
   const id = row.dictId || ids.value[0]
   refAddEditModal.value.showModal({ id })
 }
+
 const getList = () => {
   loading.value = true
   if (dateRange.value?.length) {
@@ -193,6 +195,7 @@ const { sys_normal_disable } = useDict('sys_normal_disable')
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { resetData } from '@/hooks/use-common'
+import { routerPush } from '@/hooks/use-self-router.ts'
 const {
   refAddEditModal,
   refElTable,

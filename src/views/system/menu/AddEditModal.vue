@@ -99,6 +99,31 @@
         <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符" />
       </el-form-item>
       <el-form-item
+          label="重定向地址"
+          prop="redirect"
+      >
+        <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="重定向地址" />
+      </el-form-item>
+      <el-form-item
+          label="路由名字"
+          prop="routeName"
+          :rules="formRules.notValid('路由名字不能为空')"
+      >
+        <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="重定向地址" />
+      </el-form-item>
+      <el-form-item
+          label="激活菜单"
+          prop="activeMenu"
+          :rules="formRules.notValid('激活菜单不能为空')"
+      >
+        <el-radio-group v-model="addEditForm.activeMenu">
+          <el-radio label="1">是</el-radio>
+          <el-radio label="0">否</el-radio>
+        </el-radio-group>
+      </el-form-item>
+
+
+      <el-form-item
         v-if="addEditForm.menuType === 'C'"
         label="路由参数"
         prop="queryParam"
@@ -148,7 +173,6 @@ import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
 import IconSelect from './IconSelect.vue'
 import { handleTree } from '@/views/system/menu/index-hook'
-
 const showChooseIcon = ref(false)
 const iconSelectRef = ref(null)
 /** 展示下拉图标 */
@@ -183,6 +207,10 @@ let addEditForm = reactive({
   menuId: '',
   menuName: '',
   path: '',
+  redirect: '',
+  routeName: '',
+  activeMenu: '',
+  alwaysShow: false,
   component: '',
   perms: '',
   parentId: 0,

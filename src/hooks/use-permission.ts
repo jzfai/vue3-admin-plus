@@ -14,16 +14,14 @@ import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
 
-
 //过滤异步路由
 export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
   const fileAfterRouter = filterAsyncRouterByReq(data)
-  console.log("fileAfterRouter", fileAfterRouter);
+  console.log('fileAfterRouter', fileAfterRouter)
   fileAfterRouter.forEach((route) => router.addRoute(route))
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }
-
 
 import ParentView from '@/components/ParentView/index.vue'
 import InnerLink from '@/components/InnerLink/index.vue'
@@ -52,12 +50,13 @@ export const filterAsyncRouterByReq = (asyncRouterMap, lastRouter = false, type 
       delete route['children']
       delete route['redirect']
     }
+    route.name = route.routeName
     return true
   })
 }
 
 const filterChildren = (childrenMap, lastRouter = false) => {
-  let children = []
+  let children: any = []
   childrenMap.forEach((el) => {
     if (el.children && el.children.length) {
       if (el.component === 'ParentView' && !lastRouter) {
@@ -73,6 +72,7 @@ const filterChildren = (childrenMap, lastRouter = false) => {
       }
     }
     if (lastRouter) {
+      // @ts-ignore
       el.path = `${lastRouter.path}/${el.path}`
     }
     children = children.concat(el)
@@ -82,7 +82,6 @@ const filterChildren = (childrenMap, lastRouter = false) => {
 
 // 匹配views里面所有的.vue文件
 
-
 //重置路由
 export function resetRouter() {
   //移除之前存在的路由
@@ -90,6 +89,7 @@ export function resetRouter() {
   router.getRoutes().forEach((fItem) => {
     if (fItem.name) routeNameSet.add(fItem.name)
   })
+  // @ts-ignore
   routeNameSet.forEach((setItem) => router.removeRoute(setItem))
   //新增constantRoutes
   constantRoutes.forEach((feItem) => router.addRoute(feItem))
