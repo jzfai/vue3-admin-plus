@@ -5,6 +5,5 @@ declare global {
   }
   const GLOBAL_VAR: String
   const defineOptions: typeof _defineOptions
-  const $ref: any
 }
 export {}

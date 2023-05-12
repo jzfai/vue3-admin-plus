@@ -28,11 +28,16 @@ import './permission'
 import 'element-plus/dist/index.css'
 const app = createApp(App)
 //import element-plus svg icon
-import ElSvgIcon from "@/lib/el-svg-icon"
+import ElSvgIcon from '@/lib/el-svg-icon'
 app.use(ElSvgIcon)
 
+import JsonEditorVue from 'json-editor-vue3'
+app.use(JsonEditorVue)
 //router
 app.use(router)
+
+//jsonEidt
+import 'jsoneditor'
 
 //pinia
 const pinia = createPinia()

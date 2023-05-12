@@ -35,9 +35,10 @@
         :rules="formRules.notValid('菜单图标不能为空')"
       >
         <el-popover
-          v-model:visible="showChooseIcon"
+          v-model="showChooseIcon"
           placement="bottom-start"
           :width="540"
+          :hide-after="0"
           trigger="click"
           @show="showSelectIcon"
         >
@@ -48,9 +49,11 @@
                   v-if="addEditForm.icon"
                   :icon-class="addEditForm.icon"
                   class="el-input__icon"
-                  style="height: 32px; width: 16px"
+                  style="height: 32px; width: 16px; position: relative"
                 />
-                <el-icon v-else style="height: 32px; width: 16px"><search /></el-icon>
+                <el-icon v-else style="height: 32px; width: 16px">
+                  <search />
+                </el-icon>
               </template>
             </el-input>
           </template>
@@ -98,48 +101,16 @@
       >
         <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符" />
       </el-form-item>
-      <el-form-item
-          label="重定向地址"
-          prop="redirect"
-      >
-        <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="重定向地址" />
+      <el-form-item label="redirect" prop="redirect">
+        <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="redirect" />
       </el-form-item>
-      <el-form-item
-          label="路由名字"
-          prop="routeName"
-          :rules="formRules.notValid('路由名字不能为空')"
-      >
-        <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="重定向地址" />
+      <el-form-item label="routeName" prop="routeName" :rules="formRules.isNotNull('routeName')">
+        <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="routeName" />
       </el-form-item>
-      <el-form-item
-          label="激活菜单"
-          prop="activeMenu"
-          :rules="formRules.notValid('激活菜单不能为空')"
-      >
-        <el-radio-group v-model="addEditForm.activeMenu">
-          <el-radio label="1">是</el-radio>
-          <el-radio label="0">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
-
-
-      <el-form-item
-        v-if="addEditForm.menuType === 'C'"
-        label="路由参数"
-        prop="queryParam"
-        :rules="formRules.notValid('路由参数不能为空')"
-      >
-        <el-input v-model="addEditForm.queryParam" class="wi-150px" placeholder="路由参数" />
-      </el-form-item>
-      <el-form-item
-        v-if="addEditForm.menuType === 'C'"
-        label="是否缓存"
-        prop="isCache"
-        :rules="formRules.notValid('请选择是否缓存')"
-      >
-        <el-radio-group v-model="addEditForm.isCache">
-          <el-radio label="0">缓存</el-radio>
-          <el-radio label="1">不缓存</el-radio>
+      <el-form-item label="alwaysShow" prop="alwaysShow" :rules="formRules.notValid('alwaysShow')">
+        <el-radio-group v-model="addEditForm.alwaysShow">
+          <el-radio :label="1">是</el-radio>
+          <el-radio :label="0">否</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="addEditForm.menuType !== 'F'" label="显示状态" :rules="formRules.notValid('请选择显示状态')">
@@ -156,6 +127,9 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="meta">
+        <JsonInput ref="refJsonInput" />
+      </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
@@ -167,24 +141,29 @@
 </template>
 
 <script setup>
+import JsonInput from '@/components/JsonInput.vue'
 import { ElMessage } from 'element-plus'
 import { addMenu, getMenu, parentIdReq, updateMenu } from '@/api/menu'
 import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
 import IconSelect from './IconSelect.vue'
 import { handleTree } from '@/views/system/menu/index-hook'
+
 const showChooseIcon = ref(false)
 const iconSelectRef = ref(null)
+
 /** 展示下拉图标 */
 function showSelectIcon() {
   iconSelectRef.value.reset()
   showChooseIcon.value = true
 }
+
 /** 选择图标 */
 function selected(name) {
   addEditForm.icon = name
   showChooseIcon.value = false
 }
+
 /** 图标外层点击隐藏下拉列表 */
 function hideSelectIcon(event) {
   const elem = event.relatedTarget || event.srcElement || event.target || event.currentTarget
@@ -193,6 +172,7 @@ function hideSelectIcon(event) {
     showChooseIcon.value = false
   }
 }
+
 //element valid
 const formRules = useElement().formRules
 /** 提交按钮 */
@@ -209,22 +189,22 @@ let addEditForm = reactive({
   path: '',
   redirect: '',
   routeName: '',
-  activeMenu: '',
-  alwaysShow: false,
+  alwaysShow: 1,
   component: '',
   perms: '',
   parentId: 0,
   orderNum: 10,
-  queryParam: '',
   menuType: 'M',
   isFrame: '1',
-  isCache: '0',
   visible: '0',
   status: '0'
 })
 const formString = JSON.stringify(addEditForm)
+const refJsonInput = ref()
 const submitForm = () => {
   menuRef.value.validate((valid) => {
+    const jsonData = refJsonInput.value.returnData()
+    addEditForm.metaExtra = JSON.stringify(jsonData)
     if (valid) {
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
@@ -254,7 +234,19 @@ const showModal = (row) => {
       if (!addEditForm.parentId) addEditForm.parentId = 0
       //edit modal
       title.value = '编辑菜单'
+      refJsonInput.value.initData(data.metaExtra)
     })
+  } else {
+    // const objData = {
+    //   cacheGroup: ['KeepAliveGroup', 'SecondChild', 'ThirdChild'],
+    //   activeMenu: '/basic-demo/second-keep-alive',
+    //   cachePage: true,
+    //   leaveRmCachePage: false,
+    //   closeTabRmCache: true,
+    //   elSvgIcon: 'Fold',
+    //   affix: true
+    // }
+    refJsonInput.value.initData({})
   }
   addEditForm.parentId = row.parentId
   title.value = '新增菜单'

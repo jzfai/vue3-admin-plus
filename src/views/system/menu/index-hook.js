@@ -18,14 +18,12 @@ export const handleImport = () => {
 const tableHeadColumns = ref([
   { prop: 'menuName', label: '菜单名称', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'icon', label: '图标', minWidth: 100, isTemplate: true, align: 'center', showColumn: true },
-  { prop: 'orderNum', label: '排序', minWidth: 40, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'status', label: '状态', minWidth: 50, isTemplate: true, align: 'center', showColumn: true },
-
-  { prop: 'perms', label: '权限标识', minWidth: 100, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'redirect', label: '重定向', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'routeName', label: '路由名字', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
-  { prop: 'activeMenu', label: '激活菜单', minWidth: 130, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'component', label: '组件路径', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'metaExtra', label: 'meta参数', minWidth: 130, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'orderNum', label: '排序', minWidth: 40, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'createTime', label: '创建时间', minWidth: 120, isTemplate: false, align: 'center', showColumn: true }
 ])
 export const handleSelectionChange = (selection) => {

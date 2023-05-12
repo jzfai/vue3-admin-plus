@@ -1,19 +1,12 @@
 <template>
   <div class="icon-body">
-    <el-input
-      v-model="iconName"
-      style="position: relative"
-      clearable
-      placeholder="请输入图标名称"
-      @clear="filterIcons"
-      @input="filterIcons"
-    >
-      <template #suffix><i class="el-icon-search el-input__icon" /></template>
+    <el-input v-model="iconName" clearable placeholder="请输入图标名称" @clear="filterIcons" @input="filterIcons">
+      <template #suffix><ElSvgIcon name="Search" /></template>
     </el-input>
     <div class="icon-list">
-      <div v-for="(item, index) in iconList" :key="index" @click="selectedIcon(item)">
-        <svg-icon :icon-class="item" style="height: 30px; width: 16px" />
-        <span>{{ item }}</span>
+      <div v-for="(item, index) in iconList" :key="index" class="icon-item" @click="selectedIcon(item)">
+        <svg-icon :icon-class="item" />
+        <span class="ml-4px">{{ item }}</span>
       </div>
     </div>
   </div>
@@ -52,23 +45,18 @@ defineExpose({
 .icon-body {
   width: 100%;
   padding: 10px;
-  .icon-list {
-    height: 200px;
-    overflow-y: scroll;
-    div {
-      height: 30px;
-      line-height: 30px;
-      margin-bottom: -5px;
-      cursor: pointer;
-      width: 33%;
-      float: left;
-    }
-    span {
-      display: inline-block;
-      vertical-align: -0.15em;
-      fill: currentColor;
-      overflow: hidden;
-    }
-  }
+}
+.icon-list {
+  padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.icon-item {
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 150px;
 }
 </style>
