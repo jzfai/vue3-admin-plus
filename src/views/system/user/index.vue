@@ -89,7 +89,7 @@
       </template>
 
       <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
-        <template #default="{row}">
+        <template #default="{ row }">
           <el-tooltip v-if="row.userId !== 1" content="修改" placement="top">
             <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
           </el-tooltip>
@@ -202,7 +202,7 @@ const handleResetPwd = (row) => {
 //分配角色
 const router = useRouter()
 const handleAuthRole = (row) => {
-  router.push(`/system/user-auth/role/${row.userId}`)
+  router.push(`/user-auth/role/${row.userId}`)
 }
 
 //导入当前页面封装方法
