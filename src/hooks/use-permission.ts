@@ -18,6 +18,7 @@ import { useBasicStore } from '@/store/basic'
 export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
   const fileAfterRouter = filterAsyncRouterByReq(data)
+  console.log('fileAfterRouter', fileAfterRouter)
   fileAfterRouter.forEach((route) => router.addRoute(route))
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }
@@ -50,7 +51,7 @@ export const filterAsyncRouterByReq = (asyncRouterMap) => {
       delete route['redirect']
     }
     route.name = route.routeName
-    if (route.metaExtra) route.meta = { ...route.meta, ...route.metaExtra }
+    if (route.metaExtra) route.meta = Object.assign(route.meta, JSON.parse(JSON.parse(route.metaExtra)))
     return true
   })
 }
