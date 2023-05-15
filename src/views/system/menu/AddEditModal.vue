@@ -101,13 +101,23 @@
       >
         <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符" />
       </el-form-item>
-      <el-form-item label="redirect" prop="redirect">
+      <el-form-item label="redirect" v-if="addEditForm.menuType !== 'F'" prop="redirect">
         <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="redirect" />
       </el-form-item>
-      <el-form-item label="routeName" prop="routeName" :rules="formRules.isNotNull('routeName')">
+      <el-form-item
+        label="routeName"
+        v-if="addEditForm.menuType !== 'F'"
+        prop="routeName"
+        :rules="formRules.isNotNull('routeName')"
+      >
         <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="routeName" />
       </el-form-item>
-      <el-form-item label="alwaysShow" prop="alwaysShow" :rules="formRules.notValid('alwaysShow')">
+      <el-form-item
+        label="alwaysShow"
+        v-if="addEditForm.menuType === 'M'"
+        prop="alwaysShow"
+        :rules="formRules.notValid('alwaysShow')"
+      >
         <el-radio-group v-model="addEditForm.alwaysShow">
           <el-radio :label="1">是</el-radio>
           <el-radio :label="0">否</el-radio>
@@ -127,7 +137,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="meta">
+      <el-form-item label="meta" v-if="addEditForm.menuType !== 'F'">
         <JsonInput ref="refJsonInput" />
       </el-form-item>
     </el-form>
@@ -203,8 +213,10 @@ const formString = JSON.stringify(addEditForm)
 const refJsonInput = ref()
 const submitForm = () => {
   menuRef.value.validate((valid) => {
-    const jsonData = refJsonInput.value.returnData()
-    addEditForm.metaExtra = JSON.stringify(jsonData)
+    if (refJsonInput.value) {
+      const jsonData = refJsonInput.value.returnData()
+      addEditForm.metaExtra = JSON.stringify(jsonData)
+    }
     if (valid) {
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
@@ -246,7 +258,9 @@ const showModal = (row) => {
     //   elSvgIcon: 'Fold',
     //   affix: true
     // }
-    refJsonInput.value.initData({})
+    // nextTick(() => {
+    //   refJsonInput.value.initData({})
+    // })
   }
   addEditForm.parentId = row.parentId
   title.value = '新增菜单'

@@ -1,6 +1,5 @@
-import buttonCodes from './button-codes'
-import codesPermission from './codes-permission'
-import rolesPermission from './roles-permission'
+import hasPerm from './has-perm'
+import hasRole from './has-role'
 import lang from './lang'
 
 import copy from './example/copy'
@@ -11,9 +10,8 @@ import waves from './example/waves.js'
 import clickoutside from './example/clickoutside'
 
 export default function (app) {
-  app.directive('ButtonCodes', buttonCodes)
-  app.directive('CodesPermission', codesPermission)
-  app.directive('RolesPermission', rolesPermission)
+  app.directive('hasPerm', hasPerm)
+  app.directive('hasRole', hasRole)
   app.directive('lang', lang)
 
   //example

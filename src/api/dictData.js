@@ -6,6 +6,7 @@ export const listReq = (query) => {
   return request({
     url: '/system/dict/data/list',
     method: 'get',
+    reqLoading: false,
     params: query
   })
 }

@@ -47,18 +47,18 @@
       <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
       <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
       <el-table-column label="状态" align="center" prop="status">
-        <template #default="scope">
-          <DicTag :options="sys_normal_disable" :value="scope.row.status" />
+        <template #default="{ row }">
+          <DictTag :options="sys_normal_disable" :value="row.status" />
         </template>
       </el-table-column>
       <el-table-column label="创建时间" align="center" prop="createTime" width="180">
-        <template #default="scope">
-          <span>{{ scope.row.createTime }}</span>
+        <template #default="{ row }">
+          <span>{{ row.createTime }}</span>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
-          <el-button link type="primary" icon="CircleClose" @click="cancelAuthUser(scope.row)">取消授权</el-button>
+        <template #default="{ row }">
+          <el-button link type="primary" icon="CircleClose" @click="cancelAuthUser(row)">取消授权</el-button>
         </template>
       </el-table-column>
     </el-table>

@@ -107,6 +107,8 @@ import { useDict } from '@/hooks/use-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 /*查询模块*/
 const queryParams = reactive({
+  pageNum: 1,
+  pageSize: 10000,
   menuName: '', //菜单名称
   status: '' //状态
 })

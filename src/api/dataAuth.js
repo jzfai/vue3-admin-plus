@@ -5,6 +5,7 @@ export const addDataAuth = (data) => {
   return request({
     url: `/system/role/dataScope`,
     data,
+    reqLoading: false,
     method: 'post'
   })
 }

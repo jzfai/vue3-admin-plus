@@ -18,6 +18,7 @@ export const getRouterReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
       url: '/getRouters',
+      reqLoading: false,
       method: 'get'
     }
     request(reqConfig).then(({ data }) => {

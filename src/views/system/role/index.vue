@@ -51,7 +51,9 @@
         <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
+        <el-button v-has-perm="['system:role:export']" type="warning" plain icon="Download" @click="handleExport">
+          导出
+        </el-button>
       </el-col>
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="roleList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
@@ -135,7 +137,7 @@ const queryParams = reactive({
   roleKey: '', //权限字符
   status: '0', //状态
   beginTime: '', //创建时间开始时间
-  endTime: '', //创建时间结束时间
+  endTime: '' //创建时间结束时间
 })
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
@@ -160,7 +162,7 @@ const handleStatusChange = (row) => {
 //重置
 const resetQuery = () => {
   resetData(queryParams, bakQueryParams)
-  dateRange.value=[]
+  dateRange.value = []
   handleQuery()
 }
 const handleUpdate = (row) => {
@@ -172,9 +174,9 @@ const getList = () => {
   if (dateRange.value?.length) {
     queryParams.beginTime = dateRange.value.at(-2)
     queryParams.endTime = dateRange.value.at(-1)
-  }else{
-    queryParams.beginTime=""
-    queryParams.endTime=""
+  } else {
+    queryParams.beginTime = ''
+    queryParams.endTime = ''
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
     loading.value = false
@@ -198,7 +200,7 @@ const handleDataScope = (row) => {
 
 const router = useRouter()
 const handleAuthUser = (row) => {
-  router.push(`/system/role-auth/user/${row.roleId}`)
+  router.push(`/system/role/auth-user/${row.roleId}`)
 }
 
 //导入当前页面封装方法

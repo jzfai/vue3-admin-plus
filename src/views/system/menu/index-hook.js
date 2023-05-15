@@ -16,7 +16,7 @@ export const handleImport = () => {
 }
 
 const tableHeadColumns = ref([
-  { prop: 'menuName', label: '菜单名称', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'menuName', label: '菜单名称', minWidth: 120, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'icon', label: '图标', minWidth: 100, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'status', label: '状态', minWidth: 50, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'redirect', label: '重定向', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
