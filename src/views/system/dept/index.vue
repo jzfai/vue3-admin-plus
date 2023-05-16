@@ -1,19 +1,10 @@
 <template>
   <div class="p-10px">
     <el-form v-show="showSearch" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="字典名称" prop="dictName">
+      <el-form-item label="部门名称" prop="deptName">
         <el-input
-          v-model.trim="queryParams.dictName"
-          placeholder="请输入字典名称"
-          clearable
-          class="wi-150px"
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="字典类型" prop="dictType">
-        <el-input
-          v-model.trim="queryParams.dictType"
-          placeholder="请输入字典类型"
+          v-model.trim="queryParams.deptName"
+          placeholder="请输入部门名称"
           clearable
           class="wi-150px"
           @keyup.enter="handleQuery"
@@ -24,17 +15,6 @@
           <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="创建时间" style="width: 150px}">
-        <el-date-picker
-          v-model="dateRange"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -42,17 +22,21 @@
     </el-form>
     <el-row :gutter="10" class="mb8">
       <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
-      <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate">修改</el-button>
-
-      <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
-
-      <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
-
+      <el-button type="info" plain icon="Sort" @click="toggleExpandAll">展开/折叠</el-button>
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
-      <ColumnFilter v-if="dictList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
+      <ColumnFilter v-if="deptList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="dictList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" align="center" />
+    <el-table
+      v-if="refreshTable"
+      ref="refElTable"
+      v-loading="loading"
+      row-key="deptId"
+      :default-expand-all="isExpandAll"
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      border
+      :data="deptList"
+      @selection-change="handleSelectionChange"
+    >
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
         <el-table-column
@@ -64,9 +48,9 @@
           :prop="item.prop"
           :label="item.label"
         />
-        <!--字典类型-->
+        <!--排序-->
         <el-table-column
-          v-if="item.prop === 'dictType' && item.isTemplate && item.showColumn"
+          v-if="item.prop === 'orderNum' && item.isTemplate && item.showColumn"
           :key="item.prop"
           show-overflow-tooltip
           v-bind="item"
@@ -75,9 +59,7 @@
           :label="item.label"
         >
           <template #default="{ row }">
-            <el-button link type="primary" @click="routerPush('DictDataList', { dictType: row.dictType })">
-              {{ row.dictType }}
-            </el-button>
+            <span>{{ row.orderNum }}</span>
           </template>
         </el-table-column>
         <!--状态-->
@@ -94,20 +76,6 @@
             <DictTag :options="sys_normal_disable" :value="row.status" />
           </template>
         </el-table-column>
-        <!--创建时间-->
-        <el-table-column
-          v-if="item.prop === 'createTime' && item.isTemplate && item.showColumn"
-          :key="item.prop"
-          show-overflow-tooltip
-          v-bind="item"
-          align="center"
-          :prop="item.prop"
-          :label="item.label"
-        >
-          <template #default="{ row }">
-            <span>{{ row.createTime }}</span>
-          </template>
-        </el-table-column>
       </template>
 
       <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -115,26 +83,20 @@
           <el-tooltip content="修改" placement="top">
             <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
           </el-tooltip>
+          <el-tooltip content="新增" placement="top">
+            <el-button link type="primary" icon="Plus" size="large" @click="handleAdd(row)" />
+          </el-tooltip>
           <el-tooltip content="删除" placement="top">
             <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
           </el-tooltip>
         </template>
       </el-table-column>
     </el-table>
-    <div class="columnSE">
-      <Pagination
-        v-show="totalNum > 10"
-        v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize"
-        :total="totalNum"
-        @pagination="getList"
-      />
-    </div>
     <AddEditModal ref="refAddEditModal" @getList="getList" />
   </div>
 </template>
 <script setup>
-import { listReq } from '@/api/dict'
+import { listReq } from '@/api/dept'
 import { useDict } from '@/hooks/use-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
@@ -145,11 +107,8 @@ import AddEditModal from './AddEditModal.vue'
 const queryParams = reactive({
   pageNum: 1,
   pageSize: 10,
-  dictName: '', //字典名称
-  dictType: '', //字典类型
-  status: '', //状态
-  beginTime: '', //创建时间开始时间
-  endTime: '' //创建时间结束时间
+  deptName: '', //部门名称
+  status: '' //状态
 })
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
@@ -159,6 +118,19 @@ const handleQuery = () => {
   queryParams.pageNum = 1
   getList(queryParams)
 }
+
+const isExpandAll = ref(true)
+
+/** 展开/折叠操作 */
+const refreshTable = ref(true)
+const toggleExpandAll = () => {
+  refreshTable.value = false
+  isExpandAll.value = !isExpandAll.value
+  nextTick(() => {
+    refreshTable.value = true
+  })
+}
+
 //重置
 const resetQuery = () => {
   resetData(queryParams, bakQueryParams)
@@ -166,10 +138,9 @@ const resetQuery = () => {
   handleQuery()
 }
 const handleUpdate = (row) => {
-  const id = row.dictId || ids.value[0]
+  const id = row.deptId || ids.value[0]
   refAddEditModal.value.showModal({ id })
 }
-
 const getList = () => {
   loading.value = true
   if (dateRange.value?.length) {
@@ -179,10 +150,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data }) => {
     loading.value = false
-    dictList.value = rows
-    totalNum.value = total
+    deptList.value = handleTree(data, 'deptId')
   })
 }
 onMounted(() => {
@@ -195,7 +165,7 @@ const { sys_normal_disable } = useDict('sys_normal_disable')
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { resetData } from '@/hooks/use-common'
-import { routerPush } from '@/hooks/use-self-router.ts'
+import { handleTree } from '@/views/system/menu/index-hook'
 const {
   refAddEditModal,
   refElTable,
@@ -205,7 +175,7 @@ const {
   ids,
   totalNum,
   loading,
-  dictList,
+  deptList,
   showSearch,
   tableHeadColumns,
   handleExport,

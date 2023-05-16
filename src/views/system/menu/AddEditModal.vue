@@ -101,20 +101,20 @@
       >
         <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符" />
       </el-form-item>
-      <el-form-item label="redirect" v-if="addEditForm.menuType !== 'F'" prop="redirect">
+      <el-form-item v-if="addEditForm.menuType !== 'F'" label="redirect" prop="redirect">
         <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="redirect" />
       </el-form-item>
       <el-form-item
-        label="routeName"
         v-if="addEditForm.menuType !== 'F'"
+        label="routeName"
         prop="routeName"
         :rules="formRules.isNotNull('routeName')"
       >
         <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="routeName" />
       </el-form-item>
       <el-form-item
-        label="alwaysShow"
         v-if="addEditForm.menuType === 'M'"
+        label="alwaysShow"
         prop="alwaysShow"
         :rules="formRules.notValid('alwaysShow')"
       >
@@ -137,7 +137,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="meta" v-if="addEditForm.menuType !== 'F'">
+      <el-form-item v-if="addEditForm.menuType !== 'F'" label="meta">
         <JsonInput ref="refJsonInput" />
       </el-form-item>
     </el-form>

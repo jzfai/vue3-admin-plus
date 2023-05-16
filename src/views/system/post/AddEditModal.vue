@@ -1,5 +1,5 @@
 <template>
-  <!-- 添加或修改数据字典配置对话框 -->
+  <!-- 添加或修改岗位管理配置对话框 -->
   <el-dialog
     v-model="open"
     :close-on-press-escape="false"
@@ -10,20 +10,23 @@
     append-to-body
     @close="cancel"
   >
-    <el-form ref="dictRef" :model="addEditForm" label-width="80px">
-      <el-form-item label="字典名称" prop="dictName" :rules="formRules.isNotNull('字典名称不能为空')">
-        <el-input v-model="addEditForm.dictName" class="wi-150px" placeholder="字典名称" />
+    <el-form ref="postRef" :model="addEditForm" label-width="80px">
+      <el-form-item label="岗位名称" prop="postName" :rules="formRules.isNotNull('岗位名称不能为空')">
+        <el-input v-model="addEditForm.postName" class="wi-150px" placeholder="岗位名称" />
       </el-form-item>
-      <el-form-item label="字典类型" prop="dictType" :rules="formRules.isNotNull('字典类型不能为空')">
-        <el-input v-model="addEditForm.dictType" class="wi-150px" placeholder="字典类型" />
+      <el-form-item label="岗位编码" prop="postCode" :rules="formRules.isNotNull('岗位编码不能为空')">
+        <el-input v-model="addEditForm.postCode" class="wi-150px" placeholder="岗位编码" />
+      </el-form-item>
+      <el-form-item label="岗位顺序" prop="postSort" :rules="formRules.isNotNull('岗位顺序不能为空')">
+        <el-input v-model="addEditForm.postSort" class="wi-150px" placeholder="岗位顺序" />
       </el-form-item>
       <el-form-item label="备注" prop="remark" :rules="formRules.notValid('备注不能为空')">
         <el-input v-model="addEditForm.remark" class="wi-150px" placeholder="备注" />
       </el-form-item>
-      <el-form-item label="状态" :rules="formRules.isNotNull('请选择状态')">
-        <el-select v-model="addEditForm.status" placeholder="状态" class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
-        </el-select>
+      <el-form-item label="岗位状态" :rules="formRules.isNotNull('请选择岗位状态')">
+        <el-radio-group v-model="addEditForm.status">
+          <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
+        </el-radio-group>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -37,38 +40,39 @@
 
 <script setup>
 import { ElMessage } from 'element-plus'
-import { addDict, getDict, updateDict } from '@/api/dict'
+import { addPost, getPost, updatePost } from '@/api/post'
 import { useDict } from '@/hooks/use-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid
 const formRules = useElement().formRules
 /** 提交按钮 */
-const dictRef = ref('')
+const postRef = ref('')
 const open = ref(false)
-const title = ref('新增数据字典')
+const title = ref('新增岗位管理')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict('sys_normal_disable')
 const addEditForm = reactive({
-  dictId: '',
-  dictName: '',
-  dictType: '',
+  postId: '',
+  postName: '',
+  postCode: '',
+  postSort: '',
   remark: '',
-  status: '0'
+  status: ''
 })
 const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
-  dictRef.value.validate((valid) => {
+  postRef.value.validate((valid) => {
     if (valid) {
-      if (addEditForm.dictId !== '') {
-        updateDict(addEditForm).then(() => {
+      if (addEditForm.postId !== '') {
+        updatePost(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
           open.value = false
           emits('getList')
         })
       } else {
-        addDict(addEditForm).then(() => {
+        addPost(addEditForm).then(() => {
           ElMessage({ message: '新增成功', type: 'success' })
           open.value = false
           emits('getList')
@@ -84,13 +88,13 @@ const cancel = () => {
 }
 const showModal = (row) => {
   if (row.id) {
-    getDict(row.id).then(({ data }) => {
+    getPost(row.id).then(({ data }) => {
       reshowData(addEditForm, data)
       //edit modal
-      title.value = '编辑数据字典'
+      title.value = '编辑岗位管理'
     })
   }
-  title.value = '新增数据字典'
+  title.value = '新增岗位管理'
   open.value = true
 }
 onMounted(() => {})

@@ -1,38 +1,27 @@
 <template>
   <div class="p-10px">
     <el-form v-show="showSearch" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="字典名称" prop="dictName">
+      <el-form-item label="岗位编码" prop="postCode">
         <el-input
-          v-model.trim="queryParams.dictName"
-          placeholder="请输入字典名称"
+          v-model.trim="queryParams.postCode"
+          placeholder="请输入岗位编码"
           clearable
           class="wi-150px"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="字典类型" prop="dictType">
-        <el-input
-          v-model.trim="queryParams.dictType"
-          placeholder="请输入字典类型"
-          clearable
-          class="wi-150px"
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-150px">
+      <el-form-item label="状态" prop="stauts">
+        <el-select v-model="queryParams.stauts" placeholder="请选择状态" clearable class="wi-150px">
           <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
-      <el-form-item label="创建时间" style="width: 150px}">
-        <el-date-picker
-          v-model="dateRange"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
+      <el-form-item label="岗位名称" prop="postName">
+        <el-input
+          v-model.trim="queryParams.postName"
+          placeholder="请输入岗位名称"
+          clearable
+          class="wi-150px"
+          @keyup.enter="handleQuery"
         />
       </el-form-item>
       <el-form-item>
@@ -49,9 +38,9 @@
       <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
-      <ColumnFilter v-if="dictList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
+      <ColumnFilter v-if="postList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="dictList" @selection-change="handleSelectionChange">
+    <el-table ref="refElTable" v-loading="loading" border :data="postList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
@@ -64,9 +53,9 @@
           :prop="item.prop"
           :label="item.label"
         />
-        <!--字典类型-->
+        <!--岗位编码-->
         <el-table-column
-          v-if="item.prop === 'dictType' && item.isTemplate && item.showColumn"
+          v-if="item.prop === 'postCode' && item.isTemplate && item.showColumn"
           :key="item.prop"
           show-overflow-tooltip
           v-bind="item"
@@ -75,9 +64,7 @@
           :label="item.label"
         >
           <template #default="{ row }">
-            <el-button link type="primary" @click="routerPush('DictDataList', { dictType: row.dictType })">
-              {{ row.dictType }}
-            </el-button>
+            <span>{{ row.postCode }}</span>
           </template>
         </el-table-column>
         <!--状态-->
@@ -92,20 +79,6 @@
         >
           <template #default="{ row }">
             <DictTag :options="sys_normal_disable" :value="row.status" />
-          </template>
-        </el-table-column>
-        <!--创建时间-->
-        <el-table-column
-          v-if="item.prop === 'createTime' && item.isTemplate && item.showColumn"
-          :key="item.prop"
-          show-overflow-tooltip
-          v-bind="item"
-          align="center"
-          :prop="item.prop"
-          :label="item.label"
-        >
-          <template #default="{ row }">
-            <span>{{ row.createTime }}</span>
           </template>
         </el-table-column>
       </template>
@@ -134,7 +107,7 @@
   </div>
 </template>
 <script setup>
-import { listReq } from '@/api/dict'
+import { listReq } from '@/api/post'
 import { useDict } from '@/hooks/use-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
@@ -145,11 +118,9 @@ import AddEditModal from './AddEditModal.vue'
 const queryParams = reactive({
   pageNum: 1,
   pageSize: 10,
-  dictName: '', //字典名称
-  dictType: '', //字典类型
-  status: '', //状态
-  beginTime: '', //创建时间开始时间
-  endTime: '' //创建时间结束时间
+  postCode: '', //岗位编码
+  stauts: '', //状态
+  postName: '' //岗位名称
 })
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
@@ -166,10 +137,9 @@ const resetQuery = () => {
   handleQuery()
 }
 const handleUpdate = (row) => {
-  const id = row.dictId || ids.value[0]
+  const id = row.postId || ids.value[0]
   refAddEditModal.value.showModal({ id })
 }
-
 const getList = () => {
   loading.value = true
   if (dateRange.value?.length) {
@@ -181,7 +151,7 @@ const getList = () => {
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
     loading.value = false
-    dictList.value = rows
+    postList.value = rows
     totalNum.value = total
   })
 }
@@ -195,7 +165,6 @@ const { sys_normal_disable } = useDict('sys_normal_disable')
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { resetData } from '@/hooks/use-common'
-import { routerPush } from '@/hooks/use-self-router.ts'
 const {
   refAddEditModal,
   refElTable,
@@ -205,7 +174,7 @@ const {
   ids,
   totalNum,
   loading,
-  dictList,
+  postList,
   showSearch,
   tableHeadColumns,
   handleExport,
