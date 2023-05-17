@@ -19,11 +19,24 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="归属部门" prop="deptId" >
+        <el-tree-select
+            v-model="queryParams.deptId"
+            style="width: 150px !important"
+            filterable
+            :data="deptIdOptions"
+            :props="{ value: 'id', label: 'label', children: 'children' }"
+            value-key="id"
+            placeholder="请选择归属部门"
+            check-strictly
+        />
+      </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-240px">
           <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
+
       <el-form-item label="创建时间" style="width: 240px}">
         <el-date-picker
           v-model="dateRange"
@@ -127,11 +140,12 @@ import Import from './Import.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useDict } from '@/hooks/use-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { changeUserStatus, listReq, resetUserPwd } from '@/api/user'
+import {changeUserStatus, deptIdReq, listReq, resetUserPwd} from '@/api/user'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
   pageSize: 10,
+  deptId: "",
   userName: '', //用户名称
   phonenumber: '', //手机号码
   status: '', //状态
@@ -139,6 +153,8 @@ const queryParams = reactive({
   endTime: '', //创建时间结束时间
   dateRange: [] //创建时间
 })
+
+const filterNodeMethod = (value, data) => data.label.includes(value)
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
 const dateRange = ref([])
@@ -171,9 +187,18 @@ const getList = () => {
     totalNum.value = total
   })
 }
+
+const deptIdOptions = ref([])
+const getDeptData = () => {
+  deptIdReq().then(({ data }) => {
+    deptIdOptions.value = data
+  })
+}
 onMounted(() => {
   handleQuery()
+  getDeptData()
 })
+
 const handleStatusChange = (row) => {
   const text = row.status === '0' ? '停用' : '启用'
   elConfirm('确认', `确认要"${text}""${row.userName}"用户吗?`)
