@@ -11,19 +11,22 @@
         />
       </el-form-item>
       <el-form-item label="操作人员" prop="operName">
-        <el-select v-model="queryParams.operName" placeholder="请选择操作人员" clearable
+        <el-select
+v-model="queryParams.operName" placeholder="请选择操作人员" clearable
                    class="wi-150px">
           <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value"/>
         </el-select>
       </el-form-item>
       <el-form-item label="类型" prop="businessType">
-        <el-select v-model="queryParams.businessType" placeholder="请选择类型" clearable
+        <el-select
+v-model="queryParams.businessType" placeholder="请选择类型" clearable
                    class="wi-150px">
           <el-option v-for="dict in sys_oper_type" :key="dict.value" :label="dict.label" :value="dict.value"/>
         </el-select>
       </el-form-item>
       <el-form-item label="状态" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable
+        <el-select
+v-model="queryParams.status" placeholder="请选择状态" clearable
                    class="wi-150px">
           <el-option v-for="dict in sys_common_status" :key="dict.value" :label="dict.label" :value="dict.value"/>
         </el-select>
@@ -50,10 +53,12 @@
       <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList"/>
-      <ColumnFilter v-if="operatorLogList.length" :is-operation="true" :cols="tableHeadColumns"
+      <ColumnFilter
+v-if="operatorLogList.length" :is-operation="true" :cols="tableHeadColumns"
                     @colChange="colChange"/>
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="operatorLogList"
+    <el-table
+ref="refElTable" v-loading="loading" border :data="operatorLogList"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center"/>
       <!--column头字段-->

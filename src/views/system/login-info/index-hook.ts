@@ -15,7 +15,7 @@ export const handleImport = () => {
   refExport.value.showModal()
 }
 
-let tableHeadColumns = ref([
+const tableHeadColumns = ref([
   { prop: "infoId", label: "访问编号", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "userName", label: "用户名称", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "ipaddr", label: "地址", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },

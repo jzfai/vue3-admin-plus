@@ -16,7 +16,7 @@ export const handleImport = () => {
   refExport.value.showModal()
 }
 
-let tableHeadColumns = ref([
+const tableHeadColumns = ref([
   { prop: "operId", label: "日志编号", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "title", label: "系统模块", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "businessType", label: "操作类型", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
