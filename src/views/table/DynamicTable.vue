@@ -74,7 +74,7 @@ export default defineComponent({
       }
     })
     const handleChangeChecked = (checkedList: string[]) => {
-      for (let key in tableColums) {
+      for (const key in tableColums) {
         tableColums[key].show = checkedList.includes(tableColums[key].prop)
       }
     }

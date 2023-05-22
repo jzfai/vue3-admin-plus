@@ -55,9 +55,9 @@
       />
     </el-row>
     <el-table
-      height="calc(100vh - 362px)"
       ref="refElTable"
       v-loading="loading"
+      height="calc(100vh - 362px)"
       border
       :data="operatorLogList"
       @selection-change="handleSelectionChange"

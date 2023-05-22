@@ -29,8 +29,8 @@
     <el-table
       v-if="refreshTable"
       ref="refElTable"
-      height="calc(100vh - 362px)"
       v-loading="loading"
+      height="calc(100vh - 362px)"
       row-key="deptId"
       :default-expand-all="isExpandAll"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"

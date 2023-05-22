@@ -73,9 +73,9 @@
       <ColumnFilter v-if="userList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
     <el-table
-      height="calc(100vh - 362px)"
       ref="refElTable"
       v-loading="loading"
+      height="calc(100vh - 362px)"
       border
       :data="userList"
       @selection-change="handleSelectionChange"
