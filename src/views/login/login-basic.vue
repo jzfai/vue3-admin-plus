@@ -1,61 +1,95 @@
 <template>
-  <div class="login-container columnCE">
-    <div class="login-hero">
-      <img src="@/assets/layout/login.svg" :alt="settings.title" />
-    </div>
-    <el-form ref="refLoginForm" class="login-form" :model="subForm" :rules="formRules">
-      <div class="title-container">
-        <h3 class="title text-center">{{ settings.title }}</h3>
-      </div>
-      <el-form-item prop="keyword" :rules="formRules.isNotNull('keyword')">
-        <span class="svg-container">
-          <ElSvgIcon name="User" :size="14" />
-        </span>
-        <el-input v-model="subForm.keyword" placeholder="用户名(panda)" />
-        <!--占位-->
+  <div class="login-container columnCC">
+    <el-form ref="refLoginForm" :model="loginForm" class="login-form">
+      <h3 class="title">vue3-admin-plus</h3>
+      <el-form-item prop="username" :rules="formRules.isNotNull('用户名不能为空')">
+        <el-input v-model="loginForm.username" type="text" size="large" auto-compconste="off" placeholder="账号">
+          <template #prefix>
+            <svg-icon icon-class="user" class="el-input__icon input-icon" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item prop="password" :rules="formRules.isNotNull('password')">
-        <span class="svg-container">
-          <ElSvgIcon name="Lock" :size="14" />
-        </span>
         <el-input
-          :key="passwordType"
           ref="refPassword"
-          v-model="subForm.password"
+          v-model="loginForm.password"
           :type="passwordType"
-          name="password"
-          placeholder="密码(123456)"
+          size="large"
+          auto-compconste="off"
+          placeholder="密码"
           @keyup.enter="handleLogin"
-        />
-        <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
-        </span>
+        >
+          <template #prefix>
+            <svg-icon icon-class="password" class="el-input__icon input-icon" />
+          </template>
+          <template #append>
+            <span class="show-pwd" @click="showPwd">
+              <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            </span>
+          </template>
+        </el-input>
       </el-form-item>
-      <div class="tip-message">{{ tipMessage }}</div>
-      <el-button :loading="subLoading" type="primary" class="login-btn" size="default" @click.prevent="handleLogin">
-        登录
-      </el-button>
+      <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
+        <div class="rowBC" style="width: 100%">
+          <el-input
+            v-model="loginForm.code"
+            size="large"
+            auto-compconste="off"
+            placeholder="验证码"
+            @keyup.enter="handleLogin"
+          >
+            <template #prefix>
+              <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
+            </template>
+          </el-input>
+          <img :src="codeUrl" class="login-code-img" @click="getCode" />
+        </div>
+      </el-form-item>
+      <el-checkbox
+        v-model="loginForm.rememberMe"
+        style="margin: 0px 0px 25px 0px"
+        true-label="true"
+        false-label="false"
+      >
+        记住密码
+      </el-checkbox>
+      <el-form-item style="width: 100%">
+        <el-button :loading="loading" size="large" type="primary" style="width: 100%" @click.prevent="handleLogin">
+          <span v-if="!loading">登 录</span>
+          <span v-else>登 录 中...</span>
+        </el-button>
+        <div v-if="register" style="float: right">
+          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+        </div>
+      </el-form-item>
     </el-form>
+    <!--  底部  -->
+    <div class="el-login-footer">
+      <span>Copyright © 2022-{{ new Date().getFullYear() }} KuangHua All Rights Reserved.</span>
+    </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
-import { loginReq } from '@/api/user'
-
+import { getCodeImg, loginReq } from '@/api/user'
+import { useConfigStore } from '@/store/config.ts'
 /* listen router change and set the query  */
 const { settings } = useBasicStore()
 //element valid
 const formRules = useElement().formRules
 //form
-const subForm = reactive({
-  keyword: 'panda',
-  password: '123456'
+const loginForm = reactive({
+  username: '',
+  password: '',
+  rememberMe: false,
+  code: '',
+  uuid: ''
 })
-const state: any = reactive({
+const state = reactive({
   otherQuery: {},
   redirect: undefined
 })
@@ -79,40 +113,7 @@ watch(
   { immediate: true }
 )
 
-/*
- *  login relative
- * */
-let subLoading = $ref(false)
-//tip message
-let tipMessage = $ref('')
-//sub form
-const refLoginForm = $ref(null)
-const handleLogin = () => {
-  refLoginForm.validate((valid) => {
-    subLoading = true
-    if (valid) loginFunc()
-  })
-}
-const router = useRouter()
-const basicStore = useBasicStore()
-
-const loginFunc = () => {
-  loginReq(subForm)
-    .then(({ data }) => {
-      elMessage('登录成功')
-      basicStore.setToken(data?.jwtToken)
-      router.push({ path: state.redirect || '/', query: state.otherQuery })
-    })
-    .catch((err) => {
-      tipMessage = err?.msg
-    })
-    .finally(() => {
-      subLoading = false
-    })
-}
-/*
- *  password show or hidden
- * */
+/*password show or hidden*/
 const passwordType = ref('password')
 const refPassword = ref()
 const showPwd = () => {
@@ -125,72 +126,100 @@ const showPwd = () => {
     refPassword.value.focus()
   })
 }
+/*
+ *  login relative
+ * */
+const subLoading = ref(false)
+//tip message
+const tipMessage = ref('')
+//sub form
+const refLoginForm = ref(null)
+const handleLogin = () => {
+  refLoginForm.value.validate((valid) => {
+    subLoading.value = true
+    if (valid) loginFunc()
+  })
+}
+const router = useRouter()
+const basicStore = useBasicStore()
+
+const loginFunc = () => {
+  loginReq(loginForm)
+    .then(({ data }) => {
+      const { code, msg } = data
+      const errCode = '500'
+      if (errCode.includes(code)) {
+        elMessage(msg, 'error')
+        loginForm.code = ''
+        getCode()
+      } else {
+        elMessage('登录成功')
+        basicStore.setToken(`Bearer ${data?.token}`)
+        recordLoginInfo()
+        router.push('/')
+      }
+    })
+    .catch((err) => {
+      tipMessage.value = err?.msg
+    })
+    .finally(() => {
+      subLoading.value = false
+    })
+}
+
+const codeUrl = ref('')
+const loading = ref(false)
+// 验证码开关
+const captchaEnabled = ref(true)
+// 注册开关
+const register = ref(false)
+const redirect = ref(undefined)
+
+//获取code
+const getCode = () => {
+  getCodeImg().then(({ data }) => {
+    if (data.captchaEnabled) {
+      captchaEnabled.value = true
+      codeUrl.value = `data:image/gif;base64,${data.img}`
+      loginForm.uuid = data.uuid
+    }
+  })
+}
+
+const { rememberMe, username, password, setLoginInfo } = useConfigStore()
+
+const recordLoginInfo = () => {
+  //remember password
+  if (loginForm.rememberMe) {
+    setLoginInfo(loginForm)
+  } else {
+    loginForm.username = ''
+    loginForm.password = ''
+    loginForm.rememberMe = false
+    setLoginInfo(loginForm)
+  }
+}
+
+const showLoginInfo = () => {
+  loginForm.username = username
+  loginForm.password = password
+  loginForm.rememberMe = rememberMe
+}
+
+onBeforeMount(() => {
+  showLoginInfo()
+  getCode()
+})
 </script>
+
 <style lang="scss" scoped>
-$bg: #fbfcff;
-$dark_gray: #333;
-$gray: #999;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
 $light_gray: #eee;
 .login-container {
   height: 100vh;
-  position: relative;
-  overflow-y: hidden;
   width: 100%;
-  background-color: $bg;
-  .login-form {
-    width: 360px;
-    padding: 40px 30px;
-    background: #fff;
-    box-shadow: 0px 4px 16px rgba(4, 61, 175, 0.15);
-    border-radius: 8px;
-    margin-right: 20vw;
-    z-index: 10;
-    @media screen and (min-width: 769px) and (max-width: 992px) {
-      margin-right: 10vw;
-    }
-    @media only screen and (max-width: 768px) {
-      margin-right: auto;
-      margin-left: auto;
-    }
-  }
-  .title-container {
-    .title {
-      font-size: 18px;
-      color: $dark_gray;
-      margin: 0px auto 25px auto;
-      text-align: center;
-      font-weight: bold;
-    }
-  }
-}
-.login-hero {
-  width: 40vw;
-  position: absolute;
-  top: 50%;
-  left: 15vw;
-  z-index: 0;
-  transform: translateY(-50%);
-  @media screen and (min-width: 769px) and (max-width: 992px) {
-    width: 60vw;
-    left: 5vw;
-  }
-  @media screen and (max-width: 768px) {
-    width: 100vw;
-    left: 0;
-  }
-  img {
-    width: 100%;
-  }
-}
-.svg-container {
-  padding-left: 16px;
-  color: $gray;
-  text-align: center;
-  width: 30px;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  background-color: #2d3a4b;
 }
 
 //错误提示信息
@@ -201,53 +230,69 @@ $light_gray: #eee;
   font-size: 12px;
 }
 
-//登录按钮
-.login-btn {
-  width: 100%;
-  margin-bottom: 30px;
-}
-.show-pwd {
-  width: 50px;
-  font-size: 16px;
-  color: $gray;
-  cursor: pointer;
+.title {
+  margin: 0px auto 30px auto;
   text-align: center;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  color: #707070;
 }
-</style>
 
-<style lang="scss">
-//css 样式重置 增加个前缀避免全局污染
-.login-container {
-  .el-input__wrapper {
-    background-color: transparent;
-    box-shadow: none;
-  }
-  .el-form-item {
-    border: 1px solid #e0e0e0;
-    background: #fff;
-    border-radius: 4px;
-    color: #999;
-    &__content {
-      position: relative;
+.login-form {
+  border-radius: 6px;
+  background: #ffffff;
+  width: 400px;
+  padding: 25px 25px 5px 25px;
+
+  .el-input {
+    height: 40px;
+
+    input {
+      height: 40px;
     }
   }
-  .el-input input {
-    background: transparent;
-    border: 0px;
-    -webkit-appearance: none;
-    border-radius: 0px;
-    padding: 10px 5px 10px 35px;
-    color: #999;
-    height: 42px; //此处调整item的高度
-    caret-color: #999;
+
+  .input-icon {
+    height: 42px;
+    width: 16px;
+    margin-left: 0;
   }
-  //hiden the input border
-  .el-input__inner {
-    box-shadow: none !important;
+}
+
+.login-tip {
+  font-size: 13px;
+  text-align: center;
+  color: #bfbfbf;
+}
+
+.login-code {
+  width: 33%;
+  height: 40px;
+
+  img {
+    cursor: pointer;
+    vertical-align: middle;
   }
+}
+
+.el-login-footer {
+  height: 40px;
+  line-height: 40px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: Arial;
+  font-size: 12px;
+  constter-spacing: 1px;
+}
+
+.login-code-img {
+  height: 40px;
+  width: 100px;
+}
+
+//是否显示密码
+.show-pwd {
+  cursor: pointer;
 }
 </style>

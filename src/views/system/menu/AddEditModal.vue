@@ -272,7 +272,7 @@ const getNameData = () => {
   parentIdReq().then(({ data }) => {
     const menu = { menuId: 0, menuName: '主类目', children: [] }
     menu.children = handleTree(data, 'menuId')
-    parentIdOptions.value.push(menu)
+    parentIdOptions.value=[menu]
   })
 }
 onMounted(() => {

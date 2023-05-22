@@ -6,67 +6,86 @@
     <div class="login-pane">
       <img src="@/assets/layout/login-top.svg" class="login-top" :alt="settings.title" />
       <img src="@/assets/layout/login-front.svg" class="login-front" :alt="settings.title" />
-      <el-form ref="refLoginForm" class="login-form" :model="subForm" :rules="formRules">
+      <el-form ref="refLoginForm" class="login-form" :model="loginForm" :rules="formRules">
         <div class="title-container">
           <h3 class="title text-center">{{ settings.title }}</h3>
         </div>
-        <el-form-item prop="keyword" :rules="formRules.isNotNull('keyword')">
+        <el-form-item prop="username" :rules="formRules.isNotNull('user not empty')">
           <span class="svg-container">
             <ElSvgIcon name="User" :size="14" />
           </span>
-          <el-input v-model="subForm.keyword" placeholder="panda" />
+          <el-input v-model="loginForm.username" placeholder="username" />
           <!--占位-->
         </el-form-item>
-        <el-form-item prop="password" :rules="formRules.isNotNull('password')">
+        <el-form-item prop="password" :rules="formRules.isNotNull('password not empty')">
           <span class="svg-container">
             <ElSvgIcon name="Lock" :size="14" />
           </span>
           <el-input
             :key="passwordType"
             ref="refPassword"
-            v-model="subForm.password"
+            v-model="loginForm.password"
             :type="passwordType"
             name="password"
-            placeholder="密码(123456)"
+            placeholder="password"
             @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
             <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
-        <div class="tip-message">{{ tipMessage }}</div>
-        <el-button
-          :loading="subLoading"
-          type="warning"
-          class="login-btn"
-          size="default"
-          round
-          @click.prevent="handleLogin"
+        <el-form-item v-if="captchaEnabled" prop="code" :rules="formRules.isNotNull('验证码不能为空')">
+          <div class="rowBC" style="width: 100%">
+            <span class="svg-container">
+              <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
+            </span>
+            <el-input v-model="loginForm.code" placeholder="验证码" @keyup.enter="handleLogin" />
+
+            <img :src="codeUrl" class="login-code-img" @click="getCode" />
+          </div>
+        </el-form-item>
+        <el-checkbox
+          v-model="loginForm.rememberMe"
+          style="margin: 0px 0px 25px 0px"
+          true-label="true"
+          false-label="false"
         >
-          登录
-        </el-button>
+          记住密码
+        </el-checkbox>
+        <el-form-item style="width: 100%">
+          <el-button :loading="loading" size="large" type="primary" style="width: 100%" @click.prevent="handleLogin">
+            <span v-if="!loading">登 录</span>
+            <span v-else>登 录 中...</span>
+          </el-button>
+          <div v-if="register" style="float: right">
+            <router-link class="link-type" :to="'/register'">立即注册</router-link>
+          </div>
+        </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
-import { loginReq } from '@/api/user'
-
+import { getCodeImg, loginReq } from '@/api/user'
+import { useConfigStore } from '@/store/config.ts'
 /* listen router change and set the query  */
 const { settings } = useBasicStore()
 //element valid
 const formRules = useElement().formRules
 //form
-const subForm = reactive({
-  keyword: 'panda',
-  password: '123456'
+const loginForm = reactive({
+  username: '',
+  password: '',
+  rememberMe: false,
+  code: '',
+  uuid: ''
 })
-const state: any = reactive({
+const state = reactive({
   otherQuery: {},
   redirect: undefined
 })
@@ -90,40 +109,7 @@ watch(
   { immediate: true }
 )
 
-/*
- *  login relative
- * */
-let subLoading = $ref(false)
-//tip message
-let tipMessage = $ref('')
-//sub form
-const refLoginForm = $ref(null)
-const handleLogin = () => {
-  refLoginForm.validate((valid) => {
-    subLoading = true
-    if (valid) loginFunc()
-  })
-}
-const router = useRouter()
-const basicStore = useBasicStore()
-
-const loginFunc = () => {
-  loginReq(subForm)
-    .then(({ data }) => {
-      elMessage('登录成功')
-      basicStore.setToken(data?.jwtToken)
-      router.push({ path: state.redirect || '/', query: state.otherQuery })
-    })
-    .catch((err) => {
-      tipMessage = err?.msg
-    })
-    .finally(() => {
-      subLoading = false
-    })
-}
-/*
- *  password show or hidden
- * */
+/*password show or hidden*/
 const passwordType = ref('password')
 const refPassword = ref()
 const showPwd = () => {
@@ -136,6 +122,101 @@ const showPwd = () => {
     refPassword.value.focus()
   })
 }
+/*
+ *  login relative
+ * */
+const subLoading = ref(false)
+//tip message
+const tipMessage = ref('')
+//sub form
+const refLoginForm = ref(null)
+const handleLogin = () => {
+  refLoginForm.value.validate((valid) => {
+    subLoading.value = true
+    if (valid) loginFunc()
+  })
+}
+const router = useRouter()
+const basicStore = useBasicStore()
+
+const loginFunc = () => {
+  loginReq(loginForm)
+    .then(({ data }) => {
+      const { code, msg } = data
+      const errCode = '500'
+      if (errCode.includes(code)) {
+        elMessage(msg, 'error')
+        loginForm.code = ''
+        getCode()
+      } else {
+        elMessage('登录成功')
+        basicStore.setToken(`Bearer ${data?.token}`)
+        recordLoginInfo()
+        router.push('/')
+      }
+    })
+    .catch((err) => {
+      tipMessage.value = err?.msg
+    })
+    .finally(() => {
+      subLoading.value = false
+    })
+}
+
+const codeUrl = ref('')
+const loading = ref(false)
+// 验证码开关
+const captchaEnabled = ref(true)
+// 注册开关
+const register = ref(false)
+const redirect = ref(undefined)
+
+//获取code
+const getCode = () => {
+  getCodeImg().then(({ data }) => {
+    if (data.captchaEnabled) {
+      captchaEnabled.value = true
+      codeUrl.value = `data:image/gif;base64,${data.img}`
+      loginForm.uuid = data.uuid
+    }
+  })
+}
+
+const { rememberMe, username, password, setLoginInfo } = useConfigStore()
+
+const recordLoginInfo = () => {
+  //remember password
+  if (loginForm.rememberMe) {
+    setLoginInfo(loginForm)
+  } else {
+    loginForm.username = ''
+    loginForm.password = ''
+    loginForm.rememberMe = false
+    setLoginInfo(loginForm)
+  }
+}
+
+const showLoginInfo = () => {
+  loginForm.username = username
+  loginForm.password = password
+  loginForm.rememberMe = rememberMe
+}
+//定时刷新验证码
+let timeInterId
+const reloadCode = () => {
+  timeInterId = setInterval(() => {
+    getCode()
+  }, 30000)
+}
+
+onUnmounted(() => {
+  clearInterval(timeInterId)
+})
+onBeforeMount(() => {
+  showLoginInfo()
+  getCode()
+  reloadCode()
+})
 </script>
 <style lang="scss" scoped>
 $bg: #ffe4b5;
@@ -197,7 +278,7 @@ $light_gray: #eee;
     }
   }
   .login-form {
-    width: 340px;
+    width: 380px;
     padding: 40px 30px;
     background: #fff;
     box-shadow: 0px 4px 16px rgba(158, 105, 25, 0.15);
@@ -266,5 +347,29 @@ $light_gray: #eee;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/*验证码*/
+.login-code {
+  width: 33%;
+  height: 40px;
+  float: right;
+
+  img {
+    cursor: pointer;
+    vertical-align: middle;
+  }
+}
+.input-icon {
+  height: 39px;
+  width: 14px;
+  margin-left: 0px;
+}
+.login-code-img {
+  cursor: pointer;
+  width: 92px;
+  height: 44px;
+  border-top-right-radius: 25%;
+  border-bottom-right-radius: 25%;
 }
 </style>

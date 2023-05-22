@@ -48,6 +48,7 @@
     </el-row>
     <el-table
       ref="refElTable"
+      height="calc(100vh - 362px)"
       v-loading="loading"
       border
       :data="loginInfoList"

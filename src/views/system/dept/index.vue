@@ -29,6 +29,7 @@
     <el-table
       v-if="refreshTable"
       ref="refElTable"
+      height="calc(100vh - 362px)"
       v-loading="loading"
       row-key="deptId"
       :default-expand-all="isExpandAll"

@@ -127,6 +127,7 @@ const dateRange = ref([])
 //查询
 const handleQuery = () => {
   getList(queryParams)
+
 }
 //重置
 const resetQuery = () => {

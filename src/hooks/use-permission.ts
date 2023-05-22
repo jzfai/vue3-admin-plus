@@ -18,13 +18,13 @@ import { useBasicStore } from '@/store/basic'
 export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
   const fileAfterRouter = filterAsyncRouterByReq(data)
-  console.log('fileAfterRouter', fileAfterRouter)
   fileAfterRouter.forEach((route) => router.addRoute(route))
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }
 
 import ParentView from '@/components/ParentView/index.vue'
 import InnerLink from '@/components/InnerLink/index.vue'
+import { filterNull } from '@/hooks/use-common'
 // @ts-ignore
 const modules = import.meta.glob('../views/**/**.vue')
 export const filterAsyncRouterByReq = (asyncRouterMap) => {
@@ -32,6 +32,7 @@ export const filterAsyncRouterByReq = (asyncRouterMap) => {
     // if (type && route.children) {
     //   route.children = filterChildren(route.children)
     // }
+    console.log(route)
     if (route.component) {
       // Layout ParentView 组件特殊处理
       if (route.component === 'Layout') {
@@ -50,12 +51,15 @@ export const filterAsyncRouterByReq = (asyncRouterMap) => {
       delete route['children']
       delete route['redirect']
     }
-    route.name = route.routeName
-    if (route.metaExtra) route.meta = Object.assign(route.meta, JSON.parse(JSON.parse(route.metaExtra)))
+    if (route.routeName) {
+      route.name = route.routeName
+    }
+    if (route.metaExtra && JSON.parse(route.metaExtra) !== '{}') {
+      route.meta = Object.assign(route.meta, JSON.parse(JSON.parse(route.metaExtra)))
+    }
     return true
   })
 }
-
 // const filterChildren = (childrenMap, lastRouter = false) => {
 //   let children: any = []
 //   childrenMap.forEach((el) => {

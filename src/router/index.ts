@@ -1,6 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Layout from '@/layout/index.vue'
-
+/* Router Modules */
+import charts from './modules/charts'
+import guid from './modules/guid'
+import excel from './modules/excel'
+import directive from './modules/directive'
+import table from './modules/table'
 export const constantRoutes = [
   {
     path: '/redirect',
@@ -28,6 +33,7 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401.vue'),
     hidden: true
   }
+
   // {
   //   path: '/',
   //   component: Layout,
@@ -41,7 +47,13 @@ export const constantRoutes = [
   //       meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
   //     }
   //   ]
-  // }
+  // },
+  //
+  // guid,
+  // charts,
+  // excel,
+  // directive,
+  // table
 
   // {
   //   path: '/system1',

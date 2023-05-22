@@ -19,16 +19,16 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="归属部门" prop="deptId" >
+      <el-form-item label="归属部门" prop="deptId">
         <el-tree-select
-            v-model="queryParams.deptId"
-            style="width: 150px !important"
-            filterable
-            :data="deptIdOptions"
-            :props="{ value: 'id', label: 'label', children: 'children' }"
-            value-key="id"
-            placeholder="请选择归属部门"
-            check-strictly
+          v-model="queryParams.deptId"
+          style="width: 150px !important"
+          filterable
+          :data="deptIdOptions"
+          :props="{ value: 'id', label: 'label', children: 'children' }"
+          value-key="id"
+          placeholder="请选择归属部门"
+          check-strictly
         />
       </el-form-item>
       <el-form-item label="状态" prop="status">
@@ -72,7 +72,14 @@
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="userList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="userList" @selection-change="handleSelectionChange">
+    <el-table
+      height="calc(100vh - 362px)"
+      ref="refElTable"
+      v-loading="loading"
+      border
+      :data="userList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
@@ -140,12 +147,12 @@ import Import from './Import.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useDict } from '@/hooks/use-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import {changeUserStatus, deptIdReq, listReq, resetUserPwd} from '@/api/user'
+import { changeUserStatus, deptIdReq, listReq, resetUserPwd } from '@/api/user'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
   pageSize: 10,
-  deptId: "",
+  deptId: '',
   userName: '', //用户名称
   phonenumber: '', //手机号码
   status: '', //状态

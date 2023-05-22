@@ -29,6 +29,7 @@
     "elNotify": true,
     "filterAsyncRouter": true,
     "filterAsyncRouterByReq": true,
+    "filterNull": true,
     "freshRouter": true,
     "getCurrentInstance": true,
     "getCurrentScope": true,

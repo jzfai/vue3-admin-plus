@@ -13,7 +13,6 @@ for (let i = 0; i < count; i++) {
 NameList.push({ name: 'mock-Pan' })
 
 export default [
-  // username search
   {
     url: '/vue3-admin-plus/search/user',
     method: 'get',
@@ -30,8 +29,6 @@ export default [
       }
     }
   },
-
-  // transaction list
   {
     url: '/vue3-admin-plus/transaction/list',
     method: 'get',

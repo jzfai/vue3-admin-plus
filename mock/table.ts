@@ -15,7 +15,7 @@ const data = Mock.mock({
 
 export default [
   {
-    url: '/vue3-admin-template/table/list',
+    url: '/vue3-admin-plus/table/list',
     method: 'get',
     response: () => {
       const items = data.items

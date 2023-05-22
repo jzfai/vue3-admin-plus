@@ -40,7 +40,9 @@
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="postList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="postList" @selection-change="handleSelectionChange">
+    <el-table ref="refElTable"
+              height="calc(100vh - 362px)"
+              v-loading="loading" border :data="postList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">

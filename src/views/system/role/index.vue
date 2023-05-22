@@ -58,7 +58,14 @@
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="roleList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="roleList" @selection-change="handleSelectionChange">
+    <el-table
+      ref="refElTable"
+      v-loading="loading"
+      height="calc(100vh - 362px)"
+      border
+      :data="roleList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
@@ -206,6 +213,7 @@ const handleAuthUser = (row) => {
 //导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { resetData } from '@/hooks/use-common'
+
 const {
   refAddEditModal,
   refElTable,

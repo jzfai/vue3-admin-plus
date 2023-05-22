@@ -17,6 +17,14 @@ export const sleepTimeout = (time) => {
   })
 }
 
+export const filterNull = (data) => {
+  Object.keys(data).forEach((key) => {
+    if (!data[key]) delete data[key]
+  })
+
+  return data
+}
+
 //深拷贝
 export function cloneDeep(value) {
   return JSON.parse(JSON.stringify(value))

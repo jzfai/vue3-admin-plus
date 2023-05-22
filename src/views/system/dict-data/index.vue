@@ -44,7 +44,7 @@
       ref="refElTable"
       v-loading="loading"
       border
-      height="calc(100vh - 350px)"
+      height="calc(100vh - 362px)"
       :data="dictDataList"
       @selection-change="handleSelectionChange"
     >

@@ -30,6 +30,7 @@ declare global {
   const elNotify: typeof import('../src/hooks/use-element')['elNotify']
   const filterAsyncRouter: typeof import('../src/hooks/use-permission')['filterAsyncRouter']
   const filterAsyncRouterByReq: typeof import('../src/hooks/use-permission')['filterAsyncRouterByReq']
+  const filterNull: typeof import('../src/hooks/use-common')['filterNull']
   const freshRouter: typeof import('../src/hooks/use-permission')['freshRouter']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
