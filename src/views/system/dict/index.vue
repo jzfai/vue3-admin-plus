@@ -54,7 +54,7 @@
     <el-table
       ref="refElTable"
       v-loading="loading"
-      height="calc(100vh - 362px)"
+      height="calc(100vh - 368px)"
       border
       :data="dictList"
       @selection-change="handleSelectionChange"

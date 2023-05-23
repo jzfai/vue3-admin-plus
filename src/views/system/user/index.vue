@@ -75,7 +75,7 @@
     <el-table
       ref="refElTable"
       v-loading="loading"
-      height="calc(100vh - 362px)"
+      height="calc(100vh - 370px)"
       border
       :data="userList"
       @selection-change="handleSelectionChange"

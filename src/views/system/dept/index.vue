@@ -30,7 +30,7 @@
       v-if="refreshTable"
       ref="refElTable"
       v-loading="loading"
-      height="calc(100vh - 362px)"
+      height="calc(100vh - 370px)"
       row-key="deptId"
       :default-expand-all="isExpandAll"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
