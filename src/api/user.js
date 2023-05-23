@@ -33,7 +33,16 @@ export const loginReq = (subForm) => {
     url: '/login',
     data: subForm,
     method: 'post',
-    isNotTipErrorMsg:true,
+    isNotTipErrorMsg: true
+  })
+}
+
+// 注册方法
+export const register = (data) => {
+  return request({
+    url: '/register',
+    method: 'post',
+    data
   })
 }
 
@@ -95,7 +104,7 @@ export const multiDeleteReq = (id) => {
 }
 
 //导入
-export const importReq = (updateSupport,data) => {
+export const importReq = (updateSupport, data) => {
   return request({
     url: `/system/user/importData?updateSupport=${updateSupport}`,
     method: 'post',

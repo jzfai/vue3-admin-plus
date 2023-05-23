@@ -7,7 +7,7 @@ import settings from './settings'
 
 //路由进入前拦截
 //to:将要进入的页面 vue-router4.0 不推荐使用next()
-const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
+const whiteList = ['/login', '/register', '/404', '/401'] // no redirect whitelist
 router.beforeEach(async (to) => {
   progressStart()
   document.title = langTitle(to.meta?.title) // i18 page title

@@ -24,6 +24,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/register',
+    component: () => import('@/views/login/register.vue'),
+    hidden: true
+  },
+  {
     path: '/404',
     component: () => import('@/views/error-page/404.vue'),
     hidden: true
@@ -32,22 +37,22 @@ export const constantRoutes = [
     path: '/401',
     component: () => import('@/views/error-page/401.vue'),
     hidden: true
-  }
+  },
 
-  // {
-  //   path: '/',
-  //   component: Layout,
-  //   redirect: '/index',
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       name: 'Dashboard',
-  //       component: () => import('@/views/dashboard/index.vue'),
-  //       //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-  //       meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
-  //     }
-  //   ]
-  // },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/index',
+    children: [
+      {
+        path: 'index',
+        name: 'Dashboard',
+        component: () => import('@/views/dashboard/index.vue'),
+        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+        meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
+      }
+    ]
+  }
   //
   // guid,
   // charts,

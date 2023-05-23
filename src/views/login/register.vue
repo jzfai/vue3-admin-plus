@@ -6,7 +6,7 @@
     <div class="login-pane">
       <img src="@/assets/layout/login-top.svg" class="login-top" :alt="settings.title" />
       <img src="@/assets/layout/login-front.svg" class="login-front" :alt="settings.title" />
-      <el-form ref="refLoginForm" class="login-form" :model="loginForm" :rules="formRules">
+      <el-form ref="refLoginForm" class="login-form" :model="registerForm" :rules="formRules">
         <div class="title-container">
           <h3 class="title text-center">{{ settings.title }}</h3>
         </div>
@@ -14,7 +14,7 @@
           <span class="svg-container">
             <ElSvgIcon name="User" :size="14" />
           </span>
-          <el-input v-model="loginForm.username" placeholder="username" />
+          <el-input v-model="registerForm.username" placeholder="username" />
           <!--占位-->
         </el-form-item>
         <el-form-item prop="password" :rules="formRules.isNotNull('password not empty')">
@@ -24,10 +24,28 @@
           <el-input
             :key="passwordType"
             ref="refPassword"
-            v-model="loginForm.password"
+            v-model="registerForm.password"
             :type="passwordType"
             name="password"
             placeholder="password"
+            @keyup.enter="handleLogin"
+          />
+          <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span>
+        </el-form-item>
+        <!--   确认密码     -->
+        <el-form-item prop="confirmPassword" :rules="formRules.isNotNull('password not empty')">
+          <span class="svg-container">
+            <ElSvgIcon name="Lock" :size="14" />
+          </span>
+          <el-input
+            :key="passwordType"
+            ref="refPassword"
+            v-model="registerForm.confirmPassword"
+            :type="passwordType"
+            name="confirmPassword"
+            placeholder="confirmPassword"
             @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
@@ -39,27 +57,18 @@
             <span class="svg-container">
               <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
             </span>
-            <el-input v-model="loginForm.code" placeholder="验证码" @keyup.enter="handleLogin" />
-
+            <el-input v-model="registerForm.code" placeholder="验证码" @keyup.enter="handleLogin" />
             <img :src="codeUrl" class="login-code-img" @click="getCode" />
           </div>
         </el-form-item>
-        <el-checkbox
-          v-model="loginForm.rememberMe"
-          style="margin: 0px 0px 25px 0px"
-          true-label="true"
-          false-label="false"
-        >
-          记住密码
-        </el-checkbox>
         <el-form-item style="width: 100%">
           <el-button :loading="loading" size="large" type="primary" style="width: 100%" @click.prevent="handleLogin">
-            <span v-if="!loading">登 录</span>
-            <span v-else>登 录 中...</span>
+            <span v-if="!loading">注 册</span>
+            <span v-else>注 册 中...</span>
           </el-button>
         </el-form-item>
-        <div v-if="register" style="float: right">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+        <div style="float: right">
+          <router-link class="link-type" :to="'/login'">使用已有账户登录</router-link>
         </div>
       </el-form>
     </div>
@@ -78,12 +87,13 @@ const { settings } = useBasicStore()
 //element valid
 const formRules = useElement().formRules
 //form
-const loginForm = reactive({
+const registerForm = reactive({
   username: '',
   password: '',
-  rememberMe: false,
+  confirmPassword: '',
   code: '',
-  uuid: ''
+  uuid: '',
+  userType: 'sys_user'
 })
 const state = reactive({
   otherQuery: {},
@@ -98,6 +108,7 @@ const getOtherQuery = (query) => {
     return acc
   }, {})
 }
+
 watch(
   () => route.query,
   (query) => {
@@ -132,6 +143,10 @@ const tipMessage = ref('')
 const refLoginForm = ref(null)
 const handleLogin = () => {
   refLoginForm.value.validate((valid) => {
+    if (registerForm.password !== registerForm.confirmPassword) {
+      elMessage('两次密码输入不一致', 'warning')
+      return
+    }
     subLoading.value = true
     if (valid) loginFunc()
   })
@@ -139,21 +154,12 @@ const handleLogin = () => {
 const router = useRouter()
 const basicStore = useBasicStore()
 
+import { register } from '@/api/user'
 const loginFunc = () => {
-  loginReq(loginForm)
+  register(registerForm)
     .then(({ data }) => {
-      const { code, msg } = data
-      const errCode = '500'
-      if (errCode.includes(code)) {
-        elMessage(msg, 'error')
-        loginForm.code = ''
-        getCode()
-      } else {
-        elMessage('登录成功')
-        basicStore.setToken(`Bearer ${data?.token}`)
-        recordLoginInfo()
-        router.push('/')
-      }
+      elMessage('注册成功')
+      router.push('/login')
     })
     .catch((err) => {
       tipMessage.value = err?.msg
@@ -167,8 +173,7 @@ const codeUrl = ref('')
 const loading = ref(false)
 // 验证码开关
 const captchaEnabled = ref(true)
-// 注册开关
-const register = ref(true)
+
 const redirect = ref(undefined)
 
 //获取code
@@ -177,7 +182,7 @@ const getCode = () => {
     if (data.captchaEnabled) {
       captchaEnabled.value = true
       codeUrl.value = `data:image/gif;base64,${data.img}`
-      loginForm.uuid = data.uuid
+      registerForm.uuid = data.uuid
     }
   })
 }
@@ -186,20 +191,20 @@ const { rememberMe, username, password, setLoginInfo } = useConfigStore()
 
 const recordLoginInfo = () => {
   //remember password
-  if (loginForm.rememberMe) {
-    setLoginInfo(loginForm)
+  if (registerForm.rememberMe) {
+    setLoginInfo(registerForm)
   } else {
-    loginForm.username = ''
-    loginForm.password = ''
-    loginForm.rememberMe = false
-    setLoginInfo(loginForm)
+    registerForm.username = ''
+    registerForm.password = ''
+    registerForm.rememberMe = false
+    setLoginInfo(registerForm)
   }
 }
 
 const showLoginInfo = () => {
-  loginForm.username = username
-  loginForm.password = password
-  loginForm.rememberMe = rememberMe
+  registerForm.username = username
+  registerForm.password = password
+  registerForm.rememberMe = rememberMe
 }
 //定时刷新验证码
 let timeInterId
@@ -213,7 +218,7 @@ onUnmounted(() => {
   clearInterval(timeInterId)
 })
 onBeforeMount(() => {
-  showLoginInfo()
+  // showLoginInfo()
   getCode()
   reloadCode()
 })
