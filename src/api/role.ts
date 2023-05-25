@@ -108,6 +108,15 @@ export function roleMenuTreeselect(roleId) {
   })
 }
 
+// 根据平台查询菜单下拉树结构
+export function selectMenuListByPlateFormId(platformId) {
+  return request({
+    url: `/system/menu/selectMenuListByPlateFormId`,
+    method: 'get',
+    params: { platformId }
+  })
+}
+
 // 查询角色已授权用户列表
 export function allocatedUserList(query) {
   return request({

@@ -10,7 +10,7 @@
     append-to-body
     @close="cancel"
   >
-    <el-form ref="roleRef" :model="addEditForm" label-width="80px">
+    <el-form ref="roleRef" :model="addEditForm" label-width="120px">
       <el-form-item label="角色名称" prop="roleName" :rules="formRules.isNotNull('角色名称不能为空')">
         <el-input v-model="addEditForm.roleName" class="wi-150px" placeholder="角色名称" />
       </el-form-item>
@@ -28,12 +28,36 @@
       <el-form-item label="角色顺序" prop="roleSort" :rules="formRules.isNotNull('角色顺序不能为空')">
         <el-input-number v-model="addEditForm.roleSort" controls-position="right" :min="0" />
       </el-form-item>
-      <el-form-item v-if="addEditForm.roleKey!=='admin'" label="状态">
+      <el-form-item v-if="addEditForm.roleKey !== 'admin'" label="状态">
         <el-radio-group v-model="addEditForm.status">
           <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item v-if="addEditForm.roleKey!=='admin'" label="菜单权限">
+
+      <el-form-item label="平台权限选择" rules="formRules.isNotNull('平台选择不能为空')">
+        <el-select
+          v-model="addEditForm.platformIdsArr"
+          multiple
+          filterable
+          allow-create
+          default-first-option
+          :reserve-keyword="false"
+          class="w-600px"
+          placeholder="请选择平台"
+        >
+          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item v-if="choosePlatformIds?.length" label="平台菜单配置">
+        <el-radio-group v-model="platformIdsChoose">
+          <el-radio v-for="item in choosePlatformIds" :key="item.id" :label="item.id" @click="menuConfigClick(item)">
+            {{ item.name }}
+          </el-radio>
+        </el-radio-group>
+      </el-form-item>
+
+      <el-form-item v-if="addEditForm.roleKey !== 'admin' && platformIdsChoose" label="菜单权限">
         <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
         <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
         <el-checkbox v-model="addEditForm.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">
@@ -74,9 +98,18 @@
 
 <script setup>
 import { ElMessage } from 'element-plus'
-import { addRole, getRole, menuOptionsReq, roleMenuTreeselect, updateRole } from '@/api/role'
+import {
+  addRole,
+  getRole,
+  menuOptionsReq,
+  roleMenuTreeselect,
+  selectMenuListByPlateFormId,
+  updateRole
+} from '@/api/role'
 import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
+import { computed, ref } from 'vue'
+import { selectPlatformAll } from '@/api/platform.ts'
 
 //element valid
 const formRules = useElement().formRules
@@ -96,13 +129,30 @@ const addEditForm = reactive({
   status: '0',
   menuCheckStrictly: true,
   deptCheckStrictly: true,
-  remark: ''
+  remark: '',
+  platformIds: [],
+  platformIdsArr: []
+})
+const platformIdsChoose = ref()
+const menuConfigClick = (item) => {
+  console.log(platformIdsChoose)
+  //传递platform的id查询菜单列表
+  selectMenuListByPlateFormId(item.id).then(({ data }) => {
+    menuOptions.value = data.menus
+  })
+  if (addEditForm.roleId) {
+    reshowTree(addEditForm.roleId)
+  }
+}
+const choosePlatformIds = computed(() => {
+  return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
 })
 const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
   roleRef.value.validate((valid) => {
     if (valid) {
       addEditForm.menuIds = getMenuAllCheckedKeys()
+      addEditForm.platformIds = JSON.stringify(addEditForm.platformIdsArr)
       if (addEditForm.roleId !== '') {
         updateRole(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
@@ -123,6 +173,9 @@ const submitForm = () => {
 const cancel = () => {
   open.value = false
   resetData(addEditForm, formString)
+  platformIdsChoose.value = []
+  menuOptions.value = []
+  platformData.value = []
 }
 const showModal = ({ roleId }) => {
   title.value = '新增角色'
@@ -131,16 +184,21 @@ const showModal = ({ roleId }) => {
     getRole(roleId).then(({ data }) => {
       reshowData(addEditForm, data)
       addEditForm.roleSort = Number(data.roleSort)
+      if (addEditForm.platformIds) {
+        addEditForm.platformIdsArr = JSON.parse(addEditForm.platformIds)
+        const firstPlatformId = addEditForm.platformIdsArr[0]
+        menuConfigClick({ id: firstPlatformId })
+        platformIdsChoose.value =firstPlatformId
+      }
       //edit modal
       title.value = '编辑角色'
     })
-    reshowTree(roleId)
   }
 }
-
+let menuOptions = ref([])
 const reshowTree = (roleId) => {
   roleMenuTreeselect(roleId).then(({ data }) => {
-    menuOptions.value = data.menus
+    //menuOptions.value = data.menus
     data?.checkedKeys?.forEach((v) => {
       nextTick(() => {
         menuRef.value.setChecked(v, true, false)
@@ -156,14 +214,20 @@ const reshowData = (addEditForm, detailData) => {
     }
   })
 }
-let menuOptions = ref([])
-const menuOptionsData = () => {
-  menuOptionsReq().then(({ data }) => {
-    menuOptions.value = data
+
+// const menuOptionsData = () => {
+//   menuOptionsReq().then(({ data }) => {
+//     menuOptions.value = data
+//   })
+// }
+const platformData = ref([])
+const platformList = () => {
+  selectPlatformAll().then(({ data }) => {
+    platformData.value = data
   })
 }
 onMounted(() => {
-  menuOptionsData()
+  platformList()
 })
 
 /** 树权限（展开/折叠）*/

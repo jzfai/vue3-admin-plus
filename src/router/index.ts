@@ -67,16 +67,10 @@ export const constantRoutes = [
   //   meta: { title: '系统管理', icon: 'example' },
   //   children: [
   //     {
-  //       path: 'loginInfo/index',
-  //       component: () => import('@/views/system/login-info/index.vue'),
-  //       name: 'LoginInfo',
-  //       meta: { title: '登录日志', icon: 'Fold' }
-  //     },
-  //     {
-  //       path: 'operatorLog/index',
-  //       component: () => import('@/views/system/operator-log/index.vue'),
-  //       name: 'OperatorLog',
-  //       meta: { title: '操作日志', icon: 'Fold' }
+  //       path: 'platform/index',
+  //       component: () => import('@/views/system/platform/index.vue'),
+  //       name: 'platform',
+  //       meta: { title: '平台管理', icon: 'Fold' }
   //     }
   //   ]
   // }

@@ -10,6 +10,12 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="平台" prop="status">
+        <el-select v-model="queryParams.platformId" placeholder="请选择状态" clearable class="wi-240px">
+          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
+        </el-select>
+      </el-form-item>
+
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-240px">
           <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
@@ -110,7 +116,8 @@ const queryParams = reactive({
   pageNum: 1,
   pageSize: 10000,
   menuName: '', //菜单名称
-  status: '' //状态
+  status: '', //状态
+  platformId: settings.platformId //平台id
 })
 const isExpandAll = ref(false)
 const refreshTable = ref(true)
@@ -127,7 +134,6 @@ const dateRange = ref([])
 //查询
 const handleQuery = () => {
   getList(queryParams)
-
 }
 //重置
 const resetQuery = () => {
@@ -136,7 +142,7 @@ const resetQuery = () => {
 }
 
 const handleAddByParent = ({ menuId }) => {
-  refAddEditModal.value.showModal({ menuId:"", parentId: menuId })
+  refAddEditModal.value.showModal({ menuId: '', parentId: menuId })
 }
 
 const handleUpdate = (row) => {
@@ -154,8 +160,19 @@ const getList = () => {
     menuList.value = handleTree(data, 'menuId')
   })
 }
+const platformData = ref()
+const platformList = () => {
+  selectPlatformAll().then(({ data }) => {
+    platformData.value = data
+    //显示第一项数据
+    // console.log(data[0].platformId)
+    queryParams.platformId = data[0].id
+    handleQuery()
+  })
+}
+
 onMounted(() => {
-  handleQuery()
+  platformList()
 })
 //字典数据
 // eslint-disable-next-line camelcase
@@ -172,6 +189,8 @@ import {
   removeEmptyKey
 } from './index-hook'
 import { resetData } from '@/hooks/use-common'
+import { selectPlatformAll } from '@/api/platform.ts'
+import settings from '@/settings.ts'
 const {
   refAddEditModal,
   refElTable,

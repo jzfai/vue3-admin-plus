@@ -1,4 +1,5 @@
 import request from '@/utils/axios-req'
+import settings from '@/settings'
 
 //获取用户信息
 export const userInfoReq = () => {
@@ -31,7 +32,7 @@ export const getRouterReq = () => {
 export const loginReq = (subForm) => {
   return request({
     url: '/login',
-    data: subForm,
+    data: Object.assign(subForm, { platformId: settings.platformId }),
     method: 'post',
     isNotTipErrorMsg: true
   })

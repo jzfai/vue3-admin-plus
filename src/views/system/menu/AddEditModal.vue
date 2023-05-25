@@ -28,6 +28,17 @@
           <el-radio label="F">按钮</el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="平台权限选择" rules="formRules.isNotNull('平台选择不能为空')">
+        <el-select
+          v-model="addEditForm.platformId"
+          filterable
+          default-first-option
+          :reserve-keyword="false"
+          placeholder="请选择平台"
+        >
+          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
+        </el-select>
+      </el-form-item>
       <el-form-item
         v-if="addEditForm.menuType !== 'F'"
         label="菜单图标"
@@ -158,6 +169,9 @@ import { useDict } from '@/hooks/use-dict'
 import { resetData } from '@/hooks/use-common'
 import IconSelect from './IconSelect.vue'
 import { handleTree } from '@/views/system/menu/index-hook'
+import { ref } from 'vue'
+import { selectPlatformAll } from '@/api/platform.ts'
+import settings from '@/settings.ts'
 
 const showChooseIcon = ref(false)
 const iconSelectRef = ref(null)
@@ -207,7 +221,8 @@ let addEditForm = reactive({
   menuType: 'M',
   isFrame: '1',
   visible: '0',
-  status: '0'
+  status: '0',
+  platformId: settings.platformId
 })
 const formString = JSON.stringify(addEditForm)
 const refJsonInput = ref()
@@ -272,10 +287,18 @@ const getNameData = () => {
   parentIdReq().then(({ data }) => {
     const menu = { menuId: 0, menuName: '主类目', children: [] }
     menu.children = handleTree(data, 'menuId')
-    parentIdOptions.value=[menu]
+    parentIdOptions.value = [menu]
   })
 }
+const platformData = ref([])
+const platformList = () => {
+  selectPlatformAll().then(({ data }) => {
+    platformData.value = data
+  })
+}
+
 onMounted(() => {
+  platformList()
   getNameData()
 })
 //导出给refs使用

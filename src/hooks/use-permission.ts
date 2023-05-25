@@ -32,7 +32,7 @@ export const filterAsyncRouterByReq = (asyncRouterMap) => {
     // if (type && route.children) {
     //   route.children = filterChildren(route.children)
     // }
-    console.log(route)
+    //console.log(route)
     if (route.component) {
       // Layout ParentView 组件特殊处理
       if (route.component === 'Layout') {

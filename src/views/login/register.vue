@@ -80,7 +80,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
-import { getCodeImg, loginReq } from '@/api/user'
+import { getCodeImg, loginReq , register } from '@/api/user'
 import { useConfigStore } from '@/store/config.ts'
 /* listen router change and set the query  */
 const { settings } = useBasicStore()
@@ -154,7 +154,6 @@ const handleLogin = () => {
 const router = useRouter()
 const basicStore = useBasicStore()
 
-import { register } from '@/api/user'
 const loginFunc = () => {
   register(registerForm)
     .then(({ data }) => {

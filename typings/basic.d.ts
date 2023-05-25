@@ -64,6 +64,7 @@ export interface SettingsConfig {
   rememberMe: boolean
   username: string
   password: string
+  platformId: number
 }
 
 export {}

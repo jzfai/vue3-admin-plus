@@ -1,7 +1,7 @@
 export default {
   router: {
     Dashboard: '首页',
-    LowCodePlatFrom: '低代码平台',
+    LowCodeplatform: '低代码平台',
     RBAC: '用户权限角色',
     'Setting Switch': '配置文件',
     'Error Log': '错误日志',

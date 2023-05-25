@@ -29,6 +29,7 @@ router.beforeEach(async (to) => {
           //3.用户信息
           const userInfo = await userInfoReq()
           //4.保存用户信息到store
+          // @ts-ignore
           basicStore.setUserInfo(userInfo)
           //4.路由设置
           const routeInfo = await getRouterReq()
