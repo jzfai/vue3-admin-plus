@@ -108,17 +108,14 @@ export const settings: SettingsConfig = {
    * vite.config.js base config
    * such as
    * */
-  //平台id  2->vue3-admin-plus
-  plateFormId: 2,
-
+  //平台id  1->vue3-admin-plus
+  platformId: 1,
   //login info
   rememberMe: true,
 
   username: 'test',
 
-  password: '666666',
-
-  platformId: 1
+  password: '666666'
 }
 
 export default settings

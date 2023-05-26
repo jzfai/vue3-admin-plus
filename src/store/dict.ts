@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 const useDictStore = defineStore('dict', {
   state: () => ({
-    dict: []
+    dict: [] as Array<any>
   }),
   actions: {
     // 获取字典

@@ -1,10 +1,10 @@
 <template>
   <!-- 添加或修改平台配置对话框 -->
   <el-dialog
+    v-model="open"
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     :destroy-on-close="true"
-    v-model="open"
     :title="title"
     width="600px"
     append-to-body

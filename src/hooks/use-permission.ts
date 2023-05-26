@@ -24,7 +24,6 @@ export function filterAsyncRouter(data) {
 
 import ParentView from '@/components/ParentView/index.vue'
 import InnerLink from '@/components/InnerLink/index.vue'
-import { filterNull } from '@/hooks/use-common'
 // @ts-ignore
 const modules = import.meta.glob('../views/**/**.vue')
 export const filterAsyncRouterByReq = (asyncRouterMap) => {
