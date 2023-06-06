@@ -2,11 +2,12 @@
 import request from '@/utils/axios-req'
 
 export const listReq = (query) => {
+  console.log('query', query)
   //查询列表
   return request({
     url: '/system/platform/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 

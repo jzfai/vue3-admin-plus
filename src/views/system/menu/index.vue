@@ -10,8 +10,8 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="平台" prop="status">
-        <el-select v-model="queryParams.platformId" placeholder="请选择状态" clearable class="wi-240px">
+      <el-form-item label="平台" prop="platformId">
+        <el-select v-model="queryParams.platformId" placeholder="请选择状态" class="wi-240px">
           <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>
@@ -142,9 +142,11 @@ const resetQuery = () => {
 }
 
 const handleAddByParent = ({ menuId }) => {
-  refAddEditModal.value.showModal({ menuId: '', parentId: menuId })
+  refAddEditModal.value.showModal({ menuId: '', parentId: menuId, platformId: queryParams.platformId })
 }
-
+const handleAdd = () => {
+  refAddEditModal.value.showModal({ platformId: queryParams.platformId })
+}
 const handleUpdate = (row) => {
   const menuId = row.menuId || ids[0]
   refAddEditModal.value.showModal({ menuId })
@@ -179,15 +181,7 @@ onMounted(() => {
 const { sys_normal_disable } = useDict('sys_normal_disable')
 
 //导入当前页面封装方法
-import {
-  colChange,
-  currentHook,
-  handleAdd,
-  handleImport,
-  handleSelectionChange,
-  handleTree,
-  removeEmptyKey
-} from './index-hook'
+import { colChange, currentHook, handleImport, handleSelectionChange, handleTree, removeEmptyKey } from './index-hook'
 import { resetData } from '@/hooks/use-common'
 import { selectPlatformAll } from '@/api/platform.ts'
 import settings from '@/settings.ts'

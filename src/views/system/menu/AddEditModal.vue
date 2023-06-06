@@ -28,7 +28,7 @@
           <el-radio label="F">按钮</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="平台权限选择" rules="formRules.isNotNull('平台选择不能为空')">
+      <el-form-item label="平台选择" rules="formRules.isNotNull('平台选择不能为空')">
         <el-select
           v-model="addEditForm.platformId"
           filterable
@@ -222,7 +222,7 @@ let addEditForm = reactive({
   isFrame: '1',
   visible: '0',
   status: '0',
-  platformId: settings.platformId
+  platformId: ''
 })
 const formString = JSON.stringify(addEditForm)
 const refJsonInput = ref()
@@ -264,6 +264,8 @@ const showModal = (row) => {
       refJsonInput.value.initData(data.metaExtra)
     })
   } else {
+    //回显赛选的平台
+    addEditForm.platformId = row.platformId
     // const objData = {
     //   cacheGroup: ['KeepAliveGroup', 'SecondChild', 'ThirdChild'],
     //   activeMenu: '/basic-demo/second-keep-alive',

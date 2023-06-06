@@ -35,10 +35,6 @@ export const colChange = (heardColsArr) => {
   tableHeadColumns.value = heardColsArr
 }
 
-export const handleAdd = () => {
-  refAddEditModal.value.showModal({})
-}
-
 export const removeEmptyKey = (data) => {
   return Object.keys(data)
     .filter((key) => data[key] !== null && data[key] !== undefined && data[key] !== '')
