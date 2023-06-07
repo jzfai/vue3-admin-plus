@@ -233,6 +233,7 @@ const submitForm = () => {
       addEditForm.metaExtra = JSON.stringify(jsonData)
     }
     if (valid) {
+      //校验
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
@@ -246,6 +247,8 @@ const submitForm = () => {
           emits('getList')
         })
       }
+      //重置菜单
+      location.reload()
     }
   })
 }

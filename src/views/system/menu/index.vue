@@ -84,6 +84,19 @@
             <svg-icon :icon-class="row.icon" />
           </template>
         </el-table-column>
+        <!--        菜单状态-->
+        <el-table-column
+          v-if="item.prop === 'visible' && item.showColumn"
+          :key="item.prop"
+          v-bind="item"
+          align="center"
+          :prop="item.prop"
+          :label="item.label"
+        >
+          <template #default="{ row }">
+            <span>{{ row.visible === '0' ? '显示' : '隐藏' }}</span>
+          </template>
+        </el-table-column>
       </template>
 
       <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
@@ -178,7 +191,7 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable, sys_show_hide } = useDict('sys_normal_disable')
 
 //导入当前页面封装方法
 import { colChange, currentHook, handleImport, handleSelectionChange, handleTree, removeEmptyKey } from './index-hook'
