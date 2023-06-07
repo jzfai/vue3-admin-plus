@@ -1,7 +1,7 @@
 //查询列表页面接口
 import request from '@/utils/axios-req'
 
-export const listReq = (query) => {
+export const listMenuReq = (query) => {
   //查询列表
   return request({
     url: '/system/menu/list',

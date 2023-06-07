@@ -123,6 +123,7 @@ const { sys_normal_disable } = useDict('sys_normal_disable')
 const addEditForm = reactive({
   roleName: '',
   roleId: '',
+  menuIds: [],
   menuOptions: [],
   roleSort: 3,
   roleKey: '',
@@ -135,15 +136,33 @@ const addEditForm = reactive({
 })
 const platformIdsChoose = ref()
 const menuConfigClick = (item) => {
-  console.log(platformIdsChoose)
+  //记录上一次的菜单选项
+  platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
+  // setMenuIds()
   //传递platform的id查询菜单列表
   selectMenuListByPlateFormId(item.id).then(({ data }) => {
+    // menuList.value = data.rows
     menuOptions.value = data.menus
+    // 回显选中的menu ids
+    reshowTree(item.id)
+    // getMenuIds(addEditForm.roleId)
   })
-  if (addEditForm.roleId) {
-    reshowTree(addEditForm.roleId)
-  }
 }
+// const setMenuIds = () => {
+//   //存储选中节点值
+//   // getMenuAllCheckedKeys().forEach((item) => {
+//   //   if (!addEditForm.menuIds.includes(item)) {
+//   //     addEditForm.menuIds.push(item)
+//   //   }
+//   // })
+//   //移除未选中节点值
+//   // addEditForm.menuIds?.forEach((item, index) => {
+//   //   if (getMenuNoCheckNode().includes(item)) {
+//   //     addEditForm.menuIds.splice(index, 1)
+//   //   }
+//   // })
+//   reshowTree()
+// }
 const choosePlatformIds = computed(() => {
   return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
 })
@@ -151,8 +170,10 @@ const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
   roleRef.value.validate((valid) => {
     if (valid) {
-      addEditForm.menuIds = getMenuAllCheckedKeys()
+      platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
       addEditForm.platformIds = JSON.stringify(addEditForm.platformIdsArr)
+      addEditForm.menuIds = getCheckMenuIds()
+      // setMenuIds()
       if (addEditForm.roleId !== '') {
         updateRole(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
@@ -173,10 +194,14 @@ const submitForm = () => {
 const cancel = () => {
   open.value = false
   resetData(addEditForm, formString)
-  platformIdsChoose.value = []
+  platformIdsChoose.value = ''
   menuOptions.value = []
   platformData.value = []
 }
+// const menuList = ref()
+//存储平台key:选中的menu-arr
+const platformMenuIdObj = reactive({})
+const checkedKeys = ref([])
 const showModal = ({ roleId }) => {
   title.value = '新增角色'
   open.value = true
@@ -187,25 +212,85 @@ const showModal = ({ roleId }) => {
       if (addEditForm.platformIds) {
         addEditForm.platformIdsArr = JSON.parse(addEditForm.platformIds)
         const firstPlatformId = addEditForm.platformIdsArr[0]
-        menuConfigClick({ id: firstPlatformId })
-        platformIdsChoose.value =firstPlatformId
+        platformIdsChoose.value = firstPlatformId
+        //根据平台id获取菜单
+        selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
+          // menuList.value = data.rows
+          menuOptions.value = data.menus
+          //回显menuIds
+          roleMenuTreeselect(roleId).then(async ({ data }) => {
+            //存储选中的key值
+            checkedKeys.value = data?.checkedKeys
+            await dillInitPlatformCheckMenuId(data?.checkedKeys)
+            reshowTree(firstPlatformId)
+          })
+        })
       }
       //edit modal
       title.value = '编辑角色'
     })
   }
+  platformList()
 }
-let menuOptions = ref([])
-const reshowTree = (roleId) => {
-  roleMenuTreeselect(roleId).then(({ data }) => {
-    //menuOptions.value = data.menus
-    data?.checkedKeys?.forEach((v) => {
-      nextTick(() => {
-        menuRef.value.setChecked(v, true, false)
+const arrGroupByKey = (arr, groupKey) => {
+  const map = {}
+  for (const ai of arr) {
+    // 将需要筛选的属性的值作为新对象的键，并且判断是否已经存在
+    if (!map[ai[groupKey]]) {
+      // 不存在的话就在map对象中创建一个属性的值作为键名，键值为空数组的新对象，并且把arr[i]放入
+      map[ai[groupKey]] = [ai]
+    } else {
+      // 如果已经存在就直接把arr[i]放入
+      map[ai[groupKey]].push(ai)
+    }
+  }
+  return map
+}
+import { listMenuReq } from '@/api/menu'
+const dillInitPlatformCheckMenuId = (checkedKeys) => {
+  return new Promise((resolve) => {
+    listMenuReq().then(({ data }) => {
+      const arrGroupByKey1 = arrGroupByKey(data, 'platformId')
+      let checkMenuIdArr = []
+      Object.keys(arrGroupByKey1).forEach((key) => {
+        checkMenuIdArr = []
+        arrGroupByKey1[key].forEach((item) => {
+          if (checkedKeys?.includes(item.menuId)) {
+            checkMenuIdArr.push(item.menuId)
+          }
+        })
+        platformMenuIdObj[key] = checkMenuIdArr
       })
+      resolve()
     })
   })
 }
+
+let menuOptions = ref([])
+const reshowTree = (platformId) => {
+  //menuOptions.value = data.menus
+  platformMenuIdObj[platformId].forEach((v) => {
+    nextTick(() => {
+      menuRef.value.setChecked(v, true, false)
+    })
+  })
+}
+
+const getCheckMenuIds = () => {
+  const keyArr = []
+  Object.values(platformMenuIdObj).forEach((valueArr) => {
+    valueArr.forEach((fItem) => {
+      keyArr.push(fItem)
+    })
+  })
+  return keyArr
+}
+//根据角色id获取菜单
+// const roleMenuTreeReq = (roleId) => {
+//   roleMenuTreeselect(roleId).then(({ data }) => {
+//     reshowTree()
+//   })
+// }
 
 const reshowData = (addEditForm, detailData) => {
   Object.keys(addEditForm).forEach((fItem) => {
@@ -226,9 +311,6 @@ const platformList = () => {
     platformData.value = data
   })
 }
-onMounted(() => {
-  platformList()
-})
 
 /** 树权限（展开/折叠）*/
 const handleCheckedTreeExpand = (value, type) => {
@@ -239,13 +321,8 @@ const handleCheckedTreeExpand = (value, type) => {
 }
 
 const menuRef = ref(null)
-const deptRef = ref(null)
 const menuExpand = ref(false)
 const menuNodeAll = ref(false)
-const deptExpand = ref(true)
-const deptNodeAll = ref(false)
-const deptOptions = ref([])
-const openDataScope = ref(false)
 /** 树权限（全选/全不选） */
 const handleCheckedTreeNodeAll = (value) => {
   menuRef.value.setCheckedNodes(value ? menuOptions.value : [])
@@ -264,6 +341,14 @@ const getMenuAllCheckedKeys = () => {
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys)
   return checkedKeys
 }
+
+//获取未选中节点数组
+// const getMenuNoCheckNode = () => {
+//   let mapIds = menuList.value
+//     .filter((fItem) => !getMenuAllCheckedKeys().includes(fItem.menuId))
+//     .map((mItem) => mItem.menuId)
+//   return mapIds
+// }
 
 //导出给refs使用
 defineExpose({ cancel, showModal })

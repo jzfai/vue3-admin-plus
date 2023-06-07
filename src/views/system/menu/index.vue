@@ -108,7 +108,7 @@ import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
 import AddEditModal from './AddEditModal.vue'
 import DictTag from '@/components/DictTag.vue'
-import { listReq } from '@/api/menu'
+import { listMenuReq } from '@/api/menu'
 import { useDict } from '@/hooks/use-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 /*查询模块*/
@@ -157,7 +157,7 @@ const getList = () => {
     queryParams.beginTime = dateRange.value.at(-1)
     queryParams.endTime = dateRange.value.at(-2)
   }
-  listReq(removeEmptyKey(queryParams)).then(({ data }) => {
+  listMenuReq(removeEmptyKey(queryParams)).then(({ data }) => {
     loading.value = false
     menuList.value = handleTree(data, 'menuId')
   })

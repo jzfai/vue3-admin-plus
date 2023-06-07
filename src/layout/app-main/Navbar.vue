@@ -73,7 +73,7 @@ const toggleSideBar = () => {
 const router = useRouter()
 const route = useRoute()
 const loginOut = () => {
-  elMessage('退出登录成功')
+  elMessage('退出登录成功', 'success')
   router.push(`/login?redirect=${route.path}`)
   nextTick(() => {
     resetState()
