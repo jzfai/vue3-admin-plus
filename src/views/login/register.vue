@@ -58,7 +58,7 @@
               <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
             </span>
             <el-input v-model="registerForm.code" placeholder="验证码" @keyup.enter="handleLogin" />
-            <img :src="codeUrl" class="login-code-img" @click="getCode" />
+            <img v-if="codeUrl" :src="codeUrl" class="login-code-img" @click="getCode" />
           </div>
         </el-form-item>
         <el-form-item style="width: 100%">
@@ -80,7 +80,7 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
-import { getCodeImg, loginReq , register } from '@/api/user'
+import { getCodeImg, loginReq, register } from '@/api/user'
 import { useConfigStore } from '@/store/config.ts'
 /* listen router change and set the query  */
 const { settings } = useBasicStore()

@@ -42,7 +42,7 @@
               <svg-icon icon-class="validCode" class="el-input__icon input-icon" />
             </template>
           </el-input>
-          <img :src="codeUrl" class="login-code-img" @click="getCode" />
+          <img v-if="codeUrl" :src="codeUrl" class="login-code-img" @click="getCode" />
         </div>
       </el-form-item>
       <el-checkbox

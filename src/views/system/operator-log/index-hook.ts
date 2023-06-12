@@ -17,17 +17,17 @@ export const handleImport = () => {
 }
 
 const tableHeadColumns = ref([
-  { prop: "operId", label: "日志编号", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "title", label: "系统模块", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "businessType", label: "操作类型", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
-  { prop: "operName", label: "操作人员", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "operIp", label: "主机", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "status", label: "操作状态", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
-  { prop: "operTime", label: "操作日期", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "costTime", label: "消耗时间", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: 'operId', label: '日志编号', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'title', label: '系统模块', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'businessType', label: '操作类型', minWidth: 150, isTemplate: true, align: 'center', showColumn: true },
+  { prop: 'operName', label: '操作人员', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'operIp', label: '主机', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'status', label: '操作状态', minWidth: 150, isTemplate: true, align: 'center', showColumn: true },
+  { prop: 'operTime', label: '操作日期', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'costTime', label: '消耗时间', minWidth: 150, isTemplate: false, align: 'center', showColumn: true }
 ])
 export const handleSelectionChange = (selection) => {
-  ids.value = selection.map((item) => item.operatorLogId)
+  ids.value = selection.map((item) => item.operId)
   single.value = selection.length !== 1
   multiple.value = !selection.length
 }
@@ -62,8 +62,8 @@ export const currentHook = (queryParams, getList) => {
     })
   }
   const handleDelete = (row) => {
-    const operatorLogIds = row.operatorLogId || ids.value
-    elConfirm('确认',`是否确认删除用户编号为"${operatorLogIds}"的数据项`)
+    const operatorLogIds = row.operId || ids.value
+    elConfirm('确认', `是否确认删除用户编号为"${operatorLogIds}"的数据项`)
       .then(() => {
         return deleteReq(operatorLogIds)
       })

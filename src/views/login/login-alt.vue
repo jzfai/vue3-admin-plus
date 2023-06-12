@@ -41,7 +41,7 @@
             </span>
             <el-input v-model="loginForm.code" placeholder="验证码" @keyup.enter="handleLogin" />
 
-            <img :src="codeUrl" class="login-code-img" @click="getCode" />
+            <img v-if="codeUrl" :src="codeUrl" class="login-code-img" @click="getCode" />
           </div>
         </el-form-item>
         <el-checkbox

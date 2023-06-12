@@ -222,9 +222,7 @@ const showModal = ({ roleId }) => {
             //存储选中的key值
             checkedKeys.value = data?.checkedKeys
             await dillInitPlatformCheckMenuId(data?.checkedKeys)
-            sleepTimeout(50).then(() => {
-              reshowTree(firstPlatformId)
-            })
+            reshowTree(firstPlatformId)
           })
         })
       }

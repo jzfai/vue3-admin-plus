@@ -248,7 +248,7 @@ const submitForm = () => {
         })
       }
       //重置菜单
-      location.reload()
+      //location.reload()
     }
   })
 }
