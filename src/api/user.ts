@@ -19,6 +19,7 @@ export const getRouterReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
       url: '/getRouters',
+      params: { platformId: settings.platformId },
       reqLoading: false,
       method: 'get'
     }
@@ -32,7 +33,7 @@ export const getRouterReq = () => {
 export const loginReq = (subForm) => {
   return request({
     url: '/login',
-    data: Object.assign(subForm, { platformId: settings.platformId }),
+    data: subForm,
     method: 'post',
     isNotTipErrorMsg: true
   })
