@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     ColumnFilter: typeof import('./../src/components/ColumnFilter.vue')['default']
     DictTag: typeof import('./../src/components/DictTag.vue')['default']
     ElSvgIcon: typeof import('./../src/components/ElSvgIcon.vue')['default']
+    FileUpload: typeof import('./../src/components/FileUpload/index.vue')['default']
     InnerLink: typeof import('./../src/components/InnerLink/index.vue')['default']
     JsonInput: typeof import('./../src/components/JsonInput.vue')['default']
     Pagination: typeof import('./../src/components/Pagination/index.vue')['default']

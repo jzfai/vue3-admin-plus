@@ -52,21 +52,36 @@ export const constantRoutes = [
         meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
       }
     ]
-  },
-  {
-    path: '/system',
-    component: Layout,
-    alwaysShow: true,
-    meta: { title: 'OSS', icon: 'example' },
-    children: [
-      {
-        path: 'oss/index',
-        component: () => import('@/views/system/oss/index.vue'),
-        name: 'Oss',
-        meta: { title: '列表', icon: 'Fold' }
-      }
-    ]
   }
+  // {
+  //   path: '/system',
+  //   component: Layout,
+  //   alwaysShow: true,
+  //   meta: { title: 'OSS', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'oss/index',
+  //       component: () => import('@/views/system/oss/index.vue'),
+  //       name: 'Oss',
+  //       meta: { title: '列表', icon: 'Fold' }
+  //     }
+  //   ]
+  // }
+  // {
+  //   path: '/system',
+  //   component: Layout,
+  //   alwaysShow: true,
+  //   meta: { title: '查询对象存储配置父目录', icon: 'example' },
+  //   children: [
+  //     {
+  //       path: 'oss-config/index',
+  //       component: () => import('@/views/system/oss-config/index.vue'),
+  //       name: 'O',
+  //       meta: { title: '查询对象存储配置', icon: 'Fold' }
+  //     }
+  //   ]
+  // },
+
   //
   // guid,
   // charts,

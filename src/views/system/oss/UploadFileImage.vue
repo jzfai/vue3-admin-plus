@@ -10,15 +10,14 @@
     @close="cancel"
   >
     <el-form ref="form" :model="addEditForm" label-width="80px">
-      <el-form-item label="文件名" :rules="formRules.isNotNull('文件名称不能为空')">
-        <fileUpload v-model="addEditForm.file" v-if="uploadType === 0" />
-        <imageUpload v-model="addEditForm.file" v-if="uploadType === 1" />
+      <el-form-item label="" :rules="formRules.isNotNull('文件名称不能为空')">
+        <FileUpload ref="refFileUpload" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <!--<el-button type="primary" @click="submitForm">确 定</el-button>-->
+        <el-button @click="cancel" type="primary">关 闭</el-button>
       </div>
     </template>
   </el-dialog>
@@ -64,15 +63,11 @@ const submitForm = () => {
 const cancel = () => {
   open.value = false
   resetData(addEditForm, formString)
+  emits('getList')
 }
 const showModal = ({ type }) => {
   console.log(type)
-  //文件上传
-  if (type === 0) {
-    title.value = '上传文件'
-  } else if (type === 1) {
-    title.value = '上传图片'
-  }
+  title.value = '上传文件图片'
   uploadType.value = type
   open.value = true
 }

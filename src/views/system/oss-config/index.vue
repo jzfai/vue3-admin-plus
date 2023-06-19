@@ -1,51 +1,22 @@
 <template>
   <div class="p-10px">
-    <el-form v-show="showSearch" :model="queryParams" :inline="true" label-width="80px">
-      <el-form-item label="文件名" prop="fileName">
+    <el-form v-show="showSearch" :model="queryParams" :inline="true" label-width="68px">
+      <el-form-item label="配置key" prop="configKey">
         <el-input
-          v-model.trim="queryParams.fileName"
-          placeholder="请输入文件名"
+          v-model.trim="queryParams.configKey"
+          placeholder="请输入配置key"
           clearable
           class="wi-150px"
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="原名" prop="originalName">
+      <el-form-item label="桶名称" prop="bucketName">
         <el-input
-          v-model.trim="queryParams.originalName"
-          placeholder="请输入原名"
+          v-model.trim="queryParams.bucketName"
+          placeholder="请输入桶名称"
           clearable
           class="wi-150px"
           @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="文件后缀名" prop="fileSuffix">
-        <el-input
-          v-model.trim="queryParams.fileSuffix"
-          placeholder="请输入文件后缀名"
-          clearable
-          class="wi-150px"
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="服务商" prop="service">
-        <el-input
-          v-model.trim="queryParams.service"
-          placeholder="请输入服务商"
-          clearable
-          class="wi-150px"
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="创建时间" style="width: 150px}">
-        <el-date-picker
-          v-model="timeRange"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          type="daterange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :default-time="[new Date(2000, 1, 1, 0, 0, 0), new Date(2000, 1, 1, 23, 59, 59)]"
         />
       </el-form-item>
       <el-form-item>
@@ -53,14 +24,20 @@
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
-    <el-row :gutter="10" class="mb-10px">
-      <el-button type="primary" plain @click="handleFile">上传文件</el-button>
+    <el-row :gutter="10" class="mb8">
+      <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
       <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
-      <ColumnFilter v-if="ossList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
+      <ColumnFilter v-if="ossConfigList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="ossList" @selection-change="handleSelectionChange">
+    <el-table
+      ref="refElTable"
+      v-loading="loading"
+      border
+      :data="ossConfigList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
@@ -73,31 +50,46 @@
           :prop="item.prop"
           :label="item.label"
         />
-        <!--文件展示-->
+        <!--桶权限类型-->
         <el-table-column
-          v-if="item.prop === 'url' && item.isTemplate && item.showColumn"
+          v-if="item.prop === 'accessPolicy' && item.isTemplate && item.showColumn"
           :key="item.prop"
-          show-overflow-tooltip
           v-bind="item"
           align="center"
           :prop="item.prop"
           :label="item.label"
         >
           <template #default="{ row }">
-            <el-image
-              v-if="checkFileSuffix(row.fileSuffix)"
-              style="width: 100px; height: 100px"
-              :src="row.url"
-              preview-teleported
-              :preview-src-list="[row.url]"
+            <el-tag v-if="row.accessPolicy === '0'" type="warning">private</el-tag>
+            <el-tag v-if="row.accessPolicy === '1'" type="success">public</el-tag>
+            <el-tag v-if="row.accessPolicy === '2'" type="info">custom</el-tag>
+          </template>
+        </el-table-column>
+        <!--状态-->
+        <el-table-column
+          v-if="item.prop === 'status' && item.isTemplate && item.showColumn"
+          :key="item.prop"
+          v-bind="item"
+          align="center"
+          :prop="item.prop"
+          :label="item.label"
+        >
+          <template #default="{ row }">
+            <el-switch
+              :model-value="row.status"
+              active-value="0"
+              inactive-value="1"
+              @change="handleStatusChange(row)"
             />
-            <span v-if="!checkFileSuffix(row.fileSuffix)" v-text="row.url" />
           </template>
         </el-table-column>
       </template>
 
-      <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
         <template #default="{ row }">
+          <el-tooltip content="修改" placement="top">
+            <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
+          </el-tooltip>
           <el-tooltip content="删除" placement="top">
             <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
           </el-tooltip>
@@ -117,35 +109,35 @@
   </div>
 </template>
 <script setup>
-import { listReq } from '@/api/oss'
+import { listReq, changeOssConfigStatus } from '@/api/ossConfig'
+import { changeRoleStatus } from '@/api/role.ts'
 import { useDict } from '@/hooks/use-dict'
+import { ElMessage } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './UploadFileImage.vue'
+import AddEditModal from './AddEditModal.vue'
 /*查询模块*/
 const queryParams = reactive({
+  ossConfigId: '',
   pageNum: 1,
   pageSize: 10,
-  name: '', //平台名字
-  fileName: '', //文件名
-  originalName: '', //原名
-  fileSuffix: '', //文件后缀名
-  service: '', //服务商
-  createTime: '', //创建时间开始时间
-  endTime: '' //创建时间结束时间
+  configKey: '', //配置key
+  bucketName: '', //桶名称
+  status: '' //状态
 })
-
-/** 上传文件 */
-const handleFile = () => {
-  refAddEditModal.value.showModal({ type: 0 })
+const handleStatusChange = (row) => {
+  const text = row.status === '0' ? '停用' : '启用'
+  elConfirm('确认', `确认要"${text}""${row.ossConfigId}"配置吗?`)
+    .then(() => {
+      return changeOssConfigStatus(row.ossConfigId, row.status === '0' ? '1' : '0')
+    })
+    .then(() => {
+      ElMessage({ message: `${text}成功`, type: 'success' })
+      row.status = row.status === '0' ? '1' : '0'
+    })
 }
-/** 上传图片 */
-const handleImage = () => {
-  refAddEditModal.value.showModal({ type: 1 })
-}
-
 //备份数据
 const bakQueryParams = JSON.stringify(queryParams)
 const dateRange = ref([])
@@ -160,14 +152,10 @@ const resetQuery = () => {
   dateRange.value = []
   handleQuery()
 }
-
-const checkFileSuffix = (fileSuffix) => {
-  const arr = ['png', 'jpg', 'jpeg']
-  return arr.some((type) => {
-    return fileSuffix.includes(type)
-  })
+const handleUpdate = (row) => {
+  const id = row.ossConfigId || ids.value[0]
+  refAddEditModal.value.showModal({ id })
 }
-
 const getList = () => {
   loading.value = true
   if (dateRange.value?.length) {
@@ -179,7 +167,7 @@ const getList = () => {
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
     loading.value = false
-    ossList.value = rows
+    ossConfigList.value = rows
     totalNum.value = total
   })
 }
@@ -187,10 +175,6 @@ onMounted(() => {
   handleQuery()
 })
 //字典数据
-// eslint-disable-next-line camelcase
-// const {
-// } = useDict(
-// )
 
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
@@ -204,10 +188,9 @@ const {
   ids,
   totalNum,
   loading,
-  ossList,
+  ossConfigList,
   showSearch,
   tableHeadColumns,
-  handleExport,
   handleDelete
 } = currentHook(queryParams, getList)
 </script>
