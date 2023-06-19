@@ -79,9 +79,8 @@ export function changeUserStatus(userId, status) {
     data
   })
 }
-
+//查询列表
 export const listReq = (query) => {
-  //查询列表
   return request({
     url: '/system/user/list',
     method: 'get',
