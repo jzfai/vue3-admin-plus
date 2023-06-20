@@ -8,7 +8,7 @@
  * */
 function blobToImg(blob) {
   return new Promise((resolve) => {
-    let reader = new FileReader()
+    const reader = new FileReader()
     reader.addEventListener('load', () => {
       const img:any = new Image()
       img.src = reader.result
@@ -81,7 +81,7 @@ function convasToImg(canvas) {
 
 // 封装方法
 export async function watermark(file, texts) {
-  let img = await blobToImg(file)
+  const img = await blobToImg(file)
   // 1.图片路径转成canvas
   const tempCanvas = await imgToCanvas(img)
   // 2.canvas添加水印

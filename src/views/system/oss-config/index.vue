@@ -109,7 +109,7 @@
   </div>
 </template>
 <script setup>
-import { listReq, changeOssConfigStatus } from '@/api/ossConfig'
+import { changeOssConfigStatus, listReq } from '@/api/ossConfig'
 import { changeRoleStatus } from '@/api/role.ts'
 import { useDict } from '@/hooks/use-dict'
 import { ElMessage } from 'element-plus'

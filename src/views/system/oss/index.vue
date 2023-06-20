@@ -60,7 +60,14 @@
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="ossList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
     </el-row>
-    <el-table ref="refElTable" v-loading="loading" border :data="ossList" @selection-change="handleSelectionChange">
+    <el-table
+      ref="refElTable"
+      v-loading="loading"
+      height="calc(100vh - 350px)"
+      border
+      :data="ossList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="50" align="center" />
       <!--column头字段-->
       <template v-for="item in tableHeadColumns">
@@ -87,11 +94,11 @@
             <el-image
               v-if="checkFileSuffix(row.fileSuffix)"
               style="width: 100px; height: 100px"
-              :src="row.url"
+              :src="row.frontDillUrl"
               preview-teleported
-              :preview-src-list="[row.url]"
+              :preview-src-list="[row.frontDillUrl]"
             />
-            <span v-if="!checkFileSuffix(row.fileSuffix)" v-text="row.url" />
+            <svg-icon v-else icon-class="job" class="imgStyle" />
           </template>
         </el-table-column>
       </template>
@@ -179,7 +186,11 @@ const getList = () => {
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
     loading.value = false
-    ossList.value = rows
+    ossList.value = rows.map((mItem) => {
+      mItem.frontDillUrl = spliceMinioUrl(mItem.fileName)
+      return mItem
+    })
+    console.log(ossList.value)
     totalNum.value = total
   })
 }
@@ -194,7 +205,7 @@ onMounted(() => {
 
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
+import { resetData, spliceMinioUrl } from '@/hooks/use-common'
 const {
   refAddEditModal,
   refElTable,

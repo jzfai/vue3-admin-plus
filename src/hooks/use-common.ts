@@ -104,3 +104,21 @@ export const reshowData = (addEditForm, detailData) => {
     }
   })
 }
+
+//minio图片显示拼接
+// import { listReq } from '@/api/ossConfig'
+//
+// //取 minio 激活的 bucket
+// let bucketName = ''
+// listReq({}).then(({ rows }: any) => {
+//   rows.forEach((item) => {
+//     if (item.status === '0') {
+//       bucketName = item.bucketName
+//     }
+//   })
+// })
+// console.log(bucketName)
+
+export const spliceMinioUrl = (imageUrl) => {
+  return `${import.meta.env.VITE_APP_IMAGE_URL}/hugo/${imageUrl}`
+}

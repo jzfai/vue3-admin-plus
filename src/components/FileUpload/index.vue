@@ -1,28 +1,29 @@
 <template>
-  <div class="imgUpContainer rowSS">
+  <div class="imgUpContainer rowSS" style="flex-wrap: wrap">
     <!--图片列表-->
-    <div class="imgShowList rowSS">
+    <div class="imgShowList rowSS" style="flex-wrap: wrap">
       <div v-for="(item, index) in imageList" :key="index" class="imgItem">
         <!--右上角删除按钮-->
         <el-icon class="rightDel" @click="deleteImage(index)">
-          <CloseBold/>
+          <CloseBold />
         </el-icon>
-        <img class="imgStyle" :src="item.url"/>
+        <img class="imgStyle" v-if="validIsImage(item.url)" :src="item.url" />
+        <svg-icon v-else icon-class="job" class="imgStyle" />
         <div class="imageName">{{ item.name }}</div>
       </div>
     </div>
     <!--图片上传-->
     <div class="packingImageContainer columnCC" style="cursor: pointer">
-      <el-icon class="packingIconStyle" >
-        <Plus/>
+      <el-icon class="packingIconStyle">
+        <Plus />
       </el-icon>
       <input
-          ref="refSettingFile"
-          type="file"
-          class="inputStyle"
-          accept=".jpg,.png,.jpeg,.doc,.xls,.ppt,.txt,.pdf"
-          multiple
-          @change="fileOnChange"
+        ref="refSettingFile"
+        type="file"
+        class="inputStyle"
+        accept=".jpg,.png,.jpeg,.doc,.xls,.ppt,.txt,.pdf"
+        multiple
+        @change="fileOnChange"
       />
     </div>
   </div>
@@ -33,42 +34,45 @@
 </template>
 
 <script setup>
-import {Plus, CloseBold} from '@element-plus/icons-vue'
+import { CloseBold, Plus } from '@element-plus/icons-vue'
 import axiosReq from '@/utils/axios-req'
-import {watermark} from './imgDillUtils'
-import {ElMessage} from 'element-plus'
-import {reactive, ref} from 'vue'
+// import { watermark } from './imgDillUtils'
+import { ElMessage } from 'element-plus'
+import { reactive, ref } from 'vue'
 
 const imageList = ref([])
 
+//检验是否是图片
+const validIsImage = (url) => {
+  return ['.png', '.jpg', '.jpeg'].some((type) => url.includes(type))
+}
 const fileOnChange = () => {
   const length = imageList.value.length
   if (length >= 5) {
-    ElMessage({message: '文件上传数不能大于2个', type: 'warning'})
+    ElMessage({ message: '文件上传数不能大于5个', type: 'warning' })
     return
   }
   const fileObj = refSettingFile.value.files
   const fileArr = Object.values(fileObj)
   if (fileArr.length) {
     fileArr.forEach((fItem) => {
-      watermark(fItem, ['真香定律']).then((res) => {
-        const formData = new FormData()
-        formData.append('file', res)
-        fileUploadSave(formData,fItem.name)
-      })
+      const formData = new FormData()
+      formData.append('file', fItem)
+      fileUploadSave(formData, fItem.name)
     })
   }
 }
+
 const refSettingFile = ref(null)
 const fileUploadSave = (formData) => {
   axiosReq({
     url: '/system/oss/upload',
     data: formData,
-    method: 'post',
-  }).then(({data}) => {
+    method: 'post'
+  }).then(({ data }) => {
     // filename
     imageList.value.push({
-      url:data.url,
+      url: data.url,
       name: data.fileName
     })
   })
@@ -78,12 +82,10 @@ const fileUploadSave = (formData) => {
 const deleteImage = (index) => {
   imageList.value.splice(index, 1)
 }
-
-
 </script>
 
 <style scoped lang="scss">
-$packingWidth: 200px;
+$packingWidth: 100px;
 $borderRadius: 6px;
 .imgUpContainer {
 }

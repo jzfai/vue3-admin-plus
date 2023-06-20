@@ -88,6 +88,7 @@
     "shallowReadonly": true,
     "shallowRef": true,
     "sleepTimeout": true,
+    "spliceMinioUrl": true,
     "storeToRefs": true,
     "toRaw": true,
     "toRef": true,

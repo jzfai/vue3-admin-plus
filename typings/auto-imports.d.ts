@@ -89,6 +89,7 @@ declare global {
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
   const sleepTimeout: typeof import('../src/hooks/use-common')['sleepTimeout']
+  const spliceMinioUrl: typeof import('../src/hooks/use-common')['spliceMinioUrl']
   const storeToRefs: typeof import('pinia/dist/pinia')['storeToRefs']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
