@@ -29,14 +29,8 @@ const key = computed(() => route.path)
 // cachePage: is true, keep-alive this Page
 // leaveRmCachePage: is true, keep-alive remote when page leave
 let oldRoute: rawConfig = {}
-// let deepOldRouter: RouteLocationMatched | null = null
 let cacheGroup: any = []
 const basicStore = useBasicStore()
-// const removeDeepChildren = (deepOldRouter) => {
-//   deepOldRouter.children?.forEach((fItem) => {
-//     basicStore.delCacheViewDeep(fItem.name)
-//   })
-// }
 watch(
   () => route.name,
   () => {
@@ -60,42 +54,17 @@ watch(
     }
 
     //二级路由处理
-    if (routerLevel === 2) {
-      if (oldRoute?.name) {
-        if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-          basicStore.delCachedView(oldRoute.name)
-        }
-      }
-      if (route.name) {
-        if (route.meta?.cachePage) {
-          basicStore.addCachedView(route.name)
-        }
+    if (oldRoute?.name) {
+      if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
+        basicStore.delCachedView(oldRoute.name)
       }
     }
-    //warning remove the third routerLevel cache func
-    //三级路由处理
-    // if (routerLevel === 3) {
-    //   //三级时存储当前路由对象的上一级
-    //   const parentRoute = route.matched[1]
-    //   //否则走正常两级路由处理流程
-    //   if (oldRoute?.name) {
-    //     if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-    //       basicStore.delCacheViewDeep(oldRoute.name)
-    //     }
-    //   }
-    //
-    //   //取的是第二级的name
-    //   if (parentRoute.name && parentRoute.meta?.cachePage) {
-    //     deepOldRouter = parentRoute
-    //     basicStore.addCachedView(deepOldRouter.name)
-    //     if (route.name) {
-    //       if (route.meta?.cachePage) {
-    //         //和第三级的name进行缓存
-    //         basicStore.addCachedViewDeep(route.name)
-    //       }
-    //     }
-    //   }
-    // }
+
+    if (route.name) {
+      if (route.meta?.cachePage) {
+        basicStore.addCachedView(route.name)
+      }
+    }
     oldRoute = cloneDeep({ name: route.name, meta: route.meta })
   },
   { immediate: true }

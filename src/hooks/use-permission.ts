@@ -9,7 +9,7 @@ import Layout from '@/layout/index.vue'
 /*
  * 路由操作
  * */
-import router, { asyncRoutes, constantRoutes, roleCodeRoutes } from '@/router'
+import router, { constantRoutes, noMathPage } from '@/router'
 //进度条
 import 'nprogress/nprogress.css'
 import { useBasicStore } from '@/store/basic'
@@ -18,7 +18,10 @@ import { useBasicStore } from '@/store/basic'
 export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
   const fileAfterRouter = filterAsyncRouterByReq(data)
+  //add 404 page router
+  fileAfterRouter.push(noMathPage)
   fileAfterRouter.forEach((route) => router.addRoute(route))
+
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }
 
@@ -28,10 +31,6 @@ import InnerLink from '@/components/InnerLink/index.vue'
 const modules = import.meta.glob('../views/**/**.vue')
 export const filterAsyncRouterByReq = (asyncRouterMap) => {
   return asyncRouterMap.filter((route) => {
-    // if (type && route.children) {
-    //   route.children = filterChildren(route.children)
-    // }
-    //console.log(route)
     if (route.component) {
       // Layout ParentView 组件特殊处理
       if (route.component === 'Layout') {
@@ -59,30 +58,6 @@ export const filterAsyncRouterByReq = (asyncRouterMap) => {
     return true
   })
 }
-// const filterChildren = (childrenMap, lastRouter = false) => {
-//   let children: any = []
-//   childrenMap.forEach((el) => {
-//     if (el.children?.length) {
-//       if (el.component === 'ParentView' && !lastRouter) {
-//         el.children.forEach((c) => {
-//           c.path = `${el.path}/${c.path}`
-//           if (c.children && c.children.length) {
-//             children = children.concat(filterChildren(c.children, c))
-//             return
-//           }
-//           children.push(c)
-//         })
-//         return
-//       }
-//     }
-//     if (lastRouter) {
-//       // @ts-ignore
-//       el.path = `${lastRouter.path}/${el.path}`
-//     }
-//     children = children.concat(el)
-//   })
-//   return children
-// }
 
 //重置路由
 export function resetRouter() {

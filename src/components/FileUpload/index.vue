@@ -7,7 +7,7 @@
         <el-icon class="rightDel" @click="deleteImage(index)">
           <CloseBold />
         </el-icon>
-        <img class="imgStyle" v-if="validIsImage(item.url)" :src="item.url" />
+        <img v-if="validIsImage(item.url)" class="imgStyle" :src="item.url" />
         <svg-icon v-else icon-class="job" class="imgStyle" />
         <div class="imageName">{{ item.name }}</div>
       </div>

@@ -6,6 +6,7 @@ export const listReq = (query) => {
   return request({
     url: '/system/oss/config/list',
     method: 'get',
+    reqLoading: false,
     params: query
   })
 }
