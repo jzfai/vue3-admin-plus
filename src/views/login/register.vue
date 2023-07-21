@@ -164,6 +164,7 @@ const loginFunc = () => {
       tipMessage.value = err?.msg
     })
     .finally(() => {
+      getCode()
       subLoading.value = false
     })
 }

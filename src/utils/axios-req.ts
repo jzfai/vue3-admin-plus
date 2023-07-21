@@ -4,13 +4,28 @@ import { useBasicStore } from '@/store/basic'
 
 //使用axios.create()创建一个axios请求实例
 const service = axios.create()
-let loadingInstance:any = null //loading实例
+let loadingInstance: any = null //loading实例
 let tempReqUrlSave = ''
-let authorTipDoor=true
+let authorTipDoor = true
+
+const noAuthDill = () => {
+  authorTipDoor = false
+  ElMessageBox.confirm('请重新登录', {
+    confirmButtonText: '重新登录',
+    closeOnClickModal: false,
+    showCancelButton: false,
+    showClose: false,
+    type: 'warning'
+  }).then(() => {
+    useBasicStore().resetStateAndToLogin()
+    authorTipDoor = true
+  })
+}
+
 //请求前拦截
 service.interceptors.request.use(
-  (req:any) => {
-    const { token, axiosPromiseArr }:any = useBasicStore()
+  (req: any) => {
+    const { token, axiosPromiseArr }: any = useBasicStore()
     //axiosPromiseArr收集请求地址,用于取消请求
     req.cancelToken = new axios.CancelToken((cancel) => {
       tempReqUrlSave = req.url
@@ -45,44 +60,42 @@ service.interceptors.request.use(
 )
 //请求后拦截
 service.interceptors.response.use(
-  (res) => {
+  (res: any) => {
     //取消请求
     useBasicStore().remotePromiseArrByReqUrl(tempReqUrlSave)
     if (loadingInstance) {
       loadingInstance && loadingInstance.close()
     }
     //download file
+    const noAuthCode = '401,403'
     if (res.data?.size) {
-      return res
+      new Response(res.data).text().then((stringData) => {
+        const parseJson = JSON.parse(stringData)
+        if (noAuthCode.includes(parseJson.code)) {
+          noAuthDill()
+          return
+        } else {
+          return res
+        }
+      })
     }
     const { code, msg } = res.data
     const successCode = '0,200,20000'
-    const noAuthCode = '401,403'
     if (successCode.includes(code)) {
       return res.data
     } else {
       //authorTipDoor 防止多个请求 多次alter
-      if(authorTipDoor){
+      if (authorTipDoor) {
         if (noAuthCode.includes(code)) {
-          authorTipDoor=false
-          ElMessageBox.confirm('请重新登录', {
-            confirmButtonText: '重新登录',
-            closeOnClickModal: false,
-            showCancelButton: false,
-            showClose: false,
-            type: 'warning'
-          }).then(() => {
-            useBasicStore().resetStateAndToLogin()
-            authorTipDoor=true
-          })
-        }else{
+          noAuthDill()
+        } else {
           // @ts-ignore
           if (!res.config?.isNotTipErrorMsg) {
             ElMessage.error({
               message: msg,
               duration: 2 * 1000
             })
-          }else{
+          } else {
             return res
           }
           return Promise.reject(msg)
