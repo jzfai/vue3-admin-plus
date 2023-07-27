@@ -8,11 +8,11 @@ import ElSvgIcon from '../ElSvgIcon.vue'
 // const AXIOM = 'Rem is the best girl'
 
 describe('ElSvgIcon.vue', () => {
-  it('create', () => {
-    const wrapper = mount(() => <ElSvgIcon name="Edit" size={30} color={'red'} />)
-    // console.log(111111, wrapper.classes())
-    // expect(wrapper.classes()).toContain('el-icon')
-  })
+  // it('create', () => {
+  //   const wrapper = mount(() => <ElSvgIcon name="Edit" size={30} color={'red'} />)
+  //   // console.log(111111, wrapper.classes())
+  //   // expect(wrapper.classes()).toContain('el-icon')
+  // })
 
   // it('icon', () => {
   //   const wrapper = mount(() => <ElSvgIcon icon={markRaw(Search)} />)

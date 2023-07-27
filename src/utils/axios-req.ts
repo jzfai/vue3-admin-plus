@@ -67,20 +67,12 @@ service.interceptors.response.use(
       loadingInstance && loadingInstance.close()
     }
     //download file
-    const noAuthCode = '401,403'
-    if (res.data?.size) {
-      new Response(res.data).text().then((stringData) => {
-        const parseJson = JSON.parse(stringData)
-        if (noAuthCode.includes(parseJson.code)) {
-          noAuthDill()
-          return
-        } else {
-          return res
-        }
-      })
+    if (res.data?.type?.includes("sheet")) {
+      return res
     }
     const { code, msg } = res.data
     const successCode = '0,200,20000'
+    const noAuthCode = '401,403'
     if (successCode.includes(code)) {
       return res.data
     } else {
