@@ -32,7 +32,6 @@
         <a class="btn-click-style font-bold" href="https://github.jzfai.top/micro-service-api/doc.html">api-doc</a>
       </div>
     </div>
-    <el-button type="primary" @click="sendReq">sendReq</el-button>
   </div>
 
 </template>
@@ -44,12 +43,4 @@ import request from "@/utils/axios-req";
 
 const {setTheme, theme, setSize, size, setLanguage} = useConfigStore()
 const route = useRoute()
-
-
-const sendReq=()=>{
-  axiosReq({
-    url: `/demo`,
-    method: 'get'
-  })
-}
 </script>
