@@ -43,9 +43,9 @@
     "xlsx": "^0.18.5",
     "d3": "7.2.1",
     "splitpanes": "^3.1.1",
-    "vxe-table": "^4.3.5",
+    "vxe-table": "4.3.5",
     "xe-utils": "^3.5.6",
-    "tinymce": "^6.1.0",
+    "tinymce": "^6.6.2",
     "driver.js": "^0.9.8",
     "sortablejs": "1.15.0",
     "vuedraggable": "4.1.0",
@@ -92,7 +92,7 @@
     "unocss": "^0.33.5",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",
-    "vite": "^4.0.2",
+    "vite": "^4.4.9",
     "vite-plugin-mkcert": "^1.7.2",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-svg-icons": "^2.0.1",
@@ -124,9 +124,5 @@
     "> 1%",
     "not ie 11",
     "not op_mini all"
-  ],
-  "engines": {
-    "node": ">= 16 <18",
-    "pnpm": ">= 6 <8"
-  }
+  ]
 }
