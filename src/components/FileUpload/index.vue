@@ -39,6 +39,7 @@ import axiosReq from '@/utils/axios-req'
 // import { watermark } from './imgDillUtils'
 import { ElMessage } from 'element-plus'
 import { reactive, ref } from 'vue'
+import {spliceMinioUrl} from "@/hooks/use-common";
 
 const imageList = ref([])
 
@@ -72,7 +73,7 @@ const fileUploadSave = (formData) => {
   }).then(({ data }) => {
     // filename
     imageList.value.push({
-      url: data.url,
+      url:spliceMinioUrl(data.url),
       name: data.fileName
     })
   })

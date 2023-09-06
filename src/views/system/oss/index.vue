@@ -185,13 +185,11 @@ const getList = () => {
     queryParams.endTime = ''
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
-    console.log(rows, total);
     loading.value = false
     ossList.value = rows.map((mItem) => {
-      mItem.frontDillUrl = spliceMinioUrl(mItem.fileName)
+      mItem.frontDillUrl = spliceMinioUrl(mItem.url)
       return mItem
     })
-    console.log(ossList.value)
     totalNum.value = total
   })
 }

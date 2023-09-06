@@ -120,5 +120,5 @@ export const reshowData = (addEditForm, detailData) => {
 // console.log(bucketName)
 
 export const spliceMinioUrl = (imageUrl) => {
-  return `${import.meta.env.VITE_APP_IMAGE_URL}/public/${imageUrl}`
+  return `${import.meta.env.VITE_APP_IMAGE_URL}/${imageUrl}`
 }
