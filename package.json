@@ -26,7 +26,7 @@
     "screenfull": "^6.0.2",
     "axios": "^1.1.3",
     "echarts": "^5.4.0",
-    "element-plus": "2.3.6",
+    "element-plus": "2.3.12",
     "js-error-collection": "^1.0.7",
     "element-china-area-data": "5.0.2",
     "mitt": "3.0.0",

@@ -4,7 +4,7 @@ import request from '@/utils/axios-req'
 export const listReq = (query) => {
   //查询列表
   return request({
-    url: '/system/oss/list',
+    url: '/system/oss/listPage',
     method: 'get',
     reqLoading: false,
     params: query
@@ -22,7 +22,7 @@ export const deleteReq = (id) => {
 //批量删除
 export const multiDeleteReq = (id) => {
   return request({
-    url: `/system/oss/${id}`,
+    url: `/system/oss/mul/${id}`,
     method: 'delete'
   })
 }

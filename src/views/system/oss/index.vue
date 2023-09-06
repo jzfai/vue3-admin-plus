@@ -55,7 +55,7 @@
     </el-form>
     <el-row :gutter="10" class="mb-10px">
       <el-button type="primary" plain @click="handleFile">上传文件</el-button>
-      <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
+      <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDeleteMul">删除</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
       <ColumnFilter v-if="ossList.length" :is-operation="true" :cols="tableHeadColumns" @colChange="colChange" />
@@ -185,6 +185,7 @@ const getList = () => {
     queryParams.endTime = ''
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+    console.log(rows, total);
     loading.value = false
     ossList.value = rows.map((mItem) => {
       mItem.frontDillUrl = spliceMinioUrl(mItem.fileName)
@@ -219,6 +220,7 @@ const {
   showSearch,
   tableHeadColumns,
   handleExport,
-  handleDelete
+  handleDelete,
+  handleDeleteMul
 } = currentHook(queryParams, getList)
 </script>

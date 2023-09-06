@@ -1,4 +1,4 @@
-import { deleteReq, exportReq } from '@/api/oss'
+import { deleteReq, multiDeleteReq,exportReq } from '@/api/oss'
 import { downLoadTemp } from '@/hooks/use-common'
 import { ElMessage } from 'element-plus'
 const single = ref(true)
@@ -71,7 +71,21 @@ export const currentHook = (queryParams, getList) => {
         getList()
       })
   }
+
+  const handleDeleteMul = () => {
+    const ossIds = ids.value
+    elConfirm('确认', `是否确认删除用户编号为"${ossIds}"的数据项`)
+      .then(() => {
+        return multiDeleteReq(ossIds)
+      })
+      .then(() => {
+        ElMessage({ message: '删除成功', type: 'success' })
+        getList()
+      })
+  }
+
   return {
+    handleDeleteMul,
     refAddEditModal,
     handleDelete,
     refElTable,
