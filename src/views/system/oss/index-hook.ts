@@ -1,4 +1,4 @@
-import { deleteReq, multiDeleteReq,exportReq } from '@/api/oss'
+import { deleteReq, exportReq,multiDeleteReq } from '@/api/oss'
 import { downLoadTemp } from '@/hooks/use-common'
 import { ElMessage } from 'element-plus'
 const single = ref(true)

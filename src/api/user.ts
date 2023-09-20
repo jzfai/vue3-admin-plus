@@ -9,8 +9,8 @@ export const userInfoReq = () => {
       data:{platformId: settings.platformId},
       method: 'get'
     }
-    request(reqConfig).then(({ data }) => {
-      resolve(data)
+    request(reqConfig).then((res) => {
+      resolve(res?.data)
     })
   })
 }
