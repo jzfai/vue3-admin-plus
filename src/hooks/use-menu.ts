@@ -5,8 +5,6 @@ import InnerLink from '@/components/InnerLink/index.vue'
 import {isExternal} from "@/hooks/use-layout";
 // @ts-ignore
 const modules = import.meta.glob('../views/**/**.vue')
-
-
 /**
  * 根据公司情况处理，生成路由
  * @return
@@ -117,7 +115,6 @@ const getComponent=(menu)=>{
   }
   return component;
 }
-
 /**
  * 是否为菜单内部跳转
  *
@@ -127,8 +124,6 @@ const getComponent=(menu)=>{
 const isMenuFrame=(menu)=>{
   return menu.parentId===0&& "C"===menu.menuType &&  1===menu.isFrame
 }
-
-
 /**
  * 是否为内链组件
  *
@@ -138,7 +133,6 @@ const isMenuFrame=(menu)=>{
 const isInnerLink=(menu)=> {
   return 1===menu.isFrame && isExternal(menu.path);
 }
-
 /**
  * 是否为parent_view组件
  *
@@ -148,11 +142,9 @@ const isInnerLink=(menu)=> {
 const isParentView=(menu)=> {
   return menu.parentId!==0 && "M"===menu.menuType;
 }
-
 export  const generatorRouter=(data, id, parentId?, children?)=>{
-  const handleTree1 = handleTree(data, id, parentId, children);
-  return buildAsyncRouter(handleTree1)
+  //将菜单转换为树形结构
+  const routerTree = handleTree(data, id, parentId, children);
+  //构建路由（此处可以根据公司的选择）
+  return buildAsyncRouter(routerTree)
 }
-
-
-

@@ -125,7 +125,7 @@
 </template>
 <script setup>
 import { listReq } from '@/api/oss'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'

@@ -12,17 +12,17 @@
       </el-form-item>
       <el-form-item label="操作人员" prop="operName">
         <el-select v-model="queryParams.operName" placeholder="请选择操作人员" clearable class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="类型" prop="businessType">
         <el-select v-model="queryParams.businessType" placeholder="请选择类型" clearable class="wi-150px">
-          <el-option v-for="dict in sys_oper_type" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_oper_type" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-150px">
-          <el-option v-for="dict in sys_common_status" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_common_status" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="操作时间" style="width: 150px}">
@@ -125,7 +125,7 @@
 </template>
 <script setup>
 import { listReq } from '@/api/operatorLog'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
@@ -176,9 +176,9 @@ onMounted(() => {
 //字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable, sys_oper_type, sys_common_status } = useDict(
-  'sys_normal_disable',
-  'sys_oper_type',
-  'sys_common_status'
+  ['sys_normal_disable',
+    'sys_oper_type',
+    'sys_common_status']
 )
 
 ///导入当前页面封装方法

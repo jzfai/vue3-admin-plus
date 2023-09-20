@@ -111,7 +111,7 @@
 <script setup>
 import { changeOssConfigStatus, listReq } from '@/api/ossConfig'
 import { changeRoleStatus } from '@/api/role.ts'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { ElMessage } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法

@@ -165,7 +165,7 @@
 import JsonInput from '@/components/JsonInput.vue'
 import { ElMessage } from 'element-plus'
 import { addMenu, getMenu, parentIdReq, updateMenu } from '@/api/menu'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
 import IconSelect from './IconSelect.vue'
 import { handleTree } from '@/views/system/menu/index-hook'
@@ -205,7 +205,7 @@ const open = ref(false)
 const title = ref('新增菜单')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_show_hide, sys_normal_disable } = useDict('sys_show_hide', 'sys_normal_disable')
+const { sys_show_hide, sys_normal_disable } = useDict(['sys_show_hide', 'sys_normal_disable'])
 let addEditForm = reactive({
   icon: '',
   menuId: '',

@@ -81,7 +81,7 @@ import { resetData } from '@/hooks/use-common'
 
 const route = useRoute()
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 
 const userList = ref([])
 const loading = ref(true)

@@ -5,7 +5,8 @@ import settings from '@/settings'
 export const userInfoReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
-      url: '/getInfo',
+      url: 'getInfo',
+      data:{platformId: settings.platformId},
       method: 'get'
     }
     request(reqConfig).then(({ data }) => {
@@ -18,7 +19,7 @@ export const userInfoReq = () => {
 export const getRouterReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
-      url: '/getRouters',
+      url: 'rbac/getMenu',
       params: { platformId: settings.platformId },
       reqLoading: false,
       method: 'get'
@@ -32,7 +33,7 @@ export const getRouterReq = () => {
 //登录
 export const loginReq = (subForm) => {
   return request({
-    url: '/login',
+    url: 'login',
     data: subForm,
     method: 'post',
     isNotTipErrorMsg: true
@@ -42,7 +43,7 @@ export const loginReq = (subForm) => {
 // 注册方法
 export const register = (data) => {
   return request({
-    url: '/register',
+    url: 'rbac/register',
     method: 'post',
     data
   })
@@ -51,7 +52,7 @@ export const register = (data) => {
 //退出登录
 export const loginOutReq = () => {
   return request({
-    url: '/logout',
+    url: 'rbac/logout',
     method: 'post'
   })
 }

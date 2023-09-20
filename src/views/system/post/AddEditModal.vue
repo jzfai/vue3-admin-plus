@@ -41,7 +41,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addPost, getPost, updatePost } from '@/api/post'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid
@@ -52,7 +52,7 @@ const open = ref(false)
 const title = ref('新增岗位管理')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 const addEditForm = reactive({
   postId: '',
   postName: '',

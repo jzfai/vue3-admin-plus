@@ -19,7 +19,7 @@
       </el-form-item>
       <el-form-item label="权限范围" :rules="formRules.isNotNull('请选择权限范围')">
         <el-select v-model="addEditForm.dataScope" placeholder="权限范围" class="wi-150px">
-          <el-option v-for="dict in dataScopeOptions" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in dataScopeOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item v-show="addEditForm.dataScope == 2" label="数据权限">

@@ -145,7 +145,7 @@ import RightToolBar from '@/components/RightToolBar.vue'
 import AddEditModal from './AddEditModal.vue'
 import Import from './Import.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 import { changeUserStatus, deptIdReq, listReq, resetUserPwd } from '@/api/user'
 /*查询模块*/
@@ -176,7 +176,7 @@ const resetQuery = () => {
   handleQuery()
 }
 // eslint-disable-next-line camelcase
-const { sys_user_sex, sys_normal_disable } = useDict('sys_user_sex', 'sys_normal_disable')
+const { sys_user_sex, sys_normal_disable } = useDict(['sys_user_sex', 'sys_normal_disable'])
 
 const handleUpdate = (row) => {
   const userId = row.userId || ids[0] || 1

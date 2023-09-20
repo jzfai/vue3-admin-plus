@@ -68,7 +68,7 @@
 
 <script setup name="SelectUser">
 import { authUserSelectAll, unallocatedUserList } from '@/api/role'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { ElMessage } from 'element-plus'
 import DicTag from '../../../components/DictTag.vue'
 const props = defineProps({
@@ -78,7 +78,7 @@ const props = defineProps({
 })
 
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 
 const userList = ref([])
 const visible = ref(false)

@@ -108,7 +108,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import {addUser, deptIdReq, getUser, getUserInfo, updateUser} from '@/api/user'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
 
 //element valid
@@ -119,7 +119,7 @@ const open = ref(false)
 const title = ref('新增用户')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_user_sex, sys_normal_disable } = useDict('sys_user_sex', 'sys_normal_disable')
+const { sys_user_sex, sys_normal_disable } = useDict(['sys_user_sex', 'sys_normal_disable'])
 const addEditForm = reactive({
   nickName: '',
   userId: "",

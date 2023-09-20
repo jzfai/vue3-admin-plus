@@ -106,7 +106,7 @@ import {
   selectMenuListByPlateFormId,
   updateRole
 } from '@/api/role'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
 import { computed, ref } from 'vue'
 import { selectPlatformAll } from '@/api/platform.ts'
@@ -119,7 +119,7 @@ const open = ref(false)
 const title = ref('新增角色')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 const addEditForm = reactive({
   roleName: '',
   roleId: '',

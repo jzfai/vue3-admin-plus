@@ -21,7 +21,7 @@
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间" style="width: 150px}">
@@ -142,7 +142,7 @@
 </template>
 <script setup>
 import { listReq } from '@/api/dict'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
@@ -197,7 +197,7 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'

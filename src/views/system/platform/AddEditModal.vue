@@ -27,7 +27,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addPlatform, getPlatform, updatePlatform } from '@/api/platform'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid

@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite --mode serve-dev",
     "test": "vite --mode serve-test",
+    "local": "vite --mode serve-local",
     "build:test": "vite build --mode  build-test",
     "build": "vite build --mode build",
     "preview:build": "npm run build && vite preview ",

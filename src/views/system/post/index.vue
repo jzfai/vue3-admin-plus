@@ -115,7 +115,7 @@
 </template>
 <script setup>
 import { listReq } from '@/api/post'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
@@ -167,7 +167,9 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
+
+console.log("sys_normal_disable", sys_normal_disable);
 
 ///导入当前页面封装方法
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'

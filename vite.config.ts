@@ -89,7 +89,7 @@ export default defineConfig(({ command, mode }) => {
           }
         ],
         //配置后会自动扫描目录下的文件
-        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/directives/**'],
+        dirs: ['src/hooks/**'],
         eslintrc: {
           enabled: true, // Default `false`
           filepath: './eslintrc/.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`

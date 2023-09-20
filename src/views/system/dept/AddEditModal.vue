@@ -54,7 +54,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addDept, getDept, updateDept } from '@/api/dept'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid
@@ -65,7 +65,7 @@ const open = ref(false)
 const title = ref('新增部门管理')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { listClassOptions, sys_normal_disable } = useDict('listClassOptions', 'sys_normal_disable')
+const { listClassOptions, sys_normal_disable } = useDict(['listClassOptions', 'sys_normal_disable'])
 const addEditForm = reactive({
   parentId: '',
   deptId: '',

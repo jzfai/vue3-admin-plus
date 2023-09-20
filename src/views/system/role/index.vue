@@ -133,7 +133,7 @@ import AddEditModal from './AddEditModal.vue'
 import DataAuthorModal from './DataAuthorModal.vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { changeRoleStatus, getRole, listReq } from '@/api/role'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
 /*查询模块*/
 const queryParams = reactive({
@@ -196,7 +196,7 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 
 /** 分配数据权限操作 */
 const refDataAuthorModal = ref(null)

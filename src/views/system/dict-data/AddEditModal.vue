@@ -38,7 +38,7 @@
       </el-form-item>
       <el-form-item label="状态" :rules="formRules.isNotNull('请选择状态')">
         <el-select v-model="addEditForm.status" placeholder="状态" class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="备注" prop="remark" :rules="formRules.notValid('备注不能为空')">
@@ -57,7 +57,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addDict, getDict, updateDict } from '@/api/dictData'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 import { getQueryParam } from '@/hooks/use-self-router.ts'
 
@@ -69,7 +69,7 @@ const open = ref(false)
 const title = ref('新增数据字典')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('listClassOptions', 'sys_normal_disable')
+const { sys_normal_disable } = useDict(['listClassOptions', 'sys_normal_disable'])
 const addEditForm = reactive({
   dictType: '',
   dictLabel: '',

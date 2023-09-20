@@ -22,7 +22,7 @@
       </el-form-item>
       <el-form-item label="状态" :rules="formRules.isNotNull('请选择状态')">
         <el-select v-model="addEditForm.status" placeholder="状态" class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
+          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
         </el-select>
       </el-form-item>
     </el-form>
@@ -38,7 +38,7 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addDict, getDict, updateDict } from '@/api/dict'
-import { useDict } from '@/hooks/use-dict'
+import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid
@@ -49,7 +49,7 @@ const open = ref(false)
 const title = ref('新增数据字典')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_normal_disable } = useDict('sys_normal_disable')
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 const addEditForm = reactive({
   dictId: '',
   dictName: '',
