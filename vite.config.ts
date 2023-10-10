@@ -30,7 +30,7 @@ export default defineConfig(({ command, mode }) => {
       open: false, // 类型： boolean | string在服务器启动时自动在浏览器中打开应用程序；
       host: true,
       https: false,
-      origin: ' http://192.168.198.226:5005',
+      // origin: ' http://192.168.198.226:5005',
       // proxy: {
       //   [env.VITE_APP_BASE_URL]: {
       //     target: env.VITE_PROXY_URL,
