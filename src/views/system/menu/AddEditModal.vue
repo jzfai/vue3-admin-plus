@@ -171,7 +171,6 @@ import IconSelect from './IconSelect.vue'
 import { handleTree } from '@/views/system/menu/index-hook'
 import { ref } from 'vue'
 import { selectPlatformAll } from '@/api/platform.ts'
-import settings from '@/settings.ts'
 
 const showChooseIcon = ref(false)
 const iconSelectRef = ref(null)
@@ -233,6 +232,9 @@ const submitForm = () => {
       addEditForm.metaExtra = JSON.stringify(jsonData)
     }
     if (valid) {
+      if (addEditForm.menuType === 'M'&&!addEditForm.path.startsWith("/")) {
+        addEditForm.path=`/${addEditForm.path}`
+      }
       //校验
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
