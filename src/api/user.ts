@@ -19,7 +19,7 @@ export const userInfoReq = () => {
 export const getRouterReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
-      url: 'rbac/getMenu',
+      url: 'getMenu',
       params: { platformId: settings.platformId },
       reqLoading: false,
       method: 'get'
@@ -63,6 +63,10 @@ export const getCodeImg = () => {
     url: '/captchaImage',
     headers: {
       isToken: false
+    },
+    data:{
+      width:100,
+      height:50
     },
     method: 'get'
   })
