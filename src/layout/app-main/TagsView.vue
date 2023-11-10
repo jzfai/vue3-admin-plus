@@ -300,8 +300,6 @@ const { visible, top, left, selectedTag } = toRefs(state)
 </style>
 
 <style lang="scss">
-
-
 //reset element css of el-icon-close
 .tags-view-wrapper {
   .tags-view-item {

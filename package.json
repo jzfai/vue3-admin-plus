@@ -10,7 +10,7 @@
     "local": "vite --mode serve-local",
     "build:test": "vite build --mode  build-test",
     "build": "vite build --mode build",
-    "preview:build": "npm run build && vite preview ",
+    "preview:build": "npm run build && vite previe  ",
     "preview": "vite preview ",
     "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix",
     "prepare": "husky install",
