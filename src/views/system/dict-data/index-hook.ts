@@ -61,7 +61,7 @@ export const currentHook = (queryParams, getList) => {
     })
   }
   const handleDelete = (row) => {
-    const dictDataIds = row.dictDataId || ids.value
+    const dictDataIds = row.dictCode || ids.value
     elConfirm('确认', `是否确认删除用户编号为"${dictDataIds}"的数据项`)
       .then(() => {
         return deleteReq(dictDataIds)

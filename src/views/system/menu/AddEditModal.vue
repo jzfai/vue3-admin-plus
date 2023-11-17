@@ -1,24 +1,25 @@
 <template>
   <!-- 添加或修改菜单配置对话框 -->
   <el-dialog
-    v-model="open"
-    :close-on-press-escape="false"
-    :close-on-click-modal="false"
-    :destroy-on-close="true"
-    :title="title"
-    width="600px"
-    append-to-body
-    @close="cancel"
+      v-if="open"
+      v-model="open"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false"
+      :destroy-on-close="true"
+      :title="title"
+      width="600px"
+      append-to-body
+      @close="cancel"
   >
     <el-form ref="menuRef" :model="addEditForm" label-width="80px" inline>
       <el-form-item label="上级菜单" prop="parentId" :rules="formRules.notValid('用户昵称不能为空')">
         <el-tree-select
-          v-model="addEditForm.parentId"
-          :data="parentIdOptions"
-          :props="{ value: 'menuId', label: 'menuName', children: 'children' }"
-          value-key="menuId"
-          placeholder="请选择上级菜单"
-          check-strictly
+            v-model="addEditForm.parentId"
+            :data="parentIdOptions"
+            :props="{ value: 'menuId', label: 'menuName', children: 'children' }"
+            value-key="menuId"
+            placeholder="请选择上级菜单"
+            check-strictly
         />
       </el-form-item>
       <el-form-item label="菜单类型" prop="menuType">
@@ -28,60 +29,60 @@
           <el-radio label="F">按钮</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="平台选择" rules="formRules.isNotNull('平台选择不能为空')">
+      <el-form-item label="平台选择" :rules="formRules.isNotNull('平台选择不能为空')">
         <el-select
-          v-model="addEditForm.platformId"
-          filterable
-          default-first-option
-          :reserve-keyword="false"
-          placeholder="请选择平台"
+            v-model="addEditForm.platformId"
+            filterable
+            default-first-option
+            :reserve-keyword="false"
+            placeholder="请选择平台"
         >
-          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
+          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id"/>
         </el-select>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType !== 'F'"
-        label="菜单图标"
-        prop="icon"
-        :rules="formRules.notValid('菜单图标不能为空')"
+          v-if="addEditForm.menuType !== 'F'"
+          label="菜单图标"
+          prop="icon"
+          :rules="formRules.notValid('菜单图标不能为空')"
       >
         <el-popover
-          v-model="showChooseIcon"
-          placement="bottom-start"
-          :width="540"
-          :hide-after="0"
-          trigger="click"
-          @show="showSelectIcon"
+            v-model="showChooseIcon"
+            placement="bottom-start"
+            :width="540"
+            :hide-after="0"
+            trigger="click"
+            @show="showSelectIcon"
         >
           <template #reference>
             <el-input v-model="addEditForm.icon" placeholder="点击选择图标" readonly @blur="showSelectIcon">
               <template #prefix>
                 <svg-icon
-                  v-if="addEditForm.icon"
-                  :icon-class="addEditForm.icon"
-                  class="el-input__icon"
-                  style="height: 32px; width: 16px; position: relative"
+                    v-if="addEditForm.icon"
+                    :icon-class="addEditForm.icon"
+                    class="el-input__icon"
+                    style="height: 32px; width: 16px; position: relative"
                 />
                 <el-icon v-else style="height: 32px; width: 16px">
-                  <search />
+                  <search/>
                 </el-icon>
               </template>
             </el-input>
           </template>
-          <IconSelect ref="iconSelectRef" @selected="selected" />
+          <IconSelect ref="iconSelectRef" @selected="selected"/>
         </el-popover>
       </el-form-item>
       <el-form-item label="菜单名称" prop="menuName" :rules="formRules.isNotNull('菜单名称不能为空')">
-        <el-input v-model="addEditForm.menuName" class="wi-150px" placeholder="菜单名称" />
+        <el-input v-model="addEditForm.menuName" class="wi-150px" placeholder="菜单名称"/>
       </el-form-item>
       <el-form-item label="显示排序" prop="orderNum" :rules="formRules.isNotNull('显示排序不能为空')">
-        <el-input-number v-model="addEditForm.orderNum" controls-position="right" :min="0" placeholder="显示排序" />
+        <el-input-number v-model="addEditForm.orderNum" controls-position="right" :min="0" placeholder="显示排序"/>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType !== 'F'"
-        label="是否外链"
-        prop="isFrame"
-        :rules="formRules.notValid('请选择是否外链')"
+          v-if="addEditForm.menuType !== 'F'"
+          label="是否外链"
+          prop="isFrame"
+          :rules="formRules.notValid('请选择是否外链')"
       >
         <el-radio-group v-model="addEditForm.isFrame">
           <el-radio label="0">是</el-radio>
@@ -89,45 +90,45 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType !== 'F'"
-        label="路由地址"
-        prop="path"
-        :rules="formRules.isNotNull('路由地址不能为空')"
+          v-if="addEditForm.menuType !== 'F'"
+          label="路由地址"
+          prop="path"
+          :rules="formRules.isNotNull('路由地址不能为空')"
       >
-        <el-input v-model="addEditForm.path" class="wi-150px" placeholder="路由地址" />
+        <el-input v-model="addEditForm.path" class="wi-150px" placeholder="路由地址"/>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType === 'C'"
-        label="组件路径"
-        prop="component"
-        :rules="formRules.notValid('组件路径不能为空')"
+          v-if="addEditForm.menuType === 'C'"
+          label="组件路径"
+          prop="component"
+          :rules="formRules.notValid('组件路径不能为空')"
       >
-        <el-input v-model="addEditForm.component" class="wi-150px" placeholder="组件路径" />
+        <el-input v-model="addEditForm.component" class="wi-150px" placeholder="组件路径"/>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType !== 'M'"
-        label="权限字符"
-        prop="perms"
-        :rules="formRules.notValid('权限字符不能为空')"
+          v-if="addEditForm.menuType !== 'M'"
+          label="权限字符"
+          prop="perms"
+          :rules="formRules.notValid('权限字符不能为空')"
       >
-        <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符" />
+        <el-input v-model="addEditForm.perms" class="wi-150px" placeholder="权限字符"/>
       </el-form-item>
       <el-form-item v-if="addEditForm.menuType !== 'F'" label="redirect" prop="redirect">
-        <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="redirect" />
+        <el-input v-model="addEditForm.redirect" class="wi-150px" placeholder="redirect"/>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType !== 'F'"
-        label="routeName"
-        prop="routeName"
-        :rules="formRules.isNotNull('routeName')"
+          v-if="addEditForm.menuType !== 'F'"
+          label="routeName"
+          prop="routeName"
+          :rules="formRules.isNotNull('routeName')"
       >
-        <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="routeName" />
+        <el-input v-model="addEditForm.routeName" class="wi-150px" placeholder="routeName"/>
       </el-form-item>
       <el-form-item
-        v-if="addEditForm.menuType === 'M'"
-        label="alwaysShow"
-        prop="alwaysShow"
-        :rules="formRules.notValid('alwaysShow')"
+          v-if="addEditForm.menuType === 'M'"
+          label="alwaysShow"
+          prop="alwaysShow"
+          :rules="formRules.notValid('alwaysShow')"
       >
         <el-radio-group v-model="addEditForm.alwaysShow">
           <el-radio :label="1">是</el-radio>
@@ -149,7 +150,7 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item v-if="addEditForm.menuType !== 'F'" label="meta">
-        <JsonInput ref="refJsonInput" />
+        <JsonInput ref="refJsonInput"/>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -163,14 +164,14 @@
 
 <script setup>
 import JsonInput from '@/components/JsonInput.vue'
-import { ElMessage } from 'element-plus'
-import { addMenu, getMenu, parentIdReq, updateMenu } from '@/api/menu'
-import { useDict } from '@/hooks/use-data-dict'
-import { resetData } from '@/hooks/use-common'
+import {ElMessage} from 'element-plus'
+import {addMenu, getMenu, listMenuReq, updateMenu} from '@/api/menu'
+import {useDict} from '@/hooks/use-data-dict'
+import {resetData} from '@/hooks/use-common'
 import IconSelect from './IconSelect.vue'
-import { handleTree } from '@/views/system/menu/index-hook'
-import { ref } from 'vue'
-import { selectPlatformAll } from '@/api/platform.ts'
+import {handleTree} from '@/views/system/menu/index-hook'
+import {ref} from 'vue'
+import {selectPlatformAll} from '@/api/platform.ts'
 
 const showChooseIcon = ref(false)
 const iconSelectRef = ref(null)
@@ -204,7 +205,7 @@ const open = ref(false)
 const title = ref('新增菜单')
 const emits = defineEmits([])
 // eslint-disable-next-line camelcase
-const { sys_show_hide, sys_normal_disable } = useDict(['sys_show_hide', 'sys_normal_disable'])
+const {sys_show_hide, sys_normal_disable} = useDict(['sys_show_hide', 'sys_normal_disable'])
 let addEditForm = reactive({
   icon: '',
   menuId: '',
@@ -215,7 +216,7 @@ let addEditForm = reactive({
   alwaysShow: 1,
   component: '',
   perms: '',
-  parentId: 0,
+  parentId: '',
   orderNum: 10,
   menuType: 'M',
   isFrame: '1',
@@ -232,19 +233,19 @@ const submitForm = () => {
       addEditForm.metaExtra = JSON.stringify(jsonData)
     }
     if (valid) {
-      if (addEditForm.menuType === 'M'&&!addEditForm.path.startsWith("/")) {
-        addEditForm.path=`/${addEditForm.path}`
+      if (addEditForm.menuType === 'M' && !addEditForm.path.startsWith("/")) {
+        addEditForm.path = `/${addEditForm.path}`
       }
       //校验
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
-          ElMessage({ message: '修改成功', type: 'success' })
+          ElMessage({message: '修改成功', type: 'success'})
           open.value = false
           emits('getList')
         })
       } else {
         addMenu(addEditForm).then(() => {
-          ElMessage({ message: '新增成功', type: 'success' })
+          ElMessage({message: '新增成功', type: 'success'})
           open.value = false
           emits('getList')
         })
@@ -261,7 +262,7 @@ const cancel = () => {
 }
 const showModal = (row) => {
   if (row.menuId) {
-    getMenu(row.menuId).then(({ data }) => {
+    getMenu(row.menuId).then(({data}) => {
       reshowData(addEditForm, data)
       if (!addEditForm.parentId) addEditForm.parentId = 0
       //edit modal
@@ -271,45 +272,33 @@ const showModal = (row) => {
   } else {
     //回显赛选的平台
     addEditForm.platformId = row.platformId
-    // const objData = {
-    //   cacheGroup: ['KeepAliveGroup', 'SecondChild', 'ThirdChild'],
-    //   activeMenu: '/basic-demo/second-keep-alive',
-    //   cachePage: true,
-    //   leaveRmCachePage: false,
-    //   closeTabRmCache: true,
-    //   elSvgIcon: 'Fold',
-    //   affix: true
-    // }
-    // nextTick(() => {
-    //   refJsonInput.value.initData({})
-    // })
   }
   addEditForm.parentId = row.parentId
   title.value = '新增菜单'
   open.value = true
+
+  platformList()
+  getNameData(row.platformId)
 }
 
 const parentIdOptions = ref([])
-const getNameData = () => {
-  parentIdReq().then(({ data }) => {
-    const menu = { menuId: 0, menuName: '主类目', children: [] }
+const getNameData = (platformId) => {
+  listMenuReq({platformId}).then(({data}) => {
+    const menu = {menuId: 0, menuName: '主类目', children: []}
     menu.children = handleTree(data, 'menuId')
     parentIdOptions.value = [menu]
   })
 }
 const platformData = ref([])
 const platformList = () => {
-  selectPlatformAll().then(({ data }) => {
+  selectPlatformAll().then(({data}) => {
     platformData.value = data
   })
 }
 
-onMounted(() => {
-  platformList()
-  getNameData()
-})
 //导出给refs使用
-defineExpose({ cancel, showModal })
+defineExpose({cancel, showModal})
 </script>
 
 <style scoped lang="scss"></style>
+

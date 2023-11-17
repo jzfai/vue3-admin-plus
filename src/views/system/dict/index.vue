@@ -97,7 +97,7 @@
           :prop="item.prop"
           :label="item.label"
         >
-          <template #default="{ row }">
+          <template #default="{  row }">
             <DictTag :options="sys_normal_disable" :value="row.status" />
           </template>
         </el-table-column>
@@ -117,7 +117,7 @@
         </el-table-column>
       </template>
 
-      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
         <template #default="{ row }">
           <el-tooltip content="修改" placement="top">
             <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
@@ -187,6 +187,7 @@ const getList = () => {
     queryParams.endTime = ''
   }
   listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+    console.log(rows, total);
     loading.value = false
     dictList.value = rows
     totalNum.value = total
@@ -195,7 +196,7 @@ const getList = () => {
 onMounted(() => {
   handleQuery()
 })
-//字典数据
+// 字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict(['sys_normal_disable'])
 

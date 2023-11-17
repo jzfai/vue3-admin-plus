@@ -17,10 +17,11 @@ const props = defineProps({
 })
 const labelItem=ref({})
 const label = computed(() => {
+  if(!props.value) return  ""
   labelItem.value= props.options.find((item)=>{
     return item.dictValue==props.value
   })
-  return  labelItem.value.dictLabel
+  return  labelItem.value?.dictLabel
 })
 </script>
 

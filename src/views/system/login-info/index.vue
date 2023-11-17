@@ -11,9 +11,13 @@
         />
       </el-form-item>
       <el-form-item label="用户名称" prop="userName">
-        <el-select v-model="queryParams.userName" placeholder="请选择用户名称" clearable class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
-        </el-select>
+        <el-input
+            v-model.trim="queryParams.userName"
+            placeholder="请输入用户名称"
+            clearable
+            class="wi-150px"
+            @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-150px">
@@ -38,9 +42,7 @@
     </el-form>
     <el-row :gutter="10" class="mb8">
       <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
-
       <el-button type="danger" plain icon="Delete" @click="handleClean">清空</el-button>
-      <el-button type="primary" plain icon="Unlock" :disabled="single" @click="handleUnlock">解锁</el-button>
       <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
@@ -82,10 +84,14 @@
         </el-table-column>
       </template>
 
-      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
         <template #default="{ row }">
           <el-tooltip content="删除" placement="top">
             <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
+          </el-tooltip>
+
+          <el-tooltip content="解锁" placement="top">
+            <el-button  link type="primary" icon="Unlock" size="large"  @click="handleUnlock(row)"/>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -123,8 +129,10 @@ const bakQueryParams = JSON.stringify(queryParams)
 const dateRange = ref([])
 
 //解锁
-const handleUnlock = () => {
-  unlockLoginInfo()
+const handleUnlock = ({userName}) => {
+  unlockLoginInfo(userName).then(()=>{
+    elMessage(`${userName}解锁成功`)
+  })
 }
 
 //清空

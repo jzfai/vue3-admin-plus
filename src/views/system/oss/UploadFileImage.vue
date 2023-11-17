@@ -5,7 +5,7 @@
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     :destroy-on-close="true"
-    width="600px"
+    width="500px"
     append-to-body
     @close="cancel"
   >
@@ -66,7 +66,6 @@ const cancel = () => {
   emits('getList')
 }
 const showModal = ({ type }) => {
-  console.log(type)
   title.value = '上传文件图片'
   uploadType.value = type
   open.value = true

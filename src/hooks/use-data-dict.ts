@@ -1,14 +1,7 @@
 import useDictStore from "@/store/dict";
-import axiosReq from "@/utils/axios-req";
+import {dictDataReq} from "@/api/dict"
 
-const dictDataReq=(dictType)=>{
-  return axiosReq({
-    url: '/dataDict/selectDictDataList',
-    method: 'get',
-    reqLoading: false,
-    params: {dictType}
-  })
-}
+
 //字典枚举，根据value返回选中的项
 export const getItem= async (dictType,value,key) =>{
   if(getDict(dictType).length){

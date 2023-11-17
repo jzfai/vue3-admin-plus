@@ -17,11 +17,11 @@ export const handleImport = () => {
 }
 
 const tableHeadColumns = ref([
-  { prop: "dictName", label: "字典名称", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "dictType", label: "字典类型", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
-  { prop: "roleSort", label: "备注", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "status", label: "状态", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
-  { prop: "createTime", label: "创建时间", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
+  { prop: "dictName", label: "字典名称", minWidth: 80,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "dictType", label: "字典类型", minWidth: 70,isTemplate:true, align: 'center', showColumn: true  },
+  { prop: "status", label: "状态", minWidth: 60,isTemplate:true, align: 'center', showColumn: true  },
+  { prop: "createTime", label: "创建时间", minWidth: 100,isTemplate:true, align: 'center', showColumn: true  },
+  { prop: "remark", label: "备注", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
 ])
 export const handleSelectionChange = (selection) => {
   ids.value = selection.map((item) => item.dictId)

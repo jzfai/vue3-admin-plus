@@ -11,7 +11,7 @@
         />
       </el-form-item>
       <el-form-item label="平台" prop="platformId">
-        <el-select v-model="queryParams.platformId" placeholder="请选择状态" class="wi-240px">
+        <el-select v-model="queryParams.platformId" placeholder="请选择平台" class="wi-240px">
           <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
         </el-select>
       </el-form-item>

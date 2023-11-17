@@ -5,9 +5,9 @@ export const listMenuReq = (query) => {
   //查询列表
   return request({
     url: '/system/menu/list',
-    method: 'get',
+    method: 'post',
     reqLoading: false,
-    params: query
+    data: query
   })
 }
 
@@ -49,14 +49,6 @@ export const updateMenu = (data) => {
 export const getMenu = (id) => {
   return request({
     url: `/system/menu/${id}`,
-    method: 'get'
-  })
-}
-//上级菜单
-export const parentIdReq = (data) => {
-  return request({
-    url: `/system/menu/list`,
-    data,
     method: 'get'
   })
 }
