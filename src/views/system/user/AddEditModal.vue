@@ -16,17 +16,19 @@
       </el-form-item>
       <el-form-item label="归属部门" prop="deptId" :rules="formRules.isNotNull('用户昵称不能为空')">
         <el-tree-select
-          v-model="addEditForm.deptId"
-          style="width: 150px !important"
-          :data="deptIdOptions"
-          :props="{ value: 'id', label: 'label', children: 'children' }"
-          value-key="id"
-          placeholder="请选择归属部门"
-          check-strictly
+            v-model="addEditForm.deptId"
+            style="width: 150px !important"
+            filterable
+            default-expand-all
+            :data="deptIdOptions"
+            :props="{ value: 'deptId', label: 'deptName', children: 'children' }"
+            value-key="id"
+            placeholder="请选择归属部门"
+            check-strictly
         />
       </el-form-item>
       <el-form-item label="手机号码" prop="phonenumber" :rules="formRules.isNotNull('手机号码不能为空')">
-        <el-input v-model="addEditForm.phonenumber" style="width: 150px" placeholder="手机号码" />
+        <el-input :disabled="addEditForm.userId" v-model="addEditForm.phonenumber" style="width: 150px" placeholder="手机号码" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email" :rules="formRules.isNotNull('邮箱不能为空')">
         <el-input v-model="addEditForm.email" style="width: 150px" placeholder="邮箱" />
@@ -58,19 +60,19 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="岗位" :rules="formRules.notValid('请选择岗位')">
-        <el-select v-model="addEditForm.postIds" multiple placeholder="岗位" style="width: 150px">
+      <el-form-item  label="岗位" :rules="formRules.notValid('请选择岗位')">
+        <el-select v-model="addEditForm.postIds" multiple placeholder="岗位" style="width: 400px">
           <el-option
-            v-for="item in postIdsOptions"
-            :key="item.postId"
-            :disabled="item.status == 1"
-            :label="item.postName"
-            :value="item.postId"
+              v-for="item in postIdsOptions"
+              :key="item.postId"
+              :disabled="item.status == 1"
+              :label="item.postName"
+              :value="item.postId"
           />
         </el-select>
       </el-form-item>
       <el-form-item label="角色" :rules="formRules.notValid('请选择角色')">
-        <el-select v-model="addEditForm.roleIds" multiple placeholder="角色" style="width: 150px">
+        <el-select v-model="addEditForm.roleIds" multiple placeholder="角色" style="width: 400px">
           <el-option
             v-for="item in roleIdsOptions"
             :key="item.roleId"
@@ -107,9 +109,14 @@
 
 <script setup>
 import { ElMessage } from 'element-plus'
-import {addUser, deptIdReq, getUser, getUserInfo, updateUser} from '@/api/user'
+import {addUser, getUser, getUserInfo, updateUser} from '@/api/user'
 import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
+import  * as  dept from '@/api/dept'
+import  * as  post from '@/api/post'
+import  * as  role from '@/api/role'
+
+import {handleTree} from "@/views/system/menu/index-hook";
 
 //element valid
 const formRules = useElement().formRules
@@ -122,7 +129,7 @@ const emits = defineEmits([])
 const { sys_user_sex, sys_normal_disable } = useDict(['sys_user_sex', 'sys_normal_disable'])
 const addEditForm = reactive({
   nickName: '',
-  userId: "",
+  userId: null,
   deptId: '',
   phonenumber: '',
   email: '',
@@ -130,14 +137,22 @@ const addEditForm = reactive({
   password: '',
   sex: '',
   status: '',
-  postIds: '',
-  roleIds: '',
+  postIds: [],
+  roleIds: [],
   remark: ''
 })
+//userRoleList
+//userPostList
 const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
   userRef.value.validate((valid) => {
     if (valid) {
+       addEditForm.userRoleList=roleIdsOptions.value.filter((f)=>addEditForm.roleIds.includes(f.roleId)).map(m=>{
+         return {userId:addEditForm.userId,roleId:m.roleId}
+       })
+       addEditForm.userPostList=postIdsOptions.value.filter((f)=>addEditForm.postIds.includes(f.postId)).map(m=>{
+         return {userId:addEditForm.userId,postId:m.postId}
+       })
       if (addEditForm.userId) {
         updateUser(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
@@ -161,27 +176,27 @@ const cancel = () => {
 }
 const postIdsOptions = ref([])
 const roleIdsOptions = ref([])
+
 const showModal = (row) => {
   if (row.userId) {
     getUser(row.userId).then(({ data }) => {
-      postIdsOptions.value = data.posts
-      roleIdsOptions.value = data.roles
       //edit
-      addEditForm.postIds = data.postIds || []
-      addEditForm.roleIds = data.roleIds || []
-      reshowData(addEditForm, data.user)
+      reshowData(addEditForm, data)
       //edit modal
       title.value = '编辑用户'
     })
   } else {
-    getUserInfo().then(({data})=>{
-      postIdsOptions.value = data.posts
-      roleIdsOptions.value = data.roles
-      addEditForm.password = ''
-      title.value = '新增用户'
-    })
+    addEditForm.password = ''
+    title.value = '新增用户'
   }
   open.value = true
+  //请求岗位和角色
+  post.listReq().then(({data})=>{
+    postIdsOptions.value = data
+  })
+  role.listReq().then(({data})=>{
+    roleIdsOptions.value = data
+  })
 }
 const reshowData = (addEditForm, detailData) => {
   Object.keys(addEditForm).forEach((fItem) => {
@@ -192,8 +207,8 @@ const reshowData = (addEditForm, detailData) => {
 }
 const deptIdOptions = ref([])
 const getDeptData = () => {
-  deptIdReq().then(({ data }) => {
-    deptIdOptions.value = data
+  dept.listReq({}).then(({ data }) => {
+    deptIdOptions.value = handleTree(data, 'deptId')
   })
 }
 onMounted(() => {

@@ -5,9 +5,9 @@ export const listReq = (query) => {
   //查询列表
   return request({
     url: '/system/dept/list',
-    method: 'get',
+    method: 'post',
     reqLoading: false,
-    params: query
+    data: query||{}
   })
 }
 

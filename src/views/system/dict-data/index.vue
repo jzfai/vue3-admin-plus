@@ -160,9 +160,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    dictDataList.value = rows
+    dictDataList.value = data
     totalNum.value = total
   })
 }

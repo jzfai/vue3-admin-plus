@@ -110,9 +110,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    platformList.value = rows
+    platformList.value = data
     totalNum.value = total
   })
 }

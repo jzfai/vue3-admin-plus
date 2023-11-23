@@ -165,9 +165,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    ossConfigList.value = rows
+    ossConfigList.value = data
     totalNum.value = total
   })
 }

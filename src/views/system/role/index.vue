@@ -51,7 +51,7 @@
         <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button v-has-perm="['system:role:export']" type="warning" plain icon="Download" @click="handleExport">
+        <el-button type="warning" plain icon="Download" @click="handleExport">
           导出
         </el-button>
       </el-col>
@@ -185,9 +185,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    roleList.value = rows
+    roleList.value = data
     totalNum.value = total
   })
 }

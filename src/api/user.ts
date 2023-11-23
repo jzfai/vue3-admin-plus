@@ -88,8 +88,8 @@ export function changeUserStatus(userId, status) {
 export const listReq = (query) => {
   return request({
     url: '/system/user/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 
@@ -165,14 +165,6 @@ export const getUser = (id) => {
 export const getUserInfo = () => {
   return request({
     url: `/system/user`,
-    method: 'get'
-  })
-}
-//归属部门
-export const deptIdReq = (data) => {
-  return request({
-    url: `/system/user/deptTree`,
-    data,
     method: 'get'
   })
 }

@@ -184,9 +184,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    ossList.value = rows.map((mItem) => {
+    ossList.value = data.map((mItem) => {
       mItem.frontDillUrl = spliceMinioUrl(mItem.url)
       return mItem
     })

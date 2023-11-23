@@ -186,10 +186,10 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
-    console.log(rows, total);
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
+    console.log(data, total);
     loading.value = false
-    dictList.value = rows
+    dictList.value = data
     totalNum.value = total
   })
 }

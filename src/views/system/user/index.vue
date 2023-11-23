@@ -24,8 +24,9 @@
           v-model="queryParams.deptId"
           style="width: 150px !important"
           filterable
+          default-expand-all
           :data="deptIdOptions"
-          :props="{ value: 'id', label: 'label', children: 'children' }"
+          :props="{ value: 'deptId', label: 'deptName', children: 'children' }"
           value-key="id"
           placeholder="请选择归属部门"
           check-strictly
@@ -139,15 +140,21 @@
   </div>
 </template>
 <script setup>
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import AddEditModal from './AddEditModal.vue'
+import Import from './Import.vue'
+import { colChange, currentHook, handleAdd, handleImport, handleSelectionChange, removeEmptyKey } from './current-hook'
 import Pagination from '@/components/Pagination/index.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
-import AddEditModal from './AddEditModal.vue'
-import Import from './Import.vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
 import { useDict } from '@/hooks/use-data-dict'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { changeUserStatus, deptIdReq, listReq, resetUserPwd } from '@/api/user'
+import { changeUserStatus, listReq, resetUserPwd } from '@/api/user'
+import  * as  dept from '@/api/dept'
+
+//导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import {handleTree} from "@/views/system/menu/index-hook";
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -188,17 +195,17 @@ const getList = () => {
     queryParams.beginTime = dateRange.value.at(-1)
     queryParams.endTime = dateRange.value.at(-2)
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    userList.value = rows
+    userList.value = data
     totalNum.value = total
   })
 }
 
 const deptIdOptions = ref([])
 const getDeptData = () => {
-  deptIdReq().then(({ data }) => {
-    deptIdOptions.value = data
+  dept.listReq({}).then(({ data }) => {
+    deptIdOptions.value = handleTree(data, 'deptId')
   })
 }
 onMounted(() => {
@@ -236,10 +243,6 @@ const router = useRouter()
 const handleAuthRole = (row) => {
   router.push(`/user-auth/role/${row.userId}`)
 }
-
-//导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleImport, handleSelectionChange, removeEmptyKey } from './current-hook'
-import { resetData } from '@/hooks/use-common'
 const {
   refAddEditModal,
   refElTable,

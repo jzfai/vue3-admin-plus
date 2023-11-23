@@ -102,7 +102,7 @@ const formString = JSON.stringify(queryParams)
 function getList() {
   loading.value = true
   allocatedUserList(queryParams).then((response) => {
-    userList.value = response.rows
+    userList.value = response.data
     total.value = response.total
     loading.value = false
   })

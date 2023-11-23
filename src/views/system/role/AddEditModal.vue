@@ -141,7 +141,7 @@ const menuConfigClick = (item) => {
   // setMenuIds()
   //传递platform的id查询菜单列表
   selectMenuListByPlateFormId(item.id).then(({ data }) => {
-    // menuList.value = data.rows
+    // menuList.value = data.data
     menuOptions.value = data.menus
     // 回显选中的menu ids
     reshowTree(item.id)
@@ -215,7 +215,7 @@ const showModal = ({ roleId }) => {
         platformIdsChoose.value = firstPlatformId
         //根据平台id获取菜单
         selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
-          // menuList.value = data.rows
+          // menuList.value = data.data
           menuOptions.value = data.menus
           //回显menuIds
           roleMenuTreeselect(roleId).then(async ({ data }) => {

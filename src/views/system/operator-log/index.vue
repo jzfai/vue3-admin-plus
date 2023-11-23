@@ -124,12 +124,16 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { listReq } from '@/api/operatorLog'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -164,9 +168,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    operatorLogList.value = rows
+    operatorLogList.value = data
     totalNum.value = total
   })
 }
@@ -175,15 +179,7 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable, sys_oper_type, sys_common_status } = useDict(
-  ['sys_normal_disable',
-    'sys_oper_type',
-    'sys_common_status']
-)
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
+const { sys_normal_disable, sys_oper_type, sys_common_status } = useDict(['sys_normal_disable', 'sys_oper_type', 'sys_common_status'])
 const {
   refAddEditModal,
   refElTable,
