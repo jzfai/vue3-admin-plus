@@ -34,11 +34,11 @@
 </template>
 
 <script setup>
+import { reactive, ref } from 'vue'
 import { CloseBold, Plus } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import axiosReq from '@/utils/axios-req'
 // import { watermark } from './imgDillUtils'
-import { ElMessage } from 'element-plus'
-import { reactive, ref } from 'vue'
 import {spliceMinioUrl} from "@/hooks/use-common";
 
 const imageList = ref([])

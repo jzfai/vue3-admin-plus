@@ -124,13 +124,22 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import AddEditModal from './UploadFileImage.vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { listReq } from '@/api/oss'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './UploadFileImage.vue'
+//字典数据
+// eslint-disable-next-line camelcase
+// const {
+// } = useDict(
+// )
+
+///导入当前页面封装方法
+import { resetData, spliceMinioUrl } from '@/hooks/use-common'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -196,15 +205,6 @@ const getList = () => {
 onMounted(() => {
   handleQuery()
 })
-//字典数据
-// eslint-disable-next-line camelcase
-// const {
-// } = useDict(
-// )
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData, spliceMinioUrl } from '@/hooks/use-common'
 const {
   refAddEditModal,
   refElTable,

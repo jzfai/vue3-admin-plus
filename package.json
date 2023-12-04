@@ -1,6 +1,6 @@
 {
   "name": "vue3-admin-plus",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "author": "kuanghua",
   "packageManager": "pnpm@7.9.0",
@@ -95,7 +95,7 @@
     "unocss": "^0.33.5",
     "unplugin-auto-import": "^0.11.2",
     "unplugin-vue-components": "^0.22.8",
-    "vite": "^4.4.9",
+    "vite": "^5.0.4",
     "vite-plugin-mkcert": "^1.7.2",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-svg-icons": "^2.0.1",
@@ -127,5 +127,9 @@
     "> 1%",
     "not ie 11",
     "not op_mini all"
-  ]
+  ],
+"engines": {
+    "node": ">= 18 <20",
+    "pnpm": ">= 6 <9"
+}
 }

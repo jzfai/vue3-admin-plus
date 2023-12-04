@@ -2,7 +2,7 @@
 
 The plus version of vue3-admin-ts , provide enterprise-class using demo
 
-suggestion the Node.js >= 16.0.0。
+suggestion the Node.js >= 18.0.0。
 
 
 

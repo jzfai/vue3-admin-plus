@@ -1,5 +1,5 @@
-import { deleteReq } from '@/api/ossConfig'
 import { ElMessage } from 'element-plus'
+import { deleteReq } from '@/api/ossConfig'
 const single = ref(true)
 const multiple = ref(true)
 /*table 列表*/

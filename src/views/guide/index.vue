@@ -13,9 +13,9 @@
 <script setup>
 import Driver from 'driver.js'
 import 'driver.js/dist/driver.min.css'
-import steps from './steps'
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { useI18n } from 'vue-i18n'
+import steps from './steps'
 
 const { t } = useI18n()
 let driver = ref()

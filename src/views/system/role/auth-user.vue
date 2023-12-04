@@ -74,9 +74,9 @@
 </template>
 
 <script setup name="AuthUser">
-import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/role'
 import { ElMessage } from 'element-plus'
 import SelectUser from './SelectUser.vue'
+import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/role'
 import { resetData } from '@/hooks/use-common'
 
 const route = useRoute()

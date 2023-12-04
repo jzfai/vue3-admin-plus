@@ -45,9 +45,9 @@
 
 <script setup>
 import { downLoadTemp } from '@/hooks/use-common'
+import { downloadTemplateReq, importReq } from '@/api/role'
 const isShow = ref(false)
 const title = ref('上传文件')
-import { downloadTemplateReq, importReq } from '@/api/role'
 //提交按钮
 const fileList = ref([])
 const updateSupport = ref(false)

@@ -97,6 +97,7 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import {
   addRole,
@@ -108,8 +109,8 @@ import {
 } from '@/api/role'
 import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
-import { computed, ref } from 'vue'
 import { selectPlatformAll } from '@/api/platform.ts'
+import { listMenuReq } from '@/api/menu'
 
 //element valid
 const formRules = useElement().formRules
@@ -246,7 +247,6 @@ const arrGroupByKey = (arr, groupKey) => {
   }
   return map
 }
-import { listMenuReq } from '@/api/menu'
 const dillInitPlatformCheckMenuId = (checkedKeys) => {
   return new Promise((resolve) => {
     listMenuReq().then(({ data }) => {

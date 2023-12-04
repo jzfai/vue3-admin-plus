@@ -163,14 +163,14 @@
 </template>
 
 <script setup>
-import JsonInput from '@/components/JsonInput.vue'
+import {ref} from 'vue'
 import {ElMessage} from 'element-plus'
+import IconSelect from './IconSelect.vue'
+import JsonInput from '@/components/JsonInput.vue'
 import {addMenu, getMenu, listMenuReq, updateMenu} from '@/api/menu'
 import {useDict} from '@/hooks/use-data-dict'
 import {resetData} from '@/hooks/use-common'
-import IconSelect from './IconSelect.vue'
 import {handleTree} from '@/views/system/menu/index-hook'
-import {ref} from 'vue'
 import {selectPlatformAll} from '@/api/platform.ts'
 
 const showChooseIcon = ref(false)

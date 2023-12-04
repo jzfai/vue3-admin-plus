@@ -117,13 +117,19 @@
   </div>
 </template>
 <script setup>
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import AddEditModal from './AddEditModal.vue'
+import { colChange, currentHook, handleImport, handleSelectionChange, handleTree, removeEmptyKey } from './index-hook'
 import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
-import AddEditModal from './AddEditModal.vue'
 import DictTag from '@/components/DictTag.vue'
 import { listMenuReq } from '@/api/menu'
 import { useDict } from '@/hooks/use-data-dict'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+
+//导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import { selectPlatformAll } from '@/api/platform.ts'
+import settings from '@/settings.ts'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -192,12 +198,6 @@ onMounted(() => {
 //字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable, sys_show_hide } = useDict(['sys_normal_disable'])
-
-//导入当前页面封装方法
-import { colChange, currentHook, handleImport, handleSelectionChange, handleTree, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
-import { selectPlatformAll } from '@/api/platform.ts'
-import settings from '@/settings.ts'
 const {
   refAddEditModal,
   refElTable,

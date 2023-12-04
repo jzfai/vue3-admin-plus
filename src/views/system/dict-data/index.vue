@@ -115,13 +115,18 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import AddEditModal from './AddEditModal.vue'
+import { colChange, currentHook, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { listReq } from '@/api/dictData'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './AddEditModal.vue'
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import { getQueryParam } from '@/hooks/use-self-router.ts'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -177,11 +182,6 @@ onMounted(() => {
 //字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict(['sys_normal_disable'])
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
-import { getQueryParam } from '@/hooks/use-self-router.ts'
 const {
   refAddEditModal,
   refElTable,

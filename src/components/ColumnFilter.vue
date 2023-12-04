@@ -33,13 +33,13 @@
 <script setup>
 import { computed, nextTick, onMounted, ref, unref } from 'vue'
 import { ClickOutside as vClickOutside } from 'element-plus'
+
+import Draggable from 'vuedraggable'
 const buttonRef = ref()
 const popoverRef = ref()
 const onClickOutside = () => {
   unref(popoverRef).popperRef?.delayHide?.()
 }
-
-import Draggable from 'vuedraggable'
 const props = defineProps({
   cols: {
     type: Array

@@ -126,15 +126,19 @@
   </div>
 </template>
 <script setup>
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import AddEditModal from './AddEditModal.vue'
+import DataAuthorModal from './DataAuthorModal.vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import Pagination from '@/components/Pagination/index.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
-import AddEditModal from './AddEditModal.vue'
-import DataAuthorModal from './DataAuthorModal.vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
 import { changeRoleStatus, getRole, listReq } from '@/api/role'
 import { useDict } from '@/hooks/use-data-dict'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+
+//导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -209,10 +213,6 @@ const router = useRouter()
 const handleAuthUser = (row) => {
   router.push(`/system/role/auth-user/${row.roleId}`)
 }
-
-//导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
 
 const {
   refAddEditModal,
