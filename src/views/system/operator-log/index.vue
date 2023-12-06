@@ -99,7 +99,7 @@
           :label="item.label"
         >
           <template #default="{ row }">
-            <dict-tag :options="sys_common_status" :value="row.status" />
+            <dict-tag :options="sys_common_status" :value="row.status+''" />
           </template>
         </el-table-column>
       </template>
