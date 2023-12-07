@@ -15,7 +15,7 @@ export const listReq = (query) => {
 export const selectPlatformAll = () => {
   //查询列表
   return request({
-    url: '/system/platform/filterPlatformByUserId',
+    url: '/system/platform/selectSysPlatformAll',
     method: 'get'
   })
 }

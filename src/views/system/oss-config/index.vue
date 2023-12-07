@@ -109,15 +109,20 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import AddEditModal from './AddEditModal.vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { changeOssConfigStatus, listReq } from '@/api/ossConfig'
 import { changeRoleStatus } from '@/api/role.ts'
 import { useDict } from '@/hooks/use-data-dict'
-import { ElMessage } from 'element-plus'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './AddEditModal.vue'
+//字典数据
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
 /*查询模块*/
 const queryParams = reactive({
   ossConfigId: '',
@@ -165,20 +170,15 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    ossConfigList.value = rows
+    ossConfigList.value = data
     totalNum.value = total
   })
 }
 onMounted(() => {
   handleQuery()
 })
-//字典数据
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
 const {
   refAddEditModal,
   refElTable,

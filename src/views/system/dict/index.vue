@@ -97,7 +97,7 @@
           :prop="item.prop"
           :label="item.label"
         >
-          <template #default="{ row }">
+          <template #default="{  row }">
             <DictTag :options="sys_normal_disable" :value="row.status" />
           </template>
         </el-table-column>
@@ -117,7 +117,7 @@
         </el-table-column>
       </template>
 
-      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
         <template #default="{ row }">
           <el-tooltip content="修改" placement="top">
             <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
@@ -141,13 +141,18 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import AddEditModal from './AddEditModal.vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { listReq } from '@/api/dict'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './AddEditModal.vue'
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import { routerPush } from '@/hooks/use-self-router.ts'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -186,23 +191,19 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
+    console.log(data, total);
     loading.value = false
-    dictList.value = rows
+    dictList.value = data
     totalNum.value = total
   })
 }
 onMounted(() => {
   handleQuery()
 })
-//字典数据
+// 字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict(['sys_normal_disable'])
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
-import { routerPush } from '@/hooks/use-self-router.ts'
 const {
   refAddEditModal,
   refElTable,

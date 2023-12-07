@@ -51,7 +51,7 @@
         <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button v-has-perm="['system:role:export']" type="warning" plain icon="Download" @click="handleExport">
+        <el-button type="warning" plain icon="Download" @click="handleExport">
           导出
         </el-button>
       </el-col>
@@ -126,15 +126,19 @@
   </div>
 </template>
 <script setup>
+import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import AddEditModal from './AddEditModal.vue'
+import DataAuthorModal from './DataAuthorModal.vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import Pagination from '@/components/Pagination/index.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
-import AddEditModal from './AddEditModal.vue'
-import DataAuthorModal from './DataAuthorModal.vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
 import { changeRoleStatus, getRole, listReq } from '@/api/role'
 import { useDict } from '@/hooks/use-data-dict'
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+
+//导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -185,9 +189,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    roleList.value = rows
+    roleList.value = data
     totalNum.value = total
   })
 }
@@ -209,10 +213,6 @@ const router = useRouter()
 const handleAuthUser = (row) => {
   router.push(`/system/role/auth-user/${row.roleId}`)
 }
-
-//导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
 
 const {
   refAddEditModal,

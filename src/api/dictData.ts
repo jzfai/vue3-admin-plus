@@ -4,17 +4,17 @@ import request from '@/utils/axios-req'
 export const listReq = (query) => {
   //查询列表
   return request({
-    url: '/system/dict/data/list',
-    method: 'get',
+    url: '/system/sysDictData/list',
+    method: 'post',
     reqLoading: false,
-    params: query
+    data: query
   })
 }
 
 //删除
 export const deleteReq = (id) => {
   return request({
-    url: `/system/dict/data/${id}`,
+    url: `/system/sysDictData/${id}`,
     method: 'delete'
   })
 }
@@ -22,7 +22,7 @@ export const deleteReq = (id) => {
 //批量删除
 export const multiDeleteReq = (id) => {
   return request({
-    url: `/system/dict/data/${id}`,
+    url: `/system/sysDictData/${id}`,
     method: 'delete'
   })
 }
@@ -30,7 +30,7 @@ export const multiDeleteReq = (id) => {
 //导出
 export const exportReq = (reqConfig) => {
   return request({
-    url: `system/dict/data/export`,
+    url: `/system/sysDictData/export`,
     responseType: 'blob',
     method: 'post',
     params: Object.assign(reqConfig, { responseType: 'blob' })
@@ -43,7 +43,7 @@ export const exportReq = (reqConfig) => {
  */
 export const addDict = (data) => {
   return request({
-    url: `/system/dict/data`,
+    url: `/system/sysDictData`,
     data,
     method: 'post'
   })
@@ -55,7 +55,7 @@ export const addDict = (data) => {
  */
 export const updateDict = (data) => {
   return request({
-    url: `/system/dict/data`,
+    url: `/system/sysDictData`,
     method: 'put',
     data
   })
@@ -67,7 +67,7 @@ export const updateDict = (data) => {
  */
 export const getDict = (id) => {
   return request({
-    url: `/system/dict/data/${id}`,
+    url: `/system/sysDictData/${id}`,
     method: 'get'
   })
 }

@@ -55,8 +55,8 @@
 </template>
 
 <script setup name="AuthRole">
-import { getAuthRole, updateAuthRole } from '@/api/user'
 import { ElMessage } from 'element-plus'
+import { getAuthRole, updateAuthRole } from '@/api/user'
 const route = useRoute()
 const loading = ref(true)
 const total = ref(0)

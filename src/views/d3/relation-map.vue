@@ -26,10 +26,10 @@
 
 <script>
 import { onMounted, reactive, ref } from 'vue'
+import * as d3 from 'd3'
 import useData from './useDatas'
 import useD3 from './useD3'
 import data from './data.json'
-import * as d3 from 'd3'
 import NodeDetail from './component/NodeDetail.vue'
 
 export default {

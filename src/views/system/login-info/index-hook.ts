@@ -1,5 +1,5 @@
-import { deleteReq, exportReq } from '@/api/loginInfo'
 import { ElMessage } from 'element-plus'
+import { deleteReq, exportReq } from '@/api/loginInfo'
 const single = ref(true)
 const multiple = ref(true)
 /*table 列表*/
@@ -17,17 +17,17 @@ export const handleImport = () => {
 
 const tableHeadColumns = ref([
   { prop: "infoId", label: "访问编号", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "userName", label: "用户名称", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "ipaddr", label: "地址", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "userName", label: "用户名称", minWidth: 80,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "ipaddr", label: "地址", minWidth: 100,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "loginLocation", label: "登录地点", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "os", label: "操作系统", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "browser", label: "浏览器", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
-  { prop: "status", label: "登录状态", minWidth: 150,isTemplate:true, align: 'center', showColumn: true  },
-  { prop: "msg", label: "描述", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "os", label: "操作系统", minWidth: 120,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "browser", label: "浏览器", minWidth: 80,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "status", label: "登录状态", minWidth: 80,isTemplate:true, align: 'center', showColumn: true  },
+  { prop: "msg", label: "描述", minWidth: 120,isTemplate:false, align: 'center', showColumn: true  },
   { prop: "loginTime", label: "访问时间", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
 ])
 export const handleSelectionChange = (selection) => {
-  ids.value = selection.map((item) => item.loginInfoId)
+  ids.value = selection.map((item) => item.infoId)
   single.value = selection.length !== 1
   multiple.value = !selection.length
 }
@@ -62,7 +62,7 @@ export const currentHook = (queryParams, getList) => {
     })
   }
   const handleDelete = (row) => {
-    const loginInfoIds = row.loginInfoId || ids.value
+    const loginInfoIds = row.infoId || ids.value
     elConfirm('确认',`是否确认删除用户编号为"${loginInfoIds}"的数据项`)
       .then(() => {
         return deleteReq(loginInfoIds)

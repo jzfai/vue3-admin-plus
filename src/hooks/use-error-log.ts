@@ -1,10 +1,10 @@
 /*js 错误日志收集*/
 import { jsErrorCollection } from 'js-error-collection'
+import axiosReq from 'axios'
 import pack from '../../package.json'
 import settings from '@/settings'
 import bus from '@/utils/bus'
 //此处不要使用utils下的axios
-import axiosReq from 'axios'
 const reqUrl = '/integration-front/errorCollection/insert'
 let repeatErrorLogJudge = ''
 const errorLogReq = (errLog: string) => {

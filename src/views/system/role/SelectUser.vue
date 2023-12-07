@@ -67,10 +67,10 @@
 </template>
 
 <script setup name="SelectUser">
-import { authUserSelectAll, unallocatedUserList } from '@/api/role'
-import { useDict } from '@/hooks/use-data-dict'
 import { ElMessage } from 'element-plus'
 import DicTag from '../../../components/DictTag.vue'
+import { authUserSelectAll, unallocatedUserList } from '@/api/role'
+import { useDict } from '@/hooks/use-data-dict'
 const props = defineProps({
   roleId: {
     type: [Number, String]
@@ -110,7 +110,7 @@ function handleSelectionChange(selection) {
 // 查询表数据
 function getList() {
   unallocatedUserList(queryParams).then((res) => {
-    userList.value = res.rows
+    userList.value = res.data
     total.value = res.total
   })
 }

@@ -11,9 +11,13 @@
         />
       </el-form-item>
       <el-form-item label="用户名称" prop="userName">
-        <el-select v-model="queryParams.userName" placeholder="请选择用户名称" clearable class="wi-150px">
-          <el-option v-for="dict in sys_normal_disable" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
-        </el-select>
+        <el-input
+            v-model.trim="queryParams.userName"
+            placeholder="请输入用户名称"
+            clearable
+            class="wi-150px"
+            @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable class="wi-150px">
@@ -38,9 +42,7 @@
     </el-form>
     <el-row :gutter="10" class="mb8">
       <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
-
       <el-button type="danger" plain icon="Delete" @click="handleClean">清空</el-button>
-      <el-button type="primary" plain icon="Unlock" :disabled="single" @click="handleUnlock">解锁</el-button>
       <el-button type="warning" plain icon="Download" @click="handleExport">导出</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList" />
@@ -82,10 +84,14 @@
         </el-table-column>
       </template>
 
-      <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="80" class-name="small-padding fixed-width">
         <template #default="{ row }">
           <el-tooltip content="删除" placement="top">
             <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
+          </el-tooltip>
+
+          <el-tooltip content="解锁" placement="top">
+            <el-button  link type="primary" icon="Unlock" size="large"  @click="handleUnlock(row)"/>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -102,12 +108,17 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { cleanLoginInfo, listReq, unlockLoginInfo } from '@/api/loginInfo'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import { elConfirm, elMessage } from '@/hooks/use-element.ts'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -123,8 +134,10 @@ const bakQueryParams = JSON.stringify(queryParams)
 const dateRange = ref([])
 
 //解锁
-const handleUnlock = () => {
-  unlockLoginInfo()
+const handleUnlock = ({userName}) => {
+  unlockLoginInfo(userName).then(()=>{
+    elMessage(`${userName}解锁成功`)
+  })
 }
 
 //清空
@@ -159,9 +172,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    loginInfoList.value = rows
+    loginInfoList.value = data
     totalNum.value = total
   })
 }
@@ -171,11 +184,6 @@ onMounted(() => {
 //字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable, sys_common_status } = useDict(['sys_normal_disable', 'sys_common_status'])
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
-import { elConfirm, elMessage } from '@/hooks/use-element.ts'
 
 const {
   refAddEditModal,

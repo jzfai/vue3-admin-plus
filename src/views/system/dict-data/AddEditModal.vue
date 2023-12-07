@@ -71,6 +71,7 @@ const emits = defineEmits([])
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict(['listClassOptions', 'sys_normal_disable'])
 const addEditForm = reactive({
+  id:"",
   dictType: '',
   dictLabel: '',
   dictValue: '',
@@ -78,7 +79,7 @@ const addEditForm = reactive({
   dictCode: '',
   dictSort: '',
   listClass: 'default',
-  status: '',
+  status: 0,
   remark: ''
 })
 // 数据标签回显样式
@@ -94,7 +95,7 @@ const formString = JSON.stringify(addEditForm)
 const submitForm = () => {
   dictRef.value.validate((valid) => {
     if (valid) {
-      if (addEditForm.dictId !== '') {
+      if (addEditForm.dictCode !== '') {
         updateDict(addEditForm).then(() => {
           ElMessage({ message: '修改成功', type: 'success' })
           open.value = false
@@ -116,12 +117,14 @@ const cancel = () => {
   resetData(addEditForm, formString)
 }
 const showModal = (row) => {
-  if (row.id) {
-    getDict(row.id).then(({ data }) => {
+  if (row.dictCode) {
+    getDict(row.dictCode).then(({ data }) => {
       reshowData(addEditForm, data)
       //edit modal
       title.value = '编辑数据字典'
     })
+  }else{
+    addEditForm.dictType=row.dictType
   }
   title.value = '新增数据字典'
   open.value = true

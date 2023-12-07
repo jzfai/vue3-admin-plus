@@ -19,7 +19,7 @@ export const userInfoReq = () => {
 export const getRouterReq = () => {
   return new Promise((resolve) => {
     const reqConfig = {
-      url: 'rbac/getMenu',
+      url: 'getMenu',
       params: { platformId: settings.platformId },
       reqLoading: false,
       method: 'get'
@@ -64,6 +64,10 @@ export const getCodeImg = () => {
     headers: {
       isToken: false
     },
+    data:{
+      width:100,
+      height:50
+    },
     method: 'get'
   })
 }
@@ -84,8 +88,8 @@ export function changeUserStatus(userId, status) {
 export const listReq = (query) => {
   return request({
     url: '/system/user/list',
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 
@@ -161,14 +165,6 @@ export const getUser = (id) => {
 export const getUserInfo = () => {
   return request({
     url: `/system/user`,
-    method: 'get'
-  })
-}
-//归属部门
-export const deptIdReq = (data) => {
-  return request({
-    url: `/system/user/deptTree`,
-    data,
     method: 'get'
   })
 }

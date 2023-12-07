@@ -1,10 +1,11 @@
 <template>
   <div class="p-10px">
     <el-form v-show="showSearch" :model="queryParams" :inline="true" label-width="68px">
-      <el-form-item label="字典名称" prop="dictType">
+      <el-form-item label="字典类型" prop="dictType">
         <el-input
           v-model.trim="queryParams.dictType"
           placeholder="请输入字典名称"
+          disabled
           clearable
           class="wi-150px"
           @keyup.enter="handleQuery"
@@ -114,13 +115,18 @@
   </div>
 </template>
 <script setup>
+import { onMounted, reactive, ref } from 'vue'
+import AddEditModal from './AddEditModal.vue'
+import { colChange, currentHook, handleSelectionChange, removeEmptyKey } from './index-hook'
 import { listReq } from '@/api/dictData'
 import { useDict } from '@/hooks/use-data-dict'
-import { onMounted, reactive, ref } from 'vue'
 //导入当前页面封装方法
 import RightToolBar from '@/components/RightToolBar.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
-import AddEditModal from './AddEditModal.vue'
+
+///导入当前页面封装方法
+import { resetData } from '@/hooks/use-common'
+import { getQueryParam } from '@/hooks/use-self-router.ts'
 /*查询模块*/
 const queryParams = reactive({
   pageNum: 1,
@@ -143,9 +149,12 @@ const resetQuery = () => {
   dateRange.value = []
   handleQuery()
 }
+const handleAdd = () => {
+  refAddEditModal.value.showModal({dictType:queryParams.dictType})
+}
 const handleUpdate = (row) => {
   const dictDataId = row.dictCode || ids.value[0]
-  refAddEditModal.value.showModal({ id: dictDataId })
+  refAddEditModal.value.showModal({ dictCode: dictDataId })
 }
 const getList = () => {
   loading.value = true
@@ -156,9 +165,9 @@ const getList = () => {
     queryParams.beginTime = ''
     queryParams.endTime = ''
   }
-  listReq(removeEmptyKey(queryParams)).then(({ rows, total }) => {
+  listReq(removeEmptyKey(queryParams)).then(({ data, total }) => {
     loading.value = false
-    dictDataList.value = rows
+    dictDataList.value = data
     totalNum.value = total
   })
 }
@@ -173,11 +182,6 @@ onMounted(() => {
 //字典数据
 // eslint-disable-next-line camelcase
 const { sys_normal_disable } = useDict(['sys_normal_disable'])
-
-///导入当前页面封装方法
-import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
-import { resetData } from '@/hooks/use-common'
-import { getQueryParam } from '@/hooks/use-self-router.ts'
 const {
   refAddEditModal,
   refElTable,

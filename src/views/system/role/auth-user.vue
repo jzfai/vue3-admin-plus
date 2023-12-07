@@ -74,9 +74,9 @@
 </template>
 
 <script setup name="AuthUser">
-import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/role'
 import { ElMessage } from 'element-plus'
 import SelectUser from './SelectUser.vue'
+import { allocatedUserList, authUserCancel, authUserCancelAll } from '@/api/role'
 import { resetData } from '@/hooks/use-common'
 
 const route = useRoute()
@@ -102,7 +102,7 @@ const formString = JSON.stringify(queryParams)
 function getList() {
   loading.value = true
   allocatedUserList(queryParams).then((response) => {
-    userList.value = response.rows
+    userList.value = response.data
     total.value = response.total
     loading.value = false
   })

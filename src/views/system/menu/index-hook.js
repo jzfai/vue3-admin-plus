@@ -1,5 +1,5 @@
-import { deleteReq } from '@/api/menu'
 import { ElMessage } from 'element-plus'
+import { deleteReq } from '@/api/menu'
 const single = ref(true)
 const multiple = ref(true)
 /*table 列表*/

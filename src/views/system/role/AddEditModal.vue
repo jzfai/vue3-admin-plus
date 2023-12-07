@@ -97,6 +97,7 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import {
   addRole,
@@ -108,8 +109,8 @@ import {
 } from '@/api/role'
 import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
-import { computed, ref } from 'vue'
 import { selectPlatformAll } from '@/api/platform.ts'
+import { listMenuReq } from '@/api/menu'
 
 //element valid
 const formRules = useElement().formRules
@@ -141,7 +142,7 @@ const menuConfigClick = (item) => {
   // setMenuIds()
   //传递platform的id查询菜单列表
   selectMenuListByPlateFormId(item.id).then(({ data }) => {
-    // menuList.value = data.rows
+    // menuList.value = data.data
     menuOptions.value = data.menus
     // 回显选中的menu ids
     reshowTree(item.id)
@@ -215,7 +216,7 @@ const showModal = ({ roleId }) => {
         platformIdsChoose.value = firstPlatformId
         //根据平台id获取菜单
         selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
-          // menuList.value = data.rows
+          // menuList.value = data.data
           menuOptions.value = data.menus
           //回显menuIds
           roleMenuTreeselect(roleId).then(async ({ data }) => {
@@ -246,7 +247,6 @@ const arrGroupByKey = (arr, groupKey) => {
   }
   return map
 }
-import { listMenuReq } from '@/api/menu'
 const dillInitPlatformCheckMenuId = (checkedKeys) => {
   return new Promise((resolve) => {
     listMenuReq().then(({ data }) => {
