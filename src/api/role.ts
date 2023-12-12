@@ -101,19 +101,20 @@ export function changeRoleStatus(roleId, status) {
 }
 
 // 根据角色ID查询菜单下拉树结构
-export function roleMenuTreeselect(roleId) {
+export function roleMenuTreeselect(roleId,platformId) {
   return request({
-    url: `/system/menu/roleMenuTreeselect/${roleId}`,
-    method: 'get'
+    url: `/selectMenuListByRoleId`,
+    method: 'get',
+    params:{roleId,platformId}
   })
 }
 
 // 根据平台查询菜单下拉树结构
 export function selectMenuListByPlateFormId(platformId) {
   return request({
-    url: `/system/menu/selectMenuListByPlateFormId`,
-    method: 'get',
-    params: { platformId }
+    url: `/system/menu/list`,
+    method: 'post',
+    data: { platformId }
   })
 }
 

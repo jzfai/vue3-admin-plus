@@ -34,44 +34,44 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item label="平台权限选择" rules="formRules.isNotNull('平台选择不能为空')">
-        <el-select
-          v-model="addEditForm.platformIdsArr"
-          multiple
-          filterable
-          allow-create
-          default-first-option
-          :reserve-keyword="false"
-          class="w-600px"
-          placeholder="请选择平台"
-        >
-          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />
-        </el-select>
-      </el-form-item>
+<!--      <el-form-item label="平台权限选择" rules="formRules.isNotNull('平台选择不能为空')">-->
+<!--        <el-select-->
+<!--          v-model="addEditForm.platformIdsArr"-->
+<!--          multiple-->
+<!--          filterable-->
+<!--          allow-create-->
+<!--          default-first-option-->
+<!--          :reserve-keyword="false"-->
+<!--          class="w-600px"-->
+<!--          placeholder="请选择平台"-->
+<!--        >-->
+<!--          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />-->
+<!--        </el-select>-->
+<!--      </el-form-item>-->
 
-      <el-form-item v-if="choosePlatformIds?.length" label="平台菜单配置">
+      <el-form-item label="平台菜单配置">
         <el-radio-group v-model="platformIdsChoose">
-          <el-radio v-for="item in choosePlatformIds" :key="item.id" :label="item.id" @click="menuConfigClick(item)">
+          <el-radio v-for="item in platformData" :key="item.id" :label="item.id" @click="menuConfigClick(item)">
             {{ item.name }}
           </el-radio>
         </el-radio-group>
       </el-form-item>
 
       <el-form-item v-if="addEditForm.roleKey !== 'admin' && platformIdsChoose" label="菜单权限">
-        <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
-        <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
-        <el-checkbox v-model="addEditForm.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">
-          父子联动
-        </el-checkbox>
+<!--        <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>-->
+<!--        <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>-->
+<!--        <el-checkbox v-model="addEditForm.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">-->
+<!--          父子联动-->
+<!--        </el-checkbox>-->
         <el-tree
           ref="menuRef"
           class="tree-border"
           :data="menuOptions"
           show-checkbox
-          node-key="id"
+          node-key="menuId"
           :check-strictly="!addEditForm.menuCheckStrictly"
           empty-text="加载中，请稍候"
-          :props="{ label: 'label', children: 'children' }"
+          :props="{ label: 'routeName', children: 'children' }"
         />
       </el-form-item>
       <el-form-item label="备注" prop="remark" :rules="formRules.notValid('备注不能为空')">
@@ -102,7 +102,6 @@ import { ElMessage } from 'element-plus'
 import {
   addRole,
   getRole,
-  menuOptionsReq,
   roleMenuTreeselect,
   selectMenuListByPlateFormId,
   updateRole
@@ -111,7 +110,11 @@ import { useDict } from '@/hooks/use-data-dict'
 import { resetData } from '@/hooks/use-common'
 import { selectPlatformAll } from '@/api/platform.ts'
 import { listMenuReq } from '@/api/menu'
+import {handleTree} from "@/views/system/menu/index-hook";
+/**********   props   *****************/
 
+
+/**********   data   *****************/
 //element valid
 const formRules = useElement().formRules
 /** 提交按钮 */
@@ -136,34 +139,14 @@ const addEditForm = reactive({
   platformIdsArr: []
 })
 const platformIdsChoose = ref()
-const menuConfigClick = (item) => {
-  //记录上一次的菜单选项
-  platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
-  // setMenuIds()
-  //传递platform的id查询菜单列表
-  selectMenuListByPlateFormId(item.id).then(({ data }) => {
-    // menuList.value = data.data
-    menuOptions.value = data.menus
-    // 回显选中的menu ids
-    reshowTree(item.id)
-    // getMenuIds(addEditForm.roleId)
-  })
-}
-// const setMenuIds = () => {
-//   //存储选中节点值
-//   // getMenuAllCheckedKeys().forEach((item) => {
-//   //   if (!addEditForm.menuIds.includes(item)) {
-//   //     addEditForm.menuIds.push(item)
-//   //   }
-//   // })
-//   //移除未选中节点值
-//   // addEditForm.menuIds?.forEach((item, index) => {
-//   //   if (getMenuNoCheckNode().includes(item)) {
-//   //     addEditForm.menuIds.splice(index, 1)
-//   //   }
-//   // })
-//   reshowTree()
-// }
+const menuRef = ref()
+const menuExpand = ref(false)
+const menuNodeAll = ref(false)
+// const menuList = ref()
+//存储平台key:选中的menu-arr
+const platformMenuIdObj = reactive({})
+const checkedKeys = ref([])
+const platformData = ref([])
 const choosePlatformIds = computed(() => {
   return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
 })
@@ -191,6 +174,21 @@ const submitForm = () => {
     }
   })
 }
+
+/**********   method   *****************/
+const menuConfigClick = (item) => {
+  //记录上一次的菜单选项
+  platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
+  // setMenuIds()
+  //传递platform的id查询菜单列表
+  selectMenuListByPlateFormId(item.id).then(({ data }) => {
+    // menuList.value = data.data
+    menuOptions.value = handleTree(data, 'menuId')
+    // 回显选中的menu ids
+    reshowTree(item.id)
+    // getMenuIds(addEditForm.roleId)
+  })
+}
 /** 取消按钮 */
 const cancel = () => {
   open.value = false
@@ -199,10 +197,6 @@ const cancel = () => {
   menuOptions.value = []
   platformData.value = []
 }
-// const menuList = ref()
-//存储平台key:选中的menu-arr
-const platformMenuIdObj = reactive({})
-const checkedKeys = ref([])
 const showModal = ({ roleId }) => {
   title.value = '新增角色'
   open.value = true
@@ -217,12 +211,12 @@ const showModal = ({ roleId }) => {
         //根据平台id获取菜单
         selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
           // menuList.value = data.data
-          menuOptions.value = data.menus
+          menuOptions.value = handleTree(data, 'menuId')
           //回显menuIds
           roleMenuTreeselect(roleId).then(async ({ data }) => {
             //存储选中的key值
-            checkedKeys.value = data?.checkedKeys
-            await dillInitPlatformCheckMenuId(data?.checkedKeys)
+            checkedKeys.value = data
+            await dillInitPlatformCheckMenuId(data)
             reshowTree(firstPlatformId)
           })
         })
@@ -249,7 +243,7 @@ const arrGroupByKey = (arr, groupKey) => {
 }
 const dillInitPlatformCheckMenuId = (checkedKeys) => {
   return new Promise((resolve) => {
-    listMenuReq().then(({ data }) => {
+    listMenuReq({}).then(({ data }) => {
       const arrGroupByKey1 = arrGroupByKey(data, 'platformId')
       let checkMenuIdArr = []
       Object.keys(arrGroupByKey1).forEach((key) => {
@@ -265,7 +259,6 @@ const dillInitPlatformCheckMenuId = (checkedKeys) => {
     })
   })
 }
-
 let menuOptions = ref([])
 const reshowTree = (platformId) => {
   //menuOptions.value = data.menus
@@ -275,7 +268,6 @@ const reshowTree = (platformId) => {
     })
   })
 }
-
 const getCheckMenuIds = () => {
   const keyArr = []
   Object.values(platformMenuIdObj).forEach((valueArr) => {
@@ -285,13 +277,6 @@ const getCheckMenuIds = () => {
   })
   return keyArr
 }
-//根据角色id获取菜单
-// const roleMenuTreeReq = (roleId) => {
-//   roleMenuTreeselect(roleId).then(({ data }) => {
-//     reshowTree()
-//   })
-// }
-
 const reshowData = (addEditForm, detailData) => {
   Object.keys(addEditForm).forEach((fItem) => {
     if (detailData[fItem]) {
@@ -299,13 +284,6 @@ const reshowData = (addEditForm, detailData) => {
     }
   })
 }
-
-// const menuOptionsData = () => {
-//   menuOptionsReq().then(({ data }) => {
-//     menuOptions.value = data
-//   })
-// }
-const platformData = ref([])
 const platformList = () => {
   selectPlatformAll().then(({ data }) => {
     platformData.value = data
@@ -313,16 +291,14 @@ const platformList = () => {
 }
 
 /** 树权限（展开/折叠）*/
-const handleCheckedTreeExpand = (value, type) => {
-  const treeList = menuOptions.value
+const handleCheckedTreeExpand = (value) => {
+  const treeList = menuOptions.value;
   for (const element of treeList) {
-    menuRef.value.store.nodesMap[element.id].expanded = value
+    menuRef.value.store.nodesMap[element.id].expanded = value;
   }
 }
 
-const menuRef = ref(null)
-const menuExpand = ref(false)
-const menuNodeAll = ref(false)
+
 /** 树权限（全选/全不选） */
 const handleCheckedTreeNodeAll = (value) => {
   menuRef.value.setCheckedNodes(value ? menuOptions.value : [])
@@ -342,13 +318,7 @@ const getMenuAllCheckedKeys = () => {
   return checkedKeys
 }
 
-//获取未选中节点数组
-// const getMenuNoCheckNode = () => {
-//   let mapIds = menuList.value
-//     .filter((fItem) => !getMenuAllCheckedKeys().includes(fItem.menuId))
-//     .map((mItem) => mItem.menuId)
-//   return mapIds
-// }
+/***-------mounted----------***/
 
 //导出给refs使用
 defineExpose({ cancel, showModal })
