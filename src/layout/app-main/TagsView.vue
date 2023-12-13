@@ -159,9 +159,9 @@ const closeSelectedTag = (view) => {
       if (routerLevel === 2) {
         basicStore.delCachedView(view.name)
       }
-      if (routerLevel === 3) {
-        basicStore.setCacheViewDeep(view.name)
-      }
+      // if (routerLevel === 3) {
+      //   basicStore.setCacheViewDeep(view.name)
+      // }
     }
   })
 }
