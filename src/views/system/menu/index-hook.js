@@ -16,15 +16,15 @@ export const handleImport = () => {
 }
 
 const tableHeadColumns = ref([
-  { prop: 'menuName', label: '菜单名称', minWidth: 120, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'menuName', label: '菜单名称', minWidth: 120, isTemplate: false, align: 'left', showColumn: true },
   { prop: 'icon', label: '图标', minWidth: 100, isTemplate: true, align: 'center', showColumn: true },
-  { prop: 'status', label: '状态', minWidth: 50, isTemplate: true, align: 'center', showColumn: true },
+  { prop: 'status', label: '状态', minWidth: 60, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'redirect', label: '重定向', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'routeName', label: '路由名字', minWidth: 80, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'visible', label: '显示状态', minWidth: 80, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'metaExtra', label: 'meta参数', minWidth: 130, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'orderNum', label: '排序', minWidth: 40, isTemplate: false, align: 'center', showColumn: true },
-  { prop: 'createTime', label: '创建时间', minWidth: 120, isTemplate: false, align: 'center', showColumn: true }
+  { prop: 'createTime', label: '创建时间', minWidth: 130, isTemplate: false, align: 'center', showColumn: true }
 ])
 export const handleSelectionChange = (selection) => {
   ids.value = selection.map((item) => item.menuId)
@@ -109,7 +109,7 @@ export const currentHook = (queryParams, getList) => {
   //   })
   // }
   const handleDelete = (row) => {
-    const menuIds = row.menuId || ids.value
+    const menuIds = row.menuId
     elConfirm(`是否确认删除用户编号为"${menuIds}"的数据项`)
       .then(() => {
         return deleteReq(menuIds)

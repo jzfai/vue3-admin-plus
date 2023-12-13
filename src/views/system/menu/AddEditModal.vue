@@ -23,7 +23,7 @@
         />
       </el-form-item>
       <el-form-item label="菜单类型" prop="menuType">
-        <el-radio-group v-model="addEditForm.menuType">
+        <el-radio-group v-model="addEditForm.menuType" @change="menuTypeChoose">
           <el-radio label="M">目录</el-radio>
           <el-radio label="C">菜单</el-radio>
           <el-radio label="F">按钮</el-radio>
@@ -182,6 +182,17 @@ function showSelectIcon() {
   showChooseIcon.value = true
 }
 
+const menuTypeChoose=(data)=>{
+  if(data==="C"){
+    addEditForm.component=""
+    addEditForm.perms=""
+  }
+  if(data==="F"){
+    addEditForm.component=""
+    addEditForm.routeName=""
+  }
+}
+
 /** 选择图标 */
 function selected(name) {
   addEditForm.icon = name
@@ -239,12 +250,15 @@ const submitForm = () => {
       //校验
       if (addEditForm.menuId) {
         updateMenu(addEditForm).then(() => {
+          resetData(addEditForm, formString)
           ElMessage({message: '修改成功', type: 'success'})
           open.value = false
           emits('getList')
+
         })
       } else {
         addMenu(addEditForm).then(() => {
+          resetData(addEditForm, formString)
           ElMessage({message: '新增成功', type: 'success'})
           open.value = false
           emits('getList')
