@@ -14,6 +14,7 @@ const prodMock = setting.openProdMock
 import vitePluginSetupExtend from './src/plugins/vite-plugin-setup-extend'
 // import { visualizer } from 'rollup-plugin-visualizer'
 const pathSrc = resolve(__dirname, 'src')
+// @ts-ignore
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '') //获取环境变量
   return {
@@ -125,7 +126,7 @@ export default defineConfig(({ command, mode }) => {
     },
     optimizeDeps: {
       //include: [...optimizeDependencies,...optimizeElementPlus] //on-demand element-plus use this
-      include: ['moment-mini']
+      include: ['moment-mini',"@wangeditor/editor-for-vue","xlsx","d3","vuedraggable"]
     }
   }
 })
