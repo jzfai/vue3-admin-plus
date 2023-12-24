@@ -1,7 +1,6 @@
 <template>
-  <el-tag  :class="labelItem.elTagClass" :type="labelItem.elTagType === 'primary' ? '' : labelItem.elTagType">
-    {{label}}
-
+  <el-tag :class="labelItem.elTagClass" :type="labelItem.elTagType === 'primary' ? '' : labelItem.elTagType">
+    {{ label }}
   </el-tag>
 </template>
 
@@ -15,13 +14,13 @@ const props = defineProps({
   // 当前的值
   value: [Number, String, Array]
 })
-const labelItem=ref({})
+const labelItem = ref({})
 const label = computed(() => {
-  if(!props.value) return  ""
-  labelItem.value= props.options.find((item)=>{
-    return item.dictValue==props.value
+  if (props.value != 0 && !props.value) return ''
+  labelItem.value = props.options.find((item) => {
+    return item.dictValue == props.value
   })
-  return  labelItem.value?.dictLabel
+  return labelItem.value?.dictLabel
 })
 </script>
 

@@ -24,7 +24,7 @@ const tableHeadColumns = ref([
   { prop: 'operIp', label: '主机', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
   { prop: 'status', label: '操作状态', minWidth: 150, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'operTime', label: '操作日期', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
-  { prop: 'costTime', label: '消耗时间', minWidth: 150, isTemplate: false, align: 'center', showColumn: true }
+  { prop: 'costTime', label: '消耗时间(ms)', minWidth: 150, isTemplate: false, align: 'center', showColumn: true }
 ])
 export const handleSelectionChange = (selection) => {
   ids.value = selection.map((item) => item.operId)
