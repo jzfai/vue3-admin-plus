@@ -23,6 +23,7 @@ export default {
     Hook: 'hook',
     Pinia: 'pinia',
     Mock: 'mock',
+    Directive: '指令',
     'Svg Icon': 'svg使用',
     'Parent Children': '父子组件通信',
     'KeepAlive Group': '缓存组',
@@ -38,12 +39,35 @@ export default {
     'Button Permission': '按钮权限',
 
     Charts: '图表',
+    "OSS": '文件存储',
     Excel: 'Excel',
-    'Rich Text': '富文本',
     Table: '表格',
     Guid: '使用引导',
-    Other: '其他'
+    Other: '其他',
+
+
+    "System Manage":"系统管理",
+    "User Manage":"用户管理",
+    "Role Manage":"角色管理",
+    "Menu Manage":"菜单管理",
+    "Dictionary Type":"字典类型",
+    "Dictionary Data":"字典数据",
+    "Dept Manage":"部门管理",
+    "Post Manage":"岗位管理",
+    "Platform Manage":"平台管理",
+    "Minitor Manage":"监控管理",
+    "Rich Text":"富文本",
+    "EXCEL":"EXCEL表格",
+    "D3":"D3图表",
+    "Login Log":"登录日志",
+    "Operation Log":"操作日志",
+    "Dynamic Table":"动态表格",
+    "Guide":"指导",
+    "File List":"文件列表",
+    "Assigned User":"分配用户",
   },
+
+
 
   tagsView: {
     Refresh: '刷新',

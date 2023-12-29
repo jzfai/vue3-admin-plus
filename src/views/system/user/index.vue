@@ -120,9 +120,9 @@
           <el-tooltip v-if="row.userId !== 1" content="重置密码" placement="top">
             <el-button link type="primary" icon="Key" size="large" @click="handleResetPwd(row)" />
           </el-tooltip>
-          <el-tooltip v-if="row.userId !== 1" content="分配角色" placement="top">
-            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(row)" />
-          </el-tooltip>
+<!--          <el-tooltip v-if="row.userId !== 1" content="分配角色" placement="top">-->
+<!--            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(row)" />-->
+<!--          </el-tooltip>-->
         </template>
       </el-table-column>
     </el-table>
