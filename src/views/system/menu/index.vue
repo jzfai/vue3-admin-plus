@@ -117,7 +117,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import AddEditModal from './AddEditModal.vue'
 import { colChange, currentHook, handleImport, handleSelectionChange, handleTree, removeEmptyKey } from './index-hook'
 import ColumnFilter from '@/components/ColumnFilter.vue'
@@ -197,7 +197,7 @@ onMounted(() => {
 })
 //字典数据
 // eslint-disable-next-line camelcase
-const { sys_normal_disable, sys_show_hide } = useDict(['sys_normal_disable'])
+const { sys_normal_disable } = useDict(['sys_normal_disable'])
 const {
   refAddEditModal,
   refElTable,

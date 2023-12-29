@@ -14,7 +14,7 @@ export const listMenuReq = (query) => {
 //删除
 export const deleteReq = (id) => {
   return request({
-    url: `/system/menu/${id}`,
+    url: `/system/menu/deleteById/${id}`,
     method: 'delete'
   })
 }
