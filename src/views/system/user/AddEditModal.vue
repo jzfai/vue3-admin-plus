@@ -28,7 +28,7 @@
         />
       </el-form-item>
       <el-form-item label="手机号码" prop="phonenumber" :rules="formRules.isNotNull('手机号码不能为空')">
-        <el-input v-model="addEditForm.phonenumber" :disabled="addEditForm.userId" style="width: 150px" placeholder="手机号码" />
+        <el-input v-model="addEditForm.phonenumber"  style="width: 150px" placeholder="手机号码" />
       </el-form-item>
       <el-form-item label="邮箱" prop="email" :rules="formRules.isNotNull('邮箱不能为空')">
         <el-input v-model="addEditForm.email" style="width: 150px" placeholder="邮箱" />

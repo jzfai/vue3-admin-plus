@@ -161,3 +161,13 @@ export function authUserSelectAll(data) {
     params: data
   })
 }
+
+
+// 授权用户选择
+export function getUserIdsByRoleId(data) {
+  return request({
+    url: '/system/role/getUserIdsByRoleId',
+    method: 'get',
+    params: data
+  })
+}

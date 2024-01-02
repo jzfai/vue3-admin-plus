@@ -48,7 +48,16 @@
 <!--          <el-option v-for="item in platformData" :key="item.id" :label="item.name" :value="item.id" />-->
 <!--        </el-select>-->
 <!--      </el-form-item>-->
-
+      <el-form-item  label="用户" :rules="formRules.notValid('请选择用户')">
+        <el-select v-model="addEditForm.userIds" multiple placeholder="用户" style="width: 400px">
+          <el-option
+              v-for="item in userList"
+              :key="item.userId"
+              :label="item.userName"
+              :value="item.userId"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item label="平台菜单配置">
         <el-radio-group v-model="platformIdsChoose">
           <el-radio v-for="item in platformData" :key="item.id" :label="item.id" @click="menuConfigClick(item)">
@@ -101,7 +110,7 @@ import { computed, ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import {
   addRole,
-  getRole,
+  getRole, getUserIdsByRoleId,
   roleMenuTreeselect,
   selectMenuListByPlateFormId,
   updateRole
@@ -136,6 +145,7 @@ const addEditForm = reactive({
   deptCheckStrictly: true,
   remark: '',
   platformIds: [],
+  userIds: [],
   platformIdsArr: []
 })
 const platformIdsChoose = ref()
@@ -151,6 +161,11 @@ const choosePlatformIds = computed(() => {
   return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
 })
 const formString = JSON.stringify(addEditForm)
+
+/**********   onMounted   *****************/
+
+
+/**********   method   *****************/
 const submitForm = () => {
   roleRef.value.validate((valid) => {
     if (valid) {
@@ -175,7 +190,7 @@ const submitForm = () => {
   })
 }
 
-/**********   method   *****************/
+
 const menuConfigClick = (item) => {
   //记录上一次的菜单选项
   platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
@@ -197,10 +212,21 @@ const cancel = () => {
   menuOptions.value = []
   platformData.value = []
 }
+
+const userList=ref([])
+import { listReq } from '@/api/user'
 const showModal = ({ roleId }) => {
   title.value = '新增角色'
   open.value = true
   if (roleId) {
+    getUserIdsByRoleId({roleId}).then(({data})=>{
+      addEditForm.userIds=data;
+    })
+    //获取用户列表
+    listReq().then(({data})=>{
+        userList.value=data
+    })
+
     getRole(roleId).then(({ data }) => {
       reshowData(addEditForm, data)
       addEditForm.roleSort = Number(data.roleSort)
@@ -226,6 +252,8 @@ const showModal = ({ roleId }) => {
     })
   }
   platformList()
+
+
 }
 const arrGroupByKey = (arr, groupKey) => {
   const map = {}
@@ -289,7 +317,6 @@ const platformList = () => {
     platformData.value = data
   })
 }
-
 /** 树权限（展开/折叠）*/
 const handleCheckedTreeExpand = (value) => {
   const treeList = menuOptions.value;
@@ -297,8 +324,6 @@ const handleCheckedTreeExpand = (value) => {
     menuRef.value.store.nodesMap[element.id].expanded = value;
   }
 }
-
-
 /** 树权限（全选/全不选） */
 const handleCheckedTreeNodeAll = (value) => {
   menuRef.value.setCheckedNodes(value ? menuOptions.value : [])
@@ -317,8 +342,6 @@ const getMenuAllCheckedKeys = () => {
   checkedKeys.unshift.apply(checkedKeys, halfCheckedKeys)
   return checkedKeys
 }
-
-/***-------mounted----------***/
 
 //导出给refs使用
 defineExpose({ cancel, showModal })

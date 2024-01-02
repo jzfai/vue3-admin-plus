@@ -104,25 +104,29 @@
           :label="item.label"
         >
           <template #default="{ row }">
-            <el-switch :model-value="row.status" active-value="0" inactive-value="1" @click="handleStatusChange(row)" />
+            <el-switch v-if="row.userName !== 'admin'" :model-value="row.status" active-value="0" inactive-value="1" @click="handleStatusChange(row)" />
+            <span v-else>-</span>
           </template>
         </el-table-column>
       </template>
 
       <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
         <template #default="{ row }">
-          <el-tooltip v-if="row.userId !== 1" content="修改" placement="top">
-            <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
-          </el-tooltip>
-          <el-tooltip v-if="row.userId !== 1" content="删除" placement="top">
-            <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
-          </el-tooltip>
-          <el-tooltip v-if="row.userId !== 1" content="重置密码" placement="top">
-            <el-button link type="primary" icon="Key" size="large" @click="handleResetPwd(row)" />
-          </el-tooltip>
-<!--          <el-tooltip v-if="row.userId !== 1" content="分配角色" placement="top">-->
-<!--            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(row)" />-->
-<!--          </el-tooltip>-->
+          <div v-if="row.userName !== 'admin'">
+            <el-tooltip  content="修改" placement="top">
+              <el-button link type="primary" icon="Edit" size="large" @click="handleUpdate(row)" />
+            </el-tooltip>
+            <el-tooltip  content="删除" placement="top">
+              <el-button link type="primary" icon="Delete" size="large" @click="handleDelete(row)" />
+            </el-tooltip>
+            <el-tooltip  content="重置密码" placement="top">
+              <el-button link type="primary" icon="Key" size="large" @click="handleResetPwd(row)" />
+            </el-tooltip>
+          </div>
+
+          <!--          <el-tooltip v-if="row.userId !== 1" content="分配角色" placement="top">-->
+          <!--            <el-button link type="primary" icon="CircleCheck" size="large" @click="handleAuthRole(row)" />-->
+          <!--          </el-tooltip>-->
         </template>
       </el-table-column>
     </el-table>

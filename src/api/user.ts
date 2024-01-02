@@ -43,16 +43,16 @@ export const loginReq = (subForm) => {
 // 注册方法
 export const register = (data) => {
   return request({
-    url: 'rbac/register',
+    url: 'register',
     method: 'post',
-    data
+    params:data
   })
 }
 
 //退出登录
 export const loginOutReq = () => {
   return request({
-    url: 'rbac/logout',
+    url: 'logout',
     method: 'post'
   })
 }
@@ -89,7 +89,7 @@ export const listReq = (query) => {
   return request({
     url: '/system/user/list',
     method: 'post',
-    data: query
+    data: query||{}
   })
 }
 

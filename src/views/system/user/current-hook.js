@@ -18,7 +18,7 @@ export const handleImport = () => {
 const tableHeadColumns = ref([
   { prop: 'userName', label: '用户名称', minWidth: 100, isTemplate: false, showColumn: true },
   { prop: 'nickName', label: '用户昵称', minWidth: 100, isTemplate: false, showColumn: true },
-  { prop: 'dept.deptName', label: '部门', minWidth: 100, isTemplate: false, showColumn: true },
+  { prop: 'deptName', label: '部门', minWidth: 100, isTemplate: false, showColumn: true },
   { prop: 'phonenumber', label: '手机号码', minWidth: 120, isTemplate: false, showColumn: true },
   { prop: 'status', label: '状态', minWidth: 80, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'createTime', label: '创建时间', minWidth: 140, isTemplate: false, align: 'center', showColumn: true }

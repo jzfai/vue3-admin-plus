@@ -10,11 +10,11 @@
         <div class="title-container">
           <h3 class="title text-center">{{ settings.title }}</h3>
         </div>
-        <el-form-item prop="username" :rules="formRules.isNotNull('user not empty')">
+        <el-form-item prop="userName" :rules="formRules.isNotNull('user not empty')">
           <span class="svg-container">
             <ElSvgIcon name="User" :size="14" />
           </span>
-          <el-input v-model="registerForm.username" placeholder="username" />
+          <el-input v-model="registerForm.userName" placeholder="userName" />
           <!--占位-->
         </el-form-item>
         <el-form-item prop="password" :rules="formRules.isNotNull('password not empty')">
@@ -88,7 +88,7 @@ const { settings } = useBasicStore()
 const formRules = useElement().formRules
 //form
 const registerForm = reactive({
-  username: '',
+  userName: '',
   password: '',
   confirmPassword: '',
   code: '',
@@ -187,14 +187,14 @@ const getCode = () => {
   })
 }
 
-const { rememberMe, username, password, setLoginInfo } = useConfigStore()
+const { rememberMe, userName, password, setLoginInfo } = useConfigStore()
 
 const recordLoginInfo = () => {
   //remember password
   if (registerForm.rememberMe) {
     setLoginInfo(registerForm)
   } else {
-    registerForm.username = ''
+    registerForm.userName = ''
     registerForm.password = ''
     registerForm.rememberMe = false
     setLoginInfo(registerForm)
@@ -202,7 +202,7 @@ const recordLoginInfo = () => {
 }
 
 const showLoginInfo = () => {
-  registerForm.username = username
+  registerForm.userName = userName
   registerForm.password = password
   registerForm.rememberMe = rememberMe
 }
