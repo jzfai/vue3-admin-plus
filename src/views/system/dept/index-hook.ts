@@ -16,7 +16,7 @@ export const handleImport = () => {
 }
 
 const tableHeadColumns = ref([
-  { prop: 'deptName', label: '部门名称', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
+  { prop: 'deptName', label: '部门名称', minWidth: 150, isTemplate: false, align: 'left', showColumn: true },
   { prop: 'orderNum', label: '排序', minWidth: 150, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'status', label: '状态', minWidth: 150, isTemplate: true, align: 'center', showColumn: true },
   { prop: 'createTime', label: '创建时间', minWidth: 150, isTemplate: false, align: 'center', showColumn: true }

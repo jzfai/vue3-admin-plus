@@ -105,13 +105,6 @@
             </el-tooltip>
           </div>
 
-
-<!--          <el-tooltip v-if="row.roleId !== 1" content="数据权限" placement="top">-->
-<!--            <el-button link type="primary" icon="CircleCheck" @click="handleDataScope(row)" />-->
-<!--          </el-tooltip>-->
-<!--          <el-tooltip v-if="row.roleId !== 1" content="分配用户" placement="top">-->
-<!--            <el-button link type="primary" icon="User" @click="handleAuthUser(row)" />-->
-<!--          </el-tooltip>-->
         </template>
       </el-table-column>
     </el-table>
@@ -129,15 +122,15 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, reactive, ref, watch } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import {  onMounted, reactive, ref } from 'vue'
+import { ElMessage } from 'element-plus'
 import AddEditModal from './AddEditModal.vue'
 import DataAuthorModal from './DataAuthorModal.vue'
 import { colChange, currentHook, handleAdd, handleSelectionChange, removeEmptyKey } from './index-hook'
 import Pagination from '@/components/Pagination/index.vue'
 import ColumnFilter from '@/components/ColumnFilter.vue'
 import RightToolBar from '@/components/RightToolBar.vue'
-import { changeRoleStatus, getRole, listReq } from '@/api/role'
+import { changeRoleStatus, listReq } from '@/api/role'
 import { useDict } from '@/hooks/use-data-dict'
 
 //导入当前页面封装方法

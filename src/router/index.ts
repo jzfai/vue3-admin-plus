@@ -38,20 +38,20 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401.vue'),
     hidden: true
   },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/index',
-    children: [
-      {
-        path: 'index',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index.vue'),
-        //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
-        meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
-      }
-    ]
-  }
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/index',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: 'Dashboard',
+  //       component: () => import('@/views/dashboard/index.vue'),
+  //       //using el svg icon, the elSvgIcon first when at the same time using elSvgIcon and icon
+  //       meta: { title: 'Dashboard', elSvgIcon: 'Fold', affix: true }
+  //     }
+  //   ]
+  // }
   // {
   //   path: '/system',
   //   component: Layout,

@@ -20,7 +20,6 @@ export function filterAsyncRouter(data) {
   //const fileAfterRouter = filterAsyncRouterByReq(data)
   //add 404-page router
   fileAfterRouter.push(noMathPage)
-  console.log("fileAfterRouter", fileAfterRouter);
   fileAfterRouter.forEach((route) => router.addRoute(route))
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }

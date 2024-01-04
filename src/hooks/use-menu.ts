@@ -37,6 +37,9 @@ const buildAsyncRouter = (asyncRouterMap) => {
     if (item.routeName) {
       route.name = item.routeName
     }
+    if (item.redirect) {
+      route.redirect = item.redirect
+    }
     //alwaysShow
     route.alwaysShow = item.alwaysShow === 1
     //hidden
