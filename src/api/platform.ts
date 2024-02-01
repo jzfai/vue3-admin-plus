@@ -80,3 +80,19 @@ export const getPlatform = (id) => {
     method: 'get'
   })
 }
+//导入
+export const importReq=(updateSupport)=> {
+  return request({
+    url: `/system/platform/import`,
+    method: 'post',
+  })
+}
+
+
+//模板下载
+export const downloadTemplateReq=()=> {
+  return request({
+    url: `/system/platform/download`,
+    method: '${apiConfig.templateDownMethod}'
+  })
+}

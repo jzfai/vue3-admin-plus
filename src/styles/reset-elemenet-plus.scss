@@ -1,0 +1,56 @@
+//leave the padding of  el-scroll sidebar
+
+#Sidebar{
+  .el-scrollbar__view {
+    padding-bottom: 80px;
+  }
+
+}
+
+
+//button icon
+.fixed-width {
+  .el-button {
+    padding: 7px 0!important;
+  }
+}
+//button
+.el-button{
+  padding: 7px 12px!important;
+}
+.el-dialog {
+  transform: none;
+  left: 0;
+  position: relative;
+  margin: 0 auto;
+}
+
+
+.el-scrollbar{
+  --el-menu-base-level-padding:15px;
+}
+
+
+/* loading loading遮罩层
+------------------------------- */
+.el-loading-mask {
+  // position: relative  !important;
+  .el-loading-spinner {
+    position: fixed  !important;
+    background: #ffffff !important;
+    width: 200px !important;
+    height: 120px !important;
+    border-radius: 8px !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    padding-top: 20px !important;
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    i {
+      font-size: 20px;
+    }
+    .el-loading-text {
+      margin: 12px 0 0 0 !important;
+      //color: set-color(brand) !important;
+    }
+  }
+}

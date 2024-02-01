@@ -1,29 +1,25 @@
-import { ElMessage } from 'element-plus'
 import { deleteReq, exportReq } from '@/api/platform'
-const single = ref(true)
-const multiple = ref(true)
+import { downLoadTemp } from '@/hooks/use-common'
+import { ElMessage } from 'element-plus'
 /*table 列表*/
-const ids = ref([])
 const totalNum = ref(0)
 const loading = ref(false)
 const platformList = ref([])
 const showSearch = ref(true)
 const refAddEditModal = ref()
 const refElTable = ref()
+
+const refImport = ref()
 const refExport = ref()
 export const handleImport = () => {
-  refExport.value.showModal()
+  refImport.value.showModal()
 }
 
 const tableHeadColumns = ref([
-  { prop: 'id', label: '平台id', minWidth: 150, isTemplate: false, align: 'center', showColumn: true },
-  { prop: 'name', label: '平台名称', minWidth: 150, isTemplate: false, align: 'center', showColumn: true }
+  { prop: "name", label: "平台的名字", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "updateTime", label: "更新时间", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
+  { prop: "updateBy", label: "更新人", minWidth: 150,isTemplate:false, align: 'center', showColumn: true  },
 ])
-export const handleSelectionChange = (selection) => {
-  ids.value = selection.map((item) => item.id)
-  single.value = selection.length !== 1
-  multiple.value = !selection.length
-}
 export const colChange = (heardColsArr) => {
   tableHeadColumns.value = heardColsArr
 }
@@ -54,8 +50,11 @@ export const currentHook = (queryParams, getList) => {
       downLoadTemp(res)
     })
   }
-  const handleDelete = (row) => {
-    const platformIds = row.id || ids.value
+//多选
+  const handleMultiDelete = () => {
+    const platformIds = refElTable.value.getSelectionRows().map(m=>{
+      return m.id
+    })
     elConfirm('确认', `是否确认删除用户编号为"${platformIds}"的数据项`)
       .then(() => {
         return deleteReq(platformIds)
@@ -65,19 +64,28 @@ export const currentHook = (queryParams, getList) => {
         getList()
       })
   }
+//单选
+  const handleDelete = (row) => {
+    elConfirm('确认',`是否确认删除用户编号为"${row.id}"的数据项`)
+      .then(() => {
+        return deleteReq({id:row.id})
+      })
+      .then(() => {
+        ElMessage({ message: '删除成功', type: 'success' })
+        getList()
+      })
+  }
   return {
     refAddEditModal,
-    handleDelete,
     refElTable,
-    refExport,
-    multiple,
-    ids,
-    single,
     totalNum,
     loading,
     platformList,
     showSearch,
     tableHeadColumns,
-    handleExport
+    refExport,
+    handleExport,
+    handleMultiDelete,
+    handleDelete
   }
 }

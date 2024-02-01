@@ -27,7 +27,6 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 import { addPlatform, getPlatform, updatePlatform } from '@/api/platform'
-import { useDict } from '@/hooks/use-data-dict'
 import { resetData, reshowData } from '@/hooks/use-common'
 
 //element valid
@@ -36,7 +35,7 @@ const formRules = useElement().formRules
 const platformRef = ref('')
 const open = ref(false)
 const title = ref('新增平台')
-const emits = defineEmits([])
+const emits = defineEmits(['getList'])
 const addEditForm = reactive({
   id: '',
   name: ''

@@ -77,12 +77,12 @@ watch(
   /*50 = navbar  */
   z-index: 0;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
   background-color: var(--app-main-background);
-  min-height: calc(100vh - #{var(--nav-bar-height)}) !important;
+  height: calc(100vh - #{var(--nav-bar-height)}) !important;
 }
 .show-tag-view {
-  min-height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)}) !important;
+  height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)}) !important;
 }
 .fixed-header + .app-main {
   padding-top: 50px;

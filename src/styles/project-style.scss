@@ -1,0 +1,50 @@
+.project-page-style {
+  background: #fff;
+  padding: 20px;
+  padding-top: 0;
+}
+
+.query-page-style {
+  background: #fff;
+  padding: 20px;
+}
+
+//汽包
+.triangle {
+  position: relative;
+  left: 150px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #fafafa;
+}
+
+//table relative
+.table-operation-btn {
+  span {
+    cursor: pointer;
+    color: var(--el-color-primary);
+    display: inline-block;
+    padding: 0 6px;
+  }
+}
+//新增底部 btn
+.footer-btn {
+  position: fixed;
+  width: calc(100% - var(--side-bar-width));
+  text-align: center;
+  border-top: 1px solid var(--lineB3);
+  background: #ffffff;
+  padding: 12px 0;
+  margin-left: 0;
+  bottom: 0;
+  z-index: 11;
+  left: var(--side-bar-width) px;
+}
+
+
+//修改进度条样式
+#nprogress .bar {
+  background: #fff;
+}
+

@@ -46,8 +46,7 @@ service.interceptors.request.use(
       loadingInstance = ElLoading.service({
         lock: true,
         fullscreen: true,
-        // spinner: 'CircleCheck',
-        text: '数据载入中...',
+        text: '获取数据中，请稍后...',
         background: 'rgba(0, 0, 0, 0.1)'
       })
     }

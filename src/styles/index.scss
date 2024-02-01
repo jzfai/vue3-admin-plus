@@ -1,9 +1,10 @@
 //scss 语法糖包含常用的布局方式 flex column
 @import './scss-suger.scss';
 //重置 element-plus 样式
-@import './reset-elemenet-plus-style.scss';
+@import 'reset-elemenet-plus.scss';
 //动画文件
 @import './transition.scss';
+@import './project-style.scss';
 
 //reset style
 body {
@@ -51,8 +52,7 @@ output {
 //scroll
 @mixin main-show-wh() {
   /* css 声明 */
-  //height: calc(100vh - #{$navBarHeight} - #{$tagViewHeight} - #{$appMainPadding * 2});
-  height: calc(100vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)} - #{calc(var(--app-main-padding) * 2)});
+  height: calc(90vh - #{var(--nav-bar-height)} - #{var(--tag-view-height)} - #{calc(var(--app-main-padding) * 2)});
   width: 100%;
 }
 .scroll-y {
@@ -67,3 +67,9 @@ output {
   @include main-show-wh();
   overflow: auto;
 }
+
+
+
+
+
+
