@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-y">
+  <div>
     <div className="mb-1">折线图</div>
     <div className="rowSS">
       <div id="echartsContainerLineF" style="width: 550px; height: 400px"/>

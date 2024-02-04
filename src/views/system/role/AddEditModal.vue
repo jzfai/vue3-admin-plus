@@ -28,7 +28,7 @@
       <el-form-item label="角色顺序" prop="roleSort" :rules="formRules.isNotNull('角色顺序不能为空')">
         <el-input-number v-model="addEditForm.roleSort" controls-position="right" :min="0" />
       </el-form-item>
-      <el-form-item v-if="addEditForm.roleKey !== 'admin'" label="状态">
+      <el-form-item  label="状态">
         <el-radio-group v-model="addEditForm.status">
           <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{ dict.label }}</el-radio>
         </el-radio-group>
@@ -66,7 +66,7 @@
         </el-radio-group>
       </el-form-item>
 
-      <el-form-item v-if="addEditForm.roleKey !== 'admin' && platformIdsChoose" label="菜单权限">
+      <el-form-item v-if="platformIdsChoose" label="菜单权限">
 <!--        <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>-->
 <!--        <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>-->
 <!--        <el-checkbox v-model="addEditForm.menuCheckStrictly" @change="handleCheckedTreeConnect($event, 'menu')">-->
@@ -120,10 +120,9 @@ import { resetData } from '@/hooks/use-common'
 import { selectPlatformAll } from '@/api/platform.ts'
 import { listMenuReq } from '@/api/menu'
 import {handleTree} from "@/views/system/menu/index-hook";
-/**********   props   *****************/
+import { listReq } from '@/api/user'
 
-
-/**********   data   *****************/
+/**********   ref   *****************/
 //element valid
 const formRules = useElement().formRules
 /** 提交按钮 */
@@ -150,27 +149,29 @@ const addEditForm = reactive({
 })
 const platformIdsChoose = ref()
 const menuRef = ref()
-const menuExpand = ref(false)
-const menuNodeAll = ref(false)
+// const menuExpand = ref(false)
+// const menuNodeAll = ref(false)
 // const menuList = ref()
 //存储平台key:选中的menu-arr
 const platformMenuIdObj = reactive({})
 const checkedKeys = ref([])
 const platformData = ref([])
-const choosePlatformIds = computed(() => {
-  return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
-})
+// const choosePlatformIds = computed(() => {
+//   return platformData.value.filter((item) => addEditForm.platformIdsArr.includes(item.id))
+// })
 const formString = JSON.stringify(addEditForm)
 
-/**********   onMounted   *****************/
+const userList=ref([])
 
 
-/**********   method   *****************/
+/**********  onMounted   *****************/
+
+/**********  method   *****************/
 const submitForm = () => {
   roleRef.value.validate((valid) => {
     if (valid) {
       platformMenuIdObj[platformIdsChoose.value] = getMenuAllCheckedKeys()
-      addEditForm.platformIds = JSON.stringify(addEditForm.platformIdsArr)
+      // addEditForm.platformIds = JSON.stringify(addEditForm.platformIdsArr)
       addEditForm.menuIds = getCheckMenuIds()
       // setMenuIds()
       if (addEditForm.roleId !== '') {
@@ -213,8 +214,6 @@ const cancel = () => {
   platformData.value = []
 }
 
-const userList=ref([])
-import { listReq } from '@/api/user'
 const showModal = ({ roleId }) => {
   title.value = '新增角色'
   open.value = true
@@ -226,34 +225,14 @@ const showModal = ({ roleId }) => {
     listReq().then(({data})=>{
         userList.value=data
     })
-
     getRole(roleId).then(({ data }) => {
       reshowData(addEditForm, data)
       addEditForm.roleSort = Number(data.roleSort)
-      if (addEditForm.platformIds) {
-        addEditForm.platformIdsArr = JSON.parse(addEditForm.platformIds)
-        const firstPlatformId = addEditForm.platformIdsArr[0]
-        platformIdsChoose.value = firstPlatformId
-        //根据平台id获取菜单
-        selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
-          // menuList.value = data.data
-          menuOptions.value = handleTree(data, 'menuId')
-          //回显menuIds
-          roleMenuTreeselect(roleId).then(async ({ data }) => {
-            //存储选中的key值
-            checkedKeys.value = data
-            await dillInitPlatformCheckMenuId(data)
-            reshowTree(firstPlatformId)
-          })
-        })
-      }
       //edit modal
       title.value = '编辑角色'
     })
   }
-  platformList()
-
-
+  platformList(roleId)
 }
 const arrGroupByKey = (arr, groupKey) => {
   const map = {}
@@ -312,26 +291,47 @@ const reshowData = (addEditForm, detailData) => {
     }
   })
 }
-const platformList = () => {
+const platformList = (roleId) => {
   selectPlatformAll().then(({ data }) => {
     platformData.value = data
+    //选中第一个平台
+    if (data.length) {
+      const firstPlatformId=data[0].id
+      platformIdsChoose.value=firstPlatformId
+      getPlatformMenu(roleId,firstPlatformId)
+    }
   })
 }
-/** 树权限（展开/折叠）*/
-const handleCheckedTreeExpand = (value) => {
-  const treeList = menuOptions.value;
-  for (const element of treeList) {
-    menuRef.value.store.nodesMap[element.id].expanded = value;
-  }
+const getPlatformMenu = (roleId,firstPlatformId)=>{
+  selectMenuListByPlateFormId(firstPlatformId).then(({ data }) => {
+    // menuList.value = data.data
+    menuOptions.value = handleTree(data, 'menuId')
+    //回显menuIds
+    roleMenuTreeselect(roleId).then(async ({ data }) => {
+      //存储选中的key值
+      checkedKeys.value = data
+      await dillInitPlatformCheckMenuId(data)
+      reshowTree(firstPlatformId)
+    })
+  })
+
 }
+
+/** 树权限（展开/折叠）*/
+// const handleCheckedTreeExpand = (value) => {
+//   const treeList = menuOptions.value;
+//   for (const element of treeList) {
+//     menuRef.value.store.nodesMap[element.id].expanded = value;
+//   }
+// }
 /** 树权限（全选/全不选） */
 const handleCheckedTreeNodeAll = (value) => {
   menuRef.value.setCheckedNodes(value ? menuOptions.value : [])
 }
 /** 树权限（父子联动） */
-const handleCheckedTreeConnect = (value) => {
-  addEditForm.menuCheckStrictly = !!value
-}
+// const handleCheckedTreeConnect = (value) => {
+//   addEditForm.menuCheckStrictly = !!value
+// }
 /** 所有菜单节点数据 */
 const getMenuAllCheckedKeys = () => {
   // 目前被选中的菜单节点

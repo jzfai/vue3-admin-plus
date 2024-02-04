@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-y">
+  <div>
     <div v-lang class="mt-10px mb-10px text-green-500 text-18px">本框架完全用 setup-script 语法书写</div>
     <div class="mt-20px">vue3全家桶技术</div>
     <div class="mt-10px">基础构建： vue3+vite4</div>
@@ -31,11 +31,12 @@
 
 </template>
 <script setup lang="ts">
-import {ref} from 'vue'
 import {useRoute} from 'vue-router'
 import {useConfigStore} from '@/store/config'
-import request from "@/utils/axios-req";
 
 const {setTheme, theme, setSize, size, setLanguage} = useConfigStore()
 const route = useRoute()
+
+
+
 </script>

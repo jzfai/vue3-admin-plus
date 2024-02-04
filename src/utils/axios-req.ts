@@ -47,7 +47,7 @@ service.interceptors.request.use(
         lock: true,
         fullscreen: true,
         text: '获取数据中，请稍后...',
-        background: 'rgba(0, 0, 0, 0.1)'
+        background: 'rgba(0, 0, 0, 0.35)'
       })
     }
     return req

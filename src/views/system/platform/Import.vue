@@ -1,6 +1,7 @@
 <template>
   <!-- 用户导入对话框 -->
-  <el-dialog v-model="isShow" :close-on-press-escape="false" :close-on-click-modal="false"
+  <el-dialog
+v-model="isShow" :close-on-press-escape="false" :close-on-click-modal="false"
              :destroy-on-close="true" :title="title" width="400px" append-to-body>
     <el-upload
         ref="uploadRef"

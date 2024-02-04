@@ -43,8 +43,10 @@
 }
 
 
-//修改进度条样式
-#nprogress .bar {
-  background: #fff;
+/* wi宽度全局样式
+------------------------------- */
+@for $i from 5 through 1000 {
+  .wi-#{$i}px {
+    width: #{$i}px !important;
+  }
 }
-

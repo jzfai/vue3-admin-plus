@@ -31,7 +31,8 @@
       <el-button type="danger" plain icon="Delete" @click="handleMultiDelete">删除</el-button>
 
       <RightToolBar v-model:showSearch="showSearch" @queryTable="getList"/>
-      <ColumnFilter v-if="platformList.length" :is-operation="true" :cols="tableHeadColumns"
+      <ColumnFilter
+v-if="platformList.length" :is-operation="true" :cols="tableHeadColumns"
                     @colChange="colChange"/>
     </el-row>
     <el-table ref="refElTable" v-loading="loading" border :data="platformList">
