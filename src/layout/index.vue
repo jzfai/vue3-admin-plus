@@ -34,7 +34,6 @@ resizeHandler()
   transition: margin-left var(--sideBar-switch-duration);
   margin-left: var(--side-bar-width);
   position: relative;
-  overflow: hidden;
 }
 .sidebar-container {
   transition: width var(--sideBar-switch-duration);
@@ -46,7 +45,6 @@ resizeHandler()
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 1001;
   overflow: hidden;
   border-right: 0.5px solid var(--side-bar-border-right-color);
 }

@@ -16,7 +16,7 @@
     <!-- 下拉操作菜单 -->
     <div v-if="settings.ShowDropDown" class="right-menu rowSC">
       <ScreenFull />
-      <ScreenLock />
+      <ScreenLock/>
       <ThemeSelect />
       <SizeSelect />
       <LangSelect />
@@ -45,6 +45,7 @@
         </template>
       </el-dropdown>
     </div>
+
   </div>
 </template>
 
@@ -73,7 +74,7 @@ const toggleSideBar = () => {
 const router = useRouter()
 const route = useRoute()
 const loginOut = () => {
-  elMessage('退出登录成功', 'success')
+  elMessage('退出登录成功')
   router.push(`/login?redirect=${route.path}`)
   nextTick(() => {
     resetState()
@@ -88,7 +89,7 @@ const loginOut = () => {
   position: relative;
   background: var(--nav-bar-background);
   box-shadow: var(--nav-bar-box-shadow);
-  z-index: 1;
+  z-index: 0;
 }
 
 //logo
