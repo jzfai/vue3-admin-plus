@@ -37,4 +37,35 @@ import {useConfigStore} from '@/store/config'
 const {setTheme, theme, setSize, size, setLanguage} = useConfigStore()
 const route = useRoute()
 
+
+const newArray = [{
+  name: "aaa",
+  value: 0
+},
+  {
+    name: "ddd",
+    value: 3
+  },
+  {
+    name: "bbb",
+    value: 1
+  },
+  {
+    name: "eee",
+    value: 4
+  },
+  {
+    name: "ccc",
+    value: 2
+  }];
+
+
+function compare(property) {
+  return function (a, b) {
+    const value1 = a[property];
+    const value2 = b[property];
+    return value1 - value2;
+  }
+}
+console.log(newArray.sort(compare("value")))
 </script>

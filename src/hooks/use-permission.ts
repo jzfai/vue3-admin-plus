@@ -17,9 +17,13 @@ import { useBasicStore } from '@/store/basic'
 export function filterAsyncRouter(data) {
   const basicStore = useBasicStore()
   const fileAfterRouter = generatorRouter(data, 'menuId');
+
+
+
   //const fileAfterRouter = filterAsyncRouterByReq(data)
   //add 404-page router
   fileAfterRouter.push(noMathPage)
+
   fileAfterRouter.forEach((route) => router.addRoute(route))
   basicStore.setFilterAsyncRoutes(fileAfterRouter)
 }

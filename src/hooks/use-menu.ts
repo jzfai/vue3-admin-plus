@@ -104,8 +104,11 @@ export function handleTree(data, id, parentId?, children?) {
       }
     }
   }
-  return tree
+  //排序
+  return  orderFunc( tree,"orderNum")
 }
+
+
 /*处理component*/
 const getComponent=(menu)=>{
   let component = "Layout"
@@ -150,4 +153,22 @@ export  const generatorRouter=(data, id, parentId?, children?)=>{
   const routerTree = handleTree(data, id, parentId, children);
   //构建路由（此处可以根据公司的选择）
   return buildAsyncRouter(routerTree)
+}
+
+
+//根据字段属性进行排序
+export const orderFunc=(data,column)=>{
+// 简化后的排序函数
+  data.sort((a, b) => {
+    // 直接比较字符串形式的 orderNum
+    if (a[column] < b[column]) {
+      return -1;
+    }
+    if (a[column] >b[column]) {
+      return 1;
+    }
+    // 如果 orderNum 相等，则保持原顺序
+    return 0;
+  });
+  return data
 }

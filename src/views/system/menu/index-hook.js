@@ -1,5 +1,6 @@
 import { ElMessage } from 'element-plus'
 import { deleteReq } from '@/api/menu'
+import {orderFunc} from "@/hooks/use-menu";
 const single = ref(true)
 const multiple = ref(true)
 /*table 列表*/
@@ -99,7 +100,7 @@ export function handleTree(data, id, parentId, children) {
       }
     }
   }
-  return tree
+  return orderFunc(tree,"orderNum");
 }
 
 export const currentHook = (queryParams, getList) => {

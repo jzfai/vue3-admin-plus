@@ -7,6 +7,7 @@ import { i18n } from '@/lang'
 // the keys using  zh file
 import langEn from '@/lang/zh'
 import settings from '@/settings'
+import axiosReq from '@/utils/axios-req'
 
 export const sleepTimeout = (time) => {
   return new Promise((resolve) => {

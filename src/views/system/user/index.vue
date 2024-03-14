@@ -58,9 +58,9 @@
       <el-col :span="1.5">
         <el-button type="primary" plain icon="Plus" @click="handleAdd">新增</el-button>
       </el-col>
-      <el-col :span="1.5">
-        <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate">修改</el-button>
-      </el-col>
+<!--      <el-col :span="1.5">-->
+<!--        <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate">修改</el-button>-->
+<!--      </el-col>-->
       <el-col :span="1.5">
         <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete">删除</el-button>
       </el-col>
