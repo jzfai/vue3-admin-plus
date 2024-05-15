@@ -7,6 +7,7 @@
   transform: translate(-50%, -50%);
   z-index: 10;
 }
+
 .center-top60 {
   position: absolute;
   top: 60%;
@@ -14,6 +15,7 @@
   transform: translate(-50%, -60%);
   z-index: 10;
 }
+
 .center-top70 {
   position: absolute;
   top: 70%;
@@ -21,6 +23,7 @@
   transform: translate(-50%, -70%);
   z-index: 10;
 }
+
 .center-top80 {
   position: absolute;
   top: 80%;
@@ -28,6 +31,7 @@
   transform: translate(-50%, -80%);
   z-index: 10;
 }
+
 .center-top90 {
   position: absolute;
   top: 80%;
@@ -35,6 +39,7 @@
   transform: translate(-50%, -90%);
   z-index: 10;
 }
+
 /*fixed*/
 .fixed-center-50 {
   //居中定位
@@ -44,6 +49,7 @@
   transform: translate(-50%, -50%);
   z-index: 10;
 }
+
 .fixed-center-top60 {
   position: fixed;
   top: 60%;
@@ -51,6 +57,7 @@
   transform: translate(-50%, -60%);
   z-index: 10;
 }
+
 .fixed-center-top70 {
   position: fixed;
   top: 70%;
@@ -58,6 +65,7 @@
   transform: translate(-50%, -70%);
   z-index: 10;
 }
+
 .fixed-center-top80 {
   position: fixed;
   top: 80%;
@@ -65,6 +73,7 @@
   transform: translate(-50%, -80%);
   z-index: 10;
 }
+
 .fixed-center-top90 {
   position: fixed;
   top: 90%;
@@ -72,6 +81,7 @@
   transform: translate(-50%, -90%);
   z-index: 10;
 }
+
 .fixed-center-top95 {
   position: fixed;
   top: 95%;
@@ -90,18 +100,21 @@ flex布局 第一个字母为主轴
   justify-content: flex-start;
   align-items: flex-start;
 }
+
 .rowSC {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
+
 .rowSE {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
 }
+
 //space-between
 .rowBS {
   display: flex;
@@ -109,18 +122,21 @@ flex布局 第一个字母为主轴
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .rowBC {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .rowBE {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
 }
+
 //space-around
 .rowAS {
   display: flex;
@@ -128,18 +144,21 @@ flex布局 第一个字母为主轴
   justify-content: space-around;
   align-items: flex-start;
 }
+
 .rowAC {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
+
 .rowAE {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-end;
 }
+
 //center
 .rowCS {
   display: flex;
@@ -147,6 +166,7 @@ flex布局 第一个字母为主轴
   justify-content: center;
   align-items: flex-start;
 }
+
 .rowCC {
   display: flex;
   flex-direction: row;
@@ -169,18 +189,21 @@ flex布局 第一个字母为主轴
   justify-content: flex-start;
   align-items: flex-start;
 }
+
 .columnSC {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 }
+
 .columnSE {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
 }
+
 //space-between
 .columnBS {
   display: flex;
@@ -188,18 +211,21 @@ flex布局 第一个字母为主轴
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .columnBC {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
+
 .columnBE {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
 }
+
 //space-around
 .columnAS {
   display: flex;
@@ -207,18 +233,21 @@ flex布局 第一个字母为主轴
   justify-content: space-around;
   align-items: flex-start;
 }
+
 .columnAC {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
+
 .columnAE {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-end;
 }
+
 //center
 .columnCS {
   display: flex;
@@ -226,12 +255,14 @@ flex布局 第一个字母为主轴
   justify-content: center;
   align-items: flex-start;
 }
+
 .columnCC {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .columnCE {
   display: flex;
   flex-direction: column;
@@ -271,4 +302,440 @@ flex布局 第一个字母为主轴
   //点击样式
   cursor: pointer;
   color: #477ef5;
+}
+
+// 遵循 UI 设计中的 8 像素规则
+// margin
+
+.ml-8-1 {
+  margin-left: 8px;
+}
+
+.ml-8-0 {
+  margin-left: 0px;
+}
+
+.ml-8-2 {
+  margin-left: 16px;
+}
+
+.ml-8-3 {
+  margin-left: 24px;
+}
+
+.ml-8-4 {
+  margin-left: 32px;
+}
+
+.ml-8-5 {
+  margin-left: 40px;
+}
+
+.ml-8-6 {
+  margin-left: 48px;
+}
+
+.ml-8-7 {
+  margin-left: 56px;
+}
+
+.ml-8-8 {
+  margin-left: 64px;
+}
+
+.mr-8-1 {
+  margin-right: 8px;
+}
+
+.mr-8-2 {
+  margin-right: 16px;
+}
+
+.mr-8-3 {
+  margin-right: 24px;
+}
+
+.mr-8-4 {
+  margin-right: 32px;
+}
+
+.mr-8-5 {
+  margin-right: 40px;
+}
+
+.mr-8-6 {
+  margin-right: 48px;
+}
+
+.mr-8-7 {
+  margin-right: 56px;
+}
+
+.mr-8-8 {
+  margin-right: 64px;
+}
+
+.mt-8-1 {
+  margin-top: 8px;
+}
+
+.mt-8-2 {
+  margin-top: 16px;
+}
+
+.mt-8-3 {
+  margin-top: 24px;
+}
+
+.mt-8-4 {
+  margin-top: 32px;
+}
+
+.mt-8-5 {
+  margin-top: 40px;
+}
+
+.mt-8-6 {
+  margin-top: 48px;
+}
+
+.mt-8-7 {
+  margin-top: 56px;
+}
+
+.mt-8-8 {
+  margin-top: 64px;
+}
+
+.mb-8-1 {
+  margin-bottom: 8px;
+}
+
+.mb-8-2 {
+  margin-bottom: 16px;
+}
+
+.mb-8-3 {
+  margin-bottom: 24px;
+}
+
+.mb-8-4 {
+  margin-bottom: 32px;
+}
+
+.mb-8-5 {
+  margin-bottom: 40px;
+}
+
+.mb-8-6 {
+  margin-bottom: 48px;
+}
+
+.mb-8-7 {
+  margin-bottom: 56px;
+}
+
+.mb-8-8 {
+  margin-bottom: 64px;
+}
+
+.m-8-1 {
+  margin: 8px;
+}
+
+.m-8-2 {
+  margin: 16px;
+}
+
+.m-8-3 {
+  margin: 24px;
+}
+
+.m-8-4 {
+  margin: 32px;
+}
+
+.m-8-5 {
+  margin: 40px;
+}
+
+.m-8-6 {
+  margin: 48px;
+}
+
+.m-8-7 {
+  margin: 56px;
+}
+
+.m-8-8 {
+  margin: 64px;
+}
+
+// padding
+
+.pl-8-1 {
+  padding-left: 8px;
+}
+
+.pl-8-2 {
+  padding-left: 16px;
+}
+
+.pl-8-3 {
+  padding-left: 24px;
+}
+
+.pl-8-4 {
+  padding-left: 32px;
+}
+
+.pl-8-5 {
+  padding-left: 40px;
+}
+
+.pl-8-6 {
+  padding-left: 48px;
+}
+
+.pl-8-7 {
+  padding-left: 56px;
+}
+
+.pl-8-8 {
+  padding-left: 64px;
+}
+
+.pr-8-1 {
+  padding-right: 8px;
+}
+
+.pr-8-2 {
+  padding-right: 16px;
+}
+
+.pr-8-3 {
+  padding-right: 24px;
+}
+
+.pr-8-4 {
+  padding-right: 32px;
+}
+
+.pr-8-5 {
+  padding-right: 40px;
+}
+
+.pr-8-6 {
+  padding-right: 48px;
+}
+
+.pr-8-7 {
+  padding-right: 56px;
+}
+
+.pr-8-8 {
+  padding-right: 64px;
+}
+
+.pt-8-1 {
+  padding-top: 8px;
+}
+
+.pt-8-2 {
+  padding-top: 16px;
+}
+
+.pt-8-3 {
+  padding-top: 24px;
+}
+
+.pt-8-4 {
+  padding-top: 32px;
+}
+
+.pt-8-5 {
+  padding-top: 40px;
+}
+
+.pt-8-5 {
+  padding-top: 48px;
+}
+
+.pt-8-6 {
+  padding-top: 48px;
+}
+
+.pt-8-7 {
+  padding-top: 56px;
+}
+
+.pt-8-8 {
+  padding-top: 64px;
+}
+
+.pb-8-1 {
+  padding-bottom: 8px;
+}
+
+.pb-8-2 {
+  padding-bottom: 16px;
+}
+
+.pb-8-3 {
+  padding-bottom: 24px;
+}
+
+.pb-8-4 {
+  padding-bottom: 32px;
+}
+
+.pb-8-5 {
+  padding-bottom: 40px;
+}
+
+.pb-8-6 {
+  padding-bottom: 48px;
+}
+
+.pb-8-7 {
+  padding-bottom: 56px;
+}
+
+.pb-8-8 {
+  padding-bottom: 64px;
+}
+
+.p-8-1 {
+  padding: 8px;
+}
+
+.p-8-2 {
+  padding: 16px;
+}
+
+.p-8-3 {
+  padding: 24px;
+}
+
+.p-8-4 {
+  padding: 32px;
+}
+
+.p-8-5 {
+  padding: 40px;
+}
+
+.p-8-6 {
+  padding: 48px;
+}
+
+.p-8-7 {
+  padding: 56px;
+}
+
+.p-8-8 {
+  padding: 64px;
+}
+
+// flex
+
+/* flex布局 */
+.d-flex {
+  display: flex;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.flex-shrink {
+  flex-shrink: 0;
+}
+
+.j-start {
+  justify-content: flex-start;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+.j-end {
+  justify-content: flex-end;
+}
+
+.j-sb {
+  justify-content: space-between;
+}
+
+.j-around {
+  justify-content: space-around;
+}
+
+.a-center {
+  align-items: center;
+}
+
+.a-baseline {
+  align-items: baseline;
+}
+
+.a-start {
+  align-items: flex-start;
+}
+
+.a-end {
+  align-items: flex-end;
+}
+
+.a-stretch {
+  align-items: stretch;
+}
+
+.a-self-start {
+  align-self: flex-start;
+}
+
+.a-self-auto {
+  align-self: auto;
+}
+
+.a-self-end {
+  align-self: flex-end;
+}
+
+.a-self-stretch {
+  align-self: stretch;
+}
+
+.a-self-baseline {
+  align-self: baseline;
+}
+
+.text-align-left {
+  text-align: left;
 }
