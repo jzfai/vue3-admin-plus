@@ -58,6 +58,7 @@ declare global {
   const onServerPrefetch: typeof import('vue')['onServerPrefetch']
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
+  const orderFunc: typeof import('../src/hooks/use-menu')['orderFunc']
   const progressClose: typeof import('../src/hooks/use-permission')['progressClose']
   const progressStart: typeof import('../src/hooks/use-permission')['progressStart']
   const provide: typeof import('vue')['provide']

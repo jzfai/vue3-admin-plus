@@ -2,7 +2,7 @@
     "name": "vue3-admin-plus",
     "version": "2.2.0",
     "license": "MIT",
-    "author": "kuanghua",
+    "author": "xiongmaoge",
     "type": "module",
     "packageManager": "pnpm@7.9.0",
     "scripts": {
@@ -100,7 +100,7 @@
         "prettier": "2.2.1",
         "resize-observer-polyfill": "^1.5.1",
         "rollup-plugin-visualizer": "^5.8.3",
-        "sass": "^1.52.1",
+        "sass": "1.77.6",
         "svg-sprite-loader": "6.0.11",
         "typescript": "^4.7.2",
         "unocss": "^0.58.3",
