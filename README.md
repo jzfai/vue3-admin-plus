@@ -1,5 +1,7 @@
 # vue3-admin-plus
 
+#This project is no longer maintained.
+
 The plus version of vue3-admin-ts , provide enterprise-class using demo
 
 suggestion the Node.js >= v16.20
@@ -8,19 +10,6 @@ suggestion the Node.js >= v16.20
 
 
 
-## Documents
-
-- [Official Documentation](https://github.jzfai.top/vue3-admin-doc/)
-
-- [中文官网](https://github.jzfai.top/vue3-admin-cn-doc/)
-
-
-
-## Online experience
-
-[Access address](https://github.jzfai.top/vue3-admin-plus)
-
-[国内体验地址](https://github.jzfai.top/vue3-admin-plus)
 
 
 
